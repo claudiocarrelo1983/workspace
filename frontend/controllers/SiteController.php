@@ -247,10 +247,6 @@ class SiteController extends Controller
         $model = new GeneratorJson(); 
         $faqs = $model->getLastFileUploaded('faqs');
 
-
-        print "<pre>";
-        print_r($faqs);
-        die();
         return $this->render('texts/faqs', [
             'faqs' => $faqs
         ]);
