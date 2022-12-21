@@ -335,7 +335,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
     public function deploy(){
 
-        echo shell_exec("git commit");
+        echo shell_exec("git commit -m 'Teste'  git pull");
         die();
 
         $connection = ssh2_connect('lhcp3221.webapps.net', 25088, array('hostkey'=>'ssh-rsa'));
