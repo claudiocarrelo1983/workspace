@@ -57,8 +57,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'countries':
                     case 'faqs':
                     case 'subjects': 
-                    case 'texts':                     
-                        echo "i equals 0";
+                    case 'texts':                    
                         if(method_exists(__CLASS__, $method)){
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
@@ -334,22 +333,30 @@ class GeneratorJson extends \yii\db\ActiveRecord
     }  
 
     public function deploy(){
+      
+        /*
+        git clone https://myrepo.com/git.git temp
+        mv temp/ public_html/
+        rm -rf temp
+        */
+        $session = ssh2_connect('lhcp3221.webapps.net', 25088, array('hostkey'=>'ssh-rsa'));
 
-        echo shell_exec("git commit -m 'Teste'  git pull");
-        die();
+      
+        $pubkeyfile = (Url::to('@backend/id_rsa.pub'));
+        $pprivkeyfile = file_get_contents(Url::to('@backend/id_rsa.ppk'));
 
-        $connection = ssh2_connect('lhcp3221.webapps.net', 25088, array('hostkey'=>'ssh-rsa'));
 
-        $pubkeyfile = (Url::to('@backend/myspecialgym_key.pub'));
-        $pprivkeyfile = (Url::to('@backend/myspecialgym_key.ppk'));
-
-        ssh2_auth_pubkey_file(
-            $connection,
-            'ob4pdc9t',
-            $pubkeyfile,
-            $pprivkeyfile,
-            'Igredes-007'
-        );
+        if (ssh2_auth_pubkey_file(
+                $session,
+                'ob4pdc9t',
+                $pubkeyfile,
+                $pprivkeyfile,
+                'Igredes-007'
+            )) {
+            echo "Public Key Authentication Successful\n";
+        } else {
+            die('Public Key Authentication Failed');
+        }
 
         die('___');
 
