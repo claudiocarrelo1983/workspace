@@ -1,11 +1,11 @@
 <?php
 
 namespace common\models;
-use yii\base\Model;
 use Yii;
-use yii\web\UploadedFile;
 use yii\db\Query;
 use yii\helpers\Json;
+use yii\helpers\Url;
+
    /*
 
     Generate Json on @frontend/web/json/blog/
@@ -47,11 +47,25 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
                 $columns = GeneratorJson::getTableColumns($table['TABLE_NAME']);
 
-                if(method_exists(__CLASS__, $method)){
-                    GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
-                }else{
-                    GeneratorJson::updateTablesGeneric($table['TABLE_NAME'],  $columns);  
+                switch ($table['TABLE_NAME']) {
+                    case 'pricing':
+                    case 'pricing_specs':
+                    case 'translations':
+                    case 'blogs':
+                    case 'blogs_category':
+                    case 'configurations':
+                    case 'countries':
+                    case 'faqs':
+                    case 'subjects': 
+                    case 'texts':                     
+                        echo "i equals 0";
+                        if(method_exists(__CLASS__, $method)){
+                            GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
+                        }else{
+                            GeneratorJson::updateTablesGeneric($table['TABLE_NAME'],  $columns);  
+                        }             
                 }
+             
             }           
         }
     }
@@ -100,18 +114,6 @@ class GeneratorJson extends \yii\db\ActiveRecord
         return  $result;    
     }
 
-    public static function updateTablesGeneric($table,  $columns){
-
-        $blogQuery = new Query; 
-
-        $blogArr = $blogQuery->select(
-            $columns
-        )
-        ->from([$table])      
-        ->all();
-
-        GeneratorJson::saveJson($blogArr, $table);
-    }  
     public static function saveJson($blogArr, $table){       
      
         $directory = Yii::getAlias('@frontend/web/json/'.$table.'/');
@@ -147,11 +149,14 @@ class GeneratorJson extends \yii\db\ActiveRecord
         $pathParent = (empty($pathParent)) ? 'frontend' : $pathParent;
         $url = Yii::getAlias('@'.$pathParent.'/web/json/'.$dir.'/');
 
-        $rrFiles = scandir($url, 1);
-      
-    
         $path = '';
         $return = array();
+
+        if (file_exists($url)) {
+            $rrFiles = scandir($url, 1);
+        }else{
+            return $return;
+        }
 
         if(isset($rrFiles[0])){       
             if (strlen($rrFiles[0]) >= 3) {
@@ -185,6 +190,18 @@ class GeneratorJson extends \yii\db\ActiveRecord
         GeneratorJson::saveJson($blogArr, $table);
     }
 
+    public static function updateTablesGeneric($table,  $columns){
+
+        $blogQuery = new Query; 
+
+        $blogArr = $blogQuery->select(
+            $columns
+        )
+        ->from([$table])      
+        ->all();
+
+        GeneratorJson::saveJson($blogArr, $table);
+    }  
 
     public static function updateFaqs($table, $columns){
         
@@ -273,5 +290,81 @@ class GeneratorJson extends \yii\db\ActiveRecord
         return  $resultR;
   
     }
+
+    public function populateTable(){
+  
+          $tables = GeneratorJson::getAllTables();    
+
+        foreach($tables as $table){
+            if(isset($table['TABLE_NAME'])){
+
+               
+                $method = 'populate'.ucfirst($table['TABLE_NAME']);           
+
+                $columns = GeneratorJson::getTableColumns($table['TABLE_NAME']);
+              
+                if(method_exists(__CLASS__, $method)){
+                    GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
+                }else{
+                    GeneratorJson::populateTablesGeneric($table['TABLE_NAME'],  $columns);  
+                }
+            }           
+        }
+    }
+    
+    public static function populateTablesGeneric($table,  $columns){
+
+        $connection = new Query;
+
+        $arrTotal = GeneratorJson::getLastFileUploaded($table);  
+
+        if(!empty($arrTotal)){
+            foreach($arrTotal as $arrValues){
+                $arrColumns = array();
+                foreach ($arrValues as $key => $value) {
+                    if($key != 'id'){
+                        $arrColumns[$key] = $value;
+                    }                   
+                }     
+
+                $connection->createCommand()->insert($table, $arrColumns)->execute();
+
+            }       
+        }  
+    }  
+
+    public function deploy(){
+
+        echo shell_exec("cd /website/root/htdocs && git status 2>&1");
+        die();
+
+        $connection = ssh2_connect('lhcp3221.webapps.net', 25088, array('hostkey'=>'ssh-rsa'));
+
+        $pubkeyfile = (Url::to('@backend/myspecialgym_key.pub'));
+        $pprivkeyfile = (Url::to('@backend/myspecialgym_key.ppk'));
+
+        ssh2_auth_pubkey_file(
+            $connection,
+            'ob4pdc9t',
+            $pubkeyfile,
+            $pprivkeyfile,
+            'Igredes-007'
+        );
+
+        die('___');
+
+        if (ssh2_auth_pubkey_file($connection, 'myspecialgym_key',
+            '/home/ob4pdc9t/.ssh/myspecialgym_key',
+            '/home/ob4pdc9t/.ssh/myspecialgym_key.pub', 'SHA256:8lrxMmkmqWjv+e6SI6DVLiAsZy+qvo/3yw55s8+tvtU')) {
+            echo "Public Key Authentication Successful\n";
+        } else {
+            die('Public Key Authentication Failed');
+        }
+
+        ssh2_auth_password($connection, 'ob4pdc9t', 'W[F1+)c(w%dL');
+        die('__');
+        $stream = ssh2_exec($connection, '/usr/local/bin/php -i');
+    }
+
 
 }

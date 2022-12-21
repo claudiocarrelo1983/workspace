@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => '32abfa80d6dff997d6dd6ce85def1e91bc4b2499',
+    'reference' => '9a1b3ef99af049a0f7eef3c879f83108cc227649',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -663,6 +663,15 @@
       ),
       'reference' => 'a317a09e7def49852400a4b3eca4a4b0790ceeb5',
     ),
+    'phpseclib/phpseclib' => 
+    array (
+      'pretty_version' => '2.0.40',
+      'version' => '2.0.40.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5ef6f8376ddad21f3ce1da429950f7e00ec2292c',
+    ),
     'phpspec/php-diff' => 
     array (
       'pretty_version' => 'v1.1.3',
@@ -1210,6 +1219,15 @@
       ),
       'reference' => 'cc54c1503685e618b23922f53635f46e87653662',
     ),
+    'thelfensdrfer/yii2-ssh-console' => 
+    array (
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c5ececf9f41eacdd15fa7abacbd2551fcc9bd1d1',
+    ),
     'theseer/tokenizer' => 
     array (
       'pretty_version' => '1.2.1',
@@ -1257,12 +1275,12 @@
     ),
     'yiisoft/yii2-app-advanced' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => '32abfa80d6dff997d6dd6ce85def1e91bc4b2499',
+      'reference' => '9a1b3ef99af049a0f7eef3c879f83108cc227649',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (
