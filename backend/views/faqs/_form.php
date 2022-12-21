@@ -25,7 +25,6 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 
 <div class="faqs-form">
 
-
 <?php $form = ActiveForm::begin(); ?>   
     <div class="tabs tabs-dark mb-4 pb-2">
         <ul class="nav nav-tabs">
