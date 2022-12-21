@@ -1,0 +1,294 @@
+{
+
+   "menu":[
+     {
+        "key":"t-home",
+        "title":"Dashboard",
+        "url":"site/index",           
+        "submenu":[
+                  
+        ]
+     },
+     {
+      "key":"t-companies",
+      "title":"Clients",
+      "url":"",           
+      "submenu":[
+         {   
+            "key":"t-blog-view",
+            "title":"Companies",
+            "url":"companies/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-profile-coments",
+            "title":"Company Details ",
+            "url":"company-details/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-blog-category",
+            "title":"Users ",
+            "url":"user/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-blog-coments",
+            "title":"Permissions ",
+            "url":"company-permissions/index",
+            "submenu":[                    
+               
+            ]
+         }       
+      ]
+      },  
+
+     {
+      "key":"t-blog",
+      "title":"Blog",
+      "url":"blogs/index",           
+      "submenu":[
+         {   
+            "key":"t-blog-view",
+            "title":"Posts",
+            "url":"blogs/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-blog-category",
+            "title":"Tags ",
+            "url":"blogscategory/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-blog-coments",
+            "title":"Comments ",
+            "url":"blogscomments/index",
+            "submenu":[                    
+               
+            ]
+         }  
+      ]
+      },   
+      {
+         "key":"t-blog",
+         "title":"Forms",
+         "url":"training/index",           
+         "submenu":[
+            {   
+               "key":"t-form-view",
+               "title":"List",
+               "url":"forms/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-profile-view",
+               "title":"Templates",
+               "url":"forms-templates/index",
+               "submenu":[                    
+                  
+               ]
+            }          
+         ]
+      },  
+      {
+         "key":"t-tickets",
+         "title":"Tickets",
+         "url":"",           
+         "submenu":[
+            {   
+               "key":"t-training-values-view",
+               "title":"Messages",
+               "url":"tickets/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-training-values-view",
+               "title":"Subjects",
+               "url":"subjects/index",
+               "submenu":[                    
+                  
+               ]
+            }          
+         ]
+      },  
+      {
+      "key":"t-blog",
+      "title":"Trainings",
+      "url":"",           
+      "submenu":[
+         {   
+            "key":"t-training-values-view",
+            "title":"Results",
+            "url":"training-values/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-training-view",
+            "title":"Training",
+            "url":"training/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-training-category",
+            "title":"Categories ",
+            "url":"training-category/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-training-plans",
+            "title":"Plans ",
+            "url":"training-plans/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-training-coments",
+            "title":"Shedule ",
+            "url":"training-schedule/index",
+            "submenu":[                    
+               
+            ]
+         },
+         {   
+            "key":"t-training-machines",
+            "title":"Machines ",
+            "url":"machines/index",
+            "submenu":[                    
+               
+            ]
+         }     
+      ]
+      }, 
+      {
+         "key":"t-nutricion",
+         "title":"Nutricion",
+         "url":"",           
+         "submenu":[
+            {   
+               "key":"t-profile-view",
+               "title":"Recipes",
+               "url":"recipes/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-food-category",
+               "title":"Food ",
+               "url":"nutricion-food/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-recipe-plans-coments",
+               "title":"Recipe Plans ",
+               "url":"recipes-plan/index",
+               "submenu":[                    
+                  
+               ]
+            }   
+         ]
+      },
+      {
+         "key":"t-multilanguages",
+         "title":"Multilanguages",
+         "url":"",           
+         "submenu":[
+            {   
+               "key":"t-translations-list",
+               "title":"Tanslations",
+               "url":"translations/index",
+               "submenu":[                    
+                  
+               ]
+            },           
+            {   
+               "key":"t-countries-view",
+               "title":"Countries",
+               "url":"countries/index",
+               "submenu":[                    
+                  
+               ]
+            }
+         ]
+      },
+      {
+         "key":"t-settings",
+         "title":"Settings",
+         "url":"",           
+         "submenu":[
+            {   
+               "key":"t-faqs-view",
+               "title":"Faq´s",
+               "url":"faqs/index",
+               "submenu":[                    
+                  
+               ]
+            } ,
+            {   
+               "key":"t-texts-view",
+               "title":"Texts",
+               "url":"texts/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-configurations-view",
+               "title":"Configurations",
+               "url":"configurations/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
+               "key":"t-pricing-view",
+               "title":"Set Pricing",
+               "url":"pricing/index",
+               "submenu":[                    
+                  
+               ]
+            }, 
+            {   
+               "key":"t-pricing-view",
+               "title":"Pricing Specs",
+               "url":"pricing-specs/index",
+               "submenu":[                    
+                  
+               ]
+            },        
+            {   
+               "key":"t-publish-view",
+               "title":"Publish",
+               "url":"publish/index",
+               "submenu":[                    
+                  
+               ]
+            }               
+         ]
+      }
+   ]
+}

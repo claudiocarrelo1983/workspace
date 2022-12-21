@@ -1,0 +1,113 @@
+{
+   "0":{
+      "image":"img/blog/default/blog-46.jpg",
+      "title":"How efective is intermitend fasting",
+      "subtitle": "How To Take Better Concert Pictures in 1",
+      "alt":"",
+      "url":"site/blog-single", 
+      "text":"Lorem Ipsum is simply dummy 's standard dummy text ever si",
+      "date":"January 10, 2021 ",
+      "name":"Claudio Carrelo",
+      "tags": {
+      "0": {
+         "tag" : "Lifestyle",
+         "url" : ""
+         },
+         "1": {
+            "tag" : "Design",
+            "url" : ""
+         },
+         "2": {
+            "tag" : "Diet",
+            "url" : ""
+         }
+      }      
+   } ,
+   "1":{
+      "image":"img/blog/medium/blog-1.jpg",
+      "title":"Benefits and biology of being a vegetarian",
+      "subtitle": "How To Take Better Concert Pictures in 2",
+      "alt":"",
+      "url":"site/blog-single", 
+      "text":"Lorem Ipsum is simply dummy 's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "date":"January 10, 2021 ",
+      "name":"Claudio Carrelo",
+      "tags": {
+      "0": {
+         "tag" : "Lifestyle",
+         "url" : ""
+         },
+         "1": {
+            "tag" : "Design",
+            "url" : ""
+         },
+         "2": {
+            "tag" : "Diet",
+            "url" : ""
+         }
+      }     
+   },
+   "2":{
+      "image":"img/blog/medium/blog-1.jpg",
+      "title":"What is the most effective way of losing weight?",
+      "subtitle": "How To Take Better Concert Pictures in 3",
+      "alt":"",
+      "url":"site/blog-single", 
+      "text":"Lorem Ipsum is simply dummy 's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "date":"January 10, 2021 ",
+      "name":"Claudio Carrelo",
+      "tags": {
+      "0": {
+         "tag" : "Lifestyle",
+         "url" : ""
+         },
+         "1": {
+            "tag" : "Design",
+            "url" : ""
+         }
+      }     
+   },
+   "3":{
+      "image":"img/blog/medium/blog-1.jpg",
+      "title":"Lorem sing weight?",
+      "subtitle": "How To Take Better Concert Pictures in 4",
+      "alt":"",
+      "url":"site/blog-single", 
+      "text":"Lorem Ipsum is simply dummy 's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "date":"January 10, 2021 ",
+      "name":"Claudio Carrelo",
+      "tags": {
+      "0": {
+         "tag" : "Lifestyle",
+         "url" : ""
+         },
+         "1": {
+            "tag" : "Design",
+            "url" : ""
+         }
+      }     
+   },
+   "4":{
+      "image":"img/blog/medium/blog-1.jpg",
+      "title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "subtitle": "How To Take Better Concert Pictures in 30 Seconds",
+      "alt":"",
+      "url":"site/blog-single", 
+      "text":"Lorem Ipsum is simply dummy 's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "date":"January 10, 2021 ",
+      "name":"Claudio Carrelo",
+      "tags": {
+      "0": {
+         "tag" : "Lifestyle",
+         "url" : ""
+         },
+         "1": {
+            "tag" : "Design",
+            "url" : ""
+         }
+      }     
+   }        
+}
+
+
+

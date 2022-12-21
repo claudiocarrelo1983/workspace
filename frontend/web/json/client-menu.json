@@ -1,0 +1,40 @@
+{
+
+   "menu":[
+     {
+        "key":"t-training",
+        "title":"Training",
+        "url":"client/my-training",           
+        "submenu":[
+           
+        ]
+     },
+
+     {
+      "key":"t-home",
+      "title":"Weight",
+      "url":"client/my-weight",           
+      "submenu":[
+         
+      ]
+      },
+
+      {
+         "key":"t-home",
+         "title":"Nutricion",
+         "url":"client/my-nutricion",           
+         "submenu":[
+            
+         ]
+      },
+      {
+         "key":"t-about",
+         "title":"Stats",
+         "url":"client/stats",           
+         "submenu":[
+            
+         ]
+      }
+
+   ]
+}

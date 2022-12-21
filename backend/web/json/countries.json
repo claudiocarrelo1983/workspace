@@ -1,0 +1,14 @@
+{
+    "default":{
+       "title":" Portuguese",
+       "img":"images/flags/portugal.png"
+    },
+    "pt":{
+       "title":" Portuguese",
+       "img":"images/flags/portugal.png"
+    },
+    "us":{
+       "title":" America",
+       "img":"images/flags/us.jpg"
+    }
+ }
