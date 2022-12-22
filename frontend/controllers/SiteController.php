@@ -239,7 +239,6 @@ class SiteController extends Controller
         ]);
     }
 
-
     public function actionFaqs()
     {
         $this->layout = 'public';
