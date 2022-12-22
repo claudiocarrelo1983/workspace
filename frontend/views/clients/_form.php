@@ -12,27 +12,29 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'company')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'level')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'sublevel')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+    <div class="row pb-3">
+        <div class="col-3">
+            <?= $form->field($model, 'username') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'first_name') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'last_name') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'name') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'email') ?>
+        </div>
+        <div class="col-3">
+            <?=  $form->field($model, 'gender') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'contact_number') ?>
+        </div>
+    </div>
     </br>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

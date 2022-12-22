@@ -11,14 +11,13 @@ use yii\db\Query;
 /* @var $searchModel app\Models\ClientsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'List of Clients';
+$this->title = Yii::t('app', 'backoffice_dashboard_top_page_view');
 $this->params['breadcrumbs'][] = $this->title;
 
 $query = new Query;
 $companyRows = $query->select([
-    'code',
-    'type',            
-    'name',
+    'team_code',
+
     'description',
     'address',      
     'postcode',
@@ -37,7 +36,7 @@ $companyRows = $query->select([
 
 ])
 ->from(['companies'])
-->where(['code' => Yii::$app->user->identity->company]) 
+->where(['team_code' => Yii::$app->user->identity->company]) 
 ->one();
 
 if(empty($companyRows)){
@@ -62,11 +61,17 @@ $companyArr = array_merge(
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Data Tables</h4>
+            <h4 class="mb-sm-0 font-size-18">
+                <?= Yii::t('app', 'backoffice_dashboard_top_title') ?>
+            </h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Clients</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">
+                            <?= Yii::t('app', 'backoffice_dashboard_top_page_name') ?>
+                        </a>
+                    </li>
                     <li class="breadcrumb-item active"><?= $this->title ?></li>
                 </ol>
             </div>
@@ -81,18 +86,18 @@ $companyArr = array_merge(
             <div class="card-body">
                 <div class="clients-index">
                     <!-- end page title -->
-                    <h4 class="card-title">Buttons example</h4>
-                    <p class="card-title-desc">The Buttons extension for DataTables
-                        provides a common set of options, API methods and styling to display
-                        buttons on a page that will interact with a DataTable. The core library
-                        provides the based framework upon which plug-ins can built.
+                    <h4 class="card-title">
+                        <?= Yii::t('app', 'backoffice_dashboard_title') ?>
+                    </h4>
+                    <p class="card-title-desc">
+                        <?= Yii::t('app', 'backoffice_dashboard_text') ?>
                     </p>
                     <div class="mt-5 mb-5">
                         <h5>
-                            <?= Yii::t('app','Your registration Url:') ?> 
+                            <?= Yii::t('app', 'backoffice_dashboard_registration') ?>:
                             <?= Html::a(                            
-                                Url::base('http').Url::toRoute(['client/registration', 'code' => $companyArr['code']]), 
-                                Url::toRoute(['client/registration', 'code' => $companyArr['code']]),
+                                Url::base('http').Url::toRoute(['client/registration', 'code' => $companyArr['team_code']]), 
+                                Url::toRoute(['client/registration', 'code' => $companyArr['team_code']]),
                                 [           
                                 'target' => '_blank'
                                 ]                             
@@ -120,11 +125,10 @@ $companyArr = array_merge(
                         <?= Html::a('Create Client', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
                     <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+                        'dataProvider' => $dataProvider,                     
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
