@@ -36,10 +36,7 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="popularPosts">  
-                <?=  $form->field($model, 'text_it')->hiddenInput(['value'=> 'n/a'])->label(false); ?>
-                <?=  $form->field($model, 'text_de')->hiddenInput(['value'=> 'n/a'])->label(false); ?>
-                <?=  $form->field($model, 'text_fr')->hiddenInput(['value'=> 'n/a'])->label(false); ?>
+            <div class="tab-pane active" id="popularPosts">       
                 <?=  $form->field($model, 'page_code')->hiddenInput(['value'=> $code])->label(false); ?>
 
                 <?= $form->field($model, 'type')->radioList(                       [

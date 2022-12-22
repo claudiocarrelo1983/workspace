@@ -53,9 +53,9 @@ class Blogs extends \yii\db\ActiveRecord
 
         return [    
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            [['title', 'subtitle', 'alt', 'text', 'username','tags','active'], 'required'],
+            [['country_code','title', 'subtitle', 'alt', 'text', 'username','tags','active'], 'required'],
             [['created_date'], 'safe'],
-            [['title', 'subtitle', 'generate','alt', 'image', 'username','tags'], 'string', 'max' => 255],
+            [['country_code','title', 'subtitle', 'generate','alt', 'image', 'username','tags'], 'string', 'max' => 255],
             [['text'], 'string'],
         ];
     }

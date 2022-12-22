@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tag') ?>
 
+    <?= $form->field($model, 'page_code') ?>
+
     <?= $form->field($model, 'tag_parent_id') ?>
 
     <?= $form->field($model, 'description') ?>

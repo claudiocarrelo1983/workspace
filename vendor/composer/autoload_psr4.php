@@ -17,6 +17,7 @@ return array(
     'yii2tech\\ar\\softdelete\\' => array($vendorDir . '/yii2tech/ar-softdelete/src'),
     'yii2sshconsole\\' => array($vendorDir . '/thelfensdrfer/yii2-ssh-console/src'),
     'yii2fullcalendar\\' => array($vendorDir . '/philippfrenzel/yii2fullcalendar'),
+    'sammaye\\mailchimp\\' => array($vendorDir . '/sammaye/yii2-mailchimp'),
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'mhunesi\\formio\\' => array($vendorDir . '/mhunesi/yii2-formio/src'),

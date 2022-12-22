@@ -16,21 +16,18 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="row">
-        <div class="col-4">
+        <div class="col-2">
             <?= $form->field($model, 'id') ?>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <?= $form->field($model, 'full_name') ?>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <?= $form->field($model, 'email') ?>
         </div>  
-        <div class="col-4">
+        <div class="col-3">
             <?= $form->field($model, 'subject') ?>
-        </div>
-        <div class="col-4">
-            <?= $form->field($model, 'text') ?>
-        </div>    
+        </div>     
     </div>
 
 

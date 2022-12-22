@@ -22,15 +22,29 @@ $tags = $tagQuery->select([
 ->from('blogs_category')    
 ->all();
 
-$tagQueryUser = new Query;
-
-$users = $tagQueryUser->select([
+$users = $tagQuery->select([
     'id', 
     'username', 
     'name'
     ])
 ->from('user')    
 ->all();
+
+$countries = $tagQuery->select([
+    'country_code',
+    'full_title' 
+    ])
+->from('countries')    
+->all();
+
+
+$countryUsers = array();
+
+foreach($countries as $value){
+    $countryUsers[$value['country_code']] = $value['full_title'];
+}
+
+
 
 $arrUsers = array();
 
@@ -109,8 +123,17 @@ foreach($tags as $tag){
 
     <?= $form->field($model, 'tagsArr')->checkBoxList($tagsArr, ['separator' => '<br>']); ?>
 
-    <a href="<?= Url::toRoute('blogscategory/index') ?>" target="_blank"  class="pb-5">
+    <a href="<?= Url::toRoute('blogscategory/create') ?>" target="_blank"  class="pb-5">
         <?= Yii::t('app', 'Create New Category') ?>	
+    </a>
+
+    <?= $form->field($model, 'country_code')->radioList(
+           $countryUsers
+        ,                     
+        array('required','separator' => "</br>" ))->label('Language');
+    ?>  
+    <a href="<?= Url::toRoute('countries/create') ?>" target="_blank"  class="pb-5">
+        <?= Yii::t('app', 'Create  new Country') ?>	
     </a>
 
 

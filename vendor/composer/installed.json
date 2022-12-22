@@ -3001,6 +3001,56 @@
             "install-path": "../maennchen/zipstream-php"
         },
         {
+            "name": "mailchimp/mailchimp",
+            "version": "2.0.6",
+            "version_normalized": "2.0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/mailchimp/mailchimp-api-php.git",
+                "reference": "7ac99b5ac746d5875c5c350ad7e3b83674c83ec1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/mailchimp/mailchimp-api-php/get/7ac99b5ac746d5875c5c350ad7e3b83674c83ec1.zip",
+                "reference": "7ac99b5ac746d5875c5c350ad7e3b83674c83ec1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "apigen/apigen": "dev-master"
+            },
+            "time": "2014-10-30T20:38:12+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Mailchimp": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MailChimp Devs",
+                    "email": "api@mailchimp.com",
+                    "homepage": "http://mailchimp.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "API client library for the MailChimp bulk email as a service platform",
+            "homepage": "https://bitbucket.org/mailchimp/mailchimp-api-php",
+            "keywords": [
+                "api",
+                "email"
+            ],
+            "abandoned": "mailchimp/marketing",
+            "install-path": "../mailchimp/mailchimp"
+        },
+        {
             "name": "markbaker/complex",
             "version": "3.0.1",
             "version_normalized": "3.0.1.0",
@@ -5447,6 +5497,57 @@
                 }
             ],
             "install-path": "../rize/uri-template"
+        },
+        {
+            "name": "sammaye/yii2-mailchimp",
+            "version": "0.1.2",
+            "version_normalized": "0.1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sammaye/yii2-mailchimp.git",
+                "reference": "ed75dc2aba2554ec5b974acd3f1ae677fcb2be01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sammaye/yii2-mailchimp/zipball/ed75dc2aba2554ec5b974acd3f1ae677fcb2be01",
+                "reference": "ed75dc2aba2554ec5b974acd3f1ae677fcb2be01",
+                "shasum": ""
+            },
+            "require": {
+                "mailchimp/mailchimp": "*"
+            },
+            "time": "2016-02-26T12:40:20+00:00",
+            "type": "yii2-extension",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "sammaye\\mailchimp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sammaye",
+                    "homepage": "http://sammaye.wordpress.com"
+                }
+            ],
+            "description": "MailChimp plugin for the Yii2 framework",
+            "keywords": [
+                "Yii2 Extension",
+                "extension",
+                "mailchimp",
+                "sammaye",
+                "yii2",
+                "yii2-extension"
+            ],
+            "support": {
+                "issues": "https://github.com/Sammaye/yii2-mailchimp/issues",
+                "source": "https://github.com/Sammaye/yii2-mailchimp/tree/master"
+            },
+            "install-path": "../sammaye/yii2-mailchimp"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

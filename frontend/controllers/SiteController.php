@@ -19,6 +19,7 @@ use yii\helpers\Url;
 use frontend\models\SignupForm;
 use yii\helpers\Json;
 use common\models\GeneratorJson;
+use sammaye\mailchimp\Mailchimp;
 
 
 /**
@@ -222,9 +223,9 @@ class SiteController extends Controller
         $model = new ContactForm();
         $request = Yii::$app->getRequest();
 
-        if ($request->isPost && $model->load($request->post())) {           
+        if ($request->isPost && $model->load($request->post())) {
+            $model->saveTicket($model);         
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                //die(Yii::$app->params['adminEmail']);  admin@example.com
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
@@ -241,6 +242,44 @@ class SiteController extends Controller
 
     public function actionFaqs()
     {
+
+
+        $mc = new Mailchimp(['apikey' => '7a41d4e89958dc451d8c7ea666e301f9-us21']);
+      
+        require('mailchimp/Mailchimp.php');    // You may have to modify the path based on your own configuration.
+
+$api_key = "7a41d4e89958dc451d8c7ea666e301f9-us21";
+$list_id = "Add your list ID here";
+
+$Mailchimp = new Mailchimp( $api_key );
+$Mailchimp_Lists = new Mailchimp_Lists( $Mailchimp );
+
+try 
+{
+    $subscriber = $Mailchimp_Lists->subscribe(
+        $list_id,
+        array('email' => 'kellykoe@example.com'),      // Specify the e-mail address you want to add to the list.
+        array('FNAME' => 'Kelly', 'LNAME' => 'Koe'),   // Set the first name and last name for the new subscriber.
+        'text',    // Specify the e-mail message type: 'html' or 'text'
+        FALSE,     // Set double opt-in: If this is set to TRUE, the user receives a message to confirm they want to be added to the list.
+        TRUE       // Set update_existing: If this is set to TRUE, existing subscribers are updated in the list. If this is set to FALSE, trying to add an existing subscriber causes an error.
+    );
+} 
+catch (Exception $e) 
+{
+    echo "Caught exception: " . $e;
+}
+
+if ( ! empty($subscriber['leid']) )
+{
+    echo "Subscriber added successfully.";
+}
+else
+{
+    echo "Subscriber add attempt failed.";
+}
+
+
         $this->layout = 'public';
       
         $model = new GeneratorJson(); 

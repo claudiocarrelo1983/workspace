@@ -18,6 +18,7 @@ class m220711_164930_blogs extends Migration
 
         $this->createTable('{{%blogs}}', [
             'id' => $this->primaryKey(),
+            'country_code' => $this->string()->notNull(),
             'image' => $this->string()->notNull(),
             'image_instagram' => $this->string(),
             'title' => $this->string()->notNull(),

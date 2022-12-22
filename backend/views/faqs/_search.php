@@ -16,13 +16,13 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <?= $form->field($model, 'id') ?>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <?= $form->field($model, 'page_code_question') ?>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <?= $form->field($model, 'page_code_answer') ?>
         </div>
         <div class="col-3">

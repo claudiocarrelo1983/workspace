@@ -2,6 +2,8 @@
 
 namespace frontend\models;
 
+use yii\db\Query;
+
 use Yii;
 use yii\base\Model;
 
@@ -49,8 +51,7 @@ class ContactForm extends Model
      * @return bool whether the email was sent
      */
     public function sendEmail($email)
-    {
-  
+    { 
 
         return  Yii::$app->mailer->compose()
             ->setFrom('info@myspecialgym.com')
@@ -58,6 +59,7 @@ class ContactForm extends Model
             ->setSubject($this->subject)
             ->setTextBody($this->message)
             ->send();
+
          /*
         return Yii::$app->mailer->compose()
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
@@ -77,5 +79,17 @@ class ContactForm extends Model
             ->send();
             */
 
+    }
+
+    public function saveTicket($model){        
+
+        $connection = new Query;
+      
+        $connection->createCommand()->insert('tickets', [      
+            'full_name' => $model->name,
+            'email' => $model->email,
+            'subject' => $model->subject,
+            'text' => $model->message        
+        ])->execute();
     }
 }

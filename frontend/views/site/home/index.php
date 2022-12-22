@@ -369,12 +369,22 @@ $path2 = 'home';
                             <h3 class="font-weight-bold text-color-dark text-4 mb-0"><?= $team['full_name'] ?></h3>
                             <p class="text-2 mb-0"><?= $team['title'] ?></p>
                         </div>
-                    <?php endforeach; ?>                                    
+                    <?php endforeach; ?>  
+                    <div>
+                        <img class="img-fluid rounded-0 mb-4" src="images/team/claudio.jpg" alt="" />
+                        <h3 class="font-weight-bold text-color-dark text-4 mb-0">Claudio</h3>
+                        <p class="text-2 mb-0">Personal</p>
+                    </div>   
+                    <div>
+                        <img class="img-fluid rounded-0 mb-4" src="images/team/claudio.jpg" alt="" />
+                        <h3 class="font-weight-bold text-color-dark text-4 mb-0">Claudio</h3>
+                        <p class="text-2 mb-0">Personal</p>
+                    </div>                                   
                 </div>
             </div>
             <div class="col-md-6 order-1 order-md-2 text-center text-md-start mb-5 mb-md-0">
                 <h2 class="text-color-dark font-weight-normal text-6 mb-2 pb-1">
-                    <?= Yii::t('app', "home_block_10_title") ?>
+                    <?= Yii::t('app', "home_block_10_title") ?>claudio
                 </h2>
                 <p class="lead">
                     <?= Yii::t('app', "home_block_10_subtitle_1") ?>

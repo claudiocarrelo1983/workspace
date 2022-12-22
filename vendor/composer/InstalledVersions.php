@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '9a1b3ef99af049a0f7eef3c879f83108cc227649',
+    'reference' => '29dda512e61967f44e2294f48b7e6087dc89fa33',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -476,6 +476,15 @@ private static $installed = array (
       ),
       'reference' => '211e9ba1530ea5260b45d90c9ea252f56ec52729',
     ),
+    'mailchimp/mailchimp' => 
+    array (
+      'pretty_version' => '2.0.6',
+      'version' => '2.0.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7ac99b5ac746d5875c5c350ad7e3b83674c83ec1',
+    ),
     'markbaker/complex' => 
     array (
       'pretty_version' => '3.0.1',
@@ -903,6 +912,15 @@ private static $installed = array (
       ),
       'reference' => '2a874863c48d643b9e2e254ab288ec203060a0b8',
     ),
+    'sammaye/yii2-mailchimp' => 
+    array (
+      'pretty_version' => '0.1.2',
+      'version' => '0.1.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ed75dc2aba2554ec5b974acd3f1ae677fcb2be01',
+    ),
     'sebastian/code-unit-reverse-lookup' => 
     array (
       'pretty_version' => '1.0.2',
@@ -1304,7 +1322,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '9a1b3ef99af049a0f7eef3c879f83108cc227649',
+      'reference' => '29dda512e61967f44e2294f48b7e6087dc89fa33',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

@@ -148,4 +148,13 @@ return array (
       '@dosamigos/tinymce' => $vendorDir . '/2amigos/yii2-tinymce-widget/src',
     ),
   ),
+  'sammaye/yii2-mailchimp' => 
+  array (
+    'name' => 'sammaye/yii2-mailchimp',
+    'version' => '0.1.2.0',
+    'alias' => 
+    array (
+      '@sammaye/mailchimp' => $vendorDir . '/sammaye/yii2-mailchimp',
+    ),
+  ),
 );

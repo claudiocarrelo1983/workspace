@@ -72,9 +72,18 @@ class BlogscategoryController extends Controller
 
         $model = new BlogsCategory();
 
+        $code = 'blog_category_1';
+
+        $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
+
+       if(!empty($count->id)){
+         $code = 'blog_category_'.bcadd($count->id, 1);
+       }
+
         if ($this->request->isPost) {
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
+                $model->saveBlogCategory('blog_category',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -83,6 +92,7 @@ class BlogscategoryController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'code' =>  $code
         ]);
     }
 
@@ -97,13 +107,19 @@ class BlogscategoryController extends Controller
     {      
 
         $model = $this->findModel($id);
+
+        $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
+        $code = 'pricing_specs_'.$count->id;
+
         $model->created_date = date('Y-m-d H:i:s');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $model->updateBlogCategory($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'code' =>  $code
         ]);
     }
 

@@ -52,6 +52,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'yii2sshconsole\\' => 15,
             'yii2fullcalendar\\' => 17,
         ),
+        's' => 
+        array (
+            'sammaye\\mailchimp\\' => 18,
+        ),
         'p' => 
         array (
             'phpseclib\\' => 10,
@@ -251,6 +255,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'yii2fullcalendar\\' => 
         array (
             0 => __DIR__ . '/..' . '/philippfrenzel/yii2fullcalendar',
+        ),
+        'sammaye\\mailchimp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sammaye/yii2-mailchimp',
         ),
         'phpseclib\\' => 
         array (
@@ -584,6 +592,13 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
     );
 
     public static $prefixesPsr0 = array (
+        'M' => 
+        array (
+            'Mailchimp' => 
+            array (
+                0 => __DIR__ . '/..' . '/mailchimp/mailchimp/src',
+            ),
+        ),
         'H' => 
         array (
             'HTMLPurifier' => 

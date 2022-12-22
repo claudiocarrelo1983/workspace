@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?=  $this->render('_search', ['model' => $searchModel]); ?>
-    git update-index --assume-unchanged <file    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,  
         'columns' => [
