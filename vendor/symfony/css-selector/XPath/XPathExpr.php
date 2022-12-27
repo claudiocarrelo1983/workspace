@@ -23,11 +23,28 @@ namespace Symfony\Component\CssSelector\XPath;
  */
 class XPathExpr
 {
+    /**
+     * @var string
+     */
     private $path;
+
+    /**
+     * @var string
+     */
     private $element;
+
+    /**
+     * @var string
+     */
     private $condition;
 
-    public function __construct(string $path = '', string $element = '*', string $condition = '', bool $starPrefix = false)
+    /**
+     * @param string $path
+     * @param string $element
+     * @param string $condition
+     * @param bool   $starPrefix
+     */
+    public function __construct($path = '', $element = '*', $condition = '', $starPrefix = false)
     {
         $this->path = $path;
         $this->element = $element;
@@ -38,30 +55,38 @@ class XPathExpr
         }
     }
 
-    public function getElement(): string
+    /**
+     * @return string
+     */
+    public function getElement()
     {
         return $this->element;
     }
 
     /**
-     * @return $this
+     * @param $condition
+     *
+     * @return XPathExpr
      */
-    public function addCondition(string $condition): self
+    public function addCondition($condition)
     {
-        $this->condition = $this->condition ? sprintf('(%s) and (%s)', $this->condition, $condition) : $condition;
+        $this->condition = $this->condition ? sprintf('%s and (%s)', $this->condition, $condition) : $condition;
 
         return $this;
     }
 
-    public function getCondition(): string
+    /**
+     * @return string
+     */
+    public function getCondition()
     {
         return $this->condition;
     }
 
     /**
-     * @return $this
+     * @return XPathExpr
      */
-    public function addNameTest(): self
+    public function addNameTest()
     {
         if ('*' !== $this->element) {
             $this->addCondition('name() = '.Translator::getXpathLiteral($this->element));
@@ -72,9 +97,9 @@ class XPathExpr
     }
 
     /**
-     * @return $this
+     * @return XPathExpr
      */
-    public function addStarPrefix(): self
+    public function addStarPrefix()
     {
         $this->path .= '*/';
 
@@ -84,9 +109,12 @@ class XPathExpr
     /**
      * Joins another XPathExpr with a combiner.
      *
-     * @return $this
+     * @param string    $combiner
+     * @param XPathExpr $expr
+     *
+     * @return XPathExpr
      */
-    public function join(string $combiner, self $expr): self
+    public function join($combiner, XPathExpr $expr)
     {
         $path = $this->__toString().$combiner;
 
@@ -101,7 +129,10 @@ class XPathExpr
         return $this;
     }
 
-    public function __toString(): string
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         $path = $this->path.$this->element;
         $condition = null === $this->condition || '' === $this->condition ? '' : '['.$this->condition.']';

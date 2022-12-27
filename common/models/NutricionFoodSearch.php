@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\Models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,7 +18,7 @@ class NutricionFoodSearch extends NutricionFood
     {
         return [
             [['id'], 'integer'],
-            [['name', 'group', 'calories', 'energy', 'fat', 'protein', 'carbs', 'lipids_saturated', 'lipids_unsaturated', 'lipids_monoglycerides', 'sugars', 'fibers', 'sodium', 'calcium', 'iron', 'cholesterol', 'created_date'], 'safe'],
+            [['name', 'nutricion_code', 'description', 'nutricion_pt', 'nutricion_es', 'nutricion_en', 'nutricion_it', 'nutricion_fr', 'nutricion_de', 'group', 'calories', 'energy', 'fat', 'protein', 'carbs', 'lipids_saturated', 'lipids_unsaturated', 'lipids_monoglycerides', 'sugars', 'fibers', 'sodium', 'calcium', 'iron', 'colesterol', 'created_date'], 'safe'],
         ];
     }
 
@@ -63,6 +63,14 @@ class NutricionFoodSearch extends NutricionFood
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'nutricion_code', $this->nutricion_code])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'nutricion_pt', $this->nutricion_pt])
+            ->andFilterWhere(['like', 'nutricion_es', $this->nutricion_es])
+            ->andFilterWhere(['like', 'nutricion_en', $this->nutricion_en])
+            ->andFilterWhere(['like', 'nutricion_it', $this->nutricion_it])
+            ->andFilterWhere(['like', 'nutricion_fr', $this->nutricion_fr])
+            ->andFilterWhere(['like', 'nutricion_de', $this->nutricion_de])
             ->andFilterWhere(['like', 'group', $this->group])
             ->andFilterWhere(['like', 'calories', $this->calories])
             ->andFilterWhere(['like', 'energy', $this->energy])
@@ -77,7 +85,7 @@ class NutricionFoodSearch extends NutricionFood
             ->andFilterWhere(['like', 'sodium', $this->sodium])
             ->andFilterWhere(['like', 'calcium', $this->calcium])
             ->andFilterWhere(['like', 'iron', $this->iron])
-            ->andFilterWhere(['like', 'cholesterol', $this->cholesterol]);
+            ->andFilterWhere(['like', 'colesterol', $this->colesterol]);
 
         return $dataProvider;
     }

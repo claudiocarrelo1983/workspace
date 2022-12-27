@@ -17,8 +17,8 @@ class RecipesSearch extends Recipes
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'subtitle', 'text', 'created_date'], 'safe'],
+            [['id', 'active'], 'integer'],
+            [['username', 'recipe_code', 'recipe_title', 'recipe_text', 'recipe_cat_code', 'cooking_time', 'number_of_people', 'recipe_pt', 'recipe_es', 'recipe_en', 'recipe_it', 'recipe_fr', 'recipe_de', 'created_date'], 'safe'],
         ];
     }
 
@@ -59,12 +59,30 @@ class RecipesSearch extends Recipes
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'active' => $this->active,
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'subtitle', $this->subtitle])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'recipe_code_title', $this->recipe_code_title])
+            ->andFilterWhere(['like', 'recipe_code_text', $this->recipe_code_text])
+            ->andFilterWhere(['like', 'recipe_title', $this->recipe_title])
+            ->andFilterWhere(['like', 'recipe_text', $this->recipe_text])
+            ->andFilterWhere(['like', 'recipe_cat_code', $this->recipe_cat_code])
+            ->andFilterWhere(['like', 'cooking_time', $this->cooking_time])
+            ->andFilterWhere(['like', 'number_of_people', $this->number_of_people])
+            ->andFilterWhere(['like', 'recipe_title_pt', $this->recipe_title_pt])
+            ->andFilterWhere(['like', 'recipe_text_pt', $this->recipe_text_pt])
+            ->andFilterWhere(['like', 'recipe_title_es', $this->recipe_title_es])
+            ->andFilterWhere(['like', 'recipe_text_es', $this->recipe_text_es])
+            ->andFilterWhere(['like', 'recipe_title_en', $this->recipe_title_en])
+            ->andFilterWhere(['like', 'recipe_text_en', $this->recipe_text_en])
+            ->andFilterWhere(['like', 'recipe_title_it', $this->recipe_title_it])
+            ->andFilterWhere(['like', 'recipe_text_it', $this->recipe_text_it])
+            ->andFilterWhere(['like', 'recipe_title_fr', $this->recipe_title_fr])
+            ->andFilterWhere(['like', 'recipe_text_fr', $this->recipe_text_fr])
+            ->andFilterWhere(['like', 'recipe_title_de', $this->recipe_title_de])
+            ->andFilterWhere(['like', 'recipe_text_de', $this->recipe_text_de]);
 
         return $dataProvider;
     }

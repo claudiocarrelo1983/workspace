@@ -31,6 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
+            'nutricion_code',
+            'description',
+            'nutricion_pt',
+            'nutricion_es',
+            'nutricion_en',
+            'nutricion_it',
+            'nutricion_fr',
+            'nutricion_de',
             'group',
             'calories',
             'energy',
@@ -45,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sodium',
             'calcium',
             'iron',
-            'cholesterol',
+            'colesterol',
             'created_date',
         ],
     ]) ?>

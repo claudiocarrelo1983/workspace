@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\Models\CountriesSearch */
+/* @var $model app\models\CountriesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -13,8 +13,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-    ]); ?>
-    
+        ]); 
+    ?>
+
     <div class="row">
         <div class="col-3">
             <?= $form->field($model, 'id') ?>
@@ -27,8 +28,11 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-3">
             <?= $form->field($model, 'full_title') ?>
-        </div>   
-    </div> 
+        </div>
+    </div>
+
+
+    <?php // echo $form->field($model, 'active') ?>
 
     <?php // echo $form->field($model, 'created_date') ?>
 

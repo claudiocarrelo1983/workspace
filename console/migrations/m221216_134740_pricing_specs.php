@@ -45,7 +45,8 @@ class m221216_134740_pricing_specs extends Migration
             'text_fr' => $this->string()->notNull(), 
             'text_de' => $this->string()->notNull(),
             'order' => $this->integer()->notNull(), 
-            'active' => $this->boolean()          
+            'active' => $this->boolean(),
+            'created_date' => $this->timestamp()         
              
         ], $tableOptions);
         

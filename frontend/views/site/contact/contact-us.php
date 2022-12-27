@@ -114,6 +114,12 @@ $path2 = 'contacts';
 <?= $this->render('../subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
 			
+<!--  Footer -->
+<?= $this->render('../footer',
+     [           
+        'modelFooter' =>  $modelFooter   
+    ]) ?>	
+<!--  Footer -->
 
 
 

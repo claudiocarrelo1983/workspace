@@ -26,6 +26,14 @@ class m220721_170745_nutricion_food extends Migration
         $this->createTable('{{%nutricion_food}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
+            'nutricion_code' => $this->string()->notNull(),
+            'description' => $this->string()->notNull(),  
+            'nutricion_pt' => $this->string()->notNull(), 
+            'nutricion_es' => $this->string()->notNull(), 
+            'nutricion_en' => $this->string()->notNull(), 
+            'nutricion_it' => $this->string()->notNull(), 
+            'nutricion_fr' => $this->string()->notNull(), 
+            'nutricion_de' => $this->string()->notNull(),     
             'group' => $this->string()->notNull(),
             'calories' => $this->string()->notNull(),
             'energy' => $this->string()->defaultValue(0),
@@ -40,7 +48,7 @@ class m220721_170745_nutricion_food extends Migration
             'sodium' => $this->string()->defaultValue(0),
             'calcium' => $this->string()->defaultValue(0),  
             'iron' => $this->string()->defaultValue(0), 
-            'cholesterol' => $this->string()->defaultValue(0),            
+            'colesterol' => $this->string()->defaultValue(0),            
             'created_date' => $this->timestamp()
         ], $tableOptions);
     }

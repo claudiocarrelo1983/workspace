@@ -8,6 +8,14 @@ Theme Version:	9.3.0
 		scroll-behavior: auto;
 	}
 }
+
+.field-recipes-recipe_code_title, .field-recipes-recipe_code_text,
+.field-recipes-recipe_title_pt,.field-recipes-recipe_title_es,
+.field-recipes-recipe_title_en, .field-recipes-recipe_title_it,
+.field-recipes-recipe_title_fr, .field-recipes-recipe_title_de,
+.field-recipes-recipe_text_pt,.field-recipes-recipe_text_es,
+.field-recipes-recipe_text_en, .field-recipes-recipe_text_it,
+.field-recipes-recipe_text_fr, .field-recipes-recipe_text_de,
 .field-generatorjson-type,
 .field-texts-title_pt, .field-texts-title_es,
 .field-texts-title_it,.field-texts-title_de,

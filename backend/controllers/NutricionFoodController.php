@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use common\models\NutricionFood;
-use common\models\NutricionFoodSearch;
+use common\Models\NutricionFoodSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,9 +70,6 @@ class NutricionFoodController extends Controller
         $model = new NutricionFood();
 
         if ($this->request->isPost) {
-
-            $model->created_date = date('Y-m-d H:i:s');
-            
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -95,8 +92,6 @@ class NutricionFoodController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        $model->created_date = date('Y-m-d H:i:s');
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

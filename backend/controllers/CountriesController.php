@@ -38,12 +38,10 @@ class CountriesController extends Controller
      */
     public function actionIndex()
     {
-        $model = new CountriesSearch();
         $searchModel = new CountriesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
-            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

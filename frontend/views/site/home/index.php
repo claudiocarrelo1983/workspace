@@ -3,9 +3,12 @@
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
-$model = new GeneratorJson(); 
-$arrTeams = $model->getLastFileUploaded('team');  
+
+$modelGeneratorJson = new GeneratorJson(); 
+$arrTeams = $modelGeneratorJson->getLastFileUploaded('team');  
 
 $teams = array();
 
@@ -408,8 +411,11 @@ $path2 = 'home';
 <!-- Sub Footer -->
        		
 
-
-
-
+<!--  Footer -->
+<?= $this->render('../footer',
+     [           
+        'modelFooter' =>  $modelFooter   
+    ]) ?>	
+<!--  Footer -->
 
 

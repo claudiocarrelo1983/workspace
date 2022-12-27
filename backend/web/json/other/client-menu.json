@@ -102,30 +102,7 @@
                ]
             }          
          ]
-      },  
-      {
-         "key":"t-tickets",
-         "title":"Tickets",
-         "url":"",           
-         "submenu":[
-            {   
-               "key":"t-training-values-view",
-               "title":"Messages",
-               "url":"tickets/index",
-               "submenu":[                    
-                  
-               ]
-            },
-            {   
-               "key":"t-training-values-view",
-               "title":"Subjects",
-               "url":"subjects/index",
-               "submenu":[                    
-                  
-               ]
-            }          
-         ]
-      },  
+      },   
       {
       "key":"t-blog",
       "title":"Trainings",
@@ -197,7 +174,7 @@
             {   
                "key":"t-food-category",
                "title":"Food ",
-               "url":"nutricion-food/index",
+               "url":"recipes-food/index",
                "submenu":[                    
                   
                ]
@@ -211,35 +188,36 @@
                ]
             }   
          ]
-      },
+      },  
       {
          "key":"t-multilanguages",
-         "title":"Multilanguages",
+         "title":"Texts",
          "url":"",           
-         "submenu":[
+         "submenu":[            
             {   
-               "key":"t-translations-list",
-               "title":"Tanslations",
-               "url":"translations/index",
+               "key":"t-pricing-view",
+               "title":"Prices",
+               "url":"pricing/index",
                "submenu":[                    
                   
                ]
-            },           
+            }, 
             {   
-               "key":"t-countries-view",
-               "title":"Countries",
-               "url":"countries/index",
+               "key":"t-pricing-view",
+               "title":"Pricing Options",
+               "url":"pricing-specs/index",
                "submenu":[                    
                   
                ]
-            }
-         ]
-      },
-      {
-         "key":"t-settings",
-         "title":"Settings",
-         "url":"",           
-         "submenu":[
+            },
+            {   
+               "key":"t-subjects-view",
+               "title":"Subjects",
+               "url":"subjects/index",
+               "submenu":[                    
+                  
+               ]
+            },
             {   
                "key":"t-faqs-view",
                "title":"Faq´s",
@@ -257,6 +235,29 @@
                ]
             },
             {   
+               "key":"t-translations-list",
+               "title":"Tanslations",
+               "url":"translations/index",
+               "submenu":[                    
+                  
+               ]
+            },           
+            {   
+               "key":"t-countries-view",
+               "title":"Countries",
+               "url":"countries/index",
+               "submenu":[                    
+                  
+               ]
+            }                      
+         ]
+      },
+      {
+         "key":"t-settings",
+         "title":"Settings",
+         "url":"",           
+         "submenu":[       
+            {   
                "key":"t-configurations-view",
                "title":"Configurations",
                "url":"configurations/index",
@@ -265,29 +266,13 @@
                ]
             },
             {   
-               "key":"t-pricing-view",
-               "title":"Set Pricing",
-               "url":"pricing/index",
-               "submenu":[                    
-                  
-               ]
-            }, 
-            {   
-               "key":"t-pricing-view",
-               "title":"Pricing Specs",
-               "url":"pricing-specs/index",
-               "submenu":[                    
-                  
-               ]
-            },        
-            {   
                "key":"t-publish-view",
                "title":"Publish",
                "url":"publish/index",
                "submenu":[                    
                   
                ]
-            }               
+            }                        
          ]
       }
    ]

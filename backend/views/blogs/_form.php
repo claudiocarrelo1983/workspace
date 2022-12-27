@@ -30,6 +30,12 @@ $users = $tagQuery->select([
 ->from('user')    
 ->all();
 
+$arrUsers = array();
+
+foreach($users as $user){
+    $arrUsers[$user['username']] = $user['name'];
+}
+
 $countries = $tagQuery->select([
     'country_code',
     'full_title' 
@@ -46,11 +52,7 @@ foreach($countries as $value){
 
 
 
-$arrUsers = array();
 
-foreach($users as $user){
-    $arrUsers[$user['username']] = $user['name'];
-}
 
 $arrTags = array();
 

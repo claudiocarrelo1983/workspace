@@ -37,7 +37,7 @@ class PricingSpecs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order','type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en'], 'required'],
+            [['order','type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'required'],
             [['active','order'], 'integer'],
             [['type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'string', 'max' => 255],
             [['page_code'], 'unique'],

@@ -1,39 +1,154 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use wbraganca\dynamicform\DynamicFormWidget;
+use yii\bootstrap4\ActiveForm;
 use dosamigos\tinymce\TinyMce;
+use yii\db\Query;
+
+$tagQueryUser = new Query;
+
+$countries = $tagQueryUser->select([
+    'country_code',
+    'full_title' 
+    ])
+->from('countries')    
+->all();
+
+$arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Recipes */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $modelCustomer app\modules\yii2extensions\models\Customer */
+/* @var $modelsAddress app\modules\yii2extensions\models\Address */
+
+$js = '
+jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
+    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        jQuery(this).html("Remove: " + (index + 1))
+    });
+});
+
+jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
+    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        jQuery(this).html("Remove: " + (index + 1))
+    });
+});
+
+jQuery(".dynamicform_wrapper_ingredients").on("afterInsert", function(e, item) {
+    jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {
+        jQuery(this).html("Remove: " + (index + 1))
+    });
+});
+
+jQuery(".dynamicform_wrapper_ingredients").on("afterDelete", function(e) {
+    jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {
+        jQuery(this).html("Remove: " + (index + 1))
+    });
+});
+';
+
+
+
+$this->registerJs($js);
+
+$this->title = 'Recipes';
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<div class="recipes-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<div class="customer-form">
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>
+    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
+    <div class="tabs tabs-dark mb-4 pb-2">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link show active text-1 font-weight-bold text-uppercase" href="#popularPosts" data-bs-toggle="tab">
+                     Recipes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-1 font-weight-bold text-uppercase" href="#recentPosts" data-bs-toggle="tab">
+                    Translations
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-1 font-weight-bold text-uppercase" href="#steps" data-bs-toggle="tab">
+                    Steps
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-1 font-weight-bold text-uppercase" href="#ingredients" data-bs-toggle="tab">
+                    Ingredients
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="popularPosts"> 
+                <?= $this->render('@backend/views/recipes/recipes',[
+                    'model' => $model,          
+                    'modelIngredients' => $modelIngredients, 
+                    'recipeCodeTitle' => $recipeCodeTitle,
+                    'recipeCodeText' => $recipeCodeText,
+                    'recipeCodeIngredients' => $recipeCodeIngredients,
+                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'form' => $form, 
+                    'countries' => $countries,
+                    'arrLanguages' => $arrLanguages,
+                ]); ?> 
+                
+            </div>
+            <div class="tab-pane" id="recentPosts">    
+          
+                <?= $this->render('@backend/views/recipes/translations',[
+                     'model' => $model, 
+                    'modelIngredients' => $modelIngredients, 
+                    'recipeCodeTitle' => $recipeCodeTitle,
+                    'recipeCodeText' => $recipeCodeText,
+                    'recipeCodeIngredients' => $recipeCodeIngredients,
+                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'form' => $form, 
+                    'countries' => $countries,
+                    'arrLanguages' => $arrLanguages,
+                ]); ?> 
+               
+            </div>
+            <div class="tab-pane" id="steps">   
 
-    <?= $form->field($model, 'text')->widget(TinyMce::className(), [
-        'options' => ['rows' => 6],
-        'language' => 'es',
-        'clientOptions' => [
-            'plugins' => [
-                "advlist autolink lists link charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-        ]
-    ]);?>
+                <?= $this->render('@backend/views/recipes/steps',[
+                    'modelsRecipeSteps' => $modelsRecipeSteps, 
+                    'recipeCodeTitle' => $recipeCodeTitle,
+                    'recipeCodeText' => $recipeCodeText,
+                    'recipeCodeIngredients' => $recipeCodeIngredients,
+                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'form' => $form, 
+                    'countries' => $countries,
+                    'arrLanguages' => $arrLanguages,
+                ]); ?> 
 
+            </div>
+            <div class="tab-pane" id="ingredients">    
+
+                <?= $this->render('@backend/views/recipes/ingredients',[
+                    'modelIngredients' => $modelIngredients, 
+                    'recipeCodeTitle' => $recipeCodeTitle,
+                    'recipeCodeText' => $recipeCodeText,
+                    'recipeCodeIngredients' => $recipeCodeIngredients,
+                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'form' => $form, 
+                    'countries' => $countries,
+                    'arrLanguages' => $arrLanguages,
+                ]); ?>    
+
+            </div>
+        </div>  
+    </div>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
+

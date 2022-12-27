@@ -6,11 +6,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Recipes */
 
-$this->title = $model->name;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Recipes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
+<?= $this->render('@backend/views/layouts/header'); ?>
+
 <div class="recipes-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -24,16 +27,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Create Recipes', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'subtitle',
-            'text',
+            'username',
+            'recipe_code_title',
+            'recipe_code_text',
+            'recipe_title',
+            'recipe_text:ntext',
+            'recipe_cat_code',
+            'cooking_time',
+            'number_of_people',
+            'recipe_pt',
+            'recipe_es',
+            'recipe_en',
+            'recipe_it',
+            'recipe_fr',
+            'recipe_de',
+            'active',
+            'created_date',
         ],
     ]) ?>
 

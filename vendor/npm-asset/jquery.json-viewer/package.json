@@ -1,6 +1,6 @@
 {
   "name": "jquery.json-viewer",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "jQuery plugin for displaying JSON data",
   "repository": {
     "type": "git",
@@ -19,9 +19,13 @@
   },
   "homepage": "https://github.com/abodelot/jquery.json-viewer",
   "scripts": {
-    "lint": "eslint json-viewer/*.js"
+    "lint": "eslint json-viewer test",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^6.0.1"
+    "eslint": "^7.28.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.4",
+    "jquery": "^3.6.0"
   }
 }

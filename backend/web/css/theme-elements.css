@@ -7251,9 +7251,9 @@ label.required:after {
 }
 
 .form-group {
-	margin-bottom: 16px;
-	margin-bottom: 1rem;
-	margin-top: 2rem;
+	margin-bottom: 5px;
+
+	/*margin-top: 2rem;*/
 }
 
 .form-group:after {

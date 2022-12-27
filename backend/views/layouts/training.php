@@ -29,7 +29,7 @@ PublicAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<?php $this->beginBody() ?>
+<?php $this->beginBody() ?>sss
 <body data-plugin-page-transition>
 
 <div class="body">

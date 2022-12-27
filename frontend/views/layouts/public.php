@@ -18,9 +18,7 @@ PublicAsset::register($this);
 <?= $this->render('/layouts/public_header'); ?>
 
             <?= $content ?>
-    </div>
-
-    <?= $this->render('/site/footer'); ?>			
+    </div>		
 
 </div>
 

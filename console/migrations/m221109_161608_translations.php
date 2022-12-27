@@ -37,10 +37,16 @@ class m221109_161608_translations extends Migration
             'id' => $this->primaryKey(),              
             'country_code' => $this->string(), 
             'page' => $this->string(), 
-            'page_code' => $this->string(), 
-            'text' => $this->text(),    
-            'created_date' => $this->timestamp(),
-            'active' => $this->boolean()
+            'page_code' => $this->string(),            
+            'text' => $this->text(),  
+            'text_pt' => $this->string(), 
+            'text_es' => $this->string(), 
+            'text_en' => $this->string(), 
+            'text_it' => $this->string(), 
+            'text_fr' => $this->string(), 
+            'text_de' => $this->string(),
+            'active' => $this->boolean(),
+            'created_date' => $this->timestamp()
              
         ], $tableOptions);
         

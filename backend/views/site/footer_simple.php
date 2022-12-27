@@ -6,6 +6,10 @@ use yii\helpers\Html;
 
 
 ?>	
+
+		</div>
+	</div>
+<div class="spacer"></div>
 <footer id="footer" class="bg-color-dark-scale-2 border border-end-0 border-start-0 border-bottom-0 border-color-light-3 mt-0 ">
 	<div class="copyright bg-dark py-4">
 		<div class="container text-center py-2">

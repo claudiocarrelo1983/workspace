@@ -9,12 +9,30 @@ $this->title = 'Create Recipes';
 $this->params['breadcrumbs'][] = ['label' => 'Recipes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="recipes-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?= $this->render('@backend/views/layouts/header'); ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="recipes-create">
 
+        <?= $this->render('_form', [
+            'model' => $model,
+            'recipeCodeTitle' => $recipeCodeTitle,
+            'recipeCodeText' => $recipeCodeText,
+            'recipeCodeIngredients' => $recipeCodeIngredients,
+            'recipeCodeSteps' => $recipeCodeSteps,    
+            'modelsRecipeSteps' => $modelsRecipeSteps, 
+            'modelIngredients' => $modelIngredients,
+            
+        ]) ?>
+
+    </div>    
+
+    <?= $this->render('/site/footer_simple'); ?>		
 </div>
+
+
+
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage();

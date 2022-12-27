@@ -1,6 +1,5 @@
 <?php
 
-use app\Models\NutricionFood;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -31,21 +30,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'group',
-            'calories',
-            'energy',
-            'fat',
-            'protein',
-            'carbs',
-            'lipids_saturated',
-            'lipids_unsaturated',
-            'lipids_monoglycerides',
-            'sugars',
-            'fibers',
-            'sodium',
-            'calcium',
-            'iron',
-            'cholesterol',
+            'nutricion_code',
+            'description',
+            'nutricion_pt',
+            //'nutricion_es',
+            //'nutricion_en',
+            //'nutricion_it',
+            //'nutricion_fr',
+            //'nutricion_de',
+            //'group',
+            //'calories',
+            //'energy',
+            //'fat',
+            //'protein',
+            //'carbs',
+            //'lipids_saturated',
+            //'lipids_unsaturated',
+            //'lipids_monoglycerides',
+            //'sugars',
+            //'fibers',
+            //'sodium',
+            //'calcium',
+            //'iron',
+            //'colesterol',
+            //'created_date',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, NutricionFood $model, $key, $index, $column) {

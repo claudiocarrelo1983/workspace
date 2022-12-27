@@ -18,9 +18,13 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 /* @var $this yii\web\View */
 /* @var $model app\models\PricingSpecs */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Pricing Specs';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="pricing-specs-index">
 
-<div class="pricing-specs-form">
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?php $form = ActiveForm::begin(); ?>   
     <div class="tabs tabs-dark mb-4 pb-2">
         <ul class="nav nav-tabs">

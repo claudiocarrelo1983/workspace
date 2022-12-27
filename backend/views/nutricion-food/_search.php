@@ -19,11 +19,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'group') ?>
+    <?= $form->field($model, 'nutricion_code') ?>
 
-    <?= $form->field($model, 'calories') ?>
+    <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'energy') ?>
+    <?= $form->field($model, 'nutricion_pt') ?>
+
+    <?php // echo $form->field($model, 'nutricion_es') ?>
+
+    <?php // echo $form->field($model, 'nutricion_en') ?>
+
+    <?php // echo $form->field($model, 'nutricion_it') ?>
+
+    <?php // echo $form->field($model, 'nutricion_fr') ?>
+
+    <?php // echo $form->field($model, 'nutricion_de') ?>
+
+    <?php // echo $form->field($model, 'group') ?>
+
+    <?php // echo $form->field($model, 'calories') ?>
+
+    <?php // echo $form->field($model, 'energy') ?>
 
     <?php // echo $form->field($model, 'fat') ?>
 
@@ -47,7 +63,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'iron') ?>
 
-    <?php // echo $form->field($model, 'cholesterol') ?>
+    <?php // echo $form->field($model, 'colesterol') ?>
 
     <?php // echo $form->field($model, 'created_date') ?>
 

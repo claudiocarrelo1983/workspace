@@ -34,9 +34,27 @@ class m220721_175242_recipes_food extends Migration
         }
 
         $this->createTable('{{%recipes_food}}', [
-            'id' => $this->primaryKey(),  
-            'recipes_id' => $this->integer(),
-            'food_id' => $this->integer(),             
+            'id' => $this->primaryKey(),        
+            'recipe_code' => $this->string()->notNull(),  
+            'recipe_food_name' => $this->string()->notNull(),   
+            'measure' => $this->string()->notNull(),
+            'quantity' => $this->string()->notNull(),            
+            'calories' => $this->integer()->notNull(), 
+            'lipids' => $this->integer()->defaultValue(0),
+            'colesterol' => $this->integer()->defaultValue(0), 
+            'sodium' => $this->integer()->defaultValue(0),      
+            'fibers' => $this->integer()->defaultValue(0),
+            'sugar' => $this->integer()->defaultValue(0),
+            'fat' => $this->integer()->notNull(), 
+            'carbs' => $this->integer()->notNull(), 
+            'protein' => $this->integer()->notNull(), 
+            'recipe_food_pt' => $this->string()->notNull(), 
+            'recipe_food_es' => $this->string()->notNull(), 
+            'recipe_food_en' => $this->string()->notNull(), 
+            'recipe_food_it' => $this->string()->notNull(), 
+            'recipe_food_fr' => $this->string()->notNull(), 
+            'recipe_food_de' => $this->string()->notNull(),    
+            'active' => $this->boolean(),                   
             'created_date' => $this->timestamp()
         ], $tableOptions);
     }

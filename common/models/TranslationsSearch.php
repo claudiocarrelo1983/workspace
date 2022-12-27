@@ -18,7 +18,7 @@ class TranslationsSearch extends Translations
     {
         return [
             [['id', 'active'], 'integer'],
-            [['country_code','page', 'page_code', 'text', 'created_date'], 'safe'],
+            [['page', 'page_code', 'text', 'created_date'], 'safe'],
         ];
     }
 

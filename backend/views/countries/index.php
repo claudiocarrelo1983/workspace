@@ -5,9 +5,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use common\models\Countries;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\Models\CountriesSearch */
+/* @var $searchModel app\models\CountriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Countries';
@@ -24,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider, 
+        'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -33,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'small_title',
             'full_title',
             'img',
+            //'active',
             //'created_date',
             [
                 'class' => ActionColumn::className(),

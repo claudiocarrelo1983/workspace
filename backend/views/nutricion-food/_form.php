@@ -14,6 +14,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'nutricion_code')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_pt')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_es')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_en')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_it')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_fr')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nutricion_de')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'group')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'calories')->textInput(['maxlength' => true]) ?>
@@ -42,7 +58,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'iron')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cholesterol')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'colesterol')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'created_date')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

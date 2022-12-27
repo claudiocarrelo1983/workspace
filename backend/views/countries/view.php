@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Create Country', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'small_title',
             'full_title',
             'img',
+            'active',
             'created_date',
         ],
     ]) ?>

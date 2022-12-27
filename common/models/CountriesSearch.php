@@ -1,6 +1,6 @@
 <?php
 
-namespace common\Models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,7 +17,7 @@ class CountriesSearch extends Countries
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'active'], 'integer'],
             [['country_code', 'small_title', 'full_title', 'img', 'created_date'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class CountriesSearch extends Countries
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'active' => $this->active,
             'created_date' => $this->created_date,
         ]);
 
