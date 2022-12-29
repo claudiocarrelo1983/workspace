@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\RecipesFood */
+/** @var yii\web\View $this */
+/** @var app\models\RecipesFood $model */
 
-$this->title = $model->name;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Recipes Foods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -31,22 +31,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'recipe_code',
-            'name',
+            'recipe_food_name',
             'measure',
+            'quantity',
             'calories',
             'lipids',
             'colesterol',
             'sodium',
-            'carbs',
             'fibers',
             'sugar',
+            'fat',
+            'carbs',
             'protein',
-            'nutricion_pt',
-            'nutricion_es',
-            'nutricion_en',
-            'nutricion_it',
-            'nutricion_fr',
-            'nutricion_de',
+            'recipe_food_pt',
+            'recipe_food_es',
+            'recipe_food_en',
+            'recipe_food_it',
+            'recipe_food_fr',
+            'recipe_food_de',
             'active',
             'created_date',
         ],

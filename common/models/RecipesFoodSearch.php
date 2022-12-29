@@ -38,6 +38,14 @@ class RecipesFoodSearch extends RecipesFood
      *
      * @return ActiveDataProvider
      */
+    
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
     public function search($params)
     {
         $query = RecipesFood::find();
@@ -59,27 +67,29 @@ class RecipesFoodSearch extends RecipesFood
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'calories' => $this->calories,
+            'lipids' => $this->lipids,
+            'colesterol' => $this->colesterol,
+            'sodium' => $this->sodium,
+            'fibers' => $this->fibers,
+            'sugar' => $this->sugar,
+            'fat' => $this->fat,
+            'carbs' => $this->carbs,
+            'protein' => $this->protein,
             'active' => $this->active,
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'recipe_code', $this->recipe_code])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['=', 'recipe_code', $this->recipe_code])
+            ->andFilterWhere(['like', 'recipe_food_name', $this->recipe_food_name])
             ->andFilterWhere(['like', 'measure', $this->measure])
-            ->andFilterWhere(['like', 'calories', $this->calories])
-            ->andFilterWhere(['like', 'lipids', $this->lipids])
-            ->andFilterWhere(['like', 'colesterol', $this->colesterol])
-            ->andFilterWhere(['like', 'sodium', $this->sodium])
-            ->andFilterWhere(['like', 'carbs', $this->carbs])
-            ->andFilterWhere(['like', 'fibers', $this->fibers])
-            ->andFilterWhere(['like', 'sugar', $this->sugar])
-            ->andFilterWhere(['like', 'protein', $this->protein])
-            ->andFilterWhere(['like', 'nutricion_pt', $this->nutricion_pt])
-            ->andFilterWhere(['like', 'nutricion_es', $this->nutricion_es])
-            ->andFilterWhere(['like', 'nutricion_en', $this->nutricion_en])
-            ->andFilterWhere(['like', 'nutricion_it', $this->nutricion_it])
-            ->andFilterWhere(['like', 'nutricion_fr', $this->nutricion_fr])
-            ->andFilterWhere(['like', 'nutricion_de', $this->nutricion_de]);
+            ->andFilterWhere(['like', 'quantity', $this->quantity])
+            ->andFilterWhere(['like', 'recipe_food_pt', $this->recipe_food_pt])
+            ->andFilterWhere(['like', 'recipe_food_es', $this->recipe_food_es])
+            ->andFilterWhere(['like', 'recipe_food_en', $this->recipe_food_en])
+            ->andFilterWhere(['like', 'recipe_food_it', $this->recipe_food_it])
+            ->andFilterWhere(['like', 'recipe_food_fr', $this->recipe_food_fr])
+            ->andFilterWhere(['like', 'recipe_food_de', $this->recipe_food_de]);
 
         return $dataProvider;
     }

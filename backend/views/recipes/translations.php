@@ -15,7 +15,7 @@ use dosamigos\tinymce\TinyMce;
 ?>
 
 
-   
+<div class="row">
 <?php 
 
 foreach($arrLanguages as $valLang){
@@ -32,9 +32,10 @@ foreach($arrLanguages as $valLang){
     if($display == 1){
 
 ?>  
+   
+    <div class="col-3">
     <?= $form->field($model, 'recipe_title_'.$value['country_code'])->textInput(['maxlength' => true]) ?>  
 
-    <div class="col-12">
         <?= $form->field($model, 'recipe_text_'.$valLang)->widget(TinyMce::className(), [
             'options' => ['rows' => 6],
             'language' => 'es',
@@ -49,8 +50,6 @@ foreach($arrLanguages as $valLang){
         ]);?>
     </div>
 
-    <hr class="my-5">
-
 <?php 
 }else{            
 ?>
@@ -61,3 +60,4 @@ foreach($arrLanguages as $valLang){
     }
 }               
 ?>
+</div>

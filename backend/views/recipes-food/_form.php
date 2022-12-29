@@ -3,55 +3,59 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\RecipesFood */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\RecipesFood $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="recipes-food-form">
-    <?php $form = ActiveForm::begin([
-        'id' => 'form-recipe-food', 
-        'enableClientValidation' => true, 
-        'enableAjaxValidation' => false,
-        'action' => ['/recipe-food/create', 
-        '#' => 'create'],                                             
-        'options' => ['enctype' => 'multipart/form-data']]);
-    ?>   
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'measure')->dropdownList(
-        ['milliliters' => 'Milliliters', 'grams' => 'Grams'],
-        ['prompt'=>'Grams']); 
-    ?>
+    <?= $form->field($model, 'recipe_code')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'calories')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'recipe_food_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'measure')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'carbs')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'protein')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'calories')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_pt')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'lipids')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_es')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'colesterol')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_en')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sodium')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_it')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fibers')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_fr')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sugar')->textInput() ?>
 
-    <?= $form->field($model, 'nutricion_de')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fat')->textInput() ?>
 
-    <?= $form->field($model, 'active')->dropdownList(
-        [1 => 'Yes', 0 => 'No'],
-        ['prompt'=>'Active']); 
-    ?>
+    <?= $form->field($model, 'carbs')->textInput() ?>
+
+    <?= $form->field($model, 'protein')->textInput() ?>
+
+    <?= $form->field($model, 'recipe_food_pt')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'recipe_food_es')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'recipe_food_en')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'recipe_food_it')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'recipe_food_fr')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'recipe_food_de')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'active')->textInput() ?>
+
+    <?= $form->field($model, 'created_date')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitInput('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -60,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="customer-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
     <div class="tabs tabs-dark mb-4 pb-2">
         <ul class="nav nav-tabs">
@@ -89,26 +88,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="tab-pane active" id="popularPosts"> 
                 <?= $this->render('@backend/views/recipes/recipes',[
                     'model' => $model,          
-                    'modelIngredients' => $modelIngredients, 
-                    'recipeCodeTitle' => $recipeCodeTitle,
-                    'recipeCodeText' => $recipeCodeText,
-                    'recipeCodeIngredients' => $recipeCodeIngredients,
-                    'recipeCodeSteps' => $recipeCodeSteps, 
                     'form' => $form, 
                     'countries' => $countries,
                     'arrLanguages' => $arrLanguages,
                 ]); ?> 
                 
             </div>
+            
             <div class="tab-pane" id="recentPosts">    
           
                 <?= $this->render('@backend/views/recipes/translations',[
-                     'model' => $model, 
-                    'modelIngredients' => $modelIngredients, 
-                    'recipeCodeTitle' => $recipeCodeTitle,
-                    'recipeCodeText' => $recipeCodeText,
-                    'recipeCodeIngredients' => $recipeCodeIngredients,
-                    'recipeCodeSteps' => $recipeCodeSteps, 
+                     'model' => $model,               
                     'form' => $form, 
                     'countries' => $countries,
                     'arrLanguages' => $arrLanguages,
@@ -118,31 +108,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="tab-pane" id="steps">   
 
                 <?= $this->render('@backend/views/recipes/steps',[
-                    'modelsRecipeSteps' => $modelsRecipeSteps, 
-                    'recipeCodeTitle' => $recipeCodeTitle,
-                    'recipeCodeText' => $recipeCodeText,
-                    'recipeCodeIngredients' => $recipeCodeIngredients,
-                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'modelsRecipeSteps' => $modelsRecipeSteps,             
                     'form' => $form, 
                     'countries' => $countries,
                     'arrLanguages' => $arrLanguages,
-                ]); ?> 
+                ]); ?>  
 
-            </div>
+            </div>      
+
             <div class="tab-pane" id="ingredients">    
-
                 <?= $this->render('@backend/views/recipes/ingredients',[
-                    'modelIngredients' => $modelIngredients, 
-                    'recipeCodeTitle' => $recipeCodeTitle,
-                    'recipeCodeText' => $recipeCodeText,
-                    'recipeCodeIngredients' => $recipeCodeIngredients,
-                    'recipeCodeSteps' => $recipeCodeSteps, 
+                    'modelIngredients' => $modelIngredients,                  
                     'form' => $form, 
                     'countries' => $countries,
                     'arrLanguages' => $arrLanguages,
-                ]); ?>    
-
-            </div>
+                ]); ?>                                   
+            </div>          
         </div>  
     </div>
     <div class="form-group">

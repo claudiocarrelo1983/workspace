@@ -10,15 +10,26 @@ $this->params['breadcrumbs'][] = ['label' => 'Recipes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+
+<?= $this->render('@backend/views/layouts/header'); ?>
+
 <div class="recipes-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
-        'model' => $model,
-        'title' => $title,
-        'text' => $text,
-        'modelsAddress' => $modelsAddress
+         'model' => $model,              
+         'recipeCodeIngredients' => $recipeCodeIngredients,
+         'recipeCodeSteps' => $recipeCodeSteps,    
+         'modelsRecipeSteps' => $modelsRecipeSteps, 
+         'modelIngredients' => $modelIngredients,
     ]) ?>
 
+</div>    
+
+<?= $this->render('/site/footer_simple'); ?>		
 </div>
+
+
+
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage();

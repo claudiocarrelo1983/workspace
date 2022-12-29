@@ -90,6 +90,6 @@ PublicAsset::register($this);
         </div>
     </header>    
     <div class="spacer"></div>    
-    <div class="container-fluid">
+
         <div role="main" class="main  px-5 pb-5">
        

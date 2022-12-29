@@ -37,20 +37,21 @@ use dosamigos\tinymce\TinyMce;
     ],
 ]); ?>
 <div class="panel panel-default">
-<div class="panel-heading">                
-    <button type="button" class="pull-right add-item-button-ingredients btn btn-success">
-        <i class="fa fa-plus"></i> Add Ingredients
-    </button>
-    <div class="clearfix"></div>
-</div>
-<div class="panel-body container-items text-right"><!-- widgetContainer -->
-    <?php $key = 1;
-    foreach ($modelIngredients as $index => $model): ?>        
+    <div class="panel-heading">                
+        <button type="button" class="pull-right add-item-button-ingredients btn btn-success">
+            <i class="fa fa-plus"></i> Add Ingredients
+        </button>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body container-items text-right"><!-- widgetContainer -->
+        <?php $key = 1;
+        foreach ($modelIngredients as $index => $model): 
+        ?>        
         <div class="item panel panel-default"><!-- widgetBody -->
             <div class="panel-heading text-right">               
-                <div class="row">
+                <div class="row"> 
                     <div class="col-sm-11">
-                    </div>
+                    </div>                
                     <div class="col-sm-1 text-right">
                         <div class="text-right">                          
                             <button type="button" class="pull-right remove-item-ingredients btn btn-danger ">
@@ -71,43 +72,22 @@ use dosamigos\tinymce\TinyMce;
                     }
                 ?>              
                 <div class="row">                
-                    <div class="col-sm-9">
+                    <div class="col-sm-3">
                         <?= $form->field($model, "[{$index}]recipe_food_name")->textInput(['maxlength' => true])->label('Ingredient Name') ?>
                     </div>
                     <div class="col-sm-3">
                         <?= $form->field($model, "[{$index}]quantity")->textInput(['maxlength' => true]) ?>
                     </div>
-              
-                    <?php 
-                    foreach($arrLanguages as $valLang){
-
-                        $display = 0;
-
-                        foreach ($countries as $value){
-                            if($value['country_code'] == $valLang){
-                                $display = 1;
-                                break;
-                            }
-                        }
-
-                        if($display == 1){
-
-                    ?>                     
-                    
-                    <div class="col-sm-9">
-                        <?= $form->field($model, "[{$index}]recipe_food_".$valLang)->textInput(['maxlength' => true])->label('Ingredient Name '. ucfirst($valLang)) ?>
-                    </div>
-
-
-                    <?php 
-                    }else{            
-                    ?>
-                        <?=  $form->field($model, "[{$index}]recipe_food_".$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>          
-                    <?php 
-                            
-                        }
-                    }               
-                    ?>                                 
+                </div>
+                <div class="row">  
+                    <?php foreach ($countries as $value){ ?>                    
+                        <div class="col-sm-3">
+                            <?= $form->field($model, "[{$index}]recipe_food_".$value['country_code'])->textInput(['maxlength' => true])->label('Ingredient Name '. ucfirst($value['country_code'])) ?>
+                        </div>
+                    <?php } ?>      
+                    <?=  $form->field($model, "[{$index}]recipe_food_it")->hiddenInput(['value'=> 'n/a'])->label(false); ?>  
+                    <?=  $form->field($model, "[{$index}]recipe_food_de")->hiddenInput(['value'=> 'n/a'])->label(false); ?>   
+                    <?=  $form->field($model, "[{$index}]recipe_food_fr")->hiddenInput(['value'=> 'n/a'])->label(false); ?>      
 
                     <div class="col-sm-2">
                         <?= $form->field($model, "[{$index}]measure")->dropdownList(
@@ -117,8 +97,7 @@ use dosamigos\tinymce\TinyMce;
                                 'spoon' => 'Spoon',
                                 'Tea spoon' => 'Tea Spoon',
                                 'q.b,' => 'q.b.'                             
-                            ],
-                            ['prompt'=>'Grams']); 
+                            ]); 
                         ?>   
                     </div>                
                     <div class="col-sm-2">
@@ -139,15 +118,16 @@ use dosamigos\tinymce\TinyMce;
                             [
                                 1 => 'Yes',
                                 0 => 'No'
-                            ],
-                            ['prompt'=>'Active']); 
+                            ]); 
                         ?>                                      
                     </div>                
                 </div><!-- end:row -->
                 <hr class="my-5">
             </div>
-        </div>
+        </div>       
+
+    <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
+</div>
 
 <?php DynamicFormWidget::end(); ?>

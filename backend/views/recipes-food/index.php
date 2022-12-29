@@ -1,13 +1,14 @@
 <?php
 
+use app\models\RecipesFood;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\RecipesFoodSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\RecipesFoodSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Recipes Foods';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,22 +31,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'recipe_code',
-            'name',
+            'recipe_food_name',
             'measure',
-            'calories',
+            'quantity',
+            //'calories',
             //'lipids',
             //'colesterol',
             //'sodium',
-            //'carbs',
             //'fibers',
             //'sugar',
+            //'fat',
+            //'carbs',
             //'protein',
-            //'nutricion_pt',
-            //'nutricion_es',
-            //'nutricion_en',
-            //'nutricion_it',
-            //'nutricion_fr',
-            //'nutricion_de',
+            //'recipe_food_pt',
+            //'recipe_food_es',
+            //'recipe_food_en',
+            //'recipe_food_it',
+            //'recipe_food_fr',
+            //'recipe_food_de',
             //'active',
             //'created_date',
             [

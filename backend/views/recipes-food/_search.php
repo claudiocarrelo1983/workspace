@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\RecipesFoodSearch */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\RecipesFoodSearch $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="recipes-food-search">
@@ -19,11 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'recipe_code') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'recipe_food_name') ?>
 
     <?= $form->field($model, 'measure') ?>
 
-    <?= $form->field($model, 'calories') ?>
+    <?= $form->field($model, 'quantity') ?>
+
+    <?php // echo $form->field($model, 'calories') ?>
 
     <?php // echo $form->field($model, 'lipids') ?>
 
@@ -31,25 +33,27 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'sodium') ?>
 
-    <?php // echo $form->field($model, 'carbs') ?>
-
     <?php // echo $form->field($model, 'fibers') ?>
 
     <?php // echo $form->field($model, 'sugar') ?>
 
+    <?php // echo $form->field($model, 'fat') ?>
+
+    <?php // echo $form->field($model, 'carbs') ?>
+
     <?php // echo $form->field($model, 'protein') ?>
 
-    <?php // echo $form->field($model, 'nutricion_pt') ?>
+    <?php // echo $form->field($model, 'recipe_food_pt') ?>
 
-    <?php // echo $form->field($model, 'nutricion_es') ?>
+    <?php // echo $form->field($model, 'recipe_food_es') ?>
 
-    <?php // echo $form->field($model, 'nutricion_en') ?>
+    <?php // echo $form->field($model, 'recipe_food_en') ?>
 
-    <?php // echo $form->field($model, 'nutricion_it') ?>
+    <?php // echo $form->field($model, 'recipe_food_it') ?>
 
-    <?php // echo $form->field($model, 'nutricion_fr') ?>
+    <?php // echo $form->field($model, 'recipe_food_fr') ?>
 
-    <?php // echo $form->field($model, 'nutricion_de') ?>
+    <?php // echo $form->field($model, 'recipe_food_de') ?>
 
     <?php // echo $form->field($model, 'active') ?>
 

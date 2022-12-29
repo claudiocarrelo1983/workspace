@@ -50,12 +50,12 @@ class Recipes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
-            [['recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
+            [['imageFile','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
+            [['difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
             [['cooking_time', 'number_of_people', 'active'], 'integer'],
             [['created_date'], 'safe'],
             [['username', 'recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_cat_code', 'recipe_title_pt', 'recipe_title_es', 'recipe_title_en', 'recipe_title_it', 'recipe_title_fr', 'recipe_title_de'], 'string', 'max' => 255],
-            [['recipe_code_title'], 'unique'],
+            [['recipe_code_title',], 'unique'],
             [['recipe_code_text'], 'unique'],
             [['recipe_title'], 'unique'],
         ];
@@ -103,7 +103,7 @@ class Recipes extends \yii\db\ActiveRecord
     }
 
     
-    public function saveRecipes($page, $arrValues = []){        
+    public function saveRecipes($page, $modelRecipe){        
 
         $connection = new Query;
 
@@ -112,6 +112,37 @@ class Recipes extends \yii\db\ActiveRecord
             ])
         ->from('countries')    
         ->all();
+
+        $code = $this->saveSimple($page, $modelRecipe);     
+
+        foreach($countries as $val){
+
+            $title = 'recipe_title_' . $val['country_code'];   
+            $text = 'recipe_text_' . $val['country_code'];   
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $modelRecipe->recipe_code_title,
+                'text' => $modelRecipe->$title,
+                'active' => '1',
+            ])->execute();
+            
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $modelRecipe->recipe_code_text,
+                'text' => $modelRecipe->$text,
+                'active' => '1',
+            ])->execute();
+        }
+
+        return $code;   
+    }
+
+    public function saveSimple($page, $modelRecipe){
+
+        $connection = new Query;
 
         $model = new Recipes();
         $code = 'recipe_code_1';
@@ -122,59 +153,74 @@ class Recipes extends \yii\db\ActiveRecord
          $code = 'recipe_code_'.bcadd($count->id, 1);
        }
 
-        $connection->createCommand()->insert('recipes', [   
+        $value = $connection->createCommand()->insert('recipes', [   
             'username' => '',   
             'recipe_code' => $code,     
-            'recipe_code_title' => $arrValues['recipe_code_title'],  
-            'recipe_code_text' => $arrValues['recipe_code_title'], 
-            'recipe_title' => $arrValues['recipe_title'], 
-            'cooking_time' => $arrValues['cooking_time'], 
-            'number_of_people' => $arrValues['number_of_people'], 
-            'active' => $arrValues['active'], 
-            'image' => $arrValues['imageFile'], 
-            'recipe_text' => $arrValues['recipe_text'],
-            'recipe_title_en' => $arrValues['recipe_title_en'],
-            'recipe_text_en' => $arrValues['recipe_text_en'],
-            'recipe_title_pt' => $arrValues['recipe_title_pt'],
-            'recipe_text_pt' => $arrValues['recipe_text_pt'],
-            'recipe_title_es' => $arrValues['recipe_title_es'],
-            'recipe_text_es' => $arrValues['recipe_text_es'],
-            'recipe_title_it' => $arrValues['recipe_title_it'],
-            'recipe_text_it' => $arrValues['recipe_text_it'],
-            'recipe_title_de' => $arrValues['recipe_title_de'],
-            'recipe_text_de' => $arrValues['recipe_text_de'],
-            'recipe_title_fr' => $arrValues['recipe_title_fr'],
-            'recipe_text_fr' => $arrValues['recipe_text_fr'],
+            'recipe_code_title' => $modelRecipe->recipe_code_title,  
+            'recipe_code_text' => $modelRecipe->recipe_code_text, 
+            'recipe_title' => $modelRecipe->recipe_title, 
+            'cooking_time' => $modelRecipe->cooking_time, 
+            'number_of_people' => $modelRecipe->number_of_people, 
+            'difficulty' => $modelRecipe->difficulty, 
+            'active' => $modelRecipe->active, 
+            'image' => $modelRecipe->image, 
+            'recipe_text' => $modelRecipe->recipe_text,
+            'recipe_title_en' => $modelRecipe->recipe_title_en,
+            'recipe_text_en' => $modelRecipe->recipe_text_en,
+            'recipe_title_pt' => $modelRecipe->recipe_title_pt,
+            'recipe_text_pt' => $modelRecipe->recipe_text_pt,
+            'recipe_title_es' => $modelRecipe->recipe_title_es,
+            'recipe_text_es' => $modelRecipe->recipe_text_es,
+            'recipe_title_it' => $modelRecipe->recipe_title_it,
+            'recipe_text_it' => $modelRecipe->recipe_text_it,
+            'recipe_title_de' => $modelRecipe->recipe_title_de,
+            'recipe_text_de' => $modelRecipe->recipe_text_de,
+            'recipe_title_fr' => $modelRecipe->recipe_title_fr,
+            'recipe_text_fr' => $modelRecipe->recipe_text_fr,
         ])->execute();
 
+        return $code;
+    }
 
-        foreach($countries as $val){
+    public function updateSimple($page, $modelRecipe){
 
-            $title = 'recipe_title_' . $val['country_code'];   
-            $text = 'recipe_text_' . $val['country_code'];   
+        $connection = new Query;
+     
+        $value = $connection->createCommand()->update('recipes', [   
+            'username' => '',   
+            'recipe_code' =>  $modelRecipe->recipe_code,     
+            'recipe_code_title' => $modelRecipe->recipe_code_title,  
+            'recipe_code_text' => $modelRecipe->recipe_code_text, 
+            'recipe_title' => $modelRecipe->recipe_title, 
+            'cooking_time' => $modelRecipe->cooking_time, 
+            'number_of_people' => $modelRecipe->number_of_people, 
+            'difficulty' => $modelRecipe->difficulty, 
+            'active' => $modelRecipe->active, 
+            'image' => $modelRecipe->image, 
+            'recipe_text' => $modelRecipe->recipe_text,
+            'recipe_title_en' => $modelRecipe->recipe_title_en,
+            'recipe_text_en' => $modelRecipe->recipe_text_en,
+            'recipe_title_pt' => $modelRecipe->recipe_title_pt,
+            'recipe_text_pt' => $modelRecipe->recipe_text_pt,
+            'recipe_title_es' => $modelRecipe->recipe_title_es,
+            'recipe_text_es' => $modelRecipe->recipe_text_es,
+            'recipe_title_it' => $modelRecipe->recipe_title_it,
+            'recipe_text_it' => $modelRecipe->recipe_text_it,
+            'recipe_title_de' => $modelRecipe->recipe_title_de,
+            'recipe_text_de' => $modelRecipe->recipe_text_de,
+            'recipe_title_fr' => $modelRecipe->recipe_title_fr,
+            'recipe_text_fr' => $modelRecipe->recipe_text_fr,
+        ],
+        ['id' =>  $modelRecipe->id]
+        )
+        ->execute();
 
-            $connection->createCommand()->insert('translations', [      
-                'country_code' => $val['country_code'],  
-                'page' => $page,
-                'page_code' => $arrValues['recipe_code_title'],
-                'text' => $arrValues[$title],
-                'active' => '1',
-            ])->execute();
-            
-            $connection->createCommand()->insert('translations', [      
-                'country_code' => $val['country_code'],  
-                'page' => $page,
-                'page_code' => $arrValues['recipe_code_text'],
-                'text' => $arrValues[$text],
-                'active' => '1',
-            ])->execute();
-        }
+        return true;
 
-        return true;    
     }
 
 
-    public function updateRecipes($model){
+    public function updateRecipes($page, $model){
 
         $connection = new Query;
 
@@ -184,35 +230,44 @@ class Recipes extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        foreach ($countries as $val) {
+        $this->updateSimple($page, $model);   
+
+        $connection->createCommand()
+        ->delete('translations', [
+            'page' => $page,
+            'page_code' => $model->recipe_code_title
+        ])
+        ->execute();
+
+        $connection->createCommand()
+        ->delete('translations', [
+            'page' => $page,
+            'page_code' => $model->recipe_code_text
+        ])
+        ->execute();
+
+        foreach($countries as $val){      
 
             $title = 'recipe_title_' . $val['country_code'];   
-            $text = 'recipe_text_' . $val['country_code'];            
-           
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-           
-            ->bindValue(':text', $model->$title)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->recipe_code_title)
-            ->execute();   
+            $text = 'recipe_text_' . $val['country_code'];   
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->recipe_code_title,
+                'text' => $model->$title,
+                'active' => '1',
+            ])->execute();
             
-            
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-        
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->recipe_code_text)
-            ->execute();  
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->recipe_code_text,
+                'text' => $model->$text,
+                'active' => '1',
+            ])->execute();
         }
+        
+        return true;
     }   
 }

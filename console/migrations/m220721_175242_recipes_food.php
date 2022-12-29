@@ -36,6 +36,7 @@ class m220721_175242_recipes_food extends Migration
         $this->createTable('{{%recipes_food}}', [
             'id' => $this->primaryKey(),        
             'recipe_code' => $this->string()->notNull(),  
+            'page_code' => $this->string()->notNull(),  
             'recipe_food_name' => $this->string()->notNull(),   
             'measure' => $this->string()->notNull(),
             'quantity' => $this->string()->notNull(),            

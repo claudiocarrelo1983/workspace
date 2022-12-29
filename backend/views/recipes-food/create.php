@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\RecipesFood */
+/** @var yii\web\View $this */
+/** @var app\models\RecipesFood $model */
 
 $this->title = 'Create Recipes Food';
 $this->params['breadcrumbs'][] = ['label' => 'Recipes Foods', 'url' => ['index']];

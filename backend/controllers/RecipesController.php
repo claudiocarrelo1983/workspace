@@ -2,15 +2,18 @@
 
 namespace backend\controllers;
 
+use app\Models\RecipesStep;
 use common\models\Recipes;
 use common\models\RecipesFood;
 use common\models\RecipesSteps;
 use common\models\RecipesSearch;
+use common\models\RecipesStepsSearch;
+use common\models\RecipesFoodSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\base\Model;
-use common\models\RequestDynamicFormWidget;
+use yii\web\UploadedFile;
+use yii\db\Query;
 use Yii;
 
 /**
@@ -59,9 +62,33 @@ class RecipesController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
+    {        
+        $connection = new Query;
+        $result = $connection->select([
+            'recipe_code' 
+            ])
+        ->from('recipes')   
+        ->where(['id' => $id]) 
+        ->one();
+
+        $recipeCode = (isset($result['recipe_code']) ? $result['recipe_code'] : '');
+
+        $searchModelSteps = new RecipesStepsSearch();
+        $searchFoodModel = new RecipesFoodSearch();
+
+
+        $searchModelSteps->recipe_code = $recipeCode;
+        $dataProviderStep = $searchModelSteps->search($this->request->queryParams);
+     
+        $searchFoodModel->recipe_code = $recipeCode;
+        $dataProviderFood =  $searchFoodModel->search($this->request->queryParams);
+    
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
+            'RecipesStepsModel' => $this->findModelSteps($recipeCode),
+            'RecipesFoodModel' => $this->findModelFood($recipeCode),
+            'dataProviderStep' => $dataProviderStep,
+            'dataProviderFood' => $dataProviderFood
         ]);
     }
 
@@ -74,6 +101,7 @@ class RecipesController extends Controller
         $modelsRecipeSteps = [new RecipesSteps];     
         $modelsRecipeFood = [new RecipesFood];     
 
+      
         $recipeCodeTitle = 'recipe_title_1';
         $recipeCodeText = 'recipe_text_1';
         $recipeCodeSteps = 'recipe_steps_1';
@@ -87,96 +115,46 @@ class RecipesController extends Controller
          $recipeCodeSteps = 'recipe_steps_'.bcadd($count->id, 1);
          $recipeCodeIngredients = 'recipe_ingredients_'.bcadd($count->id, 1);
        }
+     
+       if ($modelRecipe->load(Yii::$app->request->post())){
 
-       if(isset(Yii::$app->request->post()['Recipes'])){           
-            $modelRecipe->saveRecipes('recipes', Yii::$app->request->post()['Recipes']);            
-       }
-       if(isset(Yii::$app->request->post()['RecipesSteps'])){       
-            $RecipesSteps->saveRecipesSteps('recipes',Yii::$app->request->post()['RecipesSteps']);
-        }
+            $modelRecipe->recipe_code_title = $recipeCodeTitle;
+            $modelRecipe->recipe_code_text = $recipeCodeText;
 
-        if(isset(Yii::$app->request->post()['RecipesFood'])){  
-            $RecipesFood->saveRecipesFood('recipes',Yii::$app->request->post()['RecipesFood']);
-            die('___');    
-           
-        }
-  
+            $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
 
-        if ($modelRecipe->load(Yii::$app->request->post()) && $modelRecipe->save()) {
-   
-            if ($RecipesSteps->load(Yii::$app->request->post())) {      
-            
-                $RecipesSteps->recipe_code ='recipe_step_text_'.bcadd($count->id, 1);
-                print "<pre>";    
-                print_r($RecipesSteps->recipe_step_text);
-                die('___');   
-                if($RecipesSteps->save()){
-                    die();
-                    $RecipesSteps->saveRecipesSteps('recipes',$RecipesSteps);
-                }
-
-            
+            if(isset($modelRecipe->imageFile->name)){
+                $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
+                $modelRecipe->image = '/images/blog/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
+                $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
-            $modelRecipe->image = 'empty';
 
-            print "<pre>";    
-  
-            die('___');
 
-            if($modelRecipe->save()){
-                $modelRecipe->saveRecipes('recipes',$modelRecipe);
-            }
-           
-
-            if($RecipesSteps->save()){
-                die('___');
-                $modelRecipe->saveRecipes('recipes',$modelRecipe);
-            }
-           
-        
-
-            //$RecipesSteps->saveRecipesSteps('recipes_steps',$RecipesSteps);
-       
-            $modelRecipe->saveRecipesStep('recipes',$modelRecipe);
-            $modelRecipe->recipe_code = $code;
-            $modelsRecipeFood = Model::createMultiple(RecipesFood::classname());
-            Model::loadMultiple($modelsRecipeFood, Yii::$app->request->post());
-
-            // validate all models
-            $valid = $modelRecipe->validate();
-            $valid = Model::validateMultiple($modelsRecipeFood) && $valid;
-
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-
-                try {
-                    if ($flag = $modelRecipe->save(false)) {
-                        foreach ($modelsRecipeFood as $model) {
-                            $model->recipe_code = $modelRecipe->recipe_code;
-                            if (! ($flag = $model->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
+            if($modelRecipe->validate()){      
+                if(isset(Yii::$app->request->post()['Recipes'])){                      
+                    $recipesCode = $modelRecipe->saveRecipes('recipes', $modelRecipe);
+                    if (isset(Yii::$app->request->post()['RecipesSteps'])) {
+                        $RecipesSteps->saveRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
                     }
-
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelRecipe->id]);
+                    if (isset(Yii::$app->request->post()['RecipesFood'])) {
+                        $RecipesFood->saveRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $recipesCode);
                     }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
-            }
+                }     
+
+                $model = new Recipes;
+
+                $value = $model::find('recipe_code')->orderBy("id desc")->limit(1)->one();
+                    
+                return $this->redirect(['view', 'id' => $value->id]);                   
+            }               
         }
+
 
         return $this->renderAjax('create', [           
-            'model' => $modelRecipe,
-            'recipeCodeTitle' => $recipeCodeTitle,
-            'recipeCodeText' => $recipeCodeText,
+            'model' => $modelRecipe,   
             'recipeCodeIngredients' => $recipeCodeIngredients,
             'recipeCodeSteps' => $recipeCodeSteps,          
-            'modelsRecipeSteps' => $modelsRecipeSteps,
+            'modelsRecipeSteps' => (empty($modelsRecipeSteps)) ? [new RecipesSteps] : $modelsRecipeSteps,
             'modelIngredients' => (empty($modelsRecipeFood)) ? [new RecipesFood] : $modelsRecipeFood
         ]);
     }
@@ -191,24 +169,87 @@ class RecipesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $modelRecipe = $this->findModel($id);
+        $RecipesSteps = new RecipesSteps;
+        $RecipesFood = new RecipesFood;        
+        $connection = new Query;  
 
-        $count = $model ::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
-        $countValue = str_replace("recipe_title_", "", $count->recipe_code_title);
+        $result = $connection->select([
+            'recipe_code' 
+            ])
+        ->from('recipes')    
+        ->where(['id' => $id]) 
+        ->one();
+        
+        $recipeCode = (isset($result['recipe_code']) ? $result['recipe_code'] : '');
 
-        $title = 'recipe_title_'.$countValue;
-        $text = 'recipe_text_'.$countValue;
+        $modelRecipeSteps = $this->findModelSteps($recipeCode);
+        $modelsRecipeFood = $this->findModelFood($recipeCode);
 
+    
+        $recipeCodeTitle = 'recipe_title_1';
+        $recipeCodeText = 'recipe_text_1';
+        $recipeCodeSteps = 'recipe_steps_1';
+        $recipeCodeIngredients = 'recipe_ingredients_1';    
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updateRecipes($model);  
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $count = $modelRecipe::find('id')->orderBy("id desc")->limit(1)->one();
 
-        return $this->render('update', [
-            'model' => $model,
-            'title' => $title,
-            'text' => $text
+       if(!empty($count->id)){
+            $recipeCodeTitle = 'recipe_title_'.$count->id;
+            $recipeCodeText = 'recipe_text_'.$count->id;
+            $recipeCodeSteps = 'recipe_steps_'.$count->id;
+            $recipeCodeIngredients = 'recipe_ingredients_'.$count->id;
+       }
+
+        if ($this->request->isPost && $modelRecipe->load($this->request->post())) {
+
+            $modelRecipe->recipe_code_title = $recipeCodeTitle;
+            $modelRecipe->recipe_code_text = $recipeCodeText;
+
+            $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
+
+            if(isset($modelRecipe->imageFile->name)){
+                $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
+                $modelRecipe->image = '/images/blog/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
+                $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
+            }
+
+            /*
+            if($modelRecipe->validate()){      
+                if(isset(Yii::$app->request->post()['Recipes'])){                      
+                    $recipesCode = $modelRecipe->updateRecipes('recipes', $modelRecipe);
+                    if (isset(Yii::$app->request->post()['RecipesSteps'])) {
+                        $RecipesSteps->saveRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
+                    }
+                    if (isset(Yii::$app->request->post()['RecipesFood'])) {
+                        $RecipesFood->saveRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $recipesCode);
+                    }
+                }     
+
+                $model = new Recipes;
+
+                $value = $model::find('recipe_code')->orderBy("id desc")->limit(1)->one();
+                    
+                return $this->redirect(['view', 'id' => $value->id]);                   
+            }  
+
+            */
+
+            
+          
+            if($recipeCode = $modelRecipe->updateRecipes('recipes',$modelRecipe)){              
+                $RecipesSteps->updateRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);    
+                $RecipesFood->updateRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $modelRecipe);                 
+                return $this->redirect(['view', 'id' => $modelRecipe->id]);
+            }
+        }     
+
+        return $this->renderAjax('update', [
+            'model' => $modelRecipe,
+            'recipeCodeIngredients' => $recipeCodeIngredients,
+            'recipeCodeSteps' => $recipeCodeSteps,          
+            'modelsRecipeSteps' => (empty($modelRecipeSteps)) ? [new RecipesSteps] : $modelRecipeSteps,
+            'modelIngredients' => (empty($modelsRecipeFood)) ? [new RecipesFood] : $modelsRecipeFood
         ]);
     }
 
@@ -240,5 +281,28 @@ class RecipesController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function findModelSteps($code)
+    {          
+        $model = RecipesSteps::findAll(['recipe_code' => $code]);
+
+        if(empty($model)){
+            $model = new RecipesSteps;
+        }
+
+        return $model;
+    }
+
+    protected function findModelFood($code)
+    {
+
+        $model = RecipesFood::findAll(['recipe_code' => $code]);
+
+        if(empty($model)){
+            $model = new RecipesFood;
+        }
+
+        return $model;
     }
 }

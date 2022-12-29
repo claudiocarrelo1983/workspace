@@ -37,6 +37,7 @@ class m221223_171108_recipes_steps extends Migration
         $this->createTable('{{%recipes_steps}}', [
             'id' => $this->primaryKey(),         
             'recipe_code' => $this->string()->notNull(),  
+            'page_code' => $this->string()->notNull(),  
             'recipe_step_text' => $this->text()->notNull(),    
             'recipe_step_text_pt' => $this->text()->notNull(), 
             'recipe_step_text_es' => $this->text()->notNull(), 
