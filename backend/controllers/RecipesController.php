@@ -125,7 +125,7 @@ class RecipesController extends Controller
 
             if(isset($modelRecipe->imageFile->name)){
                 $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
-                $modelRecipe->image = '/images/blog/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
+                $modelRecipe->image = '/images/recipes/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
 
@@ -211,7 +211,7 @@ class RecipesController extends Controller
 
             if(isset($modelRecipe->imageFile->name)){
                 $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
-                $modelRecipe->image = '/images/blog/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
+                $modelRecipe->image = '/images/recipes/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
 

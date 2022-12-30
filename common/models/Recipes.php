@@ -269,14 +269,19 @@ class Recipes extends \yii\db\ActiveRecord
 
         $arr = $connection->select([
             'id',
-            'recipe_code'
+            'recipe_code',
+            'image'
             ])
-        ->from('recipes')    
+        ->from('recipes')   
+        ->where(['id' => $this->id]) 
         ->one();
 
+        if (file_exists(Yii::getAlias('@frontend') . '/web/' . $arr['image'])) {
+            unlink(Yii::getAlias('@frontend') . '/web/' . $arr['image']);
+        }
+
         $id = str_replace("recipe_code_", "",$arr['recipe_code']);
-        $idSlash = $id . '_';
-     
+        $idSlash = $id . '_';     
        
         $connection->createCommand()
         ->delete('recipes', ['id' => $this->id])
