@@ -15,39 +15,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-<div class="row pb-3">
-    <div class="col-3">
-        <?= $form->field($model, 'username') ?>
-    </div>
-    <div class="col-3">
-        <?= $form->field($model, 'first_name') ?>
-    </div>
-    <div class="col-3">
-        <?= $form->field($model, 'last_name') ?>
-    </div>
-    <div class="col-3">
-        <?= $form->field($model, 'name') ?>
-    </div>
-    <div class="col-3">
-        <?= $form->field($model, 'email') ?>
-    </div>
-    <div class="col-3">
-        <?=  $form->field($model, 'gender') ?>
-    </div>
-    <div class="col-3">
-        <?= $form->field($model, 'contact_number') ?>
-    </div>
-</div>
+    <?= $form->field($model, 'id') ?>
 
-   
+    <?= $form->field($model, 'username') ?>
 
-   
+    <?= $form->field($model, 'first_name') ?>
 
-    
+    <?= $form->field($model, 'last_name') ?>
 
-   
-
-   
+    <?= $form->field($model, 'name') ?>
 
     <?php // echo $form->field($model, 'email') ?>
 

@@ -3,12 +3,9 @@
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
 
-
-$modelGeneratorJson = new GeneratorJson(); 
-$arrTeams = $modelGeneratorJson->getLastFileUploaded('team');  
+$model = new GeneratorJson(); 
+$arrTeams = $model->getLastFileUploaded('team');  
 
 $teams = array();
 
@@ -142,7 +139,9 @@ $path2 = 'home';
 
                         <div class="custom-carousel-1 m-auto">
                             <div class="owl-carousel owl-theme stage-margin nav-style-1 " data-plugin-options="{'items': 1, 'margin': 10, 'loop': true, 'nav': true, 'dots': false, 'stagePadding': 45, 'autoplay': true, 'autoplayTimeout': 3000}">
-                             
+                                <div>
+                                    <img alt="" class="img-fluid" src="images/generic/screens/screen-4.jpg">
+                                </div>
                                 <div>
                                     <img alt="" class="img-fluid" src="images/generic/screens/screen-1.jpg">
                                 </div>
@@ -150,8 +149,8 @@ $path2 = 'home';
                                     <img alt="" class="img-fluid" src="images/generic/screens/screen-2.jpg">
                                 </div>
                                 <div>
-                                    <img alt="" class="img-fluid" src="images/generic/screens/screen-4.jpg">
-                                </div>                        
+                                    <img alt="" class="img-fluid" src="images/generic/screens/screen-3.jpg">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -409,11 +408,8 @@ $path2 = 'home';
 <!-- Sub Footer -->
        		
 
-<!--  Footer -->
-<?= $this->render('../footer',
-     [           
-        'modelFooter' =>  $modelFooter   
-    ]) ?>	
-<!--  Footer -->
+
+
+
 
 

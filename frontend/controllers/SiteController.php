@@ -20,7 +20,6 @@ use frontend\models\SignupForm;
 use yii\helpers\Json;
 use common\models\GeneratorJson;
 use sammaye\mailchimp\Mailchimp;
-use common\models\Subscribers;
 
 
 /**
@@ -84,51 +83,29 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {      
+    {
+        $this->layout = 'public';
 
-        $modelFooter = new Subscribers();
 
-        $request = Yii::$app->getRequest();
-
-      
-        if ($request->isPost && $modelFooter->load($request->post()) && $modelFooter->validate()) {
-            $modelFooter->opt_in = 1;
-            $modelFooter->save();
-        }
-
-        return $this->render('home/index',
-            [          
-                'modelFooter' => $modelFooter
-            ]          
-        );
-
+        return $this->render('home/index');
     }
 
     public function actionHome()
     {
-        return $this->actionIndex();
+        $this->layout = 'public';
+
+        return $this->render('home/index');
     }
 
     public function actionLanguage()
     {       
     
-
-        $modelFooter = new Subscribers();
-
-        $request = Yii::$app->getRequest();
-      
-        if ($request->isPost && $modelFooter->load($request->post()) && $modelFooter->validate()) {
-            $modelFooter->opt_in = 1;
-            $modelFooter->save();
-        }
-
        if(isset($_POST['lang'])){
         Yii::$app->language = $_POST['lang'];
 
         $cookies = new \yii\web\Cookie([
             'name' => 'lang',
             'value' => $_POST['lang'],
-            'modelFooter' => $modelFooter
         ]);
 
         Yii::$app->getResponse()->getCookies()->add($cookies);
@@ -239,15 +216,6 @@ class SiteController extends Controller
     public function actionContactUs()
     {
         $this->layout = 'public';
-
-        $modelFooter = new Subscribers();
-
-        $requestFooter = Yii::$app->getRequest();
-      
-        if ($requestFooter->isPost && $modelFooter->load($requestFooter->post()) && $modelFooter->validate()) {       
-            $modelFooter->opt_in = 1;       
-            $modelFooter->saveSubscribers($modelFooter);
-        }       
           
         $model = new GeneratorJson(); 
         $subject = $model->getLastFileUploaded('subjects');  
@@ -268,8 +236,7 @@ class SiteController extends Controller
 
         return $this->render('contact/contact-us', [
             'model' => $model,
-            'subject' =>  $subject,
-            'modelFooter' => $modelFooter
+            'subject' =>  $subject
         ]);
     }
 
@@ -277,7 +244,6 @@ class SiteController extends Controller
     {
 
 
-        /*
         $mc = new Mailchimp(['apikey' => '7a41d4e89958dc451d8c7ea666e301f9-us21']);
       
         require('mailchimp/Mailchimp.php');    // You may have to modify the path based on your own configuration.
@@ -312,7 +278,7 @@ else
 {
     echo "Subscriber add attempt failed.";
 }
-*/
+
 
         $this->layout = 'public';
       
@@ -329,119 +295,6 @@ else
         $this->layout = 'public';
         return $this->render('features/features');
     }
-
-    public function actionCalculators()
-    {
-        $modelFooter = new Subscribers();
-
-        $request = Yii::$app->getRequest();
-
-      
-        if ($request->isPost && $modelFooter->load($request->post()) && $modelFooter->validate()) {
-            $modelFooter->opt_in = 1;
-            $modelFooter->save();
-        }
-
-
-        $this->layout = 'public';
-        return $this->render('calculator/calculator',[
-            'modelFooter' => $modelFooter
-        ]);
-    }
-
-    public function actionRecipes()
-    {
-
-        $this->layout = 'public';
-
-        $modelFooter = new Subscribers();
-
-        $request = Yii::$app->getRequest();
-
-      
-        if ($request->isPost && $modelFooter->load($request->post()) && $modelFooter->validate()) {
-            $modelFooter->opt_in = 1;
-            $modelFooter->save();
-        }
-
-
-
-        $model = new GeneratorJson(); 
-        $recipes = $model->getLastFileUploaded('recipes');   
-         
-        $request = Yii::$app->request; 
-        $pg = $request->get('pg');
-        $tag = $request->get('tag');
-        $username = $request->get('username');      
-
-        $urlParams = [
-            'pg' => '',
-            'tag' => '',
-            'username' => ''
-        ];
-
-        if(!empty($pg)){         
-            $urlParams = array_merge($urlParams, array('pg' => $pg));
-        } 
-
-        if(!empty($tag)){
-            $urlParams = array_merge($urlParams, ['tag' => $tag]);
-        }
-
-        if(!empty($username)){
-            $urlParams = array_merge($urlParams, ['username' => $username]);
-        }
-
-        $blogFilter = array();
-
-        foreach($recipes as $blog){
-
-            if($username != '#'){
-                if(empty($username)){
-                    $blogFilter[] = $blog;			
-                }else{                
-                    if(trim($blog['username']) == trim($username)){
-                        $blogFilter[] = $blog;
-                    }		
-                }	
-            }
-         
-            if($tag != '#'){
-                if(empty($tag)){
-                    //$blogFilter[] = $blog;			
-                }else{
-
-                    $explode = explode(',', $blog['tags']);
-
-                    $break = false;
-
-                    foreach($explode as $tagValue){
-                        if(trim($tagValue) == trim($tag)){   
-                            $break = true;
-                            break;
-                        }	
-                    }       
-                    
-                    if($break == true){
-                        $blogFilter[] = $blog;
-                    }
-                }	
-            }	
-        }
-        
-        $blogs = $blogFilter;
-
-
-        return $this->render('recipes/recipes',
-        [            
-            'blogs' => $recipes,
-            'pg' => $pg,
-            'urlParams' => $urlParams,
-            'modelFooter' => $modelFooter
-        ]);        
-
-    }
-
     public function actionBlog()
     {
         $this->layout = 'public';

@@ -35,7 +35,7 @@
                   "key":"t-calories",
                   "url":"calculator/calories",
                   "title":"menu_calculators_calories"
-               }               
+               }                
          ]
       },
        {
@@ -54,14 +54,8 @@
             
          ]
       },
-      {
-         "key":"t-recipes-us",
-         "title":"menu_recipes",
-         "url":"site/recipes",       
-         "submenu":[            
-         ]
-      }, 
-      {
+     
+       {
          "key":"t-pricing",
          "title":"menu_pricing",
          "url":"site/pricing",       

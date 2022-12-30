@@ -57,9 +57,9 @@ class ClientController extends Controller
         $request = Yii::$app->request;
 
         $companyArr = $blogQuery->select([
-            'team_code',
-                   
-       
+            'code',
+            'type',            
+            'name',
             'description',
             'address',      
             'postcode',
@@ -78,7 +78,7 @@ class ClientController extends Controller
 
         ])
         ->from(['companies'])
-        ->where(['team_code' => $request->get('code')]) 
+        ->where(['code' => $request->get('code')]) 
         ->one();
  
         if(empty($companyArr)){
