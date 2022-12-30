@@ -107,7 +107,7 @@ class RecipesFood extends \yii\db\ActiveRecord
 
        foreach($arrValues as $arrValue){
 
-            $pageCode = 'recibo_food_name_' . $idRecibes. '_' . $i;
+            $pageCode = 'recibo_food_name_'.$idRecibes.'_' . $i;
             
             $connection->createCommand()
                 ->delete('recipes_food', ['page_code' => $pageCode])
@@ -169,33 +169,28 @@ class RecipesFood extends \yii\db\ActiveRecord
 
             $title = 'recipe_title_' . $val['country_code'];
             $text = 'recipe_text_' . $val['country_code'];
+            $text = 'recipe_text_' . $val['country_code'];
 
-            Yii::$app->db->createCommand("
-            DELETE FROM translations WHERE page_code=:page_code1 AND country_code=:country_code1;
-            UPDATE translations SET             
-            text=:text,
-            page_code=:page_code            
-            WHERE  page_code=:page_code 
-            AND country_code=:country_code"
+            Yii::$app->db->createCommand("    
+                UPDATE translations SET             
+                text=:text,
+                page_code=:page_code            
+                WHERE  page_code=:page_code 
+                AND country_code=:country_code"
             )
-            ->bindValue(':page_code1', $model->recipe_code_title)
-            ->bindValue(':country_code1', $val['country_code'])
             ->bindValue(':text', $model->$title)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->recipe_code_title)
             ->execute();
 
 
-            Yii::$app->db->createCommand("
-            DELETE FROM translations WHERE page_code=:page_code1 AND country_code=:country_code1;
-            UPDATE translations SET             
-            text=:text,
-            page_code=:page_code            
-            WHERE  page_code=:page_code 
-            AND country_code=:country_code"
+            Yii::$app->db->createCommand("       
+                UPDATE translations SET             
+                text=:text,
+                page_code=:page_code            
+                WHERE  page_code=:page_code 
+                AND country_code=:country_code"
             )
-            ->bindValue(':page_code1', $model->recipe_code_title)
-            ->bindValue(':country_code1', $val['country_code'])
             ->bindValue(':text', $model->$text)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->recipe_code_text)
@@ -209,34 +204,36 @@ class RecipesFood extends \yii\db\ActiveRecord
 
         $i = 1;
 
-        foreach($arrRecipeFood as $arr){
+        $connection->createCommand()
+        ->delete('recipes_food', [
+            'recipe_code' => $model->recipe_code
+        ])
+        ->execute();
 
-            $pageCode = 'recibo_food_name_' .$model->id. '_' . $i;
+        $idRc = str_replace("recipe_code_","","$model->recipe_code");
+
+        foreach($arrRecipeFood as $arrValue){
+
+            $pageCode = 'recibo_food_name_'.$idRc.'_' . $i;
           
-            $connection->createCommand()->update('recipes_food', [   
-                'recipe_code' => $model->recipe_code,    
-                'recipe_food_name' => $arr['recipe_food_name'],    
-                'page_code' =>  $pageCode,    
-                'measure' =>   $arr['measure'],          
-                'quantity' =>   $arr['quantity'],            
-                'calories' =>   $arr['calories'],               
-                'fat' =>   $arr['fat'],      
-                'carbs' =>   $arr['carbs'],             
-                'protein' =>   $arr['protein'],    
-                'active' =>   $arr['active'],    
-                'recipe_food_en' =>  $arr['recipe_food_en'],        
-                'recipe_food_pt' =>  $arr['recipe_food_pt'],             
-                'recipe_food_es' =>  $arr['recipe_food_es'],                 
-                'recipe_food_it' =>  $arr['recipe_food_it'],      
-                'recipe_food_de' =>  $arr['recipe_food_de'],             
-                'recipe_food_fr' =>  $arr['recipe_food_fr'],      
-            ],
-            [
-                'recipe_code' =>  $model->recipe_code,
-                'page_code' =>  $pageCode
-            ]
-            )
-            ->execute();
+            $connection->createCommand()->insert('recipes_food', [                
+                'recipe_code' => $model->recipe_code,
+                'recipe_food_name' =>  $arrValue['recipe_food_name'],   
+                'page_code' => $pageCode,   
+                'measure' => $arrValue['measure'],         
+                'quantity' => $arrValue['quantity'],         
+                'calories' => $arrValue['calories'],           
+                'fat' => $arrValue['fat'],
+                'carbs' => $arrValue['carbs'],          
+                'protein' => $arrValue['protein'],  
+                'active' => $arrValue['active'],
+                'recipe_food_en' => $arrValue['recipe_food_en'],         
+                'recipe_food_pt' => $arrValue['recipe_food_pt'],         
+                'recipe_food_es' => $arrValue['recipe_food_es'],           
+                'recipe_food_it' => $arrValue['recipe_food_it'],
+                'recipe_food_de' => $arrValue['recipe_food_de'],          
+                'recipe_food_fr' => $arrValue['recipe_food_fr'],  
+            ])->execute();
 
             $i++;
        
@@ -244,4 +241,5 @@ class RecipesFood extends \yii\db\ActiveRecord
 
         return true;
     }
+
 }

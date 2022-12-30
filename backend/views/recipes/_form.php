@@ -61,6 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
+
+    <?php if(!empty($validationMessage)){?>
+        <div class="alert alert-danger">
+            <?= $validationMessage; ?>
+        </div>
+    <?php } ?>
+      
     <div class="tabs tabs-dark mb-4 pb-2">
         <ul class="nav nav-tabs">
             <li class="nav-item">

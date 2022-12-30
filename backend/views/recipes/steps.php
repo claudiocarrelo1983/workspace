@@ -49,21 +49,19 @@ use wbraganca\dynamicform\DynamicFormWidget;
         foreach ($modelsRecipeSteps as $index => $model): ?>
         
             <div class="item panel panel-default"><!-- widgetBody -->
-                <div class="panel-heading text-right">               
-                    <div class="row">
-                    <div class="col-sm-11">
-                    </div>
-                        <div class="col-sm-1">                      
-                            <div class="col-sm-1">
-                                <div class="text-right" style="text-align: right;">                          
-                                    <button type="button" class="pull-right remove-item btn btn-danger btn-xs">
-                                        <div class="panel-title-address">
-                                            <?= ($index + 1) ?>
-                                        </div>
-                                    </button>
-                                </div>   
-                            </div>
-                        </div>               
+                <div class="panel-heading text-right">              
+                    <div class="row"> 
+                        <div class="col-sm-11">
+                        </div>                
+                        <div class="col-sm-1 text-right">
+                            <div class="text-right">                          
+                                <button type="button" class="pull-right remove-item btn btn-danger ">
+                                    <span class="panel-title-address">
+                                        <?= ($index + 1) ?>
+                                    </span>
+                                </button>
+                            </div>   
+                        </div>
                     </div>
                     <?=  $form->field($model, "[{$index}]order")->hiddenInput(['value'=> ($index + 1)])->label(false); ?>  
                     <div class="panel-body">

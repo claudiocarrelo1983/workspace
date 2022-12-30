@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="recipes-create">
 
         <?= $this->render('_form', [
-            'model' => $model,     
+            'model' => $model, 
+            'validationMessage' => $validationMessage,    
             'recipeCodeIngredients' => $recipeCodeIngredients,
             'recipeCodeSteps' => $recipeCodeSteps,    
             'modelsRecipeSteps' => $modelsRecipeSteps, 

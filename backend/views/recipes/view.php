@@ -63,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'recipe_title',
                             'recipe_text:ntext',
                             'recipe_cat_code',
+                            'image',
                             'cooking_time',
                             'number_of_people',
                             'recipe_title_pt',

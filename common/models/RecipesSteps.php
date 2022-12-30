@@ -91,7 +91,7 @@ class RecipesSteps extends \yii\db\ActiveRecord
    
         foreach($arrValues as $arrValue){
 
-            $pageCode = 'recibo_step_text_' . $idRecibes . '_' . $i;
+            $pageCode = 'recibo_step_text_'.$idRecibes.'_' . $i;
 
             $connection->createCommand()
             ->delete('recipes_steps', ['recipe_code' => $recipesCode])
@@ -182,31 +182,35 @@ class RecipesSteps extends \yii\db\ActiveRecord
 
         $connection = new Query;
         $i = 1;
-        foreach($arrRecipeSteps as $arr){
 
-            $pageCode = 'recibo_step_text_' . $model->id . '_' .$i;
-          
-            $connection->createCommand()->update('recipes_steps', [   
-                'recipe_code' => $model->recipe_code,
-                'page_code' => $pageCode,               
-                'recipe_step_text' => $arr['recipe_step_text'],
-                'recipe_step_text_en' => $arr['recipe_step_text_en'],       
-                'recipe_step_text_pt' => $arr['recipe_step_text_pt'],   
-                'recipe_step_text_es' => $arr['recipe_step_text_es'],  
-                'recipe_step_text_it' => $arr['recipe_step_text_it'],
-                'recipe_step_text_de' => $arr['recipe_step_text_de'],      
-                'recipe_step_text_fr' => $arr['recipe_step_text_fr'],  
-            ],
-            [
-                'recipe_code' =>  $model->recipe_code,
-                'page_code' => $pageCode
-            ]
-            )
-            ->execute();
+        $connection->createCommand()
+        ->delete('recipes_steps', [
+            'recipe_code' => $model->recipe_code
+        ])
+        ->execute();
+
+        $idRc = str_replace("recipe_code_","","$model->recipe_code");
+
+        foreach($arrRecipeSteps as $arr){        
+  
+            $pageCode = 'recibo_step_text_'. $idRc.'_'.$i;
+       
+            $connection->createCommand()->insert('recipes_steps', [                
+                    'recipe_code' => $model->recipe_code,
+                    'page_code' => $pageCode,
+                    'recipe_step_text' => $arr['recipe_step_text'],       
+                    'recipe_step_text_en' => $arr['recipe_step_text_en'],         
+                    'recipe_step_text_pt' => $arr['recipe_step_text_pt'],         
+                    'recipe_step_text_es' => $arr['recipe_step_text_es'],           
+                    'recipe_step_text_it' => $arr['recipe_step_text_it'],
+                    'recipe_step_text_de' => $arr['recipe_step_text_de'],          
+                    'recipe_step_text_fr' => $arr['recipe_step_text_fr'],  
+                    'order' => $i,
+                ])->execute();               
 
             $i++;
         }
-   
+ 
 
         return true;
     }

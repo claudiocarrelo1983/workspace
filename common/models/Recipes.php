@@ -50,8 +50,8 @@ class Recipes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
-            [['difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
+            [['difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
+            [['imageFile','difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
             [['cooking_time', 'number_of_people', 'active'], 'integer'],
             [['created_date'], 'safe'],
             [['username', 'recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_cat_code', 'recipe_title_pt', 'recipe_title_es', 'recipe_title_en', 'recipe_title_it', 'recipe_title_fr', 'recipe_title_de'], 'string', 'max' => 255],
@@ -186,11 +186,8 @@ class Recipes extends \yii\db\ActiveRecord
 
         $connection = new Query;
      
-        $value = $connection->createCommand()->update('recipes', [   
-            'username' => '',   
-            'recipe_code' =>  $modelRecipe->recipe_code,     
-            'recipe_code_title' => $modelRecipe->recipe_code_title,  
-            'recipe_code_text' => $modelRecipe->recipe_code_text, 
+       $connection->createCommand()->update('recipes', [   
+            'username' => '',        
             'recipe_title' => $modelRecipe->recipe_title, 
             'cooking_time' => $modelRecipe->cooking_time, 
             'number_of_people' => $modelRecipe->number_of_people, 
@@ -230,44 +227,82 @@ class Recipes extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        $this->updateSimple($page, $model);   
-
-        $connection->createCommand()
-        ->delete('translations', [
-            'page' => $page,
-            'page_code' => $model->recipe_code_title
-        ])
-        ->execute();
-
-        $connection->createCommand()
-        ->delete('translations', [
-            'page' => $page,
-            'page_code' => $model->recipe_code_text
-        ])
-        ->execute();
+        $this->updateSimple($page, $model);       
 
         foreach($countries as $val){      
 
             $title = 'recipe_title_' . $val['country_code'];   
-            $text = 'recipe_text_' . $val['country_code'];   
-
-            $connection->createCommand()->insert('translations', [      
-                'country_code' => $val['country_code'],  
-                'page' => $page,
-                'page_code' => $model->recipe_code_title,
-                'text' => $model->$title,
-                'active' => '1',
-            ])->execute();
+            $text = 'recipe_text_' . $val['country_code'];  
             
-            $connection->createCommand()->insert('translations', [      
-                'country_code' => $val['country_code'],  
-                'page' => $page,
-                'page_code' => $model->recipe_code_text,
-                'text' => $model->$text,
-                'active' => '1',
-            ])->execute();
+            $idRc = str_replace("recipe_code_","","$model->recipe_code");
+
+            $connection->createCommand()->update('translations',
+                [               
+                    'text' => $model->$title         
+                ],
+                [
+                    'page' => $page,
+                    'page_code' => 'recipe_title_'. $idRc,
+                    'country_code' => $val['country_code'],   
+                ]
+                )->execute();
+            
+                $connection->createCommand()->update('translations',
+                [               
+                    'text' => $model->$text         
+                ],
+                [
+                    'page' => $page,
+                    'page_code' => 'recipe_title_'. $idRc,
+                    'country_code' => $val['country_code'],   
+                ]
+                )->execute();
         }
-        
+
         return true;
     }   
+
+
+    public function delete(){
+
+        $connection = new Query;
+
+        $arr = $connection->select([
+            'id',
+            'recipe_code'
+            ])
+        ->from('recipes')    
+        ->one();
+
+        $id = str_replace("recipe_code_", "",$arr['recipe_code']);
+        $idSlash = $id . '_';
+     
+       
+        $connection->createCommand()
+        ->delete('recipes', ['id' => $this->id])
+        ->execute();  
+    
+        Yii::$app->db->createCommand("
+            DELETE FROM recipes_food 
+            WHERE recipe_code LIKE 'recipe_code_$id'
+         ")->execute();
+
+        Yii::$app->db->createCommand("
+            DELETE FROM recipes_steps 
+            WHERE recipe_code LIKE 'recipe_code_$id'
+         ")->execute();
+     
+  
+        Yii::$app->db->createCommand("
+            DELETE FROM translations 
+            WHERE page_code LIKE '%recibo_step_text_$idSlash%' 
+            OR page_code LIKE '%recibo_food_name_$idSlash%'
+            OR page_code LIKE '%recibo_step_text_$idSlash%'
+            OR page_code = 'recipe_text_$id'
+            OR page_code = 'recipe_title_$id'
+         ")->execute();
+
+
+        return true;
+    }
 }

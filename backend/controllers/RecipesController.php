@@ -152,6 +152,7 @@ class RecipesController extends Controller
 
         return $this->renderAjax('create', [           
             'model' => $modelRecipe,   
+            'validationMessage' => '',
             'recipeCodeIngredients' => $recipeCodeIngredients,
             'recipeCodeSteps' => $recipeCodeSteps,          
             'modelsRecipeSteps' => (empty($modelsRecipeSteps)) ? [new RecipesSteps] : $modelsRecipeSteps,
@@ -237,9 +238,14 @@ class RecipesController extends Controller
 
             
           
-            if($recipeCode = $modelRecipe->updateRecipes('recipes',$modelRecipe)){              
-                $RecipesSteps->updateRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);    
-                $RecipesFood->updateRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $modelRecipe);                 
+            if($recipeCode = $modelRecipe->updateRecipes('recipes',$modelRecipe)){
+                if (isset(Yii::$app->request->post()['RecipesSteps'])) {                
+                    $RecipesSteps->updateRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);
+                }
+                if(isset(Yii::$app->request->post()['RecipesFood'])){
+                    $RecipesFood->updateRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $modelRecipe);   
+                }
+                          
                 return $this->redirect(['view', 'id' => $modelRecipe->id]);
             }
         }     
@@ -248,8 +254,8 @@ class RecipesController extends Controller
             'model' => $modelRecipe,
             'recipeCodeIngredients' => $recipeCodeIngredients,
             'recipeCodeSteps' => $recipeCodeSteps,          
-            'modelsRecipeSteps' => (empty($modelRecipeSteps)) ? [new RecipesSteps] : $modelRecipeSteps,
-            'modelIngredients' => (empty($modelsRecipeFood)) ? [new RecipesFood] : $modelsRecipeFood
+            'modelsRecipeSteps' => (isset($modelRecipeSteps[0])) ? $modelRecipeSteps: [$modelRecipeSteps],
+            'modelIngredients' => (isset($modelsRecipeFood[0])) ? $modelsRecipeFood : [$modelsRecipeFood]
         ]);
     }
 
