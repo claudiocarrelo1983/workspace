@@ -6,11 +6,20 @@
     'aliases' => 
     array (
     ),
-    'reference' => '9619ae0381b7d7650853c1b8023ca210dabb821d',
+    'reference' => 'ea7a89ac9096c394f7464ce584e54c21b05ea966',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
   array (
+    '2amigos/yii2-chartjs-widget' => 
+    array (
+      'pretty_version' => '3.0.1',
+      'version' => '3.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '639745d0dcaa3fc019c7d43e2fb7092e202da29a',
+    ),
     '2amigos/yii2-tinymce-widget' => 
     array (
       'pretty_version' => '1.1.3',
@@ -37,6 +46,15 @@
       array (
       ),
       'reference' => '0bc8d1e30e96183e4f36db9dc79caead300beff4',
+    ),
+    'bower-asset/chart.js' => 
+    array (
+      'pretty_version' => 'v2.9.4',
+      'version' => '2.9.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9bd4cf82fda9f50a5fb50b72843e06ab88124278',
     ),
     'bower-asset/fullcalendar' => 
     array (
@@ -100,6 +118,15 @@
       array (
       ),
       'reference' => 'a9298d57da63d14a950f1b94366a864bc62264fb',
+    ),
+    'bsadnu/yii2-googlecharts' => 
+    array (
+      'pretty_version' => 'v1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '05e7a5c3cf6e6e7e7c337f3775b9ec87ed287efe',
     ),
     'bshaffer/oauth2-server-php' => 
     array (
@@ -551,6 +578,15 @@
       ),
       'reference' => 'a867478eae49c9f59ece437ae7f9506bfaa27483',
     ),
+    'nnnick/chartjs' => 
+    array (
+      'pretty_version' => 'v2.9.4',
+      'version' => '2.9.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9bd4cf82fda9f50a5fb50b72843e06ab88124278',
+    ),
     'npm-asset/bootstrap' => 
     array (
       'pretty_version' => '4.6.2',
@@ -835,8 +871,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0|2.0',
-        1 => '1.0.0 || 2.0.0 || 3.0.0',
+        0 => '1.0.0 || 2.0.0 || 3.0.0',
+        1 => '1.0|2.0',
       ),
     ),
     'psr/simple-cache' => 
@@ -1269,6 +1305,15 @@
       ),
       'reference' => '498ed03f89ded835f0ca156ec50d432191c58769',
     ),
+    'yiier/yii2-chartjs-widget' => 
+    array (
+      'pretty_version' => 'v1.3',
+      'version' => '1.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0e4019ae1964e2d51cd15231eebc760afdc814be',
+    ),
     'yiisoft/yii2' => 
     array (
       'pretty_version' => '2.0.47',
@@ -1285,7 +1330,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '9619ae0381b7d7650853c1b8023ca210dabb821d',
+      'reference' => 'ea7a89ac9096c394f7464ce584e54c21b05ea966',
     ),
     'yiisoft/yii2-authclient' => 
     array (

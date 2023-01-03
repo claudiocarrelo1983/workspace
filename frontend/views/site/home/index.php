@@ -348,52 +348,9 @@ $path2 = 'home';
                 </div>
             </div>
         </div>
-    </section>    
+    </section>   
 
 
-    <div class="container appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="300">
-        <div class="row pt-5 pb-4 my-5">  
-           <div class="col text-center">
-                <h2 class="font-weight-bold mb-0"><?= Yii::t('app', "home_block_9_title") ?></h2>
-                <p class="lead text-4 pt-2 font-weight-normal">
-                     <?= Yii::t('app', "home_block_9_subtitle") ?>
-                </p>
-            </div> 
-        </div>
-        <div class="row  pb-4 my-5">      
-            <div class="col-md-6 order-2 order-md-1 text-center text-md-start">
-                <div class="owl-carousel owl-theme nav-style-1 nav-center-images-only stage-margin mb-0" data-plugin-options="{'responsive': {'576': {'items': 1}, '768': {'items': 1}, '992': {'items': 2}, '1200': {'items': 2}}, 'margin': 25, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 40}">
-                    <?php foreach ($teams as $key => $team): ?> 
-                        <div>
-                            <img class="img-fluid rounded-0 mb-4" src="images/team/claudio.jpg" alt="" />
-                            <h3 class="font-weight-bold text-color-dark text-4 mb-0"><?= $team['full_name'] ?></h3>
-                            <p class="text-2 mb-0"><?= $team['title'] ?></p>
-                        </div>
-                    <?php endforeach; ?>  
-                    <div>
-                        <img class="img-fluid rounded-0 mb-4" src="images/team/claudio.jpg" alt="" />
-                        <h3 class="font-weight-bold text-color-dark text-4 mb-0">Claudio</h3>
-                        <p class="text-2 mb-0">Personal</p>
-                    </div>   
-                    <div>
-                        <img class="img-fluid rounded-0 mb-4" src="images/team/claudio.jpg" alt="" />
-                        <h3 class="font-weight-bold text-color-dark text-4 mb-0">Claudio</h3>
-                        <p class="text-2 mb-0">Personal</p>
-                    </div>                                   
-                </div>
-            </div>
-            <div class="col-md-6 order-1 order-md-2 text-center text-md-start mb-5 mb-md-0">
-                <h2 class="text-color-dark font-weight-normal text-6 mb-2 pb-1">
-                    <?= Yii::t('app', "home_block_10_title") ?>claudio
-                </h2>
-                <p class="lead">
-                    <?= Yii::t('app', "home_block_10_subtitle_1") ?>
-                </p>
-                <p class="mb-4">
-                <?= Yii::t('app', "home_block_10_subtitle_2") ?>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="container">

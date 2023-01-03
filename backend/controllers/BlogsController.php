@@ -79,7 +79,18 @@ class BlogsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Blogs();          
+        $model = new Blogs();   
+        $title = 'blog_title_1';
+        $subtitle = 'blog_subtitle_1';
+        $text = 'blog_text_1';
+
+        $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
+
+       if(!empty($count->id)){
+         $title = 'blog_title_'.bcadd($count->id, 1);
+         $subtitle = 'blog_subtitle_'.bcadd($count->id, 1);
+         $text = 'blog_text_'.bcadd($count->id, 1);
+       }
  
         if ($this->request->isPost) {     
 
@@ -99,14 +110,15 @@ class BlogsController extends Controller
 
                 $model->tags = '';
                 if(!empty($_POST['Blogs']['tagsArr'])){
+                   
                     $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
                 }    
              
             }      
-            
-                
+ 
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {    
+                $model::saveBlog('blog', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
     
@@ -116,6 +128,9 @@ class BlogsController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'title' => $title,
+            'subtitle' => $subtitle,
+            'text' => $text,
         ]);
     }
 
@@ -130,6 +145,11 @@ class BlogsController extends Controller
     {
         $model = $this->findModel($id);
 
+        $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
+        $title = 'blog_title_'.$count->id;
+        $subtitle = 'blog_subtitle_'.$count->id;
+        $text = 'blog_text_'.$count->id;
+
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if(isset($model->imageFile->name)){
@@ -143,13 +163,16 @@ class BlogsController extends Controller
         
         $model->created_date = date('Y-m-d H:i:s');     
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {           
-
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $model::updateBlog($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'title' => $title,
+            'subtitle' => $subtitle,
+            'text' => $text,
         ]);
     }
 

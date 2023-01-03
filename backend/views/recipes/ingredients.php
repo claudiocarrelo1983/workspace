@@ -93,10 +93,13 @@ use dosamigos\tinymce\TinyMce;
                         <?= $form->field($model, "[{$index}]measure")->dropdownList(
                             [
                                 'grams' => 'Grams',
-                                'mililiters' => 'Mililiters',
+                                'kg' => 'KG',
+                                'mil' => 'Mililiters',
+                                'decil' => 'Deciliters',
                                 'spoon' => 'Spoon',
-                                'Tea spoon' => 'Tea Spoon',
-                                'q.b,' => 'q.b.'                             
+                                'tea_spoon' => 'Tea Spoon',
+                                'q_b' => 'q.b.',
+                                'unid' => 'Unid.'                            
                             ]); 
                         ?>   
                     </div>                

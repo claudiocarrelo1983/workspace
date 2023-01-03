@@ -57,7 +57,9 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'countries':
                     case 'faqs':
                     case 'subjects': 
-                    case 'texts':                    
+                    case 'texts':    
+                    case 'recipes':     
+                    case 'recipes_category':  
                         if(method_exists(__CLASS__, $method)){
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
@@ -187,6 +189,45 @@ class GeneratorJson extends \yii\db\ActiveRecord
             ->all();
 
         GeneratorJson::saveJson($blogArr, $table);
+    }
+
+
+    public static function updateRecipes($table, $columns){
+        
+        $recipesQuery = new Query; 
+      
+        $recipesArr = $recipesQuery->select('*')
+            ->from('recipes')
+            ->all();
+
+        $recipesResult = [];    
+
+        foreach($recipesArr as $key => $recipesValue){
+
+            $recipesStepArr = $recipesQuery->select('*')
+                ->from('recipes_steps')
+                ->where(['recipe_code' => $recipesValue['recipe_code']])
+                ->all();
+
+            $recipesFoodArr = $recipesQuery->select('*')
+                ->from('recipes_food')
+                ->where(['recipe_code' => $recipesValue['recipe_code']])
+                ->all();
+            
+            $recipesCatArr = $recipesQuery->select('*')
+                ->from('recipes_category')
+                ->where(['recipe_cat_code' => $recipesValue['recipe_cat_code']])
+                ->one();
+
+
+            $recipesValue = array_merge($recipesValue, ['steps' => $recipesStepArr]);
+            $recipesValue = array_merge($recipesValue, ['food' => $recipesFoodArr]);
+            $recipesValue = array_merge($recipesValue, ['category' => ((isset($recipesCatArr['page_code'])) ? $recipesCatArr['page_code'] : '')]);
+            $recipesResult[] = $recipesValue;      
+
+        }
+
+        GeneratorJson::saveJson($recipesResult , $table);
     }
 
     public static function updateTablesGeneric($table,  $columns){

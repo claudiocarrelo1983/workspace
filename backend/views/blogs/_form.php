@@ -12,6 +12,14 @@ use yii\helpers\Url;
 
 $tagQuery = new Query;
 
+$countries = $tagQuery->select([
+    'country_code' 
+    ])
+->from('countries')    
+->all();
+
+$arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
+
 $tags = $tagQuery->select([
     'id', 
     'tag', 
@@ -35,22 +43,6 @@ $arrUsers = array();
 foreach($users as $user){
     $arrUsers[$user['username']] = $user['name'];
 }
-
-$countries = $tagQuery->select([
-    'country_code',
-    'full_title' 
-    ])
-->from('countries')    
-->all();
-
-
-$countryUsers = array();
-
-foreach($countries as $value){
-    $countryUsers[$value['country_code']] = $value['full_title'];
-}
-
-
 
 
 
@@ -95,53 +87,120 @@ foreach($tags as $tag){
 ?>
 
 <div class="blogs-form">
+    <?php $form = ActiveForm::begin(); ?>   
+        <div class="tabs tabs-dark mb-4 pb-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link show active text-1 font-weight-bold text-uppercase" href="#popularPosts" data-bs-toggle="tab">
+                        Pricing Specs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-1 font-weight-bold text-uppercase" href="#recentPosts" data-bs-toggle="tab">
+                        Translations
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="popularPosts"> 
+                    <?=  $form->field($model, 'page_code_title')->hiddenInput(['value'=> $title])->label(false); ?>
+                    <?=  $form->field($model, 'page_code_subtitle')->hiddenInput(['value'=> $subtitle])->label(false); ?>
+                    <?=  $form->field($model, 'page_code_text')->hiddenInput(['value'=> $text])->label(false); ?>
+                    <div clasS="row">
+                        <div class="col">
+                                <?= $form->field($model, 'imageFile')->fileInput()->hint('The image needs to be 900 x 500 ')->label('Image') ?>
+                        </div>
+                        <div class="col">
+                            <?= $form->field($model, 'imageFile2')->fileInput()->hint('The image needs to be 900 x 500 ')->label('Image') ?>
+                        </div>   
+                    </div>
+                    <div class="row">
+                         <div class="col">
+                            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                         </div> 
+                         <div class="col">
+                             <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>            
+                         </div> 
+                    </div>
+                    <div class="row">
+                         <div class="col">
+                            <?= $form->field($model, 'text')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 6],
+                                    'language' => 'es',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            "advlist autolink lists link charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table contextmenu paste"
+                                        ],
+                                        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                                    ]
+                                ]);?>
+                         </div>                                             
+                    </div>                 
+               
 
+                    <?= $form->field($model, 'username')->dropdownList($arrUsers,
+                    ['prompt'=>'Select User']); ?> 
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-    
-    <?= $form->field($model, 'imageFile')->fileInput()->hint('The image needs to be 900 x 500 ') ?>
+                    <?= $form->field($model, 'tagsArr')->checkBoxList($tagsArr, ['separator' => '<br>']); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                    <a href="<?= Url::toRoute('blogscategory/create') ?>" target="_blank"  class="pb-5">
+                        <?= Yii::t('app', 'Create New Category') ?>	
+                    </a>
 
-    <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'active')->dropdownList(
+                        [1 => 'Yes', 0 => 'No'],
+                        ['prompt'=>'Active']); 
+                    ?>
+                </div>
+                <div class="tab-pane" id="recentPosts">      
+                        <?php 
 
-    <?= $form->field($model, 'alt')->textInput(['maxlength' => true]) ?>
+                        foreach($arrLanguages as $valLang){
 
-    <?= $form->field($model, 'text')->widget(TinyMce::className(), [
-        'options' => ['rows' => 6],
-        'language' => 'es',
-        'clientOptions' => [
-            'plugins' => [
-                "advlist autolink lists link charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-        ]
-    ]);?>
+                            $display = 0;
 
-    <?= $form->field($model, 'username')->dropdownList($arrUsers,
-    ['prompt'=>'Select User']); ?> 
+                            foreach ($countries as $value){
+                                if(isset($value['country_code'])){
+                                    if($value['country_code'] == $valLang){
+                                        $display = 1;
+                                        break;
+                                    }
+                                }                              
+                            }
 
-    <?= $form->field($model, 'tagsArr')->checkBoxList($tagsArr, ['separator' => '<br>']); ?>
+                            if($display == 1){
 
-    <a href="<?= Url::toRoute('blogscategory/create') ?>" target="_blank"  class="pb-5">
-        <?= Yii::t('app', 'Create New Category') ?>	
-    </a>
-
-    <?= $form->field($model, 'country_code')->radioList(
-           $countryUsers
-        ,                     
-        array('required','separator' => "</br>" ))->label('Language');
-    ?>  
-    <a href="<?= Url::toRoute('countries/create') ?>" target="_blank"  class="pb-5">
-        <?= Yii::t('app', 'Create  new Country') ?>	
-    </a>
-
-
-    <?= $form->field($model, 'active')->dropdownList(
-        [1 => 'Yes', 0 => 'No'],
-    ['prompt'=>'Active']); ?>
+                        ?>  
+                        <?=  $form->field($model, 'title_'.$valLang)->textInput() ?>   
+                        <?=  $form->field($model, 'subtitle_'.$valLang)->textInput() ?>  
+                        <?= $form->field($model, 'text_'.$value['country_code'])->widget(TinyMce::className(), [
+                            'options' => ['rows' => 6],
+                            'language' => 'es',
+                            'clientOptions' => [
+                                'plugins' => [
+                                    "advlist autolink lists link charmap print preview anchor",
+                                    "searchreplace visualblocks code fullscreen",
+                                    "insertdatetime media table contextmenu paste"
+                                ],
+                                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                            ]
+                        ]);?>
+                    
+                    <?php 
+                        }else{
+                    ?>
+                        <?=  $form->field($model, 'title_'.$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>   
+                        <?=  $form->field($model, 'subtitle_'.$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>   
+                        <?=  $form->field($model, 'text_'.$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>           
+                    <?php 
+                            
+                        }
+                    }               
+                    ?>
+                </div>
+            </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

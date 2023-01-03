@@ -88,14 +88,17 @@ class RecipesSteps extends \yii\db\ActiveRecord
         ->all();
 
         $i = 1;
-   
+
+        $connection->createCommand()
+        ->delete('recipes_steps', ['recipe_code' => $recipesCode])
+        ->execute();
+
+
         foreach($arrValues as $arrValue){
 
-            $pageCode = 'recibo_step_text_'.$idRecibes.'_' . $i;
+            $pageCode = 'recipe_step_text_'.$idRecibes.'_' . $i;
 
-            $connection->createCommand()
-            ->delete('recipes_steps', ['recipe_code' => $recipesCode])
-            ->execute();
+       
 
             $connection->createCommand()->insert('recipes_steps', [                
                 'recipe_code' => $recipesCode,
@@ -111,11 +114,9 @@ class RecipesSteps extends \yii\db\ActiveRecord
             ])->execute();
 
         
-
-
             foreach($countries as $val){
     
-                $text = 'recipe_step_text_' . $val['country_code'];         
+                $text = 'recipe_step_text_'. $val['country_code'];         
             
                 $connection->createCommand()->insert('translations', [      
                     'country_code' => $val['country_code'],  
@@ -143,40 +144,62 @@ class RecipesSteps extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        $this->updateSimples($arrRecipeSteps, $model);   
+        //$this->updateSimples($arrRecipeSteps, $model);   
 
-        foreach ($countries as $val) {
+        $pageId = str_replace('recipe_code_', '', $model->recipe_code);
 
-            $title = 'recipe_title_' . $val['country_code'];
-            $text = 'recipe_text_' . $val['country_code'];
+        $i = 1;    
 
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-                )
-            ->bindValue(':text', $model->$title)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->recipe_code_title)
-            ->bindValue(':country_code', $val['country_code'])
-            ->execute();
+        $connection->createCommand()
+        ->delete('recipes_steps', ['recipe_code' => $model->recipe_code])
+        ->execute();  
 
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->recipe_code_text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->execute();
-        }        
+        foreach($arrRecipeSteps as $arr){        
+  
+            $pageCode = 'recipe_step_text_'.$pageId.'_'.$i;      
+
+            $connection->createCommand()->insert('recipes_steps', [                
+                    'recipe_code' => $model->recipe_code,
+                    'page_code' => $pageCode,
+                    'recipe_step_text' => $arr['recipe_step_text'],       
+                    'recipe_step_text_en' => $arr['recipe_step_text_en'],         
+                    'recipe_step_text_pt' => $arr['recipe_step_text_pt'],        
+                    'recipe_step_text_es' =>$arr['recipe_step_text_es'],          
+                    'recipe_step_text_it' => $arr['recipe_step_text_it'],  
+                    'recipe_step_text_de' => $arr['recipe_step_text_de'],          
+                    'recipe_step_text_fr' => $arr['recipe_step_text_fr'],   
+                    'order' => $i,
+                ])->execute();                  
+         
+                
+                foreach($countries as $val){
+        
+                    $connection->createCommand()
+                    ->delete('translations', [
+                        'page_code' => $pageCode,
+                        'country_code' => $val['country_code']
+                    ])->execute();
+            
+                    $text = 'recipe_step_text_'. $val['country_code'];         
+                
+                    $connection->createCommand()->insert('translations', [      
+                        'country_code' => $val['country_code'],  
+                        'page' => $page,
+                        'page_code' => $pageCode,
+                        'text' => $arr[$text],
+                        'active' => '1',
+                    ])->execute();          
+                          
+                }
+
+            $i++;
+        }
+        
+      
         
     }   
 
+    /*
 
     public function updateSimples($arrRecipeSteps, $model){
 
@@ -193,7 +216,7 @@ class RecipesSteps extends \yii\db\ActiveRecord
 
         foreach($arrRecipeSteps as $arr){        
   
-            $pageCode = 'recibo_step_text_'. $idRc.'_'.$i;
+            $pageCode = 'recipe_step_text_'. $idRc.'_'.$i;
        
             $connection->createCommand()->insert('recipes_steps', [                
                     'recipe_code' => $model->recipe_code,
@@ -214,4 +237,5 @@ class RecipesSteps extends \yii\db\ActiveRecord
 
         return true;
     }
+    */
 }

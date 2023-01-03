@@ -194,4 +194,31 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
     ),
   ),
+  'yiier/yii2-chartjs-widget' => 
+  array (
+    'name' => 'yiier/yii2-chartjs-widget',
+    'version' => '1.3.0.0',
+    'alias' => 
+    array (
+      '@yiier/chartjs' => $vendorDir . '/yiier/yii2-chartjs-widget',
+    ),
+  ),
+  'bsadnu/yii2-googlecharts' => 
+  array (
+    'name' => 'bsadnu/yii2-googlecharts',
+    'version' => '1.2.0.0',
+    'alias' => 
+    array (
+      '@bsadnu/googlecharts' => $vendorDir . '/bsadnu/yii2-googlecharts',
+    ),
+  ),
+  '2amigos/yii2-chartjs-widget' => 
+  array (
+    'name' => '2amigos/yii2-chartjs-widget',
+    'version' => '3.0.1.0',
+    'alias' => 
+    array (
+      '@dosamigos/chartjs' => $vendorDir . '/2amigos/yii2-chartjs-widget/src',
+    ),
+  ),
 );

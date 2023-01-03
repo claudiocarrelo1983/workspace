@@ -50,7 +50,7 @@ class Recipes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
+            [['recipe_cat_code','imageFile','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
             [['difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
             [['cooking_time', 'number_of_people', 'active'], 'integer'],
             [['created_date','imageFile'], 'safe'],
@@ -158,6 +158,7 @@ class Recipes extends \yii\db\ActiveRecord
             'recipe_code' => $code,     
             'recipe_code_title' => $modelRecipe->recipe_code_title,  
             'recipe_code_text' => $modelRecipe->recipe_code_text, 
+            'recipe_cat_code' => $modelRecipe->recipe_cat_code, 
             'recipe_title' => $modelRecipe->recipe_title, 
             'cooking_time' => $modelRecipe->cooking_time, 
             'number_of_people' => $modelRecipe->number_of_people, 
@@ -194,6 +195,7 @@ class Recipes extends \yii\db\ActiveRecord
             'difficulty' => $modelRecipe->difficulty, 
             'active' => $modelRecipe->active, 
             'image' => $modelRecipe->image, 
+            'recipe_cat_code' => $modelRecipe->recipe_cat_code, 
             'recipe_text' => $modelRecipe->recipe_text,
             'recipe_title_en' => $modelRecipe->recipe_title_en,
             'recipe_text_en' => $modelRecipe->recipe_text_en,
@@ -253,7 +255,7 @@ class Recipes extends \yii\db\ActiveRecord
                 ],
                 [
                     'page' => $page,
-                    'page_code' => 'recipe_title_'. $idRc,
+                    'page_code' => 'recipe_text_'. $idRc,
                     'country_code' => $val['country_code'],   
                 ]
                 )->execute();
@@ -309,5 +311,38 @@ class Recipes extends \yii\db\ActiveRecord
 
 
         return true;
+    }
+
+
+    public static function recipeTags($arrTags){
+
+        $arr =  array();
+
+        foreach($arrTags as $values){
+
+            if(empty($values['recipes_parent_id'])){    
+                $values['submenu'] = Recipes::recipesTagsHelper($arrTags, $values);   
+                $arr[] = $values;
+            }         
+        }
+  
+        return  $arr;
+
+    }
+
+    public static function recipesTagsHelper($arrTags, $values){
+
+        $arr =  array();  
+     
+        foreach($arrTags as $tag){             
+    
+            if(!empty($tag['recipes_parent_id'])){
+                if(trim($tag['recipes_parent_id']) == trim($values['recipe_cat_code'])){
+                    $arr[] =  $tag;
+                }      
+            }
+        }    
+    
+        return  $arr;
     }
 }

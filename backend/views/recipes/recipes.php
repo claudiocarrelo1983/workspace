@@ -1,7 +1,23 @@
 <?php
 
+use yii\helpers\Url;
+use yii\db\Query;
 
-use dosamigos\tinymce\TinyMce;
+$tagQueryUser = new Query;
+
+$tags = $tagQueryUser->select([
+    'recipe_cat_code', 
+    'description'
+    ])
+->from('recipes_category')    
+->all();
+
+$tagsArr = array();
+
+foreach($tags as $tag){
+    $tagsArr[$tag['recipe_cat_code']] = $tag['description'];
+}
+
 
 ?>
 
@@ -35,7 +51,16 @@ use dosamigos\tinymce\TinyMce;
     <div class="col-12 py-4">
         <?= $form->field($model, 'imageFile')->fileInput() ?>
         <div> The image needs to be 900 x 500</div>
-    </div>        
+    </div>    
+    <div class="col-12">
+        <?= $form->field($model, 'recipe_cat_code')->radioList(
+            $tagsArr); 
+        ?>
+        <a href="<?= Url::toRoute('recipes-category/create') ?>" target="_blank"  class="pb-5">
+            <?= Yii::t('app', 'Create New Category') ?>	
+    </a>
+    </div>
+
     
     <div class="col-12">
         <?= $form->field($model, 'recipe_text')->textarea(['maxlength' => true]) ?>        

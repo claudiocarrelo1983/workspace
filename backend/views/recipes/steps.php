@@ -75,15 +75,34 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             <div class="col-sm-3">                   
                                 <?=  $form->field($model, "[{$index}]recipe_step_text")->textarea(); ?>                       
                             </div>                     
-                            <?php foreach ($countries as $value){ ?>                       
-                                        <div class="col-sm-3">  
-                                            <?=  $form->field($model, "[{$index}]recipe_step_text_".$value['country_code'])->textarea()?>          
-                                        </div>    
-                            <?php } ?>  
-                            <?=  $form->field($model, "[{$index}]recipe_step_text_it")->hiddenInput(['value'=> 'n/a'])->label(false); ?>         
-                            <?=  $form->field($model, "[{$index}]recipe_step_text_fr")->hiddenInput(['value'=> 'n/a'])->label(false); ?>     
-                            <?=  $form->field($model, "[{$index}]recipe_step_text_de")->hiddenInput(['value'=> 'n/a'])->label(false); ?>                   
-                                    
+                            <?php 
+
+                            foreach($arrLanguages as $valLang){
+
+                                $display = 0;
+
+                                foreach ($countries as $value){
+                                    if($value['country_code'] == $valLang){
+                                        $display = 1;
+                                        break;
+                                    }
+                                }
+
+                                if($display == 1){
+
+                            ?>                       
+                                <div class="col-sm-3">  
+                                    <?=  $form->field($model, "[{$index}]recipe_step_text_".$value['country_code'])->textarea()?>          
+                                </div>    
+                            <?php 
+                            }else{            
+                            ?>                            
+                            <?=  $form->field($model, "[{$index}]recipe_step_text_".$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>         
+                            <?php 
+        
+                                }
+                            }               
+                            ?>
                             <hr class="my-5">  
                         </div><!-- end:row -->
                     </div>

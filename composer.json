@@ -37,7 +37,10 @@
         "filsh/yii2-oauth2-server": "^2.1",
         "wbraganca/yii2-dynamicform": "^2.0",
         "symfony/dom-crawler": "2.8",
-        "symfony/css-selector": "2.8"
+        "symfony/css-selector": "2.8",
+        "yiier/yii2-chartjs-widget": "^1.3",
+        "bsadnu/yii2-googlecharts": "^1.2",
+        "2amigos/yii2-chartjs-widget": "^3.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

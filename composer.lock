@@ -4,8 +4,76 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc5ba91bab386317290c41cf56383a8a",
+    "content-hash": "8d40195cbc3ba22d872bb674c4315386",
     "packages": [
+        {
+            "name": "2amigos/yii2-chartjs-widget",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-chartjs-widget.git",
+                "reference": "639745d0dcaa3fc019c7d43e2fb7092e202da29a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-chartjs-widget/zipball/639745d0dcaa3fc019c7d43e2fb7092e202da29a",
+                "reference": "639745d0dcaa3fc019c7d43e2fb7092e202da29a",
+                "shasum": ""
+            },
+            "require": {
+                "nnnick/chartjs": "^2.9",
+                "php": ">=7.3",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^8.5",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "installer-types": [
+                    "bower-asset",
+                    "npm-asset"
+                ],
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\chartjs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ChartJs widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/chartjs-widget",
+            "keywords": [
+                "2amigos",
+                "chartjs",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/2amigos/yii2-chartjs-widget/issues",
+                "source": "https://github.com/2amigos/yii2-chartjs-widget"
+            },
+            "time": "2020-02-05T12:29:41+00:00"
+        },
         {
             "name": "2amigos/yii2-tinymce-widget",
             "version": "1.1.3",
@@ -103,6 +171,24 @@
                 "source": "https://github.com/adcuz/fat-secret-php/tree/v1.0.3"
             },
             "time": "2016-08-15T14:59:40+00:00"
+        },
+        {
+            "name": "bower-asset/chart.js",
+            "version": "v2.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chartjs/Chart.js.git",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/9bd4cf82fda9f50a5fb50b72843e06ab88124278",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/fullcalendar",
@@ -229,6 +315,54 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bsadnu/yii2-googlecharts",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bsadnu/yii2-googlecharts.git",
+                "reference": "05e7a5c3cf6e6e7e7c337f3775b9ec87ed287efe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bsadnu/yii2-googlecharts/zipball/05e7a5c3cf6e6e7e7c337f3775b9ec87ed287efe",
+                "reference": "05e7a5c3cf6e6e7e7c337f3775b9ec87ed287efe",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bsadnu\\googlecharts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Stanislav Bannikov",
+                    "email": "bsadnu@gmail.com"
+                }
+            ],
+            "description": "Google Charts Extension for Yii 2 framework",
+            "keywords": [
+                "chart",
+                "charts",
+                "extension",
+                "google",
+                "googlecharts",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/bsadnu/yii2-googlecharts/issues",
+                "source": "https://github.com/bsadnu/yii2-googlecharts/tree/master"
+            },
+            "time": "2017-05-30T08:25:18+00:00"
         },
         {
             "name": "bshaffer/oauth2-server-php",
@@ -2763,6 +2897,51 @@
             "time": "2022-08-04T09:53:51+00:00"
         },
         {
+            "name": "nnnick/chartjs",
+            "version": "v2.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chartjs/Chart.js.git",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/9bd4cf82fda9f50a5fb50b72843e06ab88124278",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "release/2.0": "v2.0-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "NICK DOWNIE",
+                    "email": "hello@nickdownie.com"
+                }
+            ],
+            "description": "Simple HTML5 charts using the canvas element.",
+            "homepage": "https://www.chartjs.org/",
+            "keywords": [
+                "JS",
+                "chart"
+            ],
+            "support": {
+                "issues": "https://github.com/chartjs/Chart.js/issues",
+                "source": "https://github.com/chartjs/Chart.js/tree/v2.9.4"
+            },
+            "time": "2020-10-19T12:22:11+00:00"
+        },
+        {
             "name": "npm-asset/bootstrap",
             "version": "4.6.2",
             "dist": {
@@ -4924,6 +5103,53 @@
             },
             "abandoned": true,
             "time": "2019-07-30T11:05:57+00:00"
+        },
+        {
+            "name": "yiier/yii2-chartjs-widget",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiier/yii2-chartjs-widget.git",
+                "reference": "0e4019ae1964e2d51cd15231eebc760afdc814be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiier/yii2-chartjs-widget/zipball/0e4019ae1964e2d51cd15231eebc760afdc814be",
+                "reference": "0e4019ae1964e2d51cd15231eebc760afdc814be",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/chart.js": "^2.1.3",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yiier\\chartjs\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "forecho",
+                    "email": "caizhenghai@gmail.com"
+                }
+            ],
+            "description": "ChartJs 2 for Yii2 widget",
+            "keywords": [
+                "chartjs",
+                "extension",
+                "widget",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/yiier/yii2-chartjs-widget/issues",
+                "source": "https://github.com/yiier/yii2-chartjs-widget/tree/master"
+            },
+            "time": "2018-05-04T06:47:43+00:00"
         },
         {
             "name": "yiisoft/yii2",

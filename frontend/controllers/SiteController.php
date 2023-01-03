@@ -126,6 +126,14 @@ class SiteController extends Controller
         return $this->render('mobile-app');
     }
 
+    public function actionRecipes()
+    {
+        $this->layout = 'public';
+
+        return $this->render('recipes/recipes');
+    }
+
+
 
     public function actionBlogSingle()
     {
@@ -145,11 +153,38 @@ class SiteController extends Controller
        
 
         if(empty( $blog)){
-            return Yii::$app->response->redirect(Url::to(['site/blog'], true));
+            //return Yii::$app->response->redirect(Url::to(['site/blog'], true));
         }     
 
         return $this->render('blogs/blog-single', [
             'blog' => $blog,
+         
+        ]);
+    }
+
+    public function actionRecipeSingle()
+    {      
+        $this->layout = 'public';    
+        $request = Yii::$app->request; 
+
+        $model = new GeneratorJson(); 
+        $recipeArr = $model->getLastFileUploaded('recipes');  
+
+        $recipe = '';        
+
+        foreach($recipeArr as  $values){
+            if($values['id'] ==  $request->get('id')){
+                $recipe = $values;
+            }
+        }       
+
+        if(empty($recipe)){
+           return Yii::$app->response->redirect(Url::to(['site/blog'], true));
+        }     
+
+        return $this->render('recipes/recipe-single', [
+            'recipe' => $recipe,
+            'recipeArr' => $recipeArr,
          
         ]);
     }

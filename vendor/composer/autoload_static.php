@@ -18,8 +18,8 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -39,6 +39,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
     public static $prefixLengthsPsr4 = array (
         'y' => 
         array (
+            'yiier\\chartjs\\' => 14,
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
             'yii\\httpclient\\' => 15,
@@ -99,10 +100,15 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'd' => 
         array (
             'dosamigos\\tinymce\\' => 18,
+            'dosamigos\\chartjs\\' => 18,
         ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
+        ),
+        'b' => 
+        array (
+            'bsadnu\\googlecharts\\' => 20,
         ),
         'Z' => 
         array (
@@ -216,6 +222,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
     );
 
     public static $prefixDirsPsr4 = array (
+        'yiier\\chartjs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiier/yii2-chartjs-widget',
+        ),
         'yii\\swiftmailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer/src',
@@ -324,9 +334,17 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/2amigos/yii2-tinymce-widget/src',
         ),
+        'dosamigos\\chartjs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-chartjs-widget/src',
+        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'bsadnu\\googlecharts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bsadnu/yii2-googlecharts',
         ),
         'ZipStream\\' => 
         array (
@@ -591,9 +609,9 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
             1 => __DIR__ . '/..' . '/codeception/stub/src',
-            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
         'Adcuz\\FatSecret\\' => 
         array (

@@ -173,8 +173,8 @@
             },
             {   
                "key":"t-food-category",
-               "title":"Food ",
-               "url":"recipes-food/index",
+               "title":"Recipes Category ",
+               "url":"recipes-category/index",
                "submenu":[                    
                   
                ]

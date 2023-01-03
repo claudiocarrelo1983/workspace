@@ -105,11 +105,9 @@ $path2 = 'blog';
 									$tagList[] = $category;
 								}
 							}			
-						}	
-			
-
+						}		
+								
 					?>
-
 						<article class="post post-medium">
 							<div class="row mb-3">
 								<div class="col-lg-5">
@@ -149,6 +147,7 @@ $path2 = 'blog';
 												<?php 		
 													$count = count($tagList);
 													$i = 1;
+													$comma = '';
 
 													foreach ($tagList as  $key => $tags): 
 														if(!empty($tags)){																	
@@ -168,9 +167,11 @@ $path2 = 'blog';
 											</span> 
 										<span><i class="far fa-comments"></i> 
 										
-											<?php $urlParamsVal = ['site/blog-single', 
-																	'id' => $categories['id']												
-																];?>
+											<?php 
+											$urlParamsVal = ['site/blog-single', 
+															'id' => $categories['id']												
+															];
+											?>
 																							
 											<a href="<?= Url::toRoute($urlParamsVal); ?> ">12 <?= Yii::t('app', 'Comments') ?></a><?= $comma  ?>								
 										</span>

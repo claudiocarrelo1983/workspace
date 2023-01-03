@@ -27,8 +27,6 @@ $path2 = 'all_pricing';
 
 <?= $this->render('@frontend/views/site/banner',['path1' => 'Menu','path2' => $path2]); ?>
 
-
-
 	<div role="main" class="main">
 		<div class="container py-4">
 			<div class="row">

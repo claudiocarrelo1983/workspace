@@ -36,7 +36,7 @@ class m221223_171909_recipes_category extends Migration
         $this->createTable('{{%recipes_category}}', [
             'id' => $this->primaryKey(),
             'recipes_parent_id' => $this->string()->defaultValue(0), 
-            'recipe_code' => $this->string()->notNull()->unique(),   
+            'page_code' => $this->string()->notNull()->unique(),   
             'recipe_cat_code' => $this->string()->notNull()->unique(),         
             'description' => $this->string()->notNull(), 
             'recipe_pt' => $this->string()->notNull(), 

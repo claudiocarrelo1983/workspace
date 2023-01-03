@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\db\Query;
 
 
 
@@ -11,22 +10,6 @@ use yii\db\Query;
 /* @var $model app\Models\BlogsSearch */
 /* @var $form yii\widgets\ActiveForm */
 
-$tagQuery = new Query;
-
-$countryUsers = array(
-    '' => 'Country'
-);
-
-$countries = $tagQuery->select([
-    'country_code',
-    'full_title' 
-    ])
-->from('countries')    
-->all();
-
-foreach($countries as $value){
-    $countryUsers[$value['country_code']] = $value['full_title'];
-}
 
 
 ?>
@@ -42,13 +25,7 @@ foreach($countries as $value){
         <div class="col-3">
             <?= $form->field($model, 'id') ?>
         </div>
-        <div class="col-3">
-            <?= $form->field($model, 'country_code')->dropDownList(
-                $countryUsers
-                ,                     
-                array('required','separator' => "</br>" ))->label('Select Country');
-            ?>  
-        </div>
+   
         <div class="col-3">
             <?= $form->field($model, 'title') ?>
         </div>
