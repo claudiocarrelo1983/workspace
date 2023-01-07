@@ -10,13 +10,13 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
 
 <?php DynamicFormWidget::begin([
-    'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+    'widgetContainer' => 'dynamicform_wrapper_steps', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
     'widgetBody' => '.container-items', // required: css class selector
     'widgetItem' => '.item', // required: css class
-    'limit' => 4, // the maximum times, an element can be cloned (default 999)
+    'limit' => 100, // the maximum times, an element can be cloned (default 999)
     'min' => 0, // 0 or 1 (default 1)
-    'insertButton' => '.add-item-button', // css class
-    'deleteButton' => '.remove-item', // css class
+    'insertButton' => '.add-item-button-steps', // css class
+    'deleteButton' => '.remove-item-steps', // css class
     'model' => $modelsRecipeSteps[0],
     'formId' => 'dynamic-form',
     'formFields' => [
@@ -37,7 +37,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 ]); ?>
 <div class="panel panel-default">
     <div class="panel-heading">                
-        <button type="button" class="pull-right add-item-button btn btn-success">
+        <button type="button" class="pull-right add-item-button-steps btn btn-success">
             <i class="fa fa-plus"></i> 
             Add Step
         </button>
@@ -55,9 +55,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         </div>                
                         <div class="col-sm-1 text-right">
                             <div class="text-right">                          
-                                <button type="button" class="pull-right remove-item btn btn-danger ">
-                                    <span class="panel-title-address">
-                                        <?= ($index + 1) ?>
+                                <button type="button" class="pull-right remove-item-steps btn btn-danger ">
+                                    <span class="panel-title-steps">
+                                        Remove: <?= ($index + 1) ?>
                                     </span>
                                 </button>
                             </div>   
@@ -110,6 +110,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
             </div>
        
 <?php endforeach; ?>
-</div>
+    </div>
 </div>
 <?php DynamicFormWidget::end(); ?>

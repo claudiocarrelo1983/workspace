@@ -44,7 +44,8 @@ class PublicAsset extends AssetBundle
         'vendor/vide/jquery.vide.min.js',
         'vendor/vivus/vivus.min.js',
         'vendor/circle-flip-slideshow/js/jquery.flipshow.min.js',
-        'js/custom.js'
+        'js/custom.js',
+        'js/theme.js'
     ];
 
     public $depends = [

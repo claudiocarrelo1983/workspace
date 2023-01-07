@@ -59,7 +59,8 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'subjects': 
                     case 'texts':    
                     case 'recipes':     
-                    case 'recipes_category':  
+                    case 'recipes_category': 
+                    case 'comments':                       
                         if(method_exists(__CLASS__, $method)){
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
@@ -204,27 +205,30 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         foreach($recipesArr as $key => $recipesValue){
 
-            $recipesStepArr = $recipesQuery->select('*')
+            if($recipesValue['active'] == 1){
+
+                $recipesStepArr = $recipesQuery->select('*')
                 ->from('recipes_steps')
                 ->where(['recipe_code' => $recipesValue['recipe_code']])
                 ->all();
 
-            $recipesFoodArr = $recipesQuery->select('*')
-                ->from('recipes_food')
-                ->where(['recipe_code' => $recipesValue['recipe_code']])
-                ->all();
-            
-            $recipesCatArr = $recipesQuery->select('*')
-                ->from('recipes_category')
-                ->where(['recipe_cat_code' => $recipesValue['recipe_cat_code']])
-                ->one();
+                $recipesFoodArr = $recipesQuery->select('*')
+                    ->from('recipes_food')
+                    ->where(['recipe_code' => $recipesValue['recipe_code']])
+                    ->all();
+                
+                $recipesCatArr = $recipesQuery->select('*')
+                    ->from('recipes_category')
+                    ->where(['recipe_cat_code' => $recipesValue['recipe_cat_code']])
+                    ->one();
 
 
-            $recipesValue = array_merge($recipesValue, ['steps' => $recipesStepArr]);
-            $recipesValue = array_merge($recipesValue, ['food' => $recipesFoodArr]);
-            $recipesValue = array_merge($recipesValue, ['category' => ((isset($recipesCatArr['page_code'])) ? $recipesCatArr['page_code'] : '')]);
-            $recipesResult[] = $recipesValue;      
+                $recipesValue = array_merge($recipesValue, ['steps' => $recipesStepArr]);
+                $recipesValue = array_merge($recipesValue, ['food' => $recipesFoodArr]);
+                $recipesValue = array_merge($recipesValue, ['category' => ((isset($recipesCatArr['page_code'])) ? $recipesCatArr['page_code'] : '')]);
+                $recipesResult[] = $recipesValue;   
 
+            }           
         }
 
         GeneratorJson::saveJson($recipesResult , $table);

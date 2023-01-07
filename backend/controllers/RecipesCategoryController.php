@@ -81,7 +81,6 @@ class RecipesCategoryController extends Controller
         if ($this->request->isPost) {
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
- 
                 $model->saveRecipesCategory('recipes_category',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }

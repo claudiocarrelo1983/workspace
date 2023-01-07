@@ -9,12 +9,16 @@ use common\models\RecipesSteps;
 use common\models\RecipesSearch;
 use common\models\RecipesStepsSearch;
 use common\models\RecipesFoodSearch;
+use common\models\RecipesLoad;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\db\Query;
 use Yii;
+use Adcuz\FatSecret\OAuthBase;
+use Adcuz\FatSecret\FatSecretException;
+use Adcuz\FatSecret\Client;
 
 /**
  * RecipesController implements the CRUD actions for Recipes model.
@@ -47,13 +51,33 @@ class RecipesController extends Controller
     public function actionIndex()
     {
         $searchModel = new RecipesSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $modelRecipeId = new RecipesLoad();
+        $modelRecipe = new Recipes;       
+
+        $dataProvider = $searchModel->search($this->request->queryParams); 
+
+        if ($this->request->isPost) {
+           
+            if ($modelRecipeId->load($this->request->post()) && $modelRecipeId->validate()) {
+
+                $modelRecipeId->fatsecret_id = $modelRecipeId->recipe_id;
+                
+                $modelRecipeId->saveRecipes($modelRecipe, $modelRecipeId);
+    
+                $value = $modelRecipe::find('recipe_code')->orderBy("id desc")->limit(1)->one();
+                    
+                //return $this->redirect(['update', 'id' => $value->id]);   
+             
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'modelRecipeId' => $modelRecipeId
         ]);
     }
+   
 
     /**
      * Displays a single Recipes model.
@@ -99,9 +123,8 @@ class RecipesController extends Controller
         $RecipesSteps = new RecipesSteps;
         $RecipesFood = new RecipesFood;
         $modelsRecipeSteps = [new RecipesSteps];     
-        $modelsRecipeFood = [new RecipesFood];     
+        $modelsRecipeFood = [new RecipesFood];    
 
-      
         $recipeCodeTitle = 'recipe_title_1';
         $recipeCodeText = 'recipe_text_1';
         $recipeCodeSteps = 'recipe_steps_1';
@@ -115,23 +138,31 @@ class RecipesController extends Controller
          $recipeCodeSteps = 'recipe_steps_'.bcadd($count->id, 1);
          $recipeCodeIngredients = 'recipe_ingredients_'.bcadd($count->id, 1);
        }
-     
-       if ($modelRecipe->load(Yii::$app->request->post())){
 
+        $modelRecipe->recipe_cat_code = '';
+       
+       if(!empty($_POST['Recipes']['tagsArr'])){
+          
+           $modelRecipe->recipe_cat_code = implode(',',$_POST['Recipes']['tagsArr']);
+       }  
+     
+       if ($modelRecipe->load(Yii::$app->request->post())){          
+          
             $modelRecipe->recipe_code_title = $recipeCodeTitle;
             $modelRecipe->recipe_code_text = $recipeCodeText;
 
-            $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
+            $modelRecipe->imageFile = 'empty';
 
             if(isset($modelRecipe->imageFile->name)){
+                $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
                 $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
                 $modelRecipe->image = '/images/recipes/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
 
-
+       
             if($modelRecipe->validate()){      
-                if(isset(Yii::$app->request->post()['Recipes'])){                      
+                if(isset(Yii::$app->request->post()['Recipes'])){  
                     $recipesCode = $modelRecipe->saveRecipes('recipes', $modelRecipe);
                     if (isset(Yii::$app->request->post()['RecipesSteps'])) {
                         $RecipesSteps->saveRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
@@ -202,7 +233,16 @@ class RecipesController extends Controller
             $recipeCodeIngredients = 'recipe_ingredients_'.$count->id;
        }
 
+
         if ($this->request->isPost && $modelRecipe->load($this->request->post())) {
+                    
+            $modelRecipe->recipe_cat_code = '';
+            
+            if(!empty($_POST['Recipes']['tagsArr'])){
+                
+                $modelRecipe->recipe_cat_code = implode(',',$_POST['Recipes']['tagsArr']);
+            }  
+            
 
             $modelRecipe->recipe_code_title = $recipeCodeTitle;
             $modelRecipe->recipe_code_text = $recipeCodeText;
@@ -248,7 +288,9 @@ class RecipesController extends Controller
                           
                 return $this->redirect(['view', 'id' => $modelRecipe->id]);
             }
-        }     
+        }
+
+        $modelRecipe->tagsArr = explode(',', $modelRecipe->recipe_cat_code); 
 
         return $this->renderAjax('update', [
             'model' => $modelRecipe,

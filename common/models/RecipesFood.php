@@ -47,9 +47,9 @@ class RecipesFood extends \yii\db\ActiveRecord
     {
         return [
             [['recipe_code_text','quantity','fat','recipe_code', 'recipe_food_name', 'protein','fat','carbs','measure', 'calories', 'recipe_food_pt', 'recipe_food_es', 'recipe_food_en', 'recipe_food_it', 'recipe_food_fr', 'recipe_food_de'], 'required'],
-            [['quantity','active','protein','fat','carbs'], 'integer'],
+            [[ 'calories', 'lipids', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein','quantity','active','protein','fat','carbs'], 'number'],
             [['created_date'], 'safe'],
-            [['recipe_code_text','fat','recipe_code', 'recipe_food_name', 'measure', 'calories', 'lipids', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein', 'recipe_food_pt', 'recipe_food_es', 'recipe_food_en', 'recipe_food_it', 'recipe_food_fr', 'recipe_food_de'], 'string', 'max' => 255],
+            [['recipe_code_text','fat','recipe_code', 'recipe_food_name', 'measure', 'recipe_food_pt', 'recipe_food_es', 'recipe_food_en', 'recipe_food_it', 'recipe_food_fr', 'recipe_food_de'], 'string', 'max' => 255],
         ];
     }
 
@@ -103,7 +103,7 @@ class RecipesFood extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        $i = 1;    
+        $i = 1;
 
        foreach($arrValues as $arrValue){
 

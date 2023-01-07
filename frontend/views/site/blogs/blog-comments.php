@@ -6,32 +6,19 @@ use yii\helpers\Url;
 use yii\db\Query;
 use yii\db\Expression;
 
-/*
-$json = file_get_contents(Yii::$app->basePath.'\views\json\blog-sidebar.json');
-$structure = Json::decode($json);
-*/
+use common\models\GeneratorJson;
 
-$blogQuery = new Query;
+$model = new GeneratorJson(); 
+$comments = $model->getLastFileUploaded('comments');
 
-$blog = $blogQuery->select([
-    'b.id', 
-    'b.image', 
-    'b.title', 
-    'b.subtitle', 
-    'b.alt',         
-    'b.text',          
-    'u.name', 
-    'b.tags', 
-    'b.created_date' 
-])
-->from(['b' => 'blogs'])
-->innerJoin(['u' => 'user'],'`u`.`username` = `b`.`username`')
-->orderBy(['b.id' => SORT_DESC])
-->limit(3)
-->all();
+print "<pre>";
+print_R($comments);
+die();
+
+
 
 ?>
-    <?php foreach ($blog as $key => $categories): ?>   
+    <?php foreach ($comments as $key => $categories): ?>   
     <?php endforeach; ?>   
 
 

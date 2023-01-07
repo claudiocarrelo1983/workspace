@@ -180,13 +180,13 @@
                ]
             },
             {   
-               "key":"t-recipe-plans-coments",
-               "title":"Recipe Plans ",
-               "url":"recipes-plan/index",
+               "key":"t-recipe-coments",
+               "title":"comments",
+               "url":"comments/index",
                "submenu":[                    
                   
                ]
-            }   
+            }    
          ]
       },  
       {

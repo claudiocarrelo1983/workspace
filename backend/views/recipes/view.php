@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'recipe_food_pt',
                         'recipe_food_es',
                         'recipe_food_en',                
-                        'active',
+                        'validate',
                         'created_date',
                     ],
                 ]);?> 

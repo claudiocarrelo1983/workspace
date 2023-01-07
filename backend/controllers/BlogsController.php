@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use common\models\GeneratorJson;
+use api;
 use Yii;
 
 /**
@@ -48,7 +49,7 @@ class BlogsController extends Controller
      * @return string
      */
     public function actionIndex()
-    {   
+    {
 
         $searchModel = new BlogsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -59,6 +60,7 @@ class BlogsController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single BlogsCategory model.
      * @param int $id ID
@@ -67,10 +69,14 @@ class BlogsController extends Controller
      */
     public function actionView($id)
     {
+
+    
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
+   
 
     /**
      * Creates a new BlogsCategory model.
@@ -167,6 +173,8 @@ class BlogsController extends Controller
             $model::updateBlog($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $model->tagsArr = explode(',', $model->tags);
 
         return $this->render('update', [
             'model' => $model,

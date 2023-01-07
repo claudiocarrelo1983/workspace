@@ -13,7 +13,7 @@ $blogsArr = array();
 foreach($blogs as $key => $blog){
     $blogsArr[] =  $blog;
 
-    if($key >= 10){
+    if($key >= 3){
         break;
     }
 }

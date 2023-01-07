@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\Models\ConfigurationsSearch */
@@ -32,7 +33,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('configurations/index'); ?>">Reset</a>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -13,7 +13,7 @@ use dosamigos\tinymce\TinyMce;
     'widgetContainer' => 'dynamicform_wrapper_ingredients', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
     'widgetBody' => '.container-items', // required: css class selector
     'widgetItem' => '.item', // required: css class
-    'limit' => 4, // the maximum times, an element can be cloned (default 999)
+    'limit' => 100, // the maximum times, an element can be cloned (default 999)
     'min' => 0, // 0 or 1 (default 1)
     'insertButton' => '.add-item-button-ingredients', // css class
     'deleteButton' => '.remove-item-ingredients', // css class
@@ -36,6 +36,7 @@ use dosamigos\tinymce\TinyMce;
         'nutricion_de',
     ],
 ]); ?>
+
 <div class="panel panel-default">
     <div class="panel-heading">                
         <button type="button" class="pull-right add-item-button-ingredients btn btn-success">
@@ -53,10 +54,10 @@ use dosamigos\tinymce\TinyMce;
                     <div class="col-sm-11">
                     </div>                
                     <div class="col-sm-1 text-right">
-                        <div class="text-right">                          
+                        <div class="text-right">                         
                             <button type="button" class="pull-right remove-item-ingredients btn btn-danger ">
                                 <span class="panel-title-ingredients">
-                                    <?= ($index + 1) ?>
+                                    Remove: <?= ($index + 1) ?>
                                 </span>
                             </button>
                         </div>   
@@ -80,15 +81,34 @@ use dosamigos\tinymce\TinyMce;
                     </div>
                 </div>
                 <div class="row">  
-                    <?php foreach ($countries as $value){ ?>                    
-                        <div class="col-sm-3">
-                            <?= $form->field($model, "[{$index}]recipe_food_".$value['country_code'])->textInput(['maxlength' => true])->label('Ingredient Name '. ucfirst($value['country_code'])) ?>
-                        </div>
-                    <?php } ?>      
-                    <?=  $form->field($model, "[{$index}]recipe_food_it")->hiddenInput(['value'=> 'n/a'])->label(false); ?>  
-                    <?=  $form->field($model, "[{$index}]recipe_food_de")->hiddenInput(['value'=> 'n/a'])->label(false); ?>   
-                    <?=  $form->field($model, "[{$index}]recipe_food_fr")->hiddenInput(['value'=> 'n/a'])->label(false); ?>      
+                        <?php 
 
+                        foreach($arrLanguages as $valLang){
+
+                            $display = 0;
+
+                            foreach ($countries as $value){
+                                if($value['country_code'] == $valLang){
+                                    $display = 1;
+                                    break;
+                                }
+                            }
+
+                            if($display == 1){
+
+                        ?>                    
+                        <div class="col-sm-3">
+                            <?= $form->field($model, "[{$index}]recipe_food_".$valLang)->textInput(['maxlength' => true])->label('Ingredient Name '. ucfirst($value['country_code'])) ?>
+                        </div>
+                    <?php 
+                            }else{            
+                    ?>                        
+                        <?=  $form->field($model, "[{$index}]recipe_food_".$valLang)->hiddenInput(['value'=> 'n/a'])->label(false); ?>      
+                    <?php 
+                            
+                        }
+                    }               
+                    ?>
                     <div class="col-sm-2">
                         <?= $form->field($model, "[{$index}]measure")->dropdownList(
                             [

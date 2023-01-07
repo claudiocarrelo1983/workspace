@@ -53,8 +53,8 @@ foreach($tags as $tag){
         <div> The image needs to be 900 x 500</div>
     </div>    
     <div class="col-12">
-        <?= $form->field($model, 'recipe_cat_code')->radioList(
-            $tagsArr); 
+        <?= $form->field($model, 'tagsArr')->checkboxList(
+            $tagsArr)->label('Category'); 
         ?>
         <a href="<?= Url::toRoute('recipes-category/create') ?>" target="_blank"  class="pb-5">
             <?= Yii::t('app', 'Create New Category') ?>	

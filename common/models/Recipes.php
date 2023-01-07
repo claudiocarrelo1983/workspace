@@ -36,6 +36,8 @@ use Yii;
 class Recipes extends \yii\db\ActiveRecord
 {
      public $imageFile;
+
+    public $tagsArr;
     /**
      * {@inheritdoc}
      */
@@ -50,11 +52,11 @@ class Recipes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['recipe_cat_code','imageFile','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
-            [['difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
+            [['recipe_cat_code','tagsArr','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
+            [['recipe_cat_code','difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
             [['cooking_time', 'number_of_people', 'active'], 'integer'],
-            [['created_date','imageFile'], 'safe'],
-            [['username', 'recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_cat_code', 'recipe_title_pt', 'recipe_title_es', 'recipe_title_en', 'recipe_title_it', 'recipe_title_fr', 'recipe_title_de'], 'string', 'max' => 255],
+            [['tagsArr','created_date','imageFile'], 'safe'],
+            [['username', 'recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_title_pt', 'recipe_title_es', 'recipe_title_en', 'recipe_title_it', 'recipe_title_fr', 'recipe_title_de'], 'string', 'max' => 255],
             [['recipe_code_title',], 'unique'],
             [['recipe_code_text'], 'unique'],
             [['recipe_title'], 'unique'],
@@ -155,7 +157,8 @@ class Recipes extends \yii\db\ActiveRecord
 
         $value = $connection->createCommand()->insert('recipes', [   
             'username' => '',   
-            'recipe_code' => $code,     
+            'recipe_code' => $code, 
+            'fatsecret_id' =>  $modelRecipe->fatsecret_id,    
             'recipe_code_title' => $modelRecipe->recipe_code_title,  
             'recipe_code_text' => $modelRecipe->recipe_code_text, 
             'recipe_cat_code' => $modelRecipe->recipe_cat_code, 

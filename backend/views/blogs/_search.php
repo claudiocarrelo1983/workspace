@@ -3,15 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
-
-
-/* @var $this yii\web\View */
-/* @var $model app\Models\BlogsSearch */
-/* @var $form yii\widgets\ActiveForm */
-
-
-
+/** @var yii\web\View $this */
+/** @var app\models\BlogsSearch $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="blogs-search">
@@ -21,30 +15,76 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <div class="row">
+    <div class="row py-4">
         <div class="col-3">
             <?= $form->field($model, 'id') ?>
         </div>
-   
         <div class="col-3">
-            <?= $form->field($model, 'title') ?>
+            <?= $form->field($model, 'page_code_title') ?>
         </div>
-        <div class="col-3">            
-        <?= $form->field($model, 'username') ?>
+        <div class="col-3">
+            <?= $form->field($model, 'page_code_subtitle') ?>
         </div>
-        
-    </div>
+        <div class="col-3">
+            <?= $form->field($model, 'page_code_text') ?>
+        </div>  
+    </div>  
+
     
 
 
-    <?php // echo $form->field($model, 'url') ?>
+
+    <?php // echo $form->field($model, 'image_instagram') ?>
+
+   
+
+    <?php // echo $form->field($model, 'alt') ?>
 
     <?php // echo $form->field($model, 'text') ?>
 
-    <?php // echo $form->field($model, 'date') ?>
+    <?php // echo $form->field($model, 'tags') ?>
+
+    <?php // echo $form->field($model, 'subtitle') ?>
+
+    <?php // echo $form->field($model, 'title_pt') ?>
+
+    <?php // echo $form->field($model, 'title_es') ?>
+
+    <?php // echo $form->field($model, 'title_en') ?>
+
+    <?php // echo $form->field($model, 'title_it') ?>
+
+    <?php // echo $form->field($model, 'title_fr') ?>
+
+    <?php // echo $form->field($model, 'title_de') ?>
+
+    <?php // echo $form->field($model, 'text_pt') ?>
+
+    <?php // echo $form->field($model, 'text_es') ?>
+
+    <?php // echo $form->field($model, 'text_en') ?>
+
+    <?php // echo $form->field($model, 'text_it') ?>
+
+    <?php // echo $form->field($model, 'text_fr') ?>
+
+    <?php // echo $form->field($model, 'text_de') ?>
+
+    <?php // echo $form->field($model, 'subtitle_pt') ?>
+
+    <?php // echo $form->field($model, 'subtitle_es') ?>
+
+    <?php // echo $form->field($model, 'subtitle_en') ?>
+
+    <?php // echo $form->field($model, 'subtitle_it') ?>
+
+    <?php // echo $form->field($model, 'subtitle_fr') ?>
+
+    <?php // echo $form->field($model, 'subtitle_de') ?>
 
     <?php // echo $form->field($model, 'username') ?>
 
+    <?php // echo $form->field($model, 'active') ?>
 
     <?php // echo $form->field($model, 'created_date') ?>
 

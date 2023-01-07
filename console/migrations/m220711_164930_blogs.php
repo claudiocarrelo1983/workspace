@@ -25,7 +25,7 @@ class m220711_164930_blogs extends Migration
             'image_instagram' => $this->string(),
             'title' => $this->string()->notNull(), 
             'alt' => $this->string(),                   
-            'text' => $this->text(),  
+            'text' => $this->text()->notNull(),  
             'tags' => $this->string()->notNull(),  
             'subtitle' => $this->string(),   
             'title_pt' => $this->string()->notNull(), 

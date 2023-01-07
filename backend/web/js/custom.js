@@ -1,22 +1,11 @@
+setPricing();
 
-
-function generateJson(){  
-    
-    jQuery.ajax({
-        type: "POST",
-        url: "ajax/enerator.ajax.php",
-        dataType: 'JSON',
-        success: function(data) {
-          alert(data);
-          }
-      });
-
+function BlogToogle(id){    
+    jQuery("#dropdown-menu" + id).toggle();
 }
-    
-    
-    
-    
-function generateJson2(){  
+
+
+function setPricing(){  
     var standard = jQuery('#price-change').find(':selected').data('standard');
     var professional = jQuery('#price-change').find(':selected').data('professional');
     var enterprise = jQuery('#price-change').find(':selected').data('enterprise');

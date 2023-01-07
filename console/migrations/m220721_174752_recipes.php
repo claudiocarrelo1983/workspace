@@ -37,6 +37,7 @@ class m220721_174752_recipes extends Migration
         $this->createTable('{{%recipes}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string(),   
+            'fatsecret_id' => $this->integer(),    
             'recipe_code' => $this->string()->notNull()->unique(),     
             'recipe_code_title' => $this->string()->notNull()->unique(), 
             'recipe_code_text' => $this->string()->notNull()->unique(), 

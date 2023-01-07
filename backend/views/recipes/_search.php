@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\RecipesSearch */
@@ -15,17 +16,27 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row py-4">    
+ 
+        <div class="col-3">
+        <?= $form->field($model, 'recipe_title') ?>
+        </div>     
+        <div class="col-3">
+        <?php  echo $form->field($model, 'recipe_cat_code') ?>
+        </div>
+        <div class="col-3">
+            <?php  echo $form->field($model, 'recipe_cat_code') ?>
+        </div>
+        <div class="col-3">
+            <?= $form->field($model, 'active')->dropdownList(
+            [
+                1 => 'Yes',
+                0 => 'No'
+            ])->label('Valid'); 
+            ?>
+        </div>
+    </div>  
 
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'recipe_code_title') ?>
-
-    <?= $form->field($model, 'recipe_code_text') ?>
-
-    <?= $form->field($model, 'recipe_title') ?>
-
-    <?= $form->field($model, 'recipe_text') ?>
 
     <?php // echo $form->field($model, 'recipe_cat_code') ?>
 
@@ -51,8 +62,9 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('recipes/index'); ?>">Reset</a>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 

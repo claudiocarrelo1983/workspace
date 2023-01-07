@@ -8,8 +8,7 @@ use common\models\GeneratorJson;
 use yiier\chartjs\ChartJs;
 
 $model = new GeneratorJson(); 
-$tagsCategory = $model->getLastFileUploaded('recipe_category');  
-
+$tagsCategory = $model->getLastFileUploaded('recipes_category');  
 
 $this->title = 'Recipes';
 
@@ -81,108 +80,124 @@ $path2 = 'recipes_single';
 							
 								<span class="px-2 text-left" style='font-size:15px'>
 									<i class="far fa-folder"></i>
-										<a href="<?= Url::toRoute(['site/recipes-single', 'category' => $recipe['recipe_cat_code']]); ?>">
-											<?= Yii::t('app', $recipe['category']) ?>
-										</a>								
+										<?php 	
+											
+											$arrTags = explode(',',  $recipe['recipe_cat_code']); 
+											$tagList = array();
+
+											foreach($arrTags as $tag){	
+												foreach($tagsCategory as $category){
+													if($tag == $category['recipe_cat_code']){
+														$tagList[] = $category;
+													}
+												}			
+											}	
+
+											$count = count($tagList);
+											$i = 1;
+
+									
+
+											foreach ($tagList as  $key => $tags): 
+												if(!empty($tags)){																	
+													$comma = (($i == $count) ? '' : ',');		
+													?>					
+														<?php $urlParamsVal = ['site/recipes', 									
+															'username' => '#',																
+															'tag' => $tags['recipe_cat_code'],													
+														];?>
+																					
+														<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+													<?php 
+													$i++;
+												}
+											endforeach; 
+										?> 
+																
 								</span>
 									<?php $numberComments = 0;	?>
 								<span>								
 							</div>
-							<div class="text-3 py-3">
+							<div class="text-3 text-justify post post-large blog-single-post  py-3">
 								<?= Yii::t('app', $recipe['recipe_code_text']) ?>
 							</div>
 							<div class="row">
-								<div class="col pt-5">
+								<div class="col-lg-6 pt-5">
 									<h4>                    
 										<?= Yii::t('app', 'Ingredientes') ?>   
 									</h4>  
-									<table class="table">										
+									<table class="table">	
+										<thead> 
+											<tr> 
+												<th>
+													<?= Yii::t('app','recipe_food_name') ?>										
+												</th> 
+												<th>
+													<?= Yii::t('app','recipe_food_measure') ?>	
+												</th> 
+												<th>
+													<?= Yii::t('app','recipe_food_calories') ?>	
+												</th> 
+											<tr>	
+										</thead> 								
 										<tbody>  
 											<?php 
-												$lipids = 0;
+												$fat = 0;
+												$colesterol = 0;
+												$sodium = 0;
+												$fibers = 0;
+												$sugar = 0;
 												$carbs = 0;
 												$protein = 0;
-												$total =  0; 
+												$totalCalories =  0; 
 											?>
-											<?php foreach ($recipe['food'] as $key => $food): ?>                     
+											<?php foreach ($recipe['food'] as $key => $food): ?>   
+											
 												<tr>    
 													<td>
-														<?= Yii::t('app', $food['page_code']) ?>
+														<?= Yii::t('app', $food['page_code']) ?>													
+													</td>	
+													<td>																											
 														(
-															<?= Yii::t('app', $food['quantity']) ?> 
+															<?= $food['quantity'] ?> 
 															<?= Yii::t('app', $food['measure']) ?> 
 														)
-													</td>											
+													</td>										
 													<td class="text-right">
 														<?= Yii::t('app', $food['calories']) ?> Kcal
 													</td>   
 												</tr>  
-												<?php $total += $food['calories'] ?>
-												<?php $lipids += $food['fat'] ?>
+											
+												<?php $totalCalories += $food['calories'] ?>
+												<?php $colesterol += $food['colesterol'] ?>
+												<?php $sodium += $food['sodium'] ?>
+												<?php $fibers += $food['fibers'] ?>
+												<?php $sugar += $food['sugar'] ?>									
+												<?php $fat += $food['fat'] ?>
 												<?php $carbs += $food['carbs'] ?>
 												<?php $protein += $food['protein'] ?>
 											<?php endforeach; ?>  
+
+											<?php
+												$totalNutri = bcadd($fat, $carbs);
+												$totalNutri = bcadd($totalNutri, $protein);
+											?>
 												<tr>    
 													<td>
 														<p>
 															<strong>Total</strong>
 														</p>
+													</td>
+													<td>
 													</td>											
 													<td class="text-right">
-														<strong><?= $total ?> Kcal</strong>
+														<strong><?= $totalCalories ?> Kcal</strong>
 													</td>   
 												</tr>  
 										</tbody>
-									</table>
-									<h4>
-										<?= Yii::t('app','Macronutrients') ?>
-									</h4>
-									
-									<?= ChartJs::widget([
-										'type' => 'doughnut',
-										
-										'options' => [
-											'height' => 450,
-											'width' => 400,	
-											'legend' => [	
-												'position'=> 'bottom',
-												'display'=> 'false'		
-											],													
-										],										
-										'data' => [
-											'labels' => [
-													Yii::t('app','Lipids'),
-													Yii::t('app','Carbs'),
-													Yii::t('app','Protein')
-												],
-											'datasets' => [
-												[
-													'backgroundColor'=> [
-														"#1abd99", 
-														"#f7a923", 
-														"#e64a18", 
-													], 
-													'label'=> '# of Votes',
-													'data' => [
-														$lipids, 
-														$carbs,
-														$protein
-													],
-													'colors'=> ['#e0440e', '#e6693e', '#ec8f6e']
-												]
-											]
-										],
-										'clientOptions' => [
-											'legend' => [
-												'display' => true,
-												'position' => 'bottom',
-											]
-										]
-
-									]);?>
-									
+									</table>								
 								</div>
-								<div class="col pt-5">								
+								<div class="col-lg-6 pt-5">								
 									<h4>                    
 										<?= Yii::t('app', 'Preparation') ?>   
 									</h4>  
@@ -212,9 +227,121 @@ $path2 = 'recipes_single';
 							</div>
 					</article>
 				</div>
+			<div class=" my-5 "></div>
+			<h4>                    
+				<?= Yii::t('app', 'Informação Nutricional') ?>   
+			</h4> 	
+			<hr>	
+		
+			<div class="row">			
+				<div class="col">
+					<div class="border p-4">
+						<h4>
+							<?= Yii::t('app','Factos Nutricionais') ?>
+						</h4>		
+						<table class="table">	
+							<thead>
+								<tr> 
+									<th>
+										<?= Yii::t('app','recipe_quantity') ?>										
+									</th> 
+									<th>
+										<?= Yii::t('app','recipe_dose') ?>	
+									</th> 
+									<th>
+										(%)
+									</th> 
+								<tr>
+							</thead>					
+							<tbody>  								
+								<tr> 
+									<td>
+										<strong>
+											<?= Yii::t('app','recipe_carbs') ?>
+										</strong>
+									</td>
+									<td><?= $carbs ?> g</td>
+									<td><?= bcdiv(bcmul(100, $carbs), $totalNutri) ?> %</td>
+								</tr> 
+								<tr> 
+									<td>
+										<strong>
+											<?= Yii::t('app','recipe_fat') ?>
+										</strong>
+									</td>
+									<td><?= $fat ?> g</td>
+									<td><?= bcdiv(bcmul(100, $fat), $totalNutri) ?> %</td>
+								</tr> 
+								<tr> 
+									<td>
+										<strong>
+											<?= Yii::t('app','recipe_protein') ?>
+										</strong>
+									</td>
+									<td><?= $protein ?> g</td>
+									<td><?= bcdiv(bcmul(100, $protein), $totalNutri) ?> %</td>
+								</tr>
+								<tr> 
+									<td>
+										<strong>
+											<?= Yii::t('app','recipe_total') ?>
+										</strong>
+									</td>
+									<td><?= $totalNutri ?> g</td>	
+									<td><?= bcdiv(bcmul(100, $totalNutri), $totalNutri) ?> %</td>							
+								</tr>
+							</tbody>
+						</table>  
+					</div> 
+				</div>
+				<div class="col p-2">			
+					<?= ChartJs::widget([
+						'type' => 'doughnut',
+						
+						'options' => [
+							'height' => 320,
+							'width' => 400,	
+							'legend' => [	
+								'position'=> 'bottom',
+								'display'=> 'false'		
+							],													
+						],										
+						'data' => [
+							'labels' => [
+									Yii::t('app','Fat'),
+									Yii::t('app','Carbs'),
+									Yii::t('app','Protein')
+								],
+							'datasets' => [
+								[
+									'backgroundColor'=> [
+										"#1abd99", 
+										"#f7a923", 
+										"#e64a18", 
+									], 
+									'label'=> '# of Votes',
+									'data' => [
+										$fat, 
+										$carbs,
+										$protein
+									],
+									'colors'=> ['#e0440e', '#e6693e', '#ec8f6e']
+								]
+							]
+						],
+						'clientOptions' => [
+							'legend' => [
+								'display' => true,
+								'position' => 'bottom',
+							]
+						]
+
+					]);?>					
+				</div>
+			</div>		
+			<hr class=" my-5 ">
 			</div>
 		</div>
-		<hr class=" my-5 ">
 		<h4>                    
 			<?= Yii::t('app', 'Related Recipes') ?>   
 		</h4> 
@@ -229,7 +356,7 @@ $path2 = 'recipes_single';
 					if ($i  <= 2) { 
 						if($recipe['recipe_cat_code'] == $recipeVal['recipe_cat_code'] && $recipe['id'] != $recipeVal['id'] ){
 					?>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="card">
 								<img class="card-img-top" src="<?= $recipeVal['image'] ?>" alt="Card Image">
 								<div class="card-body">
@@ -237,7 +364,7 @@ $path2 = 'recipes_single';
 										<?= Yii::t('app', $recipeVal['recipe_code_title']) ?>
 									</h4>
 									<span class=" text-left" style='font-size:15px'>
-										<i class="far fa-clock"></i> <?= $recipeVal['cooking_time'] ?> <?= Yii::t('app', 'minutes') ?> 
+										<i class="far fa-clock"></i> <?= $recipeVal['cooking_time'] ?> <?= Yii::t('app', 'recipe_minutes') ?> 
 									</span>
 									<span class="px-2 text-left"  style='font-size:15px'>
 										<i class="far fa-lightbulb" ></i> 
@@ -245,7 +372,7 @@ $path2 = 'recipes_single';
 									</span>
 									<span class=" px-2 text-right"  style='font-size:15px'>
 										<i class="far fa-user-circle"></i>
-										<?= $recipeVal['number_of_people'] ?> <?= Yii::t('app', 'people') ?> 
+										<?= $recipeVal['number_of_people'] ?> <?= Yii::t('app', 'recipe_people') ?> 
 									</span>									
 									<p class="card-text mb-2 pt-3">
 										<?= substr(Yii::t('app',$recipeVal['recipe_code_text']), 0,115).'[..]' ?>
@@ -253,7 +380,7 @@ $path2 = 'recipes_single';
 								
 									<p class="pt-3" style='font-size:15px'>										
 										<a class="read-more text-color-primary font-weight-semibold text-2" href="<?= Url::toRoute(['site/recipe-single', 'id' => $recipeVal['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
-											<i class="fas fa-angle-right position-relative top-1 ms-1"></i> <?= Yii::t('app', 'read_more') ?>
+											<i class="fas fa-angle-right position-relative top-1 ms-1"></i> <?= Yii::t('app', 'recipe_read_more') ?>
 										</a>										
 									</p>								
 								</div>

@@ -81,7 +81,7 @@ $path2 = 'contacts';
                     </div>    
                 </div>    
 
-                <?= $form->field($model, 'message')->textarea(['rows' => 6])->label(Yii::t('app', "contacts_label__message").':')?>
+                <?= $form->field($model, 'message')->textarea(['rows' => 6])->label(Yii::t('app', "contacts_label_message").':')?>
 
                 <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', "contacts_label_send_message"), ['class' => 'btn btn-primary btn-modern']) ?>

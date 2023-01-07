@@ -71,7 +71,7 @@ class Blogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'title', 'tags', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de'], 'required'],
+            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'title', 'tags', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de'], 'required'],
             [['text'], 'string'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],

@@ -22,31 +22,31 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 /* @var $modelsAddress app\modules\yii2extensions\models\Address */
 
 $js = '
-jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
-    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+jQuery(".dynamicform_wrapper_steps").on("afterInsert", function(e, item) { 
+    jQuery(".dynamicform_wrapper_steps .panel-title-steps").each(function(index) {      
         jQuery(this).html("Remove: " + (index + 1))
     });
 });
 
-jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
-    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+jQuery(".dynamicform_wrapper_steps").on("afterDelete", function(e) {
+    jQuery(".dynamicform_wrapper_steps .panel-title-steps").each(function(index) {
         jQuery(this).html("Remove: " + (index + 1))
     });
 });
+
 
 jQuery(".dynamicform_wrapper_ingredients").on("afterInsert", function(e, item) {
-    jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {
+    jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {       
         jQuery(this).html("Remove: " + (index + 1))
     });
 });
 
 jQuery(".dynamicform_wrapper_ingredients").on("afterDelete", function(e) {
-    jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {
+   jQuery(".dynamicform_wrapper_ingredients .panel-title-ingredients").each(function(index) {     
         jQuery(this).html("Remove: " + (index + 1))
     });
 });
 ';
-
 
 
 $this->registerJs($js);
