@@ -150,18 +150,27 @@ class SiteController extends Controller
         foreach($blogList as $key => $values){
             if($values['id'] ==  $request->get('id')){
                 $blog = $values;
+                break;
             }
-        }     
+        }
+
+        if ($request->isPost && $modelComment->load($request->post())  &&  $modelComment->validate() &&  $modelComment->save()) {
+            
+            $columns = GeneratorJson::getTableColumns('comments');         
+            GeneratorJson::updateComments('comments',  $columns);  
+
+            $this->refresh();        
+        }
        
 
         if(empty( $blog)){
-            //return Yii::$app->response->redirect(Url::to(['site/blog'], true));
+            return Yii::$app->response->redirect(Url::to(['site/blog'], true));
         }     
 
         return $this->render('blogs/blog-single', [
             'blog' => $blog,
-            'modelComment' => $modelComment
-         
+            'modelComment' => $modelComment,
+            'blog_id' => $request->get('id')         
         ]);
     }
 

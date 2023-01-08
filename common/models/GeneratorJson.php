@@ -283,6 +283,30 @@ class GeneratorJson extends \yii\db\ActiveRecord
         GeneratorJson::saveJson($blogArr, $table);
     }
 
+    public static function updateComments($table, $columns){
+        
+        $blogQuery = new Query; 
+      
+        $blogQuery = new Query; 
+
+        $blogArr = $blogQuery->select(
+            $columns
+        )
+        ->from([$table])    
+        ->orderBy([
+            'id' => SORT_ASC          
+          ])->all();
+
+
+        $arrResult = [];
+
+        foreach($blogArr as $comments){
+            $arrResult[$comments['page']][] = $comments;
+        }
+       
+        GeneratorJson::saveJson($arrResult, $table);
+    }
+
     public static function updatePricingSpecs($table, $columns){
         
         $blogQuery = new Query; 

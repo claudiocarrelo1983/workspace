@@ -9,14 +9,19 @@ use common\models\GeneratorJson;
 $model = new GeneratorJson(); 
 $comments = $model->getLastFileUploaded('comments');
 
+$comments = (isset($comments['blog_' . $blog_id]) ? $comments['blog_' . $blog_id] : []);
+
+$numberComments = 1;
+
 ?>
 
 <div id="comments" class="post-block mt-5 post-comments">
-    <h4 class="mb-3">Comments (<?= count($comments)?>)</h4>
+    <h4 class="mb-3">Comments (<?= count($comments) ?>)</h4>
         <ul class="comments">
             <li>
                 <?php foreach ($comments as $key => $details): ?>    
-                    <?php                       
+                    <?php
+                        $numberComments++;                     
                          if(empty($details['parent_id'])){                                                          
                     ?>                   
                     <div class="comment">
@@ -33,15 +38,17 @@ $comments = $model->getLastFileUploaded('comments');
                                     <?php
                                         Modal::begin([
                                             'title' => 'Leave a comment',
-                                            'toggleButton' => ['label' => '<span class="float-end "><span><i class="fas fa-reply "></i> Reply  </span></span>','class' => 'btn btn-default'],
+                                            'toggleButton' => ['label' => '<span class="float-end "><span><i class="fas fa-reply "></i> Reply  </span></span>','class' => 'btn btn-default-outline text-primary'],
                                         ]);
 
                                         $form = ActiveForm::begin();
-
-                                        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> ($details['comment_id'])])->label(false); 
-                                        echo $form->field($modelComment, 'comment_id')->textInput();
-                                        echo $form->field($modelComment, 'full_name')->textarea();
-
+                                        echo  $form->field($modelComment,'page')->hiddenInput(['value'=> 'blog_'.$blog_id])->label(false);  
+                                        echo  $form->field($modelComment,'comment_id')->hiddenInput(['value'=> ''])->label(false);                                      
+                                        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> $details['comment_id']])->label(false); 
+                                        echo $form->field($modelComment, 'full_name')->textInput();
+                                        echo $form->field($modelComment, 'comment')->textarea();
+                                        echo  $form->field($modelComment,'validation')->hiddenInput(['value'=> '0'])->label(false);
+                                      
                                         echo '
                                             <div class="modal-footer">'.
                                                 Html::submitButton('Save', ['class' => 'btn btn-success'])
@@ -135,9 +142,12 @@ $comments = $model->getLastFileUploaded('comments');
 
         $form = ActiveForm::begin();
 
-        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> ($details['parent_id'])])->label(false); 
-        echo $form->field($modelComment, 'comment_id')->textInput();
-        echo $form->field($modelComment, 'full_name')->textarea();
+        echo  $form->field($modelComment,'page')->hiddenInput(['value'=> 'blog_'.$blog_id])->label(false); 
+        echo  $form->field($modelComment,'comment_id')->hiddenInput(['value'=> 'comment_'.$numberComments++])->label(false); 
+        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> ''])->label(false);      
+        echo $form->field($modelComment, 'full_name')->textInput();
+        echo $form->field($modelComment, 'comment')->textarea();
+        echo  $form->field($modelComment,'validation')->hiddenInput(['value'=> '0'])->label(false); 
 
         echo '</div>
             <div class="modal-footer">'.

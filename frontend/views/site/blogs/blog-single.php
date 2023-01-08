@@ -145,7 +145,7 @@ $path2 = 'all_pricing';
 
 									</div>
 
-									<?= $this->render('blog-comments', ['modelComment' => $modelComment]) ?>
+									<?= $this->render('blog-comments', ['modelComment' => $modelComment, 'blog_id' => $blog_id]) ?>
 							</div>
 						</article>
 					</div>

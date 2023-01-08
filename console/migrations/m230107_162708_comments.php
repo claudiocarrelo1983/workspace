@@ -36,7 +36,7 @@ class m230107_162708_comments extends Migration
         $this->createTable('{{%comments}}', [
             'id' => $this->primaryKey(),
             'page' => $this->string()->notNull(),
-            'comment_id' => $this->string()->notNull(),
+            'comment_id' => $this->string(),
             'parent_id' => $this->string(),
             'full_name' => $this->string()->notNull(),
             'email' => $this->string(),
