@@ -42,7 +42,7 @@ $path2 = 'contacts';
                                 <b><?= Yii::t('app', "contacts_block_title_1_2") ?></b>
                                 <b><?= Yii::t('app', "contacts_block_title_1_3") ?></b>
                             </span>
-                            <span><?= Yii::t('app', "contacts_block_title_2") ?></span>
+                            <span><?= Yii::t('app', "contacts_block_subtitle_1") ?></span>
                         </h1>   
                     </div>
                     <div class="overflow-hidden mb-3">

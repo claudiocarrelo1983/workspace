@@ -24,14 +24,12 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
 
     $i =  1;
     
-    foreach ($blog as $key => $categories): ?>   
-        
-
+    foreach ($blog as $key => $categories): ?>         
 
     <?php if($i == 1): ?>
 
     <div class="col-lg-7 mb-4 pb-2">
-        <a href="<?= Url::toRoute(['site/blog-single', 'id' => $key]); ?>">
+        <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
             <article class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
                 <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
                     <img src="<?= $categories['image'] ?>" class="img-fluid" alt="<?= $categories['alt'] ?>">
@@ -54,7 +52,7 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
         <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
             <div class="row align-items-center pb-1">
                 <div class="col-sm-5">
-                    <a href="<?= Url::toRoute(['site/blog-single', 'id' => $key]); ?>">
+                    <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
                         <img src="<?= $categories['image'] ?>" class="img-fluid border-radius-0" alt="Simple Ways to Have a Pretty Face">
                     </a>
                 </div>
@@ -111,8 +109,9 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
 
     <?= (($i == 4) ? '</div>': '') ?>
     <?php endif; ?>            
-
+                 
     <?php 
     $i++;
     endforeach; 
     ?>
+</div>

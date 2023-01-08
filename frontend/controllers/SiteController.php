@@ -287,6 +287,14 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionCalculators()
+    {
+
+        $this->layout = 'public';
+
+        return $this->render('@frontend/views/site/calculator/index');
+    }
+
     public function actionFaqs()
     {
 

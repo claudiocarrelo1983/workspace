@@ -7,17 +7,8 @@ use common\models\GeneratorJson;
 $model = new GeneratorJson(); 
 $recipesArr = $model->getLastFileUploaded('recipes');
 
-/*
-$arr = [];
-foreach ($recipesArr as $recipeValues) {
-	$arr[] = $recipeValues['recipe_title'];
-}
+$tagsCategory = $model->getLastFileUploaded('recipes_category');  
 
-print "<pre>";
-print_r($arr);
-die();
-
-*/
 $this->title = 'Recipes';
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -101,10 +92,37 @@ $path2 = 'recipes';
 									</span>
 								
 									<span style='font-size:15px'>
-										<i class="far fa-folder"></i>
-											<a href="<?= Url::toRoute(['site/recipes-single', 'category' => $recipeValues['recipe_cat_code']]); ?>">
-												<?= Yii::t('app', $recipeValues['category']) ?>
-											</a>								
+										<i class="far fa-folder"></i>										
+										<?php 	
+											
+											$arrTags = explode(',',  $recipeValues['recipe_cat_code']); 
+											$tagList = array();
+
+											foreach($arrTags as $tag){	
+												foreach($tagsCategory as $category){
+													if($tag == $category['recipe_cat_code']){
+														$tagList[] = $category;
+													}
+												}			
+											}	
+
+											$count = count($tagList);
+											$i = 1;									
+
+											foreach ($tagList as  $key => $tags): 
+												if(!empty($tags)){																	
+													$comma = (($i == $count) ? '' : ',');		
+													?>					
+														<?php $urlParamsVal = ['site/recipes', 																		
+															'tag' => $tags['recipe_cat_code'],													
+														];?>
+																					
+														<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+													<?php 
+													$i++;
+												}
+											endforeach; 
+										?> 							
 									</span>
 									
 									<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">

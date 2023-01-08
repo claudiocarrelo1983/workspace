@@ -94,16 +94,13 @@ $path2 = 'recipes_single';
 											}	
 
 											$count = count($tagList);
-											$i = 1;
-
-									
+											$i = 1;									
 
 											foreach ($tagList as  $key => $tags): 
 												if(!empty($tags)){																	
 													$comma = (($i == $count) ? '' : ',');		
 													?>					
-														<?php $urlParamsVal = ['site/recipes', 									
-															'username' => '#',																
+														<?php $urlParamsVal = ['site/recipes', 																
 															'tag' => $tags['recipe_cat_code'],													
 														];?>
 																					
