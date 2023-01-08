@@ -1,152 +1,152 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Json;
-use yii\helpers\Url;
-use yii\db\Query;
-use yii\db\Expression;
+use yii\bootstrap4\Modal;
+use yii\bootstrap4\ActiveForm;
 
 use common\models\GeneratorJson;
 
 $model = new GeneratorJson(); 
 $comments = $model->getLastFileUploaded('comments');
 
-print "<pre>";
-print_R($comments);
-die();
-
-
-
 ?>
-    <?php foreach ($comments as $key => $categories): ?>   
-    <?php endforeach; ?>   
-
 
 <div id="comments" class="post-block mt-5 post-comments">
-    <h4 class="mb-3">Comments (3)</h4>
+    <h4 class="mb-3">Comments (<?= count($comments)?>)</h4>
         <ul class="comments">
             <li>
-                <div class="comment">
-                    <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                        <img class="avatar" alt="" src="img/avatars/avatar-2.jpg">
-                    </div>
-                    <div class="comment-block">
-                        <div class="comment-arrow"></div>
-                        <span class="comment-by">
-                            <strong>Name</strong>
-                            <span class="float-end">
-                                <span> <a href="#"><i class="fas fa-reply"></i> Reply</a></span>
-                            </span>
-                        </span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui.</p>
-                        <span class="date float-end">January 12, 2021 at 1:38 pm</span>
-                    </div>
-                </div>
+                <?php foreach ($comments as $key => $details): ?>    
+                    <?php                       
+                         if(empty($details['parent_id'])){                                                          
+                    ?>                   
+                    <div class="comment">
+                        <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                            <img class="avatar" alt="" src="images/blog/avatar.png">
+                        </div>
+                        <div class="comment-block">
+                            <div class="comment-arrow"></div>
+                            <span class="comment-by">
+                                <strong>
+                                    <?= $details['full_name'] ?>
+                                </strong>
+                                <span class="float-end">
+                                    <?php
+                                        Modal::begin([
+                                            'title' => 'Leave a comment',
+                                            'toggleButton' => ['label' => '<span class="float-end "><span><i class="fas fa-reply "></i> Reply  </span></span>','class' => 'btn btn-default'],
+                                        ]);
 
-                <ul class="comments reply">
-                    <li>
-                        <div class="comment">
-                            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                                <img class="avatar" alt="" src="img/avatars/avatar-3.jpg">
-                            </div>
-                            <div class="comment-block">
-                                <div class="comment-arrow"></div>
-                                <span class="comment-by">
-                                    <strong>John Doe</strong>
-                                    <span class="float-end">
-                                        <span> <a href="#"><i class="fas fa-reply"></i> Reply</a></span>
-                                    </span>
+                                        $form = ActiveForm::begin();
+
+                                        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> ($details['comment_id'])])->label(false); 
+                                        echo $form->field($modelComment, 'comment_id')->textInput();
+                                        echo $form->field($modelComment, 'full_name')->textarea();
+
+                                        echo '
+                                            <div class="modal-footer">'.
+                                                Html::submitButton('Save', ['class' => 'btn btn-success'])
+                                            .'</div>';
+                                            
+                                        ActiveForm::end();
+                                        Modal::end();
+                                    ?>   
                                 </span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                <span class="date float-end">January 12, 2021 at 1:38 pm</span>
-                            </div>
+                            </span>
+                            <p>
+                                <?= $details['comment'] ?>
+                            </p>
+                            <span class="date float-end">
+                                <?php
+                                    $timestamp = strtotime($details['created_date']);
+                                ?>
+                                 <span class="day">
+									<?= date('d', $timestamp) ?>
+								</span>
+								<span class="month">
+									<?= date('M', $timestamp) ?>
+									<?= date('Y', $timestamp) ?>
+								</span>
+                            </span>
                         </div>
-                    </li>
-                    <li>
-                        <div class="comment">
-                            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                                <img class="avatar" alt="" src="img/avatars/avatar-4.jpg">
-                            </div>
-                            <div class="comment-block">
-                                <div class="comment-arrow"></div>
-                                <span class="comment-by">
-                                    <strong>John Doe</strong>
-                                    <span class="float-end">
-                                        <span> <a href="#"><i class="fas fa-reply"></i> Reply</a></span>
-                                    </span>
-                                </span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                <span class="date float-end">January 12, 2021 at 1:38 pm</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                    </div>            
+                    <ul class="comments reply">
+                      
+                            <?php 
+                                foreach ($comments as $key => $details2): 
+                            ?>  
+                            <?php                       
+                                if($details['comment_id'] == $details2['parent_id']){                                                          
+                             ?>                          
+                                <li>
+                                    <div class="comment">
+                                        <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                            <img class="avatar" alt="" src="images/blog/avatar.png">
+                                        </div>
+                                        <div class="comment-block">
+                                            <div class="comment-arrow"></div>
+                                            <span class="comment-by">
+                                                <strong>
+                                                    <?= $details2['full_name'] ?>
+                                                </strong>                                          
+                                            </span>
+                                            <p>
+                                                <?= $details2['comment'] ?>
+                                            </p>
+                                            <span class="date float-end">
+                                                <?php
+                                                    $timestamp = strtotime($details2['created_date']);
+                                                ?>
+                                                <span class="day">
+                                                    <?= date('d', $timestamp) ?>
+                                                </span>
+                                                <span class="month">
+                                                    <?= date('M', $timestamp) ?>
+                                                    <?= date('Y', $timestamp) ?>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            <?php                                 
+                                
+                            }
+                            ?>    
+                            <?php endforeach; ?>               
+                    </ul>
+                    <?php                                 
+                        
+                        }
+                    ?> 
+            
+                <?php endforeach; ?> 
+                
             </li>
-        <li>
-            <div class="comment">
-                <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                    <img class="avatar" alt="" src="img/avatars/avatar.jpg">
-                </div>
-                <div class="comment-block">
-                    <div class="comment-arrow"></div>
-                    <span class="comment-by">
-                        <strong>John Doe</strong>
-                        <span class="float-end">
-                            <span> <a href="#"><i class="fas fa-reply"></i> Reply</a></span>
-                        </span>
-                    </span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <span class="date float-end">January 12, 2021 at 1:38 pm</span>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="comment">
-                <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                    <img class="avatar" alt="" src="img/avatars/avatar.jpg">
-                </div>
-                <div class="comment-block">
-                    <div class="comment-arrow"></div>
-                    <span class="comment-by">
-                        <strong>John Doe</strong>
-                        <span class="float-end">
-                            <span> <a href="#"><i class="fas fa-reply"></i> Reply</a></span>
-                        </span>
-                    </span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <span class="date float-end">January 12, 2021 at 1:38 pm</span>
-                </div>
-            </div>
-        </li>
+
     </ul>
 </div>
 
 <div class="post-block mt-5 post-leave-comment">
-    <h4 class="mb-3">Leave a comment</h4>
+    <?php
+        Modal::begin([
+            'title' => 'Leave a comment',
+            'toggleButton' => ['label' => 'Leave Comment','class' => 'btn btn-primary w-100 mb-2'],
+        ]);
 
-    <form class="contact-form p-4 rounded bg-color-grey" action="php/contact-form.php" method="POST">			
-        <div class="p-2">
-            <div class="row">
-                <div class="form-group col-lg-6">
-                    <label class="form-label required font-weight-bold text-dark">Full Name</label>
-                    <input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" required>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label class="form-label required font-weight-bold text-dark">Email Address</label>
-                    <input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <label class="form-label required font-weight-bold text-dark">Comment</label>
-                    <textarea maxlength="5000" data-msg-required="Please enter your message." rows="8" class="form-control" name="message" required></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col mb-0">
-                    <input type="submit" value="Post Comment" class="btn btn-primary btn-modern" data-loading-text="Loading...">
-                </div>
-            </div>
-        </div>
-    </form>
+        $form = ActiveForm::begin();
+
+        echo  $form->field($modelComment,'parent_id')->hiddenInput(['value'=> ($details['parent_id'])])->label(false); 
+        echo $form->field($modelComment, 'comment_id')->textInput();
+        echo $form->field($modelComment, 'full_name')->textarea();
+
+        echo '</div>
+            <div class="modal-footer">'.
+                Html::submitButton('Save', ['class' => 'btn btn-success'])
+            .'</div>';
+            
+        ActiveForm::end();
+        Modal::end();
+    ?>                     
 </div>
+</div>
+

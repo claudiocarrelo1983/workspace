@@ -118,6 +118,11 @@ use dosamigos\tinymce\TinyMce;
                                 'decil' => 'Deciliters',
                                 'spoon' => 'Spoon',
                                 'tea_spoon' => 'Tea Spoon',
+                                'cup' => 'Cup',
+                                '1_2' => '1/2',
+                                '1_3' => '1/3',
+                                '1_4' => '1/4',
+                                '3_4' => '3/4',                         
                                 'q_b' => 'q.b.',
                                 'unid' => 'Unid.'                            
                             ]); 

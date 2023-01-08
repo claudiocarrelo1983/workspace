@@ -20,6 +20,7 @@ use frontend\models\SignupForm;
 use yii\helpers\Json;
 use common\models\GeneratorJson;
 use sammaye\mailchimp\Mailchimp;
+use common\models\Comments;
 
 
 /**
@@ -138,8 +139,9 @@ class SiteController extends Controller
     public function actionBlogSingle()
     {
         $this->layout = 'public';    
-        $request = Yii::$app->request; 
+        $request = Yii::$app->request;
 
+        $modelComment = new Comments();
         $model = new GeneratorJson(); 
         $blogList = $model->getLastFileUploaded('blogs');  
 
@@ -158,6 +160,7 @@ class SiteController extends Controller
 
         return $this->render('blogs/blog-single', [
             'blog' => $blog,
+            'modelComment' => $modelComment
          
         ]);
     }

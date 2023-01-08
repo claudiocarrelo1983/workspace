@@ -350,7 +350,7 @@ class RecipesLoad extends \yii\db\ActiveRecord
                 'sugar' => floatval($ingredient->sugar),
                 'carbs' => floatval($ingredient->carbs),
                 'protein' => floatval($ingredient->protein),
-                'active' => 1,
+                'active' => 0,
 
 
             ];

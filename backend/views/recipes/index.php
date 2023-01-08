@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],          
             'recipe_title',
+            'fatsecret_id',
             'recipe_code_title',      
             'recipe_text:ntext',
             'recipe_cat_code',

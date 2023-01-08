@@ -2168,6 +2168,8 @@ html .btn-with-arrow-solid.btn-light span {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
 	color: #0088CC;
+    padding: 8px;
+    border: 1px solid;
 }
 
 .pagination > .active > a,

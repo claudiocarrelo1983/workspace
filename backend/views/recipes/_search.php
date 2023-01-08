@@ -16,14 +16,13 @@ use yii\helpers\Url;
         'method' => 'get',
     ]); ?>
 
-    <div class="row py-4">    
- 
+    <div class="row py-4">   
+        <div class="col-3">
+        <?= $form->field($model, 'fatsecret_id') ?>
+        </div>   
         <div class="col-3">
         <?= $form->field($model, 'recipe_title') ?>
-        </div>     
-        <div class="col-3">
-        <?php  echo $form->field($model, 'recipe_cat_code') ?>
-        </div>
+        </div>    
         <div class="col-3">
             <?php  echo $form->field($model, 'recipe_cat_code') ?>
         </div>
