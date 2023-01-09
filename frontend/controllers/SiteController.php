@@ -131,7 +131,69 @@ class SiteController extends Controller
     {
         $this->layout = 'public';
 
-        return $this->render('recipes/recipes');
+        $request = Yii::$app->request; 
+        $pg = $request->get('pg');
+        $tag = $request->get('tag');
+        $username = $request->get('username');      
+
+        $urlParams = [
+            'pg' => '',
+            'tag' => '',
+            'username' => ''
+        ];
+
+        $numberPerPage = 7;
+
+        $model = new GeneratorJson(); 
+        $recipes = $model->getLastFileUploaded('recipes');   
+
+        if(!empty($pg)){         
+            $urlParams = array_merge($urlParams, array('pg' => $pg));
+        } 
+
+        if(!empty($tag)){
+            $urlParams = array_merge($urlParams, ['tag' => $tag]);
+        }
+
+        if(!empty($username)){
+            $urlParams = array_merge($urlParams, ['username' => $username]);
+        }
+
+        
+        $recipesFilter = array();
+
+        foreach($recipes as $recipe){
+
+            if($tag != '#'){
+                if(empty($tag)){
+                    $recipesFilter[] = $recipe;			
+                }else{
+
+                    $explode = explode(',', $recipe['recipe_cat_code']);
+
+                    $break = false;
+
+                    foreach($explode as $tagValue){
+                        if(trim($tagValue) == trim($tag)){   
+                            $break = true;
+                            break;
+                        }	
+                    }       
+                    
+                    if($break == true){
+                        $recipesFilter[] = $recipe;
+                    }
+                }	
+            }	
+        }
+
+
+        return $this->render('recipes/recipes',[   
+            'numberPerPage' => $numberPerPage,
+            'recipes' => $recipes,        
+            'pg' => $pg,
+            'urlParams' => $urlParams
+        ]);
     }
 
 

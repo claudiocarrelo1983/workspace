@@ -6,6 +6,8 @@ use common\models\GeneratorJson;
 
 $model = new GeneratorJson(); 
 $tagsCategory = $model->getLastFileUploaded('blogs_category');  
+ 
+$comments = $model->getLastFileUploaded('comments');
 
 $this->title = 'Blog';
 
@@ -172,8 +174,8 @@ $path2 = 'blog';
 															'id' => $categories['id']												
 															];
 											?>
-																							
-											<a href="<?= Url::toRoute($urlParamsVal); ?> ">12 <?= Yii::t('app', 'Comments') ?></a><?= $comma  ?>								
+											<?php $comments = (isset($comments['blog_' . $categories['id']]) ? $comments['blog_' .$categories['id']] : []); ?>											
+											<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= count($comments) ?> <?= Yii::t('app', 'Comments') ?></a><?= $comma  ?>								
 										</span>
 										<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">
 											<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
@@ -185,6 +187,12 @@ $path2 = 'blog';
 							</div>
 						</article>      
 					<?php endforeach; ?>
+					
+					<?php if(empty($arrBlog)){ ?>
+						<div class="text-5 text-center">
+							<?= Yii::t('app', 'blog_nothing_found') ?>
+						</div>
+					<?php }	?>
 				<?php if($numberOfDivisionsCeil > 1){ ?>
 					<ul class="pagination float-end">
 						<li class="page-item">		

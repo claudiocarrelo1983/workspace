@@ -8,7 +8,10 @@ use common\models\GeneratorJson;
 
 $model = new GeneratorJson(); 
 $tagsCategory = $model->getLastFileUploaded('blogs_category');  
+ 
+$comments = $model->getLastFileUploaded('comments');
 
+$comments = (isset($comments['blog_' . $blog_id]) ? $comments['blog_' . $blog_id] : []);
 
 $this->title = 'Blog';
 
@@ -131,7 +134,7 @@ $path2 = 'all_pricing';
 										?> 
 									</span> 
 
-									<span><i class="far fa-comments"></i> <a href="#"><?= ($numberComments < 0)? $numberComments.'Comments' : '' ?> HHHHHH</a></span>
+									<?= (count($comments) > 0)? '<span><i class="far fa-comments"></i> <a href="#">'.count($comments).' Comments</a></span>' : '' ?> 
 								</div>
 
 								<?= $blog['text'] ?>
@@ -145,7 +148,7 @@ $path2 = 'all_pricing';
 
 									</div>
 
-									<?= $this->render('blog-comments', ['modelComment' => $modelComment, 'blog_id' => $blog_id]) ?>
+									<?= $this->render('blog-comments', ['modelComment' => $modelComment, 'blog_id' => $blog_id, 'comments' => $comments]) ?>
 							</div>
 						</article>
 					</div>

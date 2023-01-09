@@ -11,7 +11,7 @@ $blogsArr = array();
 foreach(array_reverse($blogs) as $key => $blog){
     $blogsArr[] =  $blog;
 
-    if($key >= 10){
+    if($key >= 4){
         break;
     }
 }

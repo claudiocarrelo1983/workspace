@@ -78,11 +78,11 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
                     
                     <?php 		
                         $count = count($tagList);
-                        $i = 1;
+                        $inc = 1;
                      
                         foreach ($tagList as  $key => $tags):                             
                             if(!empty($tags)){																	
-                                $comma = (($i == $count) ? '' : ',');		
+                                $comma = (($inc == $count) ? '' : ',');		
                                 ?>					
                                     <?php $urlParamsVal = ['site/blog', 									
                                         'username' => '#',																
@@ -90,10 +90,10 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
                                     ];?>
                                                                 
                                     <div class="thumb-info-type text-light text-uppercase d-inline-block bg-color-dark px-2 m-0 mb-1 float-none">						
-                                        <a href="<?= Url::toRoute(['site/blog-category', 'category' => $tags['tag']]); ?>" class="text-decoration-none text-color-light -5"><?= $tags['description'] ?></a> 	
+                                        <a href="<?= Url::toRoute(['site/blog', 'category' => $tags['tag']]); ?>" class="text-decoration-none text-color-light -5"><?= $tags['description'] ?></a> 	
                                     </div>								
                                 <?php 
-                                $i++;
+                                $inc++;
                             }
                         endforeach; 
                

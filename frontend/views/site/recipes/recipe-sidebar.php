@@ -45,7 +45,7 @@ $query = new Query;
                     $url = '';
 
                     $urlParamsVal = ['site/recipes', 
-                                            'username' => '#',																
+                                            'pg' => $urlParams['pg'],											
                                             'tag' => $categories['recipe_cat_code'],													
                                         ];
 
@@ -61,9 +61,8 @@ $query = new Query;
                 if($count > 0){
                     foreach ($categories['submenu'] as  $subcategory): 
                 ?>
-                	<?php $urlParamsVal = ['site/blog', 
-                                            'username' => '#',																
-                                           // 'pg' => $urlParams['pg'],
+                	<?php $urlParamsVal = ['site/blog',                                            															
+                                            'pg' => $urlParams['pg'],
                                             'tag' => $subcategory['recipe_cat_code'],													
                                         ];?>
 

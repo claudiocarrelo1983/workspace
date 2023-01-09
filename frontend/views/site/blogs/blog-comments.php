@@ -4,12 +4,9 @@ use yii\helpers\Html;
 use yii\bootstrap4\Modal;
 use yii\bootstrap4\ActiveForm;
 
-use common\models\GeneratorJson;
 
-$model = new GeneratorJson(); 
-$comments = $model->getLastFileUploaded('comments');
 
-$comments = (isset($comments['blog_' . $blog_id]) ? $comments['blog_' . $blog_id] : []);
+
 
 $numberComments = 1;
 

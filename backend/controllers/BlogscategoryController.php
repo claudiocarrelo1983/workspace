@@ -109,7 +109,7 @@ class BlogscategoryController extends Controller
         $model = $this->findModel($id);
 
         $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
-        $code = 'pricing_specs_'.$count->id;
+        $code = 'blog_category_'.$count->id;
 
         $model->created_date = date('Y-m-d H:i:s');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

@@ -64,7 +64,7 @@ $query = new Query;
                 ?>
                 	<?php $urlParamsVal = ['site/blog', 
                                             'username' => '#',																
-                                            'pg' => $urlParams['pg'],
+                                            'pg' => (isset($urlParams['pg']) ? $urlParams['pg'] : ''),
                                             'tag' => $subcategory['tag'],													
                                         ];?>
 

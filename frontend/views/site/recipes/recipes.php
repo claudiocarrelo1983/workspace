@@ -4,8 +4,48 @@ use yii\helpers\Url;
 use common\models\recipes;
 use common\models\GeneratorJson;
 
+
 $model = new GeneratorJson(); 
-$recipesArr = $model->getLastFileUploaded('recipes');
+
+
+//total blogs
+$numberPosts = count($recipes);
+
+
+//number of divisions
+$numberOfDivisionsCeil = ceil(bcdiv($numberPosts, $numberPerPage, 2));
+
+//last page
+$numberOfDivisions = bcdiv($numberPosts, $numberPerPage);
+$numberOfDivisions = bcmul($numberPerPage, $numberOfDivisions);
+
+//number of last
+$remainBlogs = bcsub($numberPosts, $numberOfDivisions);
+
+
+$recipesArr = array();
+$index = 1;
+$numberPage = $numberPerPage;
+
+$blogFilter = array();
+
+foreach($recipes as $key => $blog){	
+	
+	if($numberPage == $key){	
+		$index ++;
+		$numberPage = bcadd($numberPerPage, $key);
+	}
+	$recipesArr[$index][] = $blog;
+}
+
+
+if(0 < $pg){	
+	$arrBlogCeil =  (isset($arrBlog[$numberOfDivisionsCeil]) ? $arrBlog[$numberOfDivisionsCeil] : array());
+	$recipesArr = (isset($recipesArr[$pg]) ? $recipesArr[$pg] : $arrBlogCeil);
+}else{
+	$recipesArr = (isset($recipesArr[1]) ? $recipesArr['1'] : $arrBlog);
+}
+
 
 $tagsCategory = $model->getLastFileUploaded('recipes_category');  
 
@@ -49,7 +89,7 @@ $path2 = 'recipes';
 <div class="container py-4">
 	<div class="row">
 		<div class="col-lg-3 order-lg-2">
-			<?= $this->render('recipe-sidebar', ['urlParams' => '#', '']); ?>				
+			<?= $this->render('recipe-sidebar', ['urlParams' => $urlParams]); ?>				
 		</div>
 		<div class="col-lg-9 order-lg-1">
 			<div class="blog-posts">			
@@ -113,7 +153,8 @@ $path2 = 'recipes';
 												if(!empty($tags)){																	
 													$comma = (($i == $count) ? '' : ',');		
 													?>					
-														<?php $urlParamsVal = ['site/recipes', 																		
+														<?php $urlParamsVal = ['site/recipes', 	
+															'pg' => 1,																		
 															'tag' => $tags['recipe_cat_code'],													
 														];?>
 																					
@@ -136,15 +177,63 @@ $path2 = 'recipes';
 					</article>
 				<?php } ?>
 
-
-				<ul class="pagination float-end">
-					<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-				</ul>
-
+				<?php if($numberOfDivisionsCeil > 1){ ?>
+					<ul class="pagination float-end">
+						<li class="page-item">		
+							<?php $urlParamsVal = ['site/blog', 
+								'username' => $urlParams['username'],																	
+								'pg' =>  1,
+								'tag' =>  $urlParams['tag']														
+							];?>			
+							<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+								<i class="fas fa-angle-left"></i>
+							</a>							
+						</li>							
+						<?php
+							$first = bcsub($pg, 3);
+							$first = (($first >= '1') ? $first : 1);
+							$end = ($numberOfDivisionsCeil <= (bcadd($pg, 3)) ? $numberOfDivisionsCeil : bcadd($pg, 3));
+							$inc = 1;						
+						?>
+						<?php 					
+							for($x = $first; $x <= $end; $x++){ ?>  							
+								<?php if ($x == $pg): ?>
+									<li class="page-item active">	
+										<?php $urlParamsVal = ['site/recipes', 																										
+											'pg' =>  $x,
+											'tag' =>  $urlParams['tag']														
+										];?>	
+										<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+											<?= $x ?>
+										</a>	
+									</li>
+								<?php else: ?>
+									<li class="page-item <?= (($inc == '1' && $pg == '') ? 'active' : '') ?>">
+										<?php $urlParamsVal = ['site/recipes', 																										
+											'pg' =>  $x,
+											'tag' =>  $urlParams['tag']														
+										];?>	
+										<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+											<?= $x ?>
+										</a>
+									</li>
+								<?php endif; ?>										
+							<?php 
+							$inc++;		
+						}
+						?>
+						<li class="page-item">
+								<?php $urlParamsVal = ['site/recipes', 																									
+									'pg' =>  $numberOfDivisionsCeil,
+									'tag' =>  $urlParams['tag']														
+								];?>	
+							<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+								<i class="fas fa-angle-right"></i>
+							</a>						
+						</li>
+					</ul>		
+					<?php } ?>	
+			
 			</div>
 		</div>
 	</div>
