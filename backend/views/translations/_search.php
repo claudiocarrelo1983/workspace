@@ -27,6 +27,24 @@ foreach($countries as $value){
     $countryUsers[$value['country_code']] = $value['full_title'];
 }
 
+
+$distinctPagesArr = $tagQuery->select(['page'])
+                        ->from('translations')
+                        ->distinct()
+                        ->orderBy('page')
+                        ->all();
+
+$PageArr = [
+    '' => 'Choose Page'
+];
+
+foreach($distinctPagesArr as $value2){
+    if(!empty($value2['page'])){
+        $PageArr[$value2['page']] = $value2['page'];
+    }
+}
+
+
 ?>
 
 <div class="translations-search">
@@ -48,7 +66,10 @@ foreach($countries as $value){
             ?>  
         </div>
         <div class="col-2">
-            <?= $form->field($model, 'page') ?>
+             <?= $form->field($model, 'page')->dropDownList(                
+                $PageArr,
+                array('required','separator' => "</br>" ))->label('Select Page');
+            ?>   
         </div>  
         <div class="col-2">
             <?= $form->field($model, 'page_code') ?>

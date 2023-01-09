@@ -27,12 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Yii::t('app', 'menu_'.strtolower($path2)) ?>
                 </h1>
                 <p class="font-weight-light opacity-7 pb-2 mb-4"></p>
-                <a href="<?= Url::toRoute('site/mobile-app') ?>" data-hash="" data-hash-offset="0" data-hash-offset-lg="100" class="btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3">
-                    <?= Yii::t('app', 'breadcrumb_get_started_now') ?>	
+                <a href="<?= Url::toRoute('site/recipes') ?>" data-hash="" data-hash-offset="0" data-hash-offset-lg="100" class="btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3">
+                    <?php 
+                    // Yii::t('app', 'breadcrumb_get_started_now') Url::toRoute('site/mobile-app')
+                     echo Yii::t('app', 'menu_recipes');
+                     ?>	
                 </a>
-                <a href="<?= Url::toRoute('site/pricing') ?>" class="btn btn-light btn-outline btn-outline-thin btn-outline-light-opacity-2 btn-effect-5 font-weight-semi-bold px-4 btn-py-2 text-3 text-color-light text-color-hover-dark ms-2" target="_blank">
-                    <?= Yii::t('app', 'breadcrumb_pricing') ?>	
-                    <i class="fas fa-external-link-alt ms-1"></i></a>
+                <a href="<?= Url::toRoute('site/blog') ?>" class="btn btn-light btn-outline btn-outline-thin btn-outline-light-opacity-2 btn-effect-5 font-weight-semi-bold px-4 btn-py-2 text-3 text-color-light text-color-hover-dark ms-2" target="_blank">
+                    <?php 
+                    //Yii::t('app', 'breadcrumb_pricing')  Url::toRoute('site/pricing') 
+                        echo Yii::t('app', 'menu_blog') 
+                    ?>	
+                    <i class="fas fa-external-link-alt ms-1"></i>
+                </a>
             </div>
 
         </div>

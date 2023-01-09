@@ -151,14 +151,14 @@ $path2 = 'blog';
 
 													foreach ($tagList as  $key => $tags): 
 														if(!empty($tags)){																	
-															$comma = (($i == $count) ? '' : ',');		
+															$comma = (($i == $count) ? '' : ',');
 															?>					
 																<?php $urlParamsVal = ['site/blog', 									
 																	'username' => '#',																
 																	'tag' => $tags['tag'],													
 																];?>
 																							
-																<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+																<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= Yii::t('app', $tags['page_code']) ?></a><?= $comma  ?>								
 															<?php 
 															$i++;
 														}

@@ -105,7 +105,7 @@ $path2 = 'all_pricing';
 
 											foreach($arrTags as $tag){	
 												foreach($tagsCategory as $category){
-													if($tag == $category['tag']){
+													if($tag == $category['tag']){													
 														$tagList[] = $category;
 													}
 												}			

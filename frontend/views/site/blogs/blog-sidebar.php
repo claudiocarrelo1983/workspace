@@ -52,8 +52,10 @@ $query = new Query;
                         $url = 'href="'.Url::toRoute($urlParamsVal).'"';
                     }
 
+                    
+
                 ?>
-                <a class="nav-link" onclick="BlogToogle(<?= $key ?>);" <?= $url ?>><?= Yii::t('app',$categories['tag']) ?> <?= (($count == 0) ? '' :  '('.$count.')') ?></a>  
+                <a class="nav-link" onclick="BlogToogle(<?= $key ?>);" <?= $url ?>><?= Yii::t('app',$categories['page_code']) ?> <?= (($count == 0) ? '' :  '('.$count.')') ?></a>  
                 
                 <ul id="dropdown-menu<?= $key ?>" style="display:none;">
                 <?php 
@@ -66,7 +68,7 @@ $query = new Query;
                                             'tag' => $subcategory['tag'],													
                                         ];?>
 
-                    <li class="nav-item"><a class="nav-link" href="<?= Url::toRoute($urlParamsVal); ?>"><?= Yii::t('app',$categories['tag']) ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= Url::toRoute($urlParamsVal); ?>"><?= Yii::t('app',$subcategory['page_code']) ?></a></li>
                 <?php 
                     endforeach; 
                 }?>  
