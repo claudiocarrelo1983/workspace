@@ -190,8 +190,7 @@ class SiteController extends Controller
 
         return $this->render('recipes/recipes',[   
             'numberPerPage' => $numberPerPage,
-            'recipes' => $recipes,        
-            'pg' => $pg,
+            'recipes' => $recipesFilter,       
             'urlParams' => $urlParams
         ]);
     }
@@ -241,6 +240,29 @@ class SiteController extends Controller
         $this->layout = 'public';    
         $request = Yii::$app->request; 
 
+        $request = Yii::$app->request; 
+        $pg = $request->get('pg');
+        $tag = $request->get('tag');
+        $username = $request->get('username');      
+
+        $urlParams = [
+            'pg' => '',
+            'tag' => '',
+            'username' => ''
+        ];
+
+        if(!empty($pg)){         
+            $urlParams = array_merge($urlParams, array('pg' => $pg));
+        } 
+
+        if(!empty($tag)){
+            $urlParams = array_merge($urlParams, ['tag' => $tag]);
+        }
+
+        if(!empty($username)){
+            $urlParams = array_merge($urlParams, ['username' => $username]);
+        }
+
         $model = new GeneratorJson(); 
         $recipeArr = $model->getLastFileUploaded('recipes');  
 
@@ -259,6 +281,7 @@ class SiteController extends Controller
         return $this->render('recipes/recipe-single', [
             'recipe' => $recipe,
             'recipeArr' => $recipeArr,
+            'urlParams' => $urlParams
          
         ]);
     }
@@ -359,44 +382,6 @@ class SiteController extends Controller
 
     public function actionFaqs()
     {
-
-
-        $mc = new Mailchimp(['apikey' => '7a41d4e89958dc451d8c7ea666e301f9-us21']);
-      
-        require('mailchimp/Mailchimp.php');    // You may have to modify the path based on your own configuration.
-
-$api_key = "7a41d4e89958dc451d8c7ea666e301f9-us21";
-$list_id = "Add your list ID here";
-
-$Mailchimp = new Mailchimp( $api_key );
-$Mailchimp_Lists = new Mailchimp_Lists( $Mailchimp );
-
-try 
-{
-    $subscriber = $Mailchimp_Lists->subscribe(
-        $list_id,
-        array('email' => 'kellykoe@example.com'),      // Specify the e-mail address you want to add to the list.
-        array('FNAME' => 'Kelly', 'LNAME' => 'Koe'),   // Set the first name and last name for the new subscriber.
-        'text',    // Specify the e-mail message type: 'html' or 'text'
-        FALSE,     // Set double opt-in: If this is set to TRUE, the user receives a message to confirm they want to be added to the list.
-        TRUE       // Set update_existing: If this is set to TRUE, existing subscribers are updated in the list. If this is set to FALSE, trying to add an existing subscriber causes an error.
-    );
-} 
-catch (Exception $e) 
-{
-    echo "Caught exception: " . $e;
-}
-
-if ( ! empty($subscriber['leid']) )
-{
-    echo "Subscriber added successfully.";
-}
-else
-{
-    echo "Subscriber add attempt failed.";
-}
-
-
         $this->layout = 'public';
       
         $model = new GeneratorJson(); 

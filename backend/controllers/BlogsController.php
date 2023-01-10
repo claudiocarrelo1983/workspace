@@ -102,29 +102,31 @@ class BlogsController extends Controller
 
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
+            $model->image = '';
          
             if(isset($model->imageFile->name)){
 
-                $fileName = $model->imageFile->baseName. date('YmdHis');;
+                $fileName = $model->imageFile->baseName;
                 $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension; 
        
                 //if ($model->imageFile && $model->validate()) {
                 $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
                 //}  
 
-                $model->created_date = date('Y-m-d H:i:s');  
-
-                $model->tags = '';
-                if(!empty($_POST['Blogs']['tagsArr'])){
-                   
-                    $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
-                }    
+                $model->created_date = date('Y-m-d H:i:s');    
              
             }      
+
+            
+            $model->tags = '';
+            if(!empty($_POST['Blogs']['tagsArr'])){
+               
+                $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
+            }  
  
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-                $model::saveBlog('blog', $model);
+                $model::saveBlog('blogs_list', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
     
@@ -158,8 +160,10 @@ class BlogsController extends Controller
 
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
+        $model->image = '';
+
         if(isset($model->imageFile->name)){
-            $fileName = $model->imageFile->baseName. date('YmdHis');;
+            $fileName = $model->imageFile->baseName;
             $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension;                  
 
             //if ($model->imageFile && $model->validate()) {
@@ -170,7 +174,7 @@ class BlogsController extends Controller
         $model->created_date = date('Y-m-d H:i:s');     
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model::updateBlog($model);
+            $model::updateBlog('blogs_list', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

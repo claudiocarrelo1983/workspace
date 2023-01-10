@@ -100,7 +100,7 @@ class PricingSpecs extends \yii\db\ActiveRecord
     }
 
 
-    public function updatePricingSpecs($model){
+    public function updatePricingSpecs($page, $model){
 
         $connection = new Query;
 
@@ -116,12 +116,14 @@ class PricingSpecs extends \yii\db\ActiveRecord
            
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
+                page=:page,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
             )          
            
             ->bindValue(':text', $model->$text)
+            ->bindValue(':page', $page)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code)
             ->execute();         

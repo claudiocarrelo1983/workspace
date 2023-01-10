@@ -33,7 +33,7 @@ $path2 = 'recipes_single';
 	<div class="container py-4">
 		<div class="row">
 			<div class="col-lg-3 order-lg-2">
-				<?= $this->render('recipe-sidebar'); ?>
+				<?= $this->render('recipe-sidebar', ['urlParams' => $urlParams]); ?>
 			</div>
 			<div class="col-lg-9 order-lg-1">
 				<div class="blog-posts single-post">
@@ -121,7 +121,7 @@ $path2 = 'recipes_single';
 							<div class="row">
 								<div class="col-lg-6 pt-5">
 									<h4>                    
-										<?= Yii::t('app', 'Ingredientes') ?>   
+										<?= Yii::t('app', 'recipe_food_ingredients') ?>   
 									</h4>  
 									<table class="table">	
 										<thead> 
@@ -196,7 +196,7 @@ $path2 = 'recipes_single';
 								</div>
 								<div class="col-lg-6 pt-5">								
 									<h4>                    
-										<?= Yii::t('app', 'Preparation') ?>   
+										<?= Yii::t('app', 'recipe_food_preparation') ?>   
 									</h4>  
 									<table class="table">										
 										<tbody>  

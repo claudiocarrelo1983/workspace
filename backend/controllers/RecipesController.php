@@ -155,7 +155,7 @@ class RecipesController extends Controller
 
             if(isset($modelRecipe->imageFile->name)){
                 $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
-                $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
+                $fileName = $modelRecipe->imageFile->baseName;
                 $modelRecipe->image = '/images/recipes/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
@@ -163,12 +163,12 @@ class RecipesController extends Controller
        
             if($modelRecipe->validate()){      
                 if(isset(Yii::$app->request->post()['Recipes'])){  
-                    $recipesCode = $modelRecipe->saveRecipes('recipes', $modelRecipe);
+                    $recipesCode = $modelRecipe->saveRecipes('recipe_list', $modelRecipe);
                     if (isset(Yii::$app->request->post()['RecipesSteps'])) {
-                        $RecipesSteps->saveRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
+                        $RecipesSteps->saveRecipesSteps('recipes_list', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
                     }
                     if (isset(Yii::$app->request->post()['RecipesFood'])) {
-                        $RecipesFood->saveRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $recipesCode);
+                        $RecipesFood->saveRecipesFood('recipes_list', Yii::$app->request->post()['RecipesFood'], $recipesCode);
                     }
                 }     
 
@@ -250,40 +250,18 @@ class RecipesController extends Controller
             $modelRecipe->imageFile = UploadedFile::getInstance($modelRecipe, 'imageFile');
 
             if(isset($modelRecipe->imageFile->name)){
-                $fileName = $modelRecipe->imageFile->baseName. date('YmdHis');;
+                $fileName = $modelRecipe->imageFile->baseName;
                 $modelRecipe->image = '/images/recipes/' .$fileName.'.'.$modelRecipe->imageFile->extension;                 
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
-
-            /*
-            if($modelRecipe->validate()){      
-                if(isset(Yii::$app->request->post()['Recipes'])){                      
-                    $recipesCode = $modelRecipe->updateRecipes('recipes', $modelRecipe);
-                    if (isset(Yii::$app->request->post()['RecipesSteps'])) {
-                        $RecipesSteps->saveRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
-                    }
-                    if (isset(Yii::$app->request->post()['RecipesFood'])) {
-                        $RecipesFood->saveRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $recipesCode);
-                    }
-                }     
-
-                $model = new Recipes;
-
-                $value = $model::find('recipe_code')->orderBy("id desc")->limit(1)->one();
-                    
-                return $this->redirect(['view', 'id' => $value->id]);                   
-            }  
-
-            */
-
-            
+       
           
-            if($recipeCode = $modelRecipe->updateRecipes('recipes',$modelRecipe)){
+            if($recipeCode = $modelRecipe->updateRecipes('recipes_list',$modelRecipe)){
                 if (isset(Yii::$app->request->post()['RecipesSteps'])) {                
-                    $RecipesSteps->updateRecipesSteps('recipes', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);
+                    $RecipesSteps->updateRecipesSteps('recipes_list', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);
                 }
                 if(isset(Yii::$app->request->post()['RecipesFood'])){
-                    $RecipesFood->updateRecipesFood('recipes', Yii::$app->request->post()['RecipesFood'], $modelRecipe);   
+                    $RecipesFood->updateRecipesFood('recipes_list', Yii::$app->request->post()['RecipesFood'], $modelRecipe);   
                 }
                           
                 return $this->redirect(['view', 'id' => $modelRecipe->id]);

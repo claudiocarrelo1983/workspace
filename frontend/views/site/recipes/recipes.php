@@ -38,6 +38,7 @@ foreach($recipes as $key => $blog){
 	$recipesArr[$index][] = $blog;
 }
 
+$pg = $urlParams['pg'];
 
 if(0 < $pg){	
 	$arrBlogCeil =  (isset($arrBlog[$numberOfDivisionsCeil]) ? $arrBlog[$numberOfDivisionsCeil] : array());
@@ -45,6 +46,7 @@ if(0 < $pg){
 }else{
 	$recipesArr = (isset($recipesArr[1]) ? $recipesArr['1'] : $arrBlog);
 }
+
 
 
 $tagsCategory = $model->getLastFileUploaded('recipes_category');  

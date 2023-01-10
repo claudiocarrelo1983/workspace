@@ -6,6 +6,18 @@ INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `ac
 
 
 
+DELETE FROM translations
+ WHERE page nOT IN (
+'recipes_category', 
+'recipes_list',
+'blog_category',
+'blogs_list',
+'subject_list', 
+'pricing_list',
+'faqs_list'
+)
+
+
 DELETE FROM translations;
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'recover_password' ,'Recover Password',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'gender', 'gender_male' ,'Male',1);

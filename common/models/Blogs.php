@@ -71,7 +71,7 @@ class Blogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'title', 'tags', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de'], 'required'],
+            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text','title', 'tags', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de'], 'required'],
             [['text'], 'string'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
@@ -256,7 +256,7 @@ class Blogs extends \yii\db\ActiveRecord
     }
 
 
-    public static function updateBlog($model){
+    public static function updateBlog($page, $model){
 
         $connection = new Query;
 
@@ -274,6 +274,7 @@ class Blogs extends \yii\db\ActiveRecord
             
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
+                page=:page,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
@@ -281,10 +282,12 @@ class Blogs extends \yii\db\ActiveRecord
             ->bindValue(':text', $model->$title)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code_title)
+            ->bindValue(':page', $page)
             ->execute();   
 
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
+                page=:page,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
@@ -292,6 +295,7 @@ class Blogs extends \yii\db\ActiveRecord
             ->bindValue(':text', $model->$subtitle)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code_subtitle)
+            ->bindValue(':page', $page)
             ->execute();   
            
             Yii::$app->db->createCommand("UPDATE translations SET             

@@ -42,7 +42,7 @@ class m220721_174752_recipes extends Migration
             'recipe_code_title' => $this->string()->notNull()->unique(), 
             'recipe_code_text' => $this->string()->notNull()->unique(), 
             'difficulty' => $this->string()->notNull(),   
-            'image' => $this->string()->notNull(),
+            'image' => $this->string(),
             'recipe_title' => $this->string()->notNull()->unique(),
             'recipe_text' => $this->text()->notNull(),  
             'recipe_cat_code' => $this->string(),

@@ -18,7 +18,7 @@ class RecipesFoodSearch extends RecipesFood
     {
         return [
             [['id', 'active'], 'integer'],
-            [['recipe_code', 'name', 'measure', 'calories', 'lipids', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein', 'nutricion_pt', 'nutricion_es', 'nutricion_en', 'nutricion_it', 'nutricion_fr', 'nutricion_de', 'created_date'], 'safe'],
+            [['recipe_code', 'name', 'measure', 'calories', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein', 'nutricion_pt', 'nutricion_es', 'nutricion_en', 'nutricion_it', 'nutricion_fr', 'nutricion_de', 'created_date'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class RecipesFoodSearch extends RecipesFood
         $query->andFilterWhere([
             'id' => $this->id,
             'calories' => $this->calories,
-            'lipids' => $this->lipids,
+            'fat' => $this->fat,
             'colesterol' => $this->colesterol,
             'sodium' => $this->sodium,
             'fibers' => $this->fibers,

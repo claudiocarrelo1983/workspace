@@ -78,7 +78,7 @@ class PricingSpecsController extends Controller
 
         if ($this->request->isPost) {            
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->savePricingSpecs('pricing',$model);
+                $model->savePricingSpecs('pricing_list',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -107,7 +107,7 @@ class PricingSpecsController extends Controller
         $code = 'pricing_specs_'.$count->id;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updatePricingSpecs($model);
+            $model->updatePricingSpecs('pricing_list', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

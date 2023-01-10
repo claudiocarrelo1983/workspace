@@ -97,6 +97,10 @@ class Faqs extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
+        print "<pre>";
+        print_r($model);
+        die();
+
         foreach($countries as $val){
 
             $question = 'question_' . $val['country_code'];   
@@ -123,7 +127,7 @@ class Faqs extends \yii\db\ActiveRecord
     }
 
 
-    public function updateFaqs($model){
+    public function updateFaqs($page, $model){
 
         $connection = new Query;
 
@@ -140,11 +144,12 @@ class Faqs extends \yii\db\ActiveRecord
            
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
+                page=:page,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
             )          
-           
+            ->bindValue(':page', $page)
             ->bindValue(':text', $model->$question)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code_question)
@@ -153,11 +158,12 @@ class Faqs extends \yii\db\ActiveRecord
             
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
+                page=:page,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
             )          
-        
+            ->bindValue(':page', $page)
             ->bindValue(':text', $model->$answer)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code_answer)
