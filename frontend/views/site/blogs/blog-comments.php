@@ -23,7 +23,7 @@ $numberComments = 1;
                     ?>                   
                     <div class="comment">
                         <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                            <img class="avatar" alt="" src="images/blog/avatar.png">
+                            <img class="avatar" alt="" src="images/generic/avatar.png">
                         </div>
                         <div class="comment-block">
                             <div class="comment-arrow"></div>
