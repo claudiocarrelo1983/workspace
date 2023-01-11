@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use common\models\Blogscategory;
+use common\models\BlogsCategory;
 use common\models\BlogsCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -71,7 +71,7 @@ class BlogscategoryController extends Controller
     {     
 
         $model = new BlogsCategory();
-
+      
         $code = 'blog_category_1';
 
         $count = $model::find('id')->orderBy("id desc")->limit(1)->one();

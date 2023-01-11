@@ -239,29 +239,47 @@ class Recipes extends \yii\db\ActiveRecord
             $title = 'recipe_title_' . $val['country_code'];   
             $text = 'recipe_text_' . $val['country_code'];  
             
-            $idRc = str_replace("recipe_code_","","$model->recipe_code");
+            $idRc = str_replace("recipe_code_","",$model->recipe_code);
 
-            $connection->createCommand()->update('translations',
-                [               
-                    'text' => $model->$title         
-                ],
-                [
-                    'page' => $page,
-                    'page_code' => 'recipe_title_'. $idRc,
-                    'country_code' => $val['country_code'],   
-                ]
-                )->execute();
+            $connection->createCommand()
+                ->delete(
+                    'translations', [
+                        'country_code' => $val['country_code'],  
+                        'page' => $page,
+                        'page_code' => 'recipe_title_'. $idRc                 
+                        ]
+                    )
+                ->execute();  
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => 'recipe_title_'. $idRc,
+                'text' => trim($model->$title),    
+                'active' => '1',
+            ])->execute();
+
+
             
-                $connection->createCommand()->update('translations',
-                [               
-                    'text' => $model->$text         
-                ],
-                [
-                    'page' => $page,
-                    'page_code' => 'recipe_text_'. $idRc,
-                    'country_code' => $val['country_code'],   
-                ]
-                )->execute();
+            $connection->createCommand()
+                ->delete(
+                    'translations', [
+                        'country_code' => $val['country_code'],  
+                        'page' => $page,
+                        'page_code' => 'recipe_text_'. $idRc                 
+                        ]
+                    )
+                ->execute(); 
+
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => 'recipe_text_'. $idRc,
+                'text' => trim($model->$text),    
+                'active' => '1',
+            ])->execute();
+         
         }
 
         return true;

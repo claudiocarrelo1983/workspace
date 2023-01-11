@@ -226,7 +226,7 @@ $path2 = 'recipes_single';
 				</div>
 			<div class=" my-5 "></div>
 			<h4>                    
-				<?= Yii::t('app', 'Informação Nutricional') ?>   
+				<?= Yii::t('app', 'recipe_nutricional_title') ?>   
 			</h4> 	
 			<hr>	
 		
@@ -234,7 +234,7 @@ $path2 = 'recipes_single';
 				<div class="col">
 					<div class="border p-4">
 						<h4>
-							<?= Yii::t('app','Factos Nutricionais') ?>
+							<?= Yii::t('app','recipe_nutricional_fact') ?>
 						</h4>		
 						<table class="table">	
 							<thead>
@@ -340,15 +340,13 @@ $path2 = 'recipes_single';
 			</div>
 		</div>
 		<h4>                    
-			<?= Yii::t('app', 'Related Recipes') ?>   
+			<?= Yii::t('app', 'recipe_related') ?>   
 		</h4> 
 		<div class="row">
 			<?php				
 				$i = 0;				
 			?>
-			<?php foreach ($recipeArr as $key => $recipeVal):  ?>   
-
-			
+			<?php foreach ($recipeArr as $key => $recipeVal):  ?>  			
 					<?php 					
 					if ($i  <= 2) { 
 						if($recipe['recipe_cat_code'] == $recipeVal['recipe_cat_code'] && $recipe['id'] != $recipeVal['id'] ){

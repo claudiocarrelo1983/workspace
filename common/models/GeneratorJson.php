@@ -334,7 +334,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         foreach($translations as $value){
             if($language ==  $value['country_code']){
-                $result[$value['page_code']] = $value['text'];
+                $result[trim($value['page_code'])] = trim($value['text']);
             }            
         }
 
