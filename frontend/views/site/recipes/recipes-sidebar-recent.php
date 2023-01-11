@@ -28,13 +28,13 @@ foreach(array_reverse($blogs) as $key => $blog){
             <li>
                 <div class="post-image">
                     <div class="img-thumbnail img-thumbnail-no-borders d-block">
-                        <a href="<?= Url::toRoute($urlParamsVal); ?>">
+                        <a href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
                             <img src="<?= $categories['image'] ?>" width="50" height="50" alt=" <?= Yii::t('app', $categories['recipe_code_title']) ?> ">
                         </a>
                     </div>
                 </div>
                 <div class="post-info">
-                    <a href="<?= Url::toRoute($urlParamsVal); ?>">                   
+                    <a href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">                   
                         <?= Yii::t('app', $categories['recipe_code_title']) ?> 
                     </a>
                     <div class="post-meta">

@@ -3,8 +3,9 @@
 use common\models\GeneratorJson;
 
 $model = new GeneratorJson(); 
-$arrTeams = $model->getLastFileUploaded('team');  
+$teams = $model->getLastFileUploaded('team');
 
+/*
 $teams = array();
 
 foreach($arrTeams as $team){
@@ -13,6 +14,12 @@ foreach($arrTeams as $team){
     }
 }
 
+
+
+print "<PRE>";
+print_R($teams);
+die();
+*/
 
 /* @var $this yii\web\View */
 

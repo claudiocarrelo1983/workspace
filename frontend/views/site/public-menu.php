@@ -31,10 +31,9 @@ $currentUrl = Yii::$app->controller->route;
         ?>
 
         <li class="dropdown">
-       
             <?= Html::a(
                 Yii::t('app', $title), 
-                Url::toRoute($url),     
+                str_replace('/frontend/web', '',Url::toRoute($url)),     
                 [
                 'class' => 'dropdown-item dropdown-toggle',
                 'data-hash' => '',         

@@ -211,6 +211,14 @@
                ]
             },
             {   
+               "key":"t-team-view",
+               "title":"Team",
+               "url":"team/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {   
                "key":"t-subjects-view",
                "title":"Subjects",
                "url":"subjects/index",

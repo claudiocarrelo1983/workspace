@@ -44,7 +44,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 				<h5 class="text-4 text-color-light mb-3"><?= Yii::t('app', 'footer_category_menu') ?></h5>
 				<ul class="list list-unstyled mb-0">
 					<?php foreach ($menu['menu'] as $menucategory): ?> 
-						<li class="mb-0"><a href="<?= Url::toRoute($menucategory['url']) ?>"><?= Yii::t('app', $menucategory['title']) ?></a></li>	
+						<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute($menucategory['url'])) ?>"><?= Yii::t('app', $menucategory['title']) ?></a></li>	
 					<?php endforeach; ?>   		
 				</ul>
 			</div>
@@ -52,12 +52,12 @@ $structure = $model->getLastFileUploaded('other','footer');
 			<div class="col-md-6 col-lg-3 mb-5 mb-lg-0 align-items-center">
 				<h5 class="text-4 text-color-light mb-3"><?= Yii::t('app', 'footer_category_usefull_links') ?></h5>
 				<ul class="list list-unstyled mb-0">
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/sitemap') ?>"><?= Yii::t('app', 'footer_category_usefull_links_sitemap') ?></a></li>
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/faqs') ?>"><?= Yii::t('app', "footer_category_usefull_links_faqs") ?></a></li>
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/privacy-policy') ?>"><?= Yii::t('app', 'footer_category_usefull_links_privacy_policy') ?></a></li>
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/coockies') ?>"><?= Yii::t('app', 'footer_category_usefull_links_coockies') ?></a></li>
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/gdpr') ?>"><?= Yii::t('app', 'footer_category_usefull_links_gdpr') ?></a></li>		
-					<li class="mb-0"><a href="<?= Url::toRoute('/site/terms-and-conditions') ?>"><?= Yii::t('app', 'footer_category_usefull_links_terms') ?></a></li>		
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/sitemap')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_sitemap') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/faqs')) ?>"><?= Yii::t('app', "footer_category_usefull_links_faqs") ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/privacy-policy')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_privacy_policy') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/coockies')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_coockies') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/gdpr')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_gdpr') ?></a></li>		
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/terms-and-conditions')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_terms') ?></a></li>		
 				</ul>
 			</div>	
 			<div class="col-md-6 col-lg-3 align-items-center">
@@ -85,7 +85,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 	<div class="footer-copyright">
 		<div class="container py-2">
 			<div class="row py-6">			
-				<a  href="<?= Url::home() ?>" class="col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
+				<a  href="<?= str_replace('/frontend/web', '',Url::home()) ?>" class="col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
 					<span class="text-color-light font-weight-normal text-6 mb-2 mt-2">My</span>
 					<span class="text-color-light font-weight-extra-bold text-6 mb-2 mt-2">Special</span>
 					<span class="font-weight-extra-bold blue-lettering text-6 mb-2 mt-2">Gym</span>	

@@ -104,7 +104,7 @@ $path2 = 'recipes_single';
 															'tag' => $tags['recipe_cat_code'],													
 														];?>
 																					
-														<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+														<a href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
 													<?php 
 													$i++;
 												}
@@ -374,7 +374,7 @@ $path2 = 'recipes_single';
 									</p>						
 								
 									<p class="pt-3" style='font-size:15px'>										
-										<a class="read-more text-color-primary font-weight-semibold text-2" href="<?= Url::toRoute(['site/recipe-single', 'id' => $recipeVal['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
+										<a class="read-more text-color-primary font-weight-semibold text-2" href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/recipe-single', 'id' => $recipeVal['id']])); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
 											<i class="fas fa-angle-right position-relative top-1 ms-1"></i> <?= Yii::t('app', 'recipe_read_more') ?>
 										</a>										
 									</p>								

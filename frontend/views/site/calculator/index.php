@@ -25,7 +25,7 @@ $this->title = 'Calculators';
 
 $this->params['breadcrumbs'][] = $this->title;
 
-$path2 = 'calculatores';
+$path2 = 'calculators';
 ?>
 
 <?= $this->render('/layouts/public_header'); ?>

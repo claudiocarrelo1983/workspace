@@ -41,10 +41,10 @@ foreach($recipes as $key => $blog){
 $pg = $urlParams['pg'];
 
 if(0 < $pg){	
-	$arrBlogCeil =  (isset($arrBlog[$numberOfDivisionsCeil]) ? $arrBlog[$numberOfDivisionsCeil] : array());
-	$recipesArr = (isset($recipesArr[$pg]) ? $recipesArr[$pg] : $arrBlogCeil);
+	$arrRecipesCeil =  (isset($recipesArr[$numberOfDivisionsCeil]) ? $recipesArr[$numberOfDivisionsCeil] : array());
+	$recipesArr = (isset($recipesArr[$pg]) ? $recipesArr[$pg] : $arrRecipesCeil);
 }else{
-	$recipesArr = (isset($recipesArr[1]) ? $recipesArr['1'] : $arrBlog);
+	$recipesArr = (isset($recipesArr[1]) ? $recipesArr['1'] : $recipesArr);
 }
 
 
@@ -100,7 +100,7 @@ $path2 = 'recipes';
 						<div class="row mb-3">
 							<div class="col-lg-5">
 								<div class="post-image">
-									<a href="<?= Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']]); ?>">
+									<a href="<?= str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>">
 										<img src="<?= $recipeValues['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
 									</a>
 								</div>
@@ -108,7 +108,7 @@ $path2 = 'recipes';
 							<div class="col-lg-7">
 								<div class="post-content">
 									<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
-										<a href="<?= Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']]); ?>">
+										<a href="<?=str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>">
 											<?= Yii::t('app',$recipeValues['recipe_code_title']) ?>
 										</a>
 									</h2>
@@ -160,7 +160,7 @@ $path2 = 'recipes';
 															'tag' => $tags['recipe_cat_code'],													
 														];?>
 																					
-														<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+														<a href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
 													<?php 
 													$i++;
 												}
@@ -169,7 +169,7 @@ $path2 = 'recipes';
 									</span>
 									
 									<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">
-										<a href="<?= Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
+										<a href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
 											<?= Yii::t('app', 'read_more') ?>
 										</a>
 									</span>
@@ -187,7 +187,7 @@ $path2 = 'recipes';
 								'pg' =>  1,
 								'tag' =>  $urlParams['tag']														
 							];?>			
-							<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+							<a class="page-link" href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
 								<i class="fas fa-angle-left"></i>
 							</a>							
 						</li>							
@@ -205,7 +205,7 @@ $path2 = 'recipes';
 											'pg' =>  $x,
 											'tag' =>  $urlParams['tag']														
 										];?>	
-										<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+										<a class="page-link" href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
 											<?= $x ?>
 										</a>	
 									</li>
@@ -215,7 +215,7 @@ $path2 = 'recipes';
 											'pg' =>  $x,
 											'tag' =>  $urlParams['tag']														
 										];?>	
-										<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+										<a class="page-link" href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
 											<?= $x ?>
 										</a>
 									</li>
@@ -229,7 +229,7 @@ $path2 = 'recipes';
 									'pg' =>  $numberOfDivisionsCeil,
 									'tag' =>  $urlParams['tag']														
 								];?>	
-							<a class="page-link" href="<?= Url::toRoute($urlParamsVal); ?>">
+							<a class="page-link" href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
 								<i class="fas fa-angle-right"></i>
 							</a>						
 						</li>
@@ -245,3 +245,6 @@ $path2 = 'recipes';
 </div>
 
 
+<!-- Sub Footer -->
+<?= $this->render('../subfooter',['path2' => $path2]); ?>
+<!-- Sub Footer -->

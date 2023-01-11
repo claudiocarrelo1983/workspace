@@ -17729,7 +17729,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info-social-icons a {
 	background: #CCC;
-	border-radius: 25px;
+	border-radius: 8px;
 	display: inline-block;
 	height: 30px;
 	line-height: 30px;
@@ -17747,8 +17747,9 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info-social-icons a i {
 	color: #FFF;
-	font-size: 0.9em;
+	font-size: 1.5em;
 	font-weight: normal;
+	padding: 4px;
 }
 
 /* Thumb Info Floating Caption */

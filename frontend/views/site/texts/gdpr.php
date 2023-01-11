@@ -6,7 +6,7 @@ $this->title = 'GDPR';
 
 $this->params['breadcrumbs'][] = $this->title;
 
-$path2 = 'privacy';
+$path2 = 'gdpr';
 
 ?>
 
