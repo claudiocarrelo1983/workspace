@@ -7,7 +7,7 @@ use common\models\TeamSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * TeamController implements the CRUD actions for Team model.
  */
@@ -70,6 +70,25 @@ class TeamController extends Controller
         $model = new Team();
 
         if ($this->request->isPost) {
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            $model->image = '';
+         
+            if(isset($model->imageFile->name)){
+
+                $fileName = $model->imageFile->baseName;
+                $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension; 
+       
+                //if ($model->imageFile && $model->validate()) {
+                $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
+                //}  
+
+                $model->created_date = date('Y-m-d H:i:s');    
+             
+            }      
+
+
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

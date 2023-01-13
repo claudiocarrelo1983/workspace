@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use common\models\GeneratorJson;
+use common\helpers\Helpers;
 use api;
 use Yii;
 
@@ -122,7 +123,9 @@ class BlogsController extends Controller
             if(!empty($_POST['Blogs']['tagsArr'])){
                
                 $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
-            }  
+            }
+
+            $model->guid = Helpers::GUID();
  
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 

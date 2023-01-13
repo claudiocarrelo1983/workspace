@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\db\Query;
+use common\helpers\Helpers;
 
 use Yii;
 
@@ -157,6 +158,7 @@ class Recipes extends \yii\db\ActiveRecord
 
         $value = $connection->createCommand()->insert('recipes', [   
             'username' => '',   
+            'guid' => Helpers::GUID(),
             'recipe_code' => $code, 
             'fatsecret_id' =>  $modelRecipe->fatsecret_id,    
             'recipe_code_title' => $modelRecipe->recipe_code_title,  

@@ -9,38 +9,6 @@ Theme Version:	9.3.0
 	}
 }
 
-.field-recipes-recipe_code_title, .field-recipes-recipe_code_text,
-.field-recipes-recipe_title_pt,.field-recipes-recipe_title_es,
-.field-recipes-recipe_title_en, .field-recipes-recipe_title_it,
-.field-recipes-recipe_title_fr, .field-recipes-recipe_title_de,
-.field-recipes-recipe_text_pt,.field-recipes-recipe_text_es,
-.field-recipes-recipe_text_en, .field-recipes-recipe_text_it,
-.field-recipes-recipe_text_fr, .field-recipes-recipe_text_de,
-.field-generatorjson-type,
-.field-texts-title_pt, .field-texts-title_es,
-.field-texts-title_it,.field-texts-title_de,
-.field-texts-title_en, .field-texts-title_fr,
-.field-texts-text_pt, .field-texts-text_es,
-.field-texts-text_it,.field-texts-text_de,
-.field-texts-text_en, .field-texts-text_fr
-.field-pricingspecs-text_de, .field-pricingspecs-text_fr, 
-.field-pricingspecs-text_it, .field-pricingspecs-page_code,
-.field-subjects-text_it, .field-subjects-text_fr,
-.field-subjects-text_de, .field-subjects-page_code
-.field-faqs-question_en, .field-faqs-question_pt,
-.field-faqs-question_de, .field-faqs-question_fr, 
-.field-faqs-question_it, .field-faqs-question_es, 
-.field-faqs-page_code_question,.field-faqs-page_code_answer,
-.field-faqs-answer_de, .field-faqs-answer_fr, 
-.field-faqs-answer_it, .field-faqs-answer_en, 
-.field-faqs-answer_pt, .field-faqs-answer_es, 
-.field-faqs-page_code_answer, .field-faqs-page_code_question
-.field-pricingspecs-text_de, .field-pricingspecs-text_fr, 
-.field-pricingspecs-text_it, .field-pricingspecs-page_code{
-	margin: 0px !important;
-}
-
-
 html {
 	direction: ltr;
 	overflow-x: hidden;
@@ -89,6 +57,10 @@ li {
 	body {
 		font-size: 13px;
 	}
+}
+
+.help-block {
+    color: red;
 }
 
 pre {
@@ -4888,8 +4860,7 @@ html.ie #header .header-column .header-extra-info .feature-box .feature-box-info
 }
 
 /* Page Header */
-.page-header {
-	background-color: #212529;
+.page-header {	
 	margin: 0 0 35px 0;
 	padding: 30px 0;
 	position: relative;
@@ -9916,11 +9887,8 @@ a.text-light:focus, a.text-light:hover {
 	font-size: 0.9em;
 	margin-top: 50px; 
 	padding: 0;
+	position: relative;
 	clear: both;
-	position: initial;
-    bottom: 0px;
-	margin-top: 100px;
-    width: 100%;
 }
 
 #footer .footer-ribbon {
@@ -11505,8 +11473,4 @@ html.gap-outside .pin-wrapper .sticky-wrapper.sticky-effect-active .sticky-body 
 
 .white-text  {
     color: #fff;
-}
-
-.help-block{
-	color:red;
 }

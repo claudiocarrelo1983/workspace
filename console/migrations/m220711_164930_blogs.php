@@ -18,6 +18,7 @@ class m220711_164930_blogs extends Migration
 
         $this->createTable('{{%blogs}}', [
             'id' => $this->primaryKey(),
+            'guid' => $this->string(),  
             'page_code_title' => $this->string()->notNull()->unique(),  
             'page_code_subtitle' => $this->string()->notNull()->unique(),  
             'page_code_text' => $this->string()->notNull()->unique(),     

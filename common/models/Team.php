@@ -103,4 +103,9 @@ class Team extends \yii\db\ActiveRecord
             'created_date' => 'Created Date',
         ];
     }
+
+    public function imgUrl(){
+        return '/images/blog/';
+    }
+
 }
