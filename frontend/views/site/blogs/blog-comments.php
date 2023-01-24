@@ -12,11 +12,12 @@ $numberComments = 1;
 
 ?>
 
+
 <div id="comments" class="post-block mt-5 post-comments">
     <h4 class="mb-3">Comments (<?= count($comments) ?>)</h4>
         <ul class="comments">
-            <li>
-                <?php foreach ($comments as $key => $details): ?>    
+            <li>             
+                <?php foreach ($comments as $key => $details): ?>                    
                     <?php
                         $numberComments++;                     
                          if(empty($details['parent_id'])){                                                          
@@ -74,43 +75,58 @@ $numberComments = 1;
                         </div>
                     </div>            
                     <ul class="comments reply">
-                      
-                            <?php 
-                                foreach ($comments as $key => $details2): 
-                            ?>  
-                            <?php                       
-                                if($details['comment_id'] == $details2['parent_id']){                                                          
-                             ?>                          
-                                <li>
-                                    <div class="comment">
-                                        <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
-                                            <img class="avatar" alt="" src="images/blog/avatar.png">
-                                        </div>
-                                        <div class="comment-block">
-                                            <div class="comment-arrow"></div>
-                                            <span class="comment-by">
-                                                <strong>
-                                                    <?= $details2['full_name'] ?>
-                                                </strong>                                          
-                                            </span>
-                                            <p>
-                                                <?= $details2['comment'] ?>
-                                            </p>
-                                            <span class="date float-end">
-                                                <?php
-                                                    $timestamp = strtotime($details2['created_date']);
-                                                ?>
-                                                <span class="day">
-                                                    <?= date('d', $timestamp) ?>
+                    <div class="toggle toggle-primary" data-plugin-toggle="">
+                        <span class="toggle">
+                        <?php 
+                            foreach ($comments as $key => $details2){
+                        ?>  
+                        <?php                       
+                            if($details['comment_id'] == $details2['parent_id']){  
+                        ?>
+                             <a class="toggle-title">View More Comments</a>
+                        <?php
+                            break;
+                            }
+                        }                                                        
+                        ?> 
+                       
+                                <div class="toggle-content">
+                                    <?php 
+                                        foreach ($comments as $key => $details2): 
+                                    ?>  
+                                    <?php                       
+                                        if($details['comment_id'] == $details2['parent_id']){                                                          
+                                    ?>                          
+                                    <li>
+                                        <div class="comment">
+                                            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                                <img class="avatar" alt="" src="images/generic/avatar.png">
+                                            </div>                                                        
+                                            <div class="comment-block">
+                                                <div class="comment-arrow"></div>
+                                                <span class="comment-by">
+                                                    <strong>
+                                                        <?= $details2['full_name'] ?>
+                                                    </strong>                                          
                                                 </span>
-                                                <span class="month">
-                                                    <?= date('M', $timestamp) ?>
-                                                    <?= date('Y', $timestamp) ?>
+                                                <p>
+                                                    <?= $details2['comment'] ?>
+                                                </p>
+                                                <span class="date float-end">
+                                                    <?php
+                                                        $timestamp = strtotime($details2['created_date']);
+                                                    ?>
+                                                    <span class="day">
+                                                        <?= date('d', $timestamp) ?>
+                                                    </span>
+                                                    <span class="month">
+                                                        <?= date('M', $timestamp) ?>
+                                                        <?= date('Y', $timestamp) ?>
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 
                             <?php                                 
                                 
@@ -124,6 +140,7 @@ $numberComments = 1;
                     ?> 
             
                 <?php endforeach; ?> 
+                </div>
                 
             </li>
 

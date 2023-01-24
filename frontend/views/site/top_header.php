@@ -48,8 +48,10 @@ use yii\helpers\Url;
 
 		<span class="m-2">|</span>                               
 		<?=
-		    	Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-		    	. Html::submitButton(
+		    	Html::beginForm(        
+					str_replace('/frontend/web', '',Url::toRoute('site/logout')), 
+					'post', ['class' => 'form-inline'])
+					. Html::submitButton(
 		    		Yii::t('app', 'login_logout'),
 		    		['class' => 'btn-link logout white-text']
 		    	)

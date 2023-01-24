@@ -157,33 +157,21 @@ $path2 = 'home';
                 </div>
             </div>
         </section>
-    </div>
-
-    <section class="call-to-action custom-call-to-action call-to-action-dark mb-5">
-        <div class="container ">
-            <div class="row p-3 p-md-0 ">
-                <div class="col-lg-8">
-                    <div class="call-to-action-content mx-auto m-lg-0">
-                        <h3 class="mb-1 font-weight-semi-bold">
-                            <?= Yii::t('app', 'home_block_5_title') ?> 
-                        </h3>
-                        <p class="mb-0 opacity-7">
-                            <?= Yii::t('app', 'home_block_5_subtitle') ?>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-center text-lg-start">
-                    <div class="call-to-action-btn mx-auto mt-0 mt-md-4 m-lg-0">
-                        <a class="btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3">
-                            <span class="d-none d-sm-inline-block"><img width="32" height="28" src="images/generic/app-landing/icons/icon-cloud.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-stroke-color-light me-2'}" /></span>
-                            <?= Yii::t('app', 'home_block_5_button') ?>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    </div> 
+    <section class="section section-default section-with-divider mb-0">
+					<div class="divider divider-solid divider-style-4">
+						<i class="fas fa-chevron-down"></i>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<h4 class="mb-3">With Divider</h4>
+								<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eros ipsum, facilisis eget scelerisque non, fermentum at tellus.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+    <hr class="my-5">
     <div class="container">
         <div class="row pt-5">
             <div class="col">

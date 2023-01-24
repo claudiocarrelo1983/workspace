@@ -50,7 +50,7 @@ class SiteController extends Controller
     public function actions()
     {
         
-        $this->layout = 'training';
+         $this->layout = 'main';
 
         return [
             'error' => [

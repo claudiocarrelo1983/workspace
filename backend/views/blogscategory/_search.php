@@ -8,26 +8,31 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
 <div class="blogs-category-search">
+  
+        <?php $form = ActiveForm::begin([
+            'action' => ['index'],
+            'method' => 'get',
+        ]); ?>
+  <div class="row">
+        <div class="col-lg-3 col-sm-12">
+            <?= $form->field($model, 'id') ?>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+        <?= $form->field($model, 'tag') ?>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+        <?= $form->field($model, 'page_code') ?>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+        <?= $form->field($model, 'tag_parent_id') ?>
+        </div>
+     
+    </div>
+        
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'tag') ?>
-
-    <?= $form->field($model, 'page_code') ?>
-
-    <?= $form->field($model, 'tag_parent_id') ?>
-
-    <?= $form->field($model, 'description') ?>
-
-    <?= $form->field($model, 'created_date') ?>
-
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
     </div>

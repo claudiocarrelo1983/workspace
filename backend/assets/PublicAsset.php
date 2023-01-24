@@ -64,6 +64,7 @@ class PublicAsset extends AssetBundle
         //'assets/libs/apexcharts/apexcharts.min.js',
         //'js/pages/dashboard.init.js',
         //'js/app.js'
+        'js/theme.init.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

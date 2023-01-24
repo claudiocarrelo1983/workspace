@@ -12,21 +12,35 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'field')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'active')->textInput() ?>
-
-    <?= $form->field($model, 'active')->dropdownList(
-        [1 => 'Yes', 0 => 'No']); ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div clasS="row my-5">
+        <div class="col-3">
+            <?= $form->field($model, 'field')->dropdownList(
+                [
+                    'maintenance' => 'Maintenance',
+                    'login' => 'Login',
+                    'register' => 'Register'
+                ]); 
+            ?>
+        </div>
     </div>
-
+    <div clasS="row my-5">
+        <div class="col-3">
+            <?= $form->field($model, 'active')->dropdownList(
+            [
+                1 => 'Yes', 
+                0 => 'No'
+            ]); 
+            ?>
+        </div>
+    </div>
+    <div clasS="row my-5">
+        <div class="col-3">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
+</div>
     <?php ActiveForm::end(); ?>
 
 </div>

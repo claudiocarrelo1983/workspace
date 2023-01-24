@@ -18,7 +18,7 @@ class ConfigurationsSearch extends Configurations
     {
         return [
             [['id', 'active'], 'integer'],
-            [['field', 'type', 'value'], 'safe'],
+            [['field'], 'safe'],
         ];
     }
 
@@ -62,9 +62,8 @@ class ConfigurationsSearch extends Configurations
             'active' => $this->active,
         ]);
 
-        $query->andFilterWhere(['like', 'field', $this->field])
-            ->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'value', $this->value]);
+        $query->andFilterWhere(['like', 'field', $this->field])          
+            ->andFilterWhere(['like', 'active', $this->active]);
 
         return $dataProvider;
     }

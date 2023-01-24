@@ -99,7 +99,7 @@ $path2 = 'recipes';
 					<article class="post post-medium">
 						<div class="row mb-3">
 							<div class="col-lg-5">
-								<div class="post-image">
+								<div class="post-image google-map-borders">
 									<a href="<?= str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>">
 										<img src="<?= $recipeValues['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
 									</a>

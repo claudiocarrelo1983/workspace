@@ -266,6 +266,27 @@ class GeneratorJson extends \yii\db\ActiveRecord
         GeneratorJson::saveJson($blogArr, $table);
     }
 
+    public static function updateConfigurations($table, $columns){
+        
+        $blogQuery = new Query; 
+      
+        $blogQuery = new Query; 
+
+        $blogArr = $blogQuery->select(
+            $columns
+        )
+        ->from([$table])->all();
+
+
+        $arrResult = [];
+
+        foreach($blogArr as $result){
+            $arrResult[$result['field']] = $result['active'];
+        }
+ 
+        GeneratorJson::saveJson($arrResult, $table);
+    }
+
     public static function updateSubjects($table, $columns){
         
         $blogQuery = new Query; 

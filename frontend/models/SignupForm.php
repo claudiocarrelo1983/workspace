@@ -2,6 +2,8 @@
 
 namespace frontend\models;
 
+use common\Helpers\Helpers;
+
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -84,29 +86,23 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
 
+        $user = new User();
+        
+        $user->level = 'subscriber';
+        $user->guid = Helpers::GUID();
+        $user->username = $this->username;      
+        $user->email = $this->email;
+        $user->company = $this->company;
         $user->terms_and_conditions = $this->terms_and_conditions;
         $user->newsletter = $this->newsletter;
-        $user->terms_and_conditions = $this->terms_and_conditions;
         $user->privacy = $this->privacy;        
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
-        $user->name = $this->first_name.' '.$this->last_name;
-      
-        $user->level = 'admin';
-   
-
+ 
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
-
-        $codeCompany = $this->stringToCode($this->company);
-        $user->company = $codeCompany;
-        $this->createCompany($this->company, $codeCompany);
+        $user->generateEmailVerificationToken(); 
 
         return $user->save() && $this->sendEmail($user);
     }
@@ -129,8 +125,6 @@ class SignupForm extends Model
 
         return $str;
     }
-
-
 
     public function generateRandomString($length = 7) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

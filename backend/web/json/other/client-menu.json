@@ -4,7 +4,7 @@
      {
         "key":"t-home",
         "title":"Dashboard",
-        "url":"site/index",           
+        "url":"",           
         "submenu":[
                   
         ]
@@ -52,7 +52,7 @@
      {
       "key":"t-blog",
       "title":"Blog",
-      "url":"blogs/index",           
+      "url":"",           
       "submenu":[
          {   
             "key":"t-blog-view",
@@ -83,7 +83,7 @@
       {
          "key":"t-blog",
          "title":"Forms",
-         "url":"training/index",           
+         "url":"",           
          "submenu":[
             {   
                "key":"t-form-view",

@@ -20,7 +20,15 @@
          "submenu":[
             
          ]
-      },
+      },   
+     
+      {
+         "key":"t-features",
+         "title":"menu_features",
+         "url":"site/features",       
+         "submenu":[            
+         ]
+      },   
       {
          "key":"t-calculators",
          "title":"menu_calculators",
@@ -38,15 +46,7 @@
                }                
          ]
       },
-       {
-          "key":"t-about",
-          "title":"menu_about_us",
-          "url":"site/about",           
-          "submenu":[
-             
-          ]
-       },
-       {
+      {
          "key":"t-blog",
          "title":"menu_blog",
          "url":"site/blog",           
@@ -54,21 +54,6 @@
             
          ]
       },
-     
-       {
-         "key":"t-pricing",
-         "title":"menu_pricing",
-         "url":"site/pricing",       
-         "submenu":[            
-         ]
-      },   
-      {
-         "key":"t-features",
-         "title":"menu_features",
-         "url":"site/features",       
-         "submenu":[            
-         ]
-      },   
       {
          "key":"t-recipes",
          "title":"menu_recipes",
@@ -76,6 +61,13 @@
          "submenu":[            
          ]
       },
+      {
+         "key":"t-pricing",
+         "title":"menu_pricing",
+         "url":"site/pricing",       
+         "submenu":[            
+         ]
+      },  
       {
          "key":"t-contact-us",
          "title":"menu_contacts",

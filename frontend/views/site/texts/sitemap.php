@@ -33,7 +33,7 @@ $path2 = 'sitemap';
             <div class="row">
                 <div class="col">
                     <h2 class="text-color-dark font-weight-normal text-5 mb-2">
-                            <?= Yii::t('app', 'title_'.$path2) ?>
+                            <?= Yii::t('app', 'sitemap_title') ?>
                     </h2>
                 </div>
             </div>

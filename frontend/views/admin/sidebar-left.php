@@ -3,16 +3,18 @@
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use common\models\GeneratorJson;
 
 
-$json = file_get_contents(Yii::$app->basePath.'\web\json\admin-menu.json');
-$structure = Json::decode($json);
+$model = new GeneratorJson(); 
+$structure = $model->getLastFileUploaded('other','admin-menu');
 
 $currentUrl = Yii::$app->controller->route;
 
 $active1 = '';
 $active2 = '';
 $active3 = '';
+
 
 ?>
 

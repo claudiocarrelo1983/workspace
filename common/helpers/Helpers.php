@@ -1,5 +1,5 @@
 <?php
-namespace common\helpers;
+namespace common\Helpers;
 
 class Helpers{       
     

@@ -5,6 +5,13 @@ Written by: 	Okler Themes - (http://www.okler.net)
 Theme Version:	9.3.0
 */
 /* Accordion */
+
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .accordion .card {
 	margin-top: 5px;
 }

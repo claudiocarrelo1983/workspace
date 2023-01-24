@@ -35,12 +35,21 @@ class m220725_164124_pricing extends Migration
 
         $this->createTable('{{%pricing}}', [
             'id' => $this->primaryKey(),
+            'page_code_title' => $this->string()->notNull()->unique(), 
             'title' => $this->string()->unique(),
             'coin' => $this->string()->unique(),
-            'key' => $this->string()->unique(),      
+            'key' => $this->string()->unique(), 
+            'url' => $this->string(),      
             'standard' => $this->integer(), 
             'professional' => $this->integer(),    
             'enterprise' => $this->integer(),
+            'title_pt' => $this->string()->notNull(), 
+            'title_es' => $this->string()->notNull(), 
+            'title_en' => $this->string()->notNull(), 
+            'title_it' => $this->string()->notNull(), 
+            'title_fr' => $this->string()->notNull(), 
+            'title_de' => $this->string()->notNull(),  
+            'active' => $this->boolean(),           
             'created_date' => $this->timestamp()
              
         ], $tableOptions);

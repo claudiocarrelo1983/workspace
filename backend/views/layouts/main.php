@@ -45,31 +45,43 @@ PublicAsset::register($this);
     <header id="header" class="header-dark header-effect-shrink " data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
         <div class="header-body border-top-0 bg-dark box-shadow-none overflow-visible">
             <div class="header-top">
-                <div class="container-fluid px-5">
-                    <div class="header-row py-2 ">	                     
+                <div class="container-fluid">
+                    <div class="header-row py-2">                     
                         <div class="header-column">
-                            <div class="header-row white-text ">                            
-                                <?= Html::a(
-                                    Yii::t('app', 'Go to Website'), 
-                                    Url::home(),     
-                                    [                                 
-                                    'data-hash' => '',         
-                                    'data-hash-offset' => 0,  
-                                    'data-hash-offset-lg' => 130,  
-                                    ]      
-                                ) ?>                                        
-                            </div>
-                        </div>
-                
+                            <div class="header-row white-text ">   
+                                <span class="d-block d-lg-none">     
+                                    <?= Html::a(
+                                            Yii::t('app', 'Go to Website'), 
+                                            Url::home(),     
+                                            [                                 
+                                            'data-hash' => '',         
+                                            'data-hash-offset' => 0,  
+                                            'data-hash-offset-lg' => 130,  
+                                            ]      
+                                        ) ?>   
+                                </span> 
+                                <span class="d-none d-lg-block pl-3">                     
+                                    <?= Html::a(
+                                        Yii::t('app', 'Go to Website'), 
+                                        Url::home(),     
+                                        [                                 
+                                        'data-hash' => '',         
+                                        'data-hash-offset' => 0,  
+                                        'data-hash-offset-lg' => 130,  
+                                        ]      
+                                    ) ?>    
+                                </span>                                    
+                            </div>                            
+                        </div>                
                         <div class="header-column justify-content-end">
                             <div class="header-row">                            
                                 <?= $this->render('/site/top_header'); ?>	                                        
                             </div>
-                        </div>
+                        </div>                
                     </div>                   
                 </div>
             </div>
-            <div class="header-container container-fluid px-5">
+            <div class="header-container container-fluid px-3">
                 <div class="header-row">
                     <?= Html::a(
                         Yii::t('app',
@@ -95,10 +107,14 @@ PublicAsset::register($this);
             </div>
         </div>
     </header>    
-    <div class="spacer"></div>    
-    <div class="container-xxl ">
+    <div class="spacer"></div> 
+ 
+    <div class="container-fluid ">
         <div role="main" class="main">
-            <?= $content ?>
+          
+            <span class="d-none d-lg-block px-5">   
+                <?= $content ?>
+            </span>    
         </div>
     </div>
     <div class="spacer"></div>

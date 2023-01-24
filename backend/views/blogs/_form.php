@@ -32,6 +32,7 @@ $tags = $tagQuery->select([
 
 $users = $tagQuery->select([
     'id', 
+    'guid', 
     'username', 
     'name'
     ])
@@ -41,7 +42,7 @@ $users = $tagQuery->select([
 $arrUsers = array();
 
 foreach($users as $user){
-    $arrUsers[$user['username']] = $user['name'];
+    $arrUsers[$user['guid']] = $user['name'];
 }
 
 
@@ -207,5 +208,5 @@ foreach($tags as $tag){
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

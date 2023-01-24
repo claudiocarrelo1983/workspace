@@ -17,16 +17,16 @@ use yii\helpers\Url;
     ]); ?>
 
     <div class="row py-4">   
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
         <?= $form->field($model, 'fatsecret_id') ?>
         </div>   
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
         <?= $form->field($model, 'recipe_title') ?>
         </div>    
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
             <?php  echo $form->field($model, 'recipe_cat_code') ?>
         </div>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
             <?= $form->field($model, 'active')->dropdownList(
             [
                 1 => 'Yes',
@@ -59,7 +59,7 @@ use yii\helpers\Url;
 
     <?php // echo $form->field($model, 'created_date') ?>
 
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('recipes/index'); ?>">Reset</a>
     </div>

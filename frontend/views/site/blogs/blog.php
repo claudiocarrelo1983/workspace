@@ -113,7 +113,7 @@ $path2 = 'blog';
 						<article class="post post-medium">
 							<div class="row mb-3">
 								<div class="col-lg-5">
-									<div class="post-image">
+									<div class="post-image post-image google-map-borders ">
 										<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
 											<img src="<?= $categories['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="<?= Yii::t('app', $categories['alt']) ?>" />
 										</a>
@@ -123,11 +123,11 @@ $path2 = 'blog';
 									<div class="post-content">
 										<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
 											<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
-												<?= Yii::t('app', $categories['title']) ?>
+												<?= Yii::t('app', $categories['page_code_title']) ?>
 											</a>
 										</h2>
 										<p class="mb-0">
-											<?= Blogs::getWords( $categories['text'], 320); ?> [...]
+											<?= Blogs::getWords( $categories['page_code_text'], 320); ?> [...]
 										</p>
 									</div>
 								</div>

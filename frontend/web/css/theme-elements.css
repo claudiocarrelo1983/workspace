@@ -18042,7 +18042,7 @@ section.timeline .timeline-box .owl-carousel {
 }
 
 .toggle > label,
-.toggle > .toggle-title {
+.toggle > .toggle-title1 {
 	transition: all .15s ease-out;
 	background: #f7f7f7;
 	border-left: 3px solid #CCC;

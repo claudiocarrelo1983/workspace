@@ -315,7 +315,7 @@ class RecipesLoad extends \yii\db\ActiveRecord
                         $ingredient->protein = $serving->protein;    
                         $ingredient->fiber = $serving->fiber;
                         $ingredient->sodium = $serving->sodium;     
-                        $ingredient->sugar = $serving->sugar;                  
+                        $ingredient->sugar = (isset($serving->sugar) ? $serving->sugar : 0);                  
                     }                   
                 }
                 

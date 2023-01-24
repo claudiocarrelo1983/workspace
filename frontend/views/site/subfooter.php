@@ -15,9 +15,9 @@ use yii\helpers\Url;
             <div class="col-md-12 col-lg-12">
                 <div class="call-to-action-content">
                     <h2 class="font-weight-normal text-5 mb-0">
-						<?= Yii::t('app', 'subfooter_'.$path2.'_title') ?>
+						<?= Yii::t('app', 'subfooter_home_title') ?>
                     </h2>
-                    <p class="mb-0"><?= Yii::t('app', 'subfooter_'.$path2.'_subtitle') ?></p>
+                    <p class="mb-0"><?= Yii::t('app', 'subfooter_home_subtitle') ?></p>
                 </div>
             </div>
         </div>

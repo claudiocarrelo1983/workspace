@@ -97,10 +97,6 @@ class Faqs extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        print "<pre>";
-        print_r($model);
-        die();
-
         foreach($countries as $val){
 
             $question = 'question_' . $val['country_code'];   

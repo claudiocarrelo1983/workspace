@@ -42,15 +42,15 @@ $path2 = 'all_pricing';
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12 align-self-center p-static order-2 text-center">
-										<h1 class="text-dark font-weight-bold text-8">
-											<?= $blog['title'] ?>
+										<h1 class="text-dark font-weight-bold text-8">										
+											<?= Yii::t('app', $blog['page_code_title']) ?>
 										</h1>
 									</div>
 								</div>
 							</div>
 						</section>
 						<article class="post post-large blog-single-post border-0 m-0 p-0">
-							<div class="post-image ms-0">							
+							<div class="post-image ms-0 post-image google-map-borders">							
 									<img src="<?= $blog['image'] ?>"
 										class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />								
 							</div>
@@ -65,9 +65,9 @@ $path2 = 'all_pricing';
 								
 							</div>
 							<div class="post-content ms-0">
-								<h2 class="font-weight-semi-bold"><a href="blog-post.html">
-										<?= $blog['subtitle'] ?>
-									</a></h2>
+								<h2 class="font-weight-semi-bold">
+									<?= Yii::t('app', $blog['page_code_subtitle']) ?>
+								</h2>
 								<div class="post-meta">
 									<span><i class="far fa-user"></i> By <a href="#">
 										<?php $urlParamsVal = ['site/blog', 
@@ -137,7 +137,9 @@ $path2 = 'all_pricing';
 									<?= (count($comments) > 0)? '<span><i class="far fa-comments"></i> <a href="#">'.count($comments).' Comments</a></span>' : '' ?> 
 								</div>
 
-								<?= $blog['text'] ?>
+								<span class="text-4 text-dark">
+									<?= Yii::t('app', $blog['page_code_text']) ?>
+								</span>
 
 									<div class="post-block mt-5 post-share">
 										<h4 class="mb-3">Share this Post</h4>

@@ -29,9 +29,10 @@ class Configurations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['field', 'type', 'value'], 'required'],
+            [['field'], 'required'],
+            [['field'], 'unique'],
             [['active'], 'integer'],
-            [['field', 'type', 'value'], 'string', 'max' => 255],
+            [['field'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,9 +43,7 @@ class Configurations extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'field' => 'Field',
-            'type' => 'Type',
-            'value' => 'Value',
+            'field' => 'Field',         
             'active' => 'Active',
         ];
     }

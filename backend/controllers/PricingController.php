@@ -69,9 +69,21 @@ class PricingController extends Controller
     {
         $model = new Pricing();
 
+        $title = 'prices_title_1';
+
+        $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
+
+       if(!empty($count->id)){
+         $title = 'prices_title_'.bcadd($count->id, 1);
+       }
+
         if ($this->request->isPost) {
+
+            
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
+
+                $model::savePricing('pricing', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -80,6 +92,7 @@ class PricingController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'title' => $title
         ]);
     }
 
@@ -95,13 +108,19 @@ class PricingController extends Controller
         $model = $this->findModel($id);
 
         $model->created_date = date('Y-m-d H:i:s');
+        $model = $this->findModel($id);
+
+        $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
+        $title = 'prices_title_'.$count->id;
         
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $model::updatePricing('pricing', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'title' => $title,
         ]);
     }
 

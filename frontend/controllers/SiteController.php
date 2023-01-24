@@ -87,13 +87,38 @@ class SiteController extends Controller
     {
         $this->layout = 'public';
 
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
 
         return $this->render('home/index');
     }
 
     public function actionHome()
     {
-        $this->layout = 'public';
+
+        $this->layout = 'public';      
+      
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('home/index');
     }
@@ -116,6 +141,19 @@ class SiteController extends Controller
     public function actionSitemap()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('texts/sitemap');
     }
@@ -130,6 +168,19 @@ class SiteController extends Controller
     public function actionRecipes()
     {
         $this->layout = 'public';
+     
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         $request = Yii::$app->request; 
         $pg = $request->get('pg');
@@ -201,6 +252,19 @@ class SiteController extends Controller
     {
         $this->layout = 'public';    
         $request = Yii::$app->request;
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         $modelComment = new Comments();
         $model = new GeneratorJson(); 
@@ -239,6 +303,19 @@ class SiteController extends Controller
     {      
         $this->layout = 'public';    
         $request = Yii::$app->request; 
+
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         $request = Yii::$app->request; 
         $pg = $request->get('pg');
@@ -289,6 +366,19 @@ class SiteController extends Controller
     public function actionDownloadApp()
     {
         $this->layout = 'public';
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('download-app');
     }
@@ -302,11 +392,23 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-        
+        Yii::$app->user->logout();        
+      
         $this->layout = 'public';
 
-        return $this->render('about');
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+        return $this->render('home/index');
     }
 
     
@@ -319,6 +421,18 @@ class SiteController extends Controller
     {
 
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('about/about');
     } 
@@ -326,7 +440,20 @@ class SiteController extends Controller
     public function actionPricing()
     {
 
-        $this->layout = 'public';       
+        $this->layout = 'public';     
+
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
         
         $model = new GeneratorJson(); 
         $pricing = $model->getLastFileUploaded('pricing');  
@@ -348,6 +475,19 @@ class SiteController extends Controller
     public function actionContactUs()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
           
         $model = new GeneratorJson(); 
         $subject = $model->getLastFileUploaded('subjects');  
@@ -376,6 +516,19 @@ class SiteController extends Controller
     {
 
         $this->layout = 'public';
+      
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('@frontend/views/site/calculator/index');
     }
@@ -383,6 +536,19 @@ class SiteController extends Controller
     public function actionFaqs()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
       
         $model = new GeneratorJson(); 
         $faqs = $model->getLastFileUploaded('faqs');
@@ -395,11 +561,39 @@ class SiteController extends Controller
     public function actionFeatures()
     {
         $this->layout = 'public';
+
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+
         return $this->render('features/features');
     }
     public function actionBlog()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+
 
         $model = new GeneratorJson(); 
         $blogs = $model->getLastFileUploaded('blogs');   
@@ -478,6 +672,19 @@ class SiteController extends Controller
     public function actionCoockies()
     {
         $this->layout = 'public';
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('texts/coockies');
     
@@ -486,6 +693,19 @@ class SiteController extends Controller
     public function actionPrivacyPolicy()
     {
         $this->layout = 'public';   
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('texts/privacy-policy'); 
     }
@@ -493,6 +713,19 @@ class SiteController extends Controller
     public function actionBlogCategory()
     {
         $this->layout = 'public';
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         $json = file_get_contents(Yii::$app->basePath.'\web\json\texts.json');
         $texts = Json::decode($json);
@@ -527,6 +760,19 @@ class SiteController extends Controller
     public function actionTermsAndConditions()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
 
         return $this->render('texts/terms-and-conditions');     
     } 
@@ -534,6 +780,19 @@ class SiteController extends Controller
     public function actionGdpr()
     {
         $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
    
         return $this->render('texts/gdpr');  
 
@@ -545,7 +804,7 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionRequestPasswordReset()
-    {
+    {     
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -557,7 +816,7 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
         }
 
-        return $this->render('requestPasswordResetToken', [
+        return $this->render('login/requestPasswordResetToken', [
             'model' => $model,
         ]);
     }
@@ -596,20 +855,35 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-      
+            return $this->render('home/index');
+        }      
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->render('home/index', [
+                'model' => $model,
+            ]);
         }
 
         $model->password = '';
         $this->layout = 'public';
 
-        return $this->render('login', [
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('login/login_maintenance', [
+                'model' => $model,
+            ]);
+        }
+     
+        return $this->render('login/login', [
             'model' => $model,
         ]);
     }
@@ -624,13 +898,32 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
 
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
         $submitEmail = '';
 
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {            
            
             $submitEmail = 'success';
-            //return $this->goHome();
+
+            $modelLogin = new LoginForm();
+
+            return $this->render('login/login', [
+                'model' => $modelLogin,
+                'submitEmail' => $submitEmail
+            ]);
         }
 
         //$this->layout = 'publicDark';
@@ -650,6 +943,7 @@ class SiteController extends Controller
      */
     public function actionVerifyEmail($token)
     {
+      
         Yii::$app->db->createCommand("UPDATE user SET status=:status WHERE verification_token=:token")
         ->bindValue(':status', User::STATUS_ACTIVE)
         //->bindValue(':username', $user->username)
@@ -694,6 +988,9 @@ class SiteController extends Controller
      */
     public function actionResendVerificationEmail()
     {
+
+        $this->layout = 'public';
+
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -703,8 +1000,71 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
         }
 
-        return $this->render('resendVerificationEmail', [
+        return $this->render('login/resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+
+    public function actionOrderComplete()
+    {
+
+        $this->layout = 'public';
+
+        return $this->render('payment/order-complete');
+    }
+
+    public function actionCheckout()
+    {
+
+        $this->layout = 'public';
+
+        $request = Yii::$app->request;
+
+        $plan = $request->get('plan');
+                
+        $model = new GeneratorJson(); 
+        $pricing = $model->getLastFileUploaded('pricing');    
+
+        $pricingSpecs = $model->getLastFileUploaded('pricing_specs');
+
+        $arrPriceSpecs = [];
+        $price = 0;
+
+        foreach ($pricing as $key => $value){
+            if($value['key'] == 'euro'){
+                $price = (isset($value[$plan]) ? $value[$plan] : 0);
+            }         
+        }
+
+        foreach ($pricingSpecs as $key => $categories){
+            if($categories['type'] == $plan){
+                $arrPriceSpecs[] = $categories['page_code'];
+            }         
+        }
+
+        switch ($plan) {
+            case "basic":
+                $plan = 'Basic';
+              break;
+            case "standard":
+                $plan = 'Standard';
+              break;
+            case "professional":
+                $plan = 'Professional';
+              break;
+            case "enterprise":
+                $plan = 'Enterprise';
+            break;
+          
+          }
+
+        return $this->render('payment/checkout',
+        [
+            'plan' => $plan,    
+            'price' => $price,           
+            'arrPriceSpecs' => $arrPriceSpecs
+        ]
+    );
     }
 }

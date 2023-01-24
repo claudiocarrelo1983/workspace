@@ -27,7 +27,7 @@ $path2 = 'faqs';
             <div class="row">
                 <div class="col">
                     <h2 class="text-color-dark font-weight-normal text-5 mb-2">
-                        <?= Yii::t('app', 'title_'.$path2) ?>
+                        <?= Yii::t('app', 'faqs_title') ?>
                     </h2>
                     <p class="lead"><?= Yii::t('app', 'faqs_text') ?></p>
 
@@ -36,7 +36,7 @@ $path2 = 'faqs';
                     <div class="toggle toggle-primary m-0" data-plugin-toggle>
                         <?php foreach ($faqs as $key => $value): ?> 
                             <section class="toggle">
-                                <a class="toggle-title"><?= Yii::t('app', $value['page_code_question']) ?></a>
+                                <a class="toggle-title toggle-title1"><?= Yii::t('app', $value['page_code_question']) ?></a>
                                 <div class="toggle-content">
                                     <p><?=Yii::t('app', $value['page_code_answer']) ?></p>
                                 </div>

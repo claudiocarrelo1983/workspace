@@ -18,20 +18,25 @@ use yii\helpers\Url;
 
     <div class="row">  
         <div class="col-3">
-            <?= $form->field($model, 'field') ?>
-        </div>
+            <?= $form->field($model, 'field')->dropdownList(
+                [
+                    'maintenance' => 'Maintenance',
+                    'login' => 'Login',
+                    'register' => 'Register'
+                ]); 
+            ?>
+        </div>  
         <div class="col-3">
-            <?= $form->field($model, 'type') ?>
-        </div>
-        <div class="col-3">
-             <?= $form->field($model, 'value') ?>
-        </div>
-        <div class="col-3">
-            <?= $form->field($model, 'active') ?>
+            <?= $form->field($model, 'active')->dropdownList(
+                [
+                    1 => 'Yes', 
+                    0 => 'No'
+                ]); 
+            ?>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('configurations/index'); ?>">Reset</a>
     </div>

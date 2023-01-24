@@ -35,9 +35,7 @@ class m221209_075923_configurations extends Migration
 
         $this->createTable('{{%configurations}}', [
             'id' => $this->primaryKey(),              
-            'field' => $this->string()->notNull(),     
-            'type' => $this->string()->notNull(), 
-            'value' => $this->string()->notNull(), 
+            'field' => $this->string()->notNull()->unique(),    
             'active' => $this->boolean()          
              
         ], $tableOptions);

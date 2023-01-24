@@ -55,33 +55,33 @@ foreach($distinctPagesArr as $value2){
     ]); ?>
 
     <div class="row">
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'id') ?>
         </div>
-        <div class="col-3">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'country_code')->dropDownList(
                 $countryUsers
                 ,                     
                 array('required','separator' => "</br>" ))->label('Select Country');
             ?>  
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
              <?= $form->field($model, 'page')->dropDownList(                
                 $PageArr,
                 array('required','separator' => "</br>" ))->label('Select Page');
             ?>   
         </div>  
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'page_code') ?>
         </div>
-        <div class="col-3">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'text') ?>
         </div>    
     </div>
 
     <?php // echo $form->field($model, 'active') ?>
 
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('translations/index'); ?>">Reset</a>
     </div>

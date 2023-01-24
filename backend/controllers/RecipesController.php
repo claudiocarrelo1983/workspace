@@ -50,6 +50,10 @@ class RecipesController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $searchModel = new RecipesSearch();
         $modelRecipeId = new RecipesLoad();
         $modelRecipe = new Recipes;       
@@ -87,6 +91,10 @@ class RecipesController extends Controller
      */
     public function actionView($id)
     {        
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $connection = new Query;
         $result = $connection->select([
             'recipe_code' 
@@ -119,6 +127,10 @@ class RecipesController extends Controller
 
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $modelRecipe = new Recipes;
         $RecipesSteps = new RecipesSteps;
         $RecipesFood = new RecipesFood;
@@ -201,6 +213,10 @@ class RecipesController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $modelRecipe = $this->findModel($id);
         $RecipesSteps = new RecipesSteps;
         $RecipesFood = new RecipesFood;        

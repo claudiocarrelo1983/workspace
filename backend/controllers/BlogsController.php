@@ -51,6 +51,9 @@ class BlogsController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
         $searchModel = new BlogsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -71,6 +74,9 @@ class BlogsController extends Controller
     public function actionView($id)
     {
 
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
     
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -86,6 +92,10 @@ class BlogsController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $model = new Blogs();   
         $title = 'blog_title_1';
         $subtitle = 'blog_subtitle_1';
@@ -125,7 +135,6 @@ class BlogsController extends Controller
                 $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
             }
 
-            $model->guid = Helpers::GUID();
  
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
@@ -154,6 +163,10 @@ class BlogsController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $model = $this->findModel($id);
 
         $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();

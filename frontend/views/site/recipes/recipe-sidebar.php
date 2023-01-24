@@ -29,7 +29,7 @@ $query = new Query;
     </h5>
     <ul class="nav nav-list flex-column mb-5">
         <li class="nav-item">
-            <a class="nav-link" href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/blog'])); ?>">
+            <a class="nav-link" href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/recipes'])); ?>">
                 <?= Yii::t('app', "recipes_block_all") ?>
             </a>
         </li>

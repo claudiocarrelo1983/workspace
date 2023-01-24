@@ -14,16 +14,25 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
+   <div class="row py-4">   
+        <div class="col-lg-3 col-sm-12">
+            <?= $form->field($model, 'id') ?>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+            <?= $form->field($model, 'username') ?>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+            <?= $form->field($model, 'full_name') ?>
+        </div> 
+        <div class="col-lg-3 col-sm-12">
+            <?= $form->field($model, 'location') ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'full_name') ?>
 
-    <?= $form->field($model, 'image') ?>
 
-    <?= $form->field($model, 'location') ?>
 
     <?php // echo $form->field($model, 'title') ?>
 
@@ -75,7 +84,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'created_date') ?>
 
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
     </div>

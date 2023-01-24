@@ -172,7 +172,12 @@ $path2 = 'pricing';
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn btn-dark btn-modern btn-outline py-2 px-4">
+                            <a href="<?= str_replace('/frontend/web', '',
+                                    Url::toRoute([
+                                        'site/checkout','plan' => 'basic'
+                                    ])) 
+                                ?>" 
+                                class="btn btn-dark btn-modern btn-outline py-2 px-4">
                                 <?= Yii::t('app', "pricing_block_3_start_now") ?>
                             </a>
                         </div>
@@ -203,9 +208,14 @@ $path2 = 'pricing';
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn btn-primary btn-modern py-2 px-4">
+                            <a href="<?= str_replace('/frontend/web', '',
+                                    Url::toRoute([
+                                        'site/checkout','plan' => 'standard'
+                                    ])) 
+                                ?>" 
+                                class="btn btn-dark btn-modern btn-outline py-2 px-4">
                                 <?= Yii::t('app', "pricing_block_3_start_now") ?>
-                            </a>
+                            </a>                     
                         </div>
                     </div>
                 </div>
@@ -235,9 +245,14 @@ $path2 = 'pricing';
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn btn-dark btn-modern btn-outline py-2 px-4">
+                            <a href="<?= str_replace('/frontend/web', '',
+                                    Url::toRoute([
+                                        'site/checkout','plan' => 'professional'
+                                    ])) 
+                                ?>" 
+                                class="btn btn-dark btn-modern btn-outline py-2 px-4">
                                 <?= Yii::t('app', "pricing_block_3_start_now") ?>
-                            </a>
+                            </a>                           
                         </div>
                     </div>
                 </div>      

@@ -24,17 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Create Configurations', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'field',
-            'type',
-            'value',
+            'field',          
             'active',
         ],
     ]) ?>
+
 
 </div>

@@ -26,14 +26,15 @@ $currentUrl = Yii::$app->controller->route;
 
             $key = $menucategory['key']; 
             $url = (($menucategory['url'] == 'null') ? '#' : $menucategory['url']);
-            $title = $menucategory['title'];   
+            $title = $menucategory['title'];  
 
         ?>
 
         <li class="dropdown">
             <?= Html::a(
                 Yii::t('app', $title), 
-                str_replace('/frontend/web', '',Url::toRoute($url)),     
+               
+                str_replace('/frontend/web', '', (($url == 'site/home') ? Url::home() : Url::toRoute($url))),     
                 [
                 'class' => 'dropdown-item dropdown-toggle',
                 'data-hash' => '',         

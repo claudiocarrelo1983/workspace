@@ -20,7 +20,7 @@ $currentUrl = Yii::$app->controller->route;
         <?php 
 
             $key = $menucategory['key']; 
-            $url = (($menucategory['url'] == 'null') ? '#' : $menucategory['url']);
+            $url = (($menucategory['url'] == 'null') ? '' : $menucategory['url']);
             $title = $menucategory['title'];   
 
         ?>

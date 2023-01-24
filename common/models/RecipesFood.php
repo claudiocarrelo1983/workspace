@@ -103,7 +103,7 @@ class RecipesFood extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        $i = 1;
+        $i = 1;   
 
        foreach($arrValues as $arrValue){
 
@@ -119,10 +119,10 @@ class RecipesFood extends \yii\db\ActiveRecord
                 'page_code' => $pageCode,   
                 'measure' => $arrValue['measure'],         
                 'quantity' => $arrValue['quantity'],         
-                'calories' => $arrValue['calories'],           
-                'fat' => $arrValue['fat'],
-                'carbs' => $arrValue['carbs'],          
-                'protein' => $arrValue['protein'],  
+                'calories' => bcdiv(bcmul($arrValue['quantity'], $arrValue['calories']), 100),           
+                'fat' => bcdiv(bcmul($arrValue['quantity'], $arrValue['calories']), 100),         
+                'carbs' => bcdiv(bcmul($arrValue['carbs'], $arrValue['calories']), 100),         
+                'protein' => bcdiv(bcmul($arrValue['protein'], $arrValue['calories']), 100),    
                 'active' => $arrValue['active'],
                 'recipe_food_en' => $arrValue['recipe_food_en'],         
                 'recipe_food_pt' => $arrValue['recipe_food_pt'],         

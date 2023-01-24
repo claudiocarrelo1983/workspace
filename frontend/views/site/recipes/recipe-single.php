@@ -49,7 +49,7 @@ $path2 = 'recipes_single';
 						</div>
 					</section>
 					<article class="post post-large blog-single-post border-0 m-0 p-0">
-						<div class="post-image ms-0">							
+						<div class="post-image ms-0 google-map-borders">							
 							<img src="<?= $recipe['image'] ?>" class=" img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />								
 						</div>
 						<div class="post-date ms-0">

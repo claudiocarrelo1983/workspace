@@ -16,27 +16,27 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="row">    
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'title') ?>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'coin') ?>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
              <?= $form->field($model, 'key') ?>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'standard') ?>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'professional') ?>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-sm-12">
             <?= $form->field($model, 'enterprise') ?>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
     </div>

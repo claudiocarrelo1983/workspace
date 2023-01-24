@@ -20,7 +20,7 @@ $this->title = 'My Yii Application';
 								<span class="font-weight-extra-bold blue-lettering text-8 mb-2 mt-2">Gym</span>						
 						</div>
 					 </div>'),
-                    Url::home(),     
+					str_replace('/frontend/web', '', Url::home()),  
                     [
                     'class' => 'logo-url',
                     'data-hash' => '',         

@@ -44,7 +44,11 @@ $structure = $model->getLastFileUploaded('other','footer');
 				<h5 class="text-4 text-color-light mb-3"><?= Yii::t('app', 'footer_category_menu') ?></h5>
 				<ul class="list list-unstyled mb-0">
 					<?php foreach ($menu['menu'] as $menucategory): ?> 
-						<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute($menucategory['url'])) ?>"><?= Yii::t('app', $menucategory['title']) ?></a></li>	
+						<li class="mb-0">
+							<a href="<?= str_replace('/frontend/web', '', 
+								(($menucategory['url']== 'site/home') ? Url::home() : Url::toRoute($menucategory['url']))) ?>"><?= Yii::t('app', $menucategory['title']) ?>
+							</a>
+						</li>	
 					<?php endforeach; ?>   		
 				</ul>
 			</div>

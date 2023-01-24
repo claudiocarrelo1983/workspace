@@ -7,6 +7,7 @@ use common\models\BlogsCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * BlogCategoryController implements the CRUD actions for BlogsCategory model.
@@ -39,6 +40,10 @@ class BlogscategoryController extends Controller
     public function actionIndex()
     {                
     
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $searchModel = new BlogscategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -56,6 +61,9 @@ class BlogscategoryController extends Controller
      */
     public function actionView($id)
     {      
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }        
         
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -69,6 +77,10 @@ class BlogscategoryController extends Controller
      */
     public function actionCreate()
     {     
+
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
         $model = new BlogsCategory();
       
@@ -105,6 +117,10 @@ class BlogscategoryController extends Controller
      */
     public function actionUpdate($id)
     {      
+
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
         $model = $this->findModel($id);
 
