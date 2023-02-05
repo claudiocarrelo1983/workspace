@@ -37,12 +37,8 @@ class m220725_175347_subjects extends Migration
             'id' => $this->primaryKey(),              
             'page_code' => $this->string()->notNull(),  
             'subject' => $this->string()->notNull(),  
-            'text_pt' => $this->string()->notNull(), 
-            'text_es' => $this->string()->notNull(), 
-            'text_en' => $this->string()->notNull(), 
-            'text_it' => $this->string()->notNull(), 
-            'text_fr' => $this->string()->notNull(), 
-            'text_de' => $this->string()->notNull(),
+            'text_pt' => $this->string()->notNull(),       
+            'text_en' => $this->string()->notNull(),   
             'order' => $this->integer()->notNull(), 
             'created_date' => $this->timestamp()
              

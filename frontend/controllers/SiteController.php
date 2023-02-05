@@ -593,8 +593,6 @@ class SiteController extends Controller
             return $this->render('home/maintenance');
         }
 
-
-
         $model = new GeneratorJson(); 
         $blogs = $model->getLastFileUploaded('blogs');   
          
@@ -620,52 +618,51 @@ class SiteController extends Controller
         if(!empty($username)){
             $urlParams = array_merge($urlParams, ['username' => $username]);
         }
+  
 
-        $blogFilter = array();
-
-        foreach($blogs as $blog){
+        foreach($blogs as  $blog){
 
             if($username != '#'){
                 if(empty($username)){
-                    $blogFilter[] = $blog;			
+                    //$blogFilter[$blog['id']] = $blog;			
                 }else{                
                     if(trim($blog['username']) == trim($username)){
-                        $blogFilter[] = $blog;
+                        $blogFilter[$blog['id']] = $blog;
+                        $blogs = $blogFilter;
                     }		
                 }	
             }
-         
-            if($tag != '#'){
+
+
+      
+            if($tag != '#'){       
                 if(empty($tag)){
-                    //$blogFilter[] = $blog;			
+                    //$blogFilter[$blog['id']] = $blog;
                 }else{
 
-                    $explode = explode(',', $blog['tags']);
-
-                    $break = false;
+                    $explode = explode(',', $blog['tags']);                
 
                     foreach($explode as $tagValue){
                         if(trim($tagValue) == trim($tag)){   
-                            $break = true;
+                            $blogFilter[$blog['id']] = $blog;         
+                            $blogs = $blogFilter;     
                             break;
                         }	
                     }       
-                    
-                    if($break == true){
-                        $blogFilter[] = $blog;
-                    }
                 }	
             }	
         }
-        
-        $blogs = $blogFilter;
+
+  
+  
 
 
         return $this->render('blogs/blog',
         [            
             'blogs' => $blogs,
             'pg' => $pg,
-            'urlParams' => $urlParams
+            'urlParams' => $urlParams,
+            'username' => $username
         ]);
     }
   

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var app\models\BlogsSearch $model */
@@ -20,14 +21,21 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'id') ?>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <?= $form->field($model, 'page_code_title') ?>
+            <?= $form->field($model, 'title') ?>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <?= $form->field($model, 'page_code_subtitle') ?>
-        </div>
+            <?= $form->field($model, 'publish')->dropdownList(
+                [1 => 'Yes', 0 => 'No'],
+                [''=>'Choose']); 
+            ?>
+        </div>   
         <div class="col-lg-3 col-sm-12">
-            <?= $form->field($model, 'page_code_text') ?>
+            <?= $form->field($model, 'active')->dropdownList(
+                [1 => 'Yes', 0 => 'No'],
+                [''=>'Choose']); 
+            ?>
         </div>  
+      
     </div>  
 
     
@@ -90,8 +98,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group py-3">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
+        <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('blogs/index'); ?>">Reset</a>
+    </div>   
 
     <?php ActiveForm::end(); ?>
 

@@ -41,17 +41,9 @@ class m220722_223505_texts extends Migration
             'title' => $this->string(),            
             'text' => $this->text(),
             'title_pt' => $this->string()->notNull(),
-            'text_pt' => $this->text()->notNull(), 
-            'title_es' => $this->string()->notNull(),
-            'text_es' => $this->text()->notNull(), 
+            'text_pt' =>  $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 
             'title_en' => $this->string()->notNull(),
-            'text_en' => $this->text()->notNull(), 
-            'title_it' => $this->string()->notNull(),
-            'text_it' => $this->text()->notNull(), 
-            'title_fr' => $this->string()->notNull(),
-            'text_fr' => $this->text()->notNull(), 
-            'title_de' => $this->string()->notNull(),
-            'text_de' => $this->text()->notNull(),
+            'text_en' => $this->text()->notNull(),         
             'created_date' => $this->timestamp()
              
         ], $tableOptions);

@@ -93,6 +93,24 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         return $result;
     }
+
+    public static function methodTitleSimple($table){
+
+        $method = '';       
+      
+        $table = explode("_",$table);            
+    
+        if(is_array($table)){
+            foreach($table as $name){
+                $method .= ucfirst($name);
+            
+            }              
+        }else{
+            $method = ucfirst($table);
+        }                 
+          
+        return $method;
+    }
     
 
 
@@ -243,7 +261,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
             $columns
         )
         ->from([$table])      
-        ->all();
+        ->all();        
 
         GeneratorJson::saveJson($blogArr, $table);
     }  
@@ -262,6 +280,63 @@ class GeneratorJson extends \yii\db\ActiveRecord
             'order' => SORT_ASC          
           ])->all();
 
+
+        GeneratorJson::saveJson($blogArr, $table);
+    }
+
+    public static function updateRecipesCategory($table, $columns){
+        
+        $recipesQuery = new Query; 
+      
+        $recipesQuery = new Query; 
+
+        $recipesArr = $recipesQuery->select(
+            $columns
+        )
+        ->from([$table])    
+        ->orderBy([
+            'order' => SORT_ASC          
+          ])->all();
+
+        GeneratorJson::saveJson($recipesArr, $table);
+    }
+
+
+    
+
+    public static function updateBlogs($table, $columns){
+        
+        $blogQuery = new Query; 
+
+        $blogArr = $blogQuery->select(
+            $columns
+        )
+        ->from([$table])   
+        ->where([
+            'publish' => true,  
+            'active' => true,  
+        ])     
+        ->orderBy([       
+            'order' => SORT_ASC          
+          ])->all();
+
+        GeneratorJson::saveJson($blogArr, $table);
+    }
+
+    public static function updateBlogsCategory($table, $columns){
+        
+        $blogQuery = new Query; 
+
+        $blogArr = $blogQuery->select(
+            $columns
+        )
+        ->from([$table])   
+        ->where([       
+            'active' => true,  
+        ])     
+        ->orderBy([       
+            'order' => SORT_ASC          
+          ])->all();
 
         GeneratorJson::saveJson($blogArr, $table);
     }
@@ -381,26 +456,75 @@ class GeneratorJson extends \yii\db\ActiveRecord
   
     }
 
+    
     public function populateTable(){
-  
-          $tables = GeneratorJson::getAllTables();    
+
+        $tables = GeneratorJson::getAllTables();    
 
         foreach($tables as $table){
             if(isset($table['TABLE_NAME'])){
 
-               
-                $method = 'populate'.ucfirst($table['TABLE_NAME']);           
+                $method = 'updateTranslations'.ucfirst($table['TABLE_NAME']);    
 
                 $columns = GeneratorJson::getTableColumns($table['TABLE_NAME']);
-              
-                if(method_exists(__CLASS__, $method)){
-                    GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
-                }else{
-                    GeneratorJson::populateTablesGeneric($table['TABLE_NAME'],  $columns);  
-                }
+
+                switch ($table['TABLE_NAME']) {
+                    /*
+                    case 'pricing':
+                    case 'pricing_specs':
+                    case 'translations':
+                    case 'blogs':
+                    case 'blogs_category':
+                    case 'configurations':
+                    case 'countries':
+                    case 'faqs':
+                    case 'subjects': 
+                    case 'texts':    
+                    case 'recipes':     
+                    case 'recipes_category': 
+                    case 'comments':       
+                    case 'team':     
+                    */ 
+                    case 'pricing_specs':
+                    case 'faqs':
+                    case 'subjects':  
+                    case 'texts':    
+                    case 'team':  
+                    case 'recipes':     
+                    case 'recipes_category': 
+                    case 'blogs_category':  
+                    case 'blogs':     
+                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns);             
+                }             
             }           
         }
     }
+
+    public static function updateTranslationsGeneric($table,  $columns){
+       
+        $blogQuery = new Query;       
+
+        $name = GeneratorJson::methodTitleSimple($table);
+
+        $class = "common\models\\".ucfirst($name);        
+    
+        $blogArr = $blogQuery->select('*')
+        ->from([$table])      
+        ->all();
+       
+        $model = new $class();
+
+        foreach($blogArr as $blog){
+            foreach ($blog as $key => $value) {
+                $model->$key = $blog[$key];      
+            }    
+
+            $method = 'update'.ucfirst($name);    
+        
+            $class::$method($table.'_text', $model);
+        }     
+ 
+    } 
     
     public static function populateTablesGeneric($table,  $columns){
 
@@ -415,9 +539,27 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     if($key != 'id'){
                         $arrColumns[$key] = $value;
                     }                   
-                }     
-
-                $connection->createCommand()->insert($table, $arrColumns)->execute();
+                }
+              
+                switch($table){
+                    case "blogs":
+                    case "blogs_category":
+                    case "countries":
+                    case "texts":
+                    case "translations":
+                        //$connection->createCommand()->delete($table)->execute();
+                        $connection->createCommand()->insert($table, $arrColumns)->execute();
+        
+                    
+                    break;
+                    case "comments":
+                        break;
+                    default:
+                    print_r($table);
+                    die();
+                        break;
+                }
+              
 
             }       
         }  

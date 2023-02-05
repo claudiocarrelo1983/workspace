@@ -18,7 +18,7 @@ class BlogsSearch extends Blogs
     {
         return [
             [['id'], 'integer'],
-            [['image', 'title', 'subtitle', 'alt',  'text', 'username', 'tags', 'created_date'], 'safe'],
+            [['image', 'title', 'subtitle', 'alt',  'text', 'username', 'tags', 'created_date','publish','active'], 'safe'],
         ];
     }
 
@@ -63,12 +63,15 @@ class BlogsSearch extends Blogs
             'created_date' => $this->created_date,
         ]);
 
+ 
         $query->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'subtitle', $this->subtitle])
             ->andFilterWhere(['like', 'alt', $this->alt])         
             ->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['=', 'active', $this->active])
+            ->andFilterWhere(['=', 'publish', $this->publish])
             ->andFilterWhere(['like', 'tags', $this->tags]);
 
         return $dataProvider;

@@ -33,6 +33,8 @@ $tags = $tagQuery->select([
 $users = $tagQuery->select([
     'id', 
     'guid', 
+    'first_name',
+    'last_name',
     'username', 
     'name'
     ])
@@ -42,9 +44,8 @@ $users = $tagQuery->select([
 $arrUsers = array();
 
 foreach($users as $user){
-    $arrUsers[$user['guid']] = $user['name'];
+    $arrUsers[$user['username']] = $user['first_name'].' '.$user['last_name'];
 }
-
 
 
 $arrTags = array();
@@ -63,8 +64,8 @@ foreach($tags as $tag){
     }
   
     
-    if($exists === false){
-        $arrTags[$tag['tag']] = $tag['description'];
+    if($exists === false){  
+        $arrTags[$tag['tag']] = $tag['description'];            
     } 
 }
 
@@ -74,7 +75,8 @@ $tagQueryUser = new Query;
 
 $tags = $tagQueryUser->select([
     'tag', 
-    'description'
+    'description',
+    'tag_parent_id'
     ])
 ->from('blogs_category')    
 ->all();
@@ -82,7 +84,9 @@ $tags = $tagQueryUser->select([
 $tagsArr = array();
 
 foreach($tags as $tag){
-    $tagsArr[$tag['tag']] = $tag['description'];
+    if(!empty($tag['tag_parent_id'])){
+         $tagsArr[$tag['tag']] = $tag['description'];
+    }
 }
 
 ?>

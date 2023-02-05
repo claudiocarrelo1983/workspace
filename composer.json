@@ -40,7 +40,8 @@
         "symfony/css-selector": "2.8",
         "yiier/yii2-chartjs-widget": "^1.3",
         "bsadnu/yii2-googlecharts": "^1.2",
-        "2amigos/yii2-chartjs-widget": "^3.0"
+        "2amigos/yii2-chartjs-widget": "^3.0",
+        "gromovfjodor/yii2-image-resize": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

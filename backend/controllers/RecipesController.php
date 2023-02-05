@@ -177,10 +177,10 @@ class RecipesController extends Controller
                 if(isset(Yii::$app->request->post()['Recipes'])){  
                     $recipesCode = $modelRecipe->saveRecipes('recipe_list', $modelRecipe);
                     if (isset(Yii::$app->request->post()['RecipesSteps'])) {
-                        $RecipesSteps->saveRecipesSteps('recipes_list', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
+                        $RecipesSteps->saveRecipesSteps('recipes_text', Yii::$app->request->post()['RecipesSteps'], $recipesCode);                        
                     }
                     if (isset(Yii::$app->request->post()['RecipesFood'])) {
-                        $RecipesFood->saveRecipesFood('recipes_list', Yii::$app->request->post()['RecipesFood'], $recipesCode);
+                        $RecipesFood->saveRecipesFood('recipes_text', Yii::$app->request->post()['RecipesFood'], $recipesCode);
                     }
                 }     
 
@@ -272,12 +272,12 @@ class RecipesController extends Controller
             }
        
           
-            if($recipeCode = $modelRecipe->updateRecipes('recipes_list',$modelRecipe)){
+            if($recipeCode = $modelRecipe->updateRecipes('recipes_text',$modelRecipe)){
                 if (isset(Yii::$app->request->post()['RecipesSteps'])) {                
-                    $RecipesSteps->updateRecipesSteps('recipes_list', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);
+                    $RecipesSteps->updateRecipesSteps('recipes_text', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);
                 }
                 if(isset(Yii::$app->request->post()['RecipesFood'])){
-                    $RecipesFood->updateRecipesFood('recipes_list', Yii::$app->request->post()['RecipesFood'], $modelRecipe);   
+                    $RecipesFood->updateRecipesFood('recipes_text', Yii::$app->request->post()['RecipesFood'], $modelRecipe);   
                 }
                           
                 return $this->redirect(['view', 'id' => $modelRecipe->id]);

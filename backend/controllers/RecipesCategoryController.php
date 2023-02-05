@@ -81,7 +81,7 @@ class RecipesCategoryController extends Controller
         if ($this->request->isPost) {
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->saveRecipesCategory('recipes_category',$model);
+                $model->saveRecipesCategory('recipes_category_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -111,7 +111,7 @@ class RecipesCategoryController extends Controller
 
         $model->created_date = date('Y-m-d H:i:s');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updateRecipesCategory('recipes_category', $model);
+            $model->updateRecipesCategory('recipes_category_text', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

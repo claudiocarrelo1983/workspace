@@ -3,12 +3,11 @@
 use yii\helpers\Url;
 use yii\db\Query;
 use common\models\Recipes;
+use common\models\RecipesCategory;
 use common\models\GeneratorJson;
 
-$model = new GeneratorJson(); 
-$structure = $model->getLastFileUploaded('recipes_category');
-
-$structure  = Recipes::recipeTags($structure);
+$recipesCat = new RecipesCategory();
+$arrResult = $recipesCat::organizeRecipesCategories();
 
 $currentUrl = Yii::$app->controller->route;
 
@@ -33,7 +32,7 @@ $query = new Query;
                 <?= Yii::t('app', "recipes_block_all") ?>
             </a>
         </li>
-            <?php foreach ($structure as $key => $categories): ?>        
+            <?php foreach ($arrResult as $key => $categories): ?>        
         
 
             <?php $count = (isset($categories['submenu']) ? count($categories['submenu']) : 0); ?>
@@ -61,7 +60,7 @@ $query = new Query;
                 if($count > 0){
                     foreach ($categories['submenu'] as  $subcategory): 
                 ?>
-                	<?php $urlParamsVal = ['site/blog',                                            															
+                	<?php $urlParamsVal = ['site/recipes',                                            															
                                             'pg' => $urlParams['pg'],
                                             'tag' => $subcategory['recipe_cat_code'],													
                                         ];?>

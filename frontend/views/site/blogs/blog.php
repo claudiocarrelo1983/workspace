@@ -52,6 +52,18 @@ if(0 < $pg){
 	$arrBlog = (isset($arrBlog[1]) ? $arrBlog['1'] : $arrBlog);
 }
 
+$teams = $model->getLastFileUploaded('team');
+
+$arrUser = array();
+
+foreach ($teams as $member) {
+	if($username == $member['username']){
+		$arrUser = $member;
+		break;
+	}
+}
+
+
 $path2 = 'blog';
 
 ?>
@@ -59,21 +71,13 @@ $path2 = 'blog';
 <!-- Banner -->
 <?= $this->render('@frontend/views/site/banner',['path1' => 'Menu','path2' => $path2]); ?>
 
-<div class="container py-4 mb-4">
-	<div class="row text-center pb-5">
+<div class="container py-4">
+	<div class="row text-center">
 		<div class="col-md-9 mx-md-auto">
 			<div class="overflow-hidden mb-3">
-				<h1 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
+				<h1 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">				
 					<span>
-						<?= Yii::t('app', "blog_block__1_title_1") ?>
-					</span>
-					<span class="word-rotator-words bg-primary">
-						<b class="is-visible"><?= Yii::t('app', "blog_block__1_1") ?></b>
-						<b><?= Yii::t('app', "blog_block__1_2") ?></b>
-						<b><?= Yii::t('app', "blog_block__1_3") ?></b>
-					</span>
-					<span>
-						<?= Yii::t('app', "blog_block__1_title_2") ?>
+						<?= Yii::t('app', "blog_block_1_title") ?>
 					</span>
 				</h1>   
 			</div>
@@ -86,6 +90,77 @@ $path2 = 'blog';
 	</div>
 </div>
 
+<?php if (!empty($arrUser)) { ?>
+	<div class="container mb-4">
+		<div class="post-block mt-4 pt-2 ">		
+			<div class="row">
+				<div class="col-lg-3 col-sm-12">
+					<span class="thumb-info thumb-info-hide-wrapper-bg">
+						<span class="thumb-info-wrapper">
+							<img src="<?= $arrUser['path'].'250x250/'.$arrUser['image'] ?>" class="img-fluid" alt="">
+							<span class="thumb-info-title">
+								<span class="thumb-info-inner pb-2">								
+									<?= Yii::t('app', $arrUser['page_code_title']) ?>
+								</span>								
+							</span>
+						</span>						
+					</span>			
+				</div>
+				<div class="col-lg-9 col-sm-12">
+					<p class="pb-2">
+					<?php $urlParamsVal = ['site/blog', 
+												'username' => $arrUser['username']																								
+											];?>
+						<strong class="name ">
+							<a href="<?= Url::toRoute($urlParamsVal)?>"  class="text-5 pb-2 pt-2 d-block">												
+							<?= Yii::t('app', 'autor') ?> : <?= $arrUser['full_name'] ?> 
+							</a>
+						</strong>
+					</p>
+					<p class="text-3-5 pb-2">
+						<?= Yii::t('app', $arrUser['page_code_text']) ?>
+					</p>
+				
+					<div class="thumb-info-caption mt-3">                    
+                        <span class="thumb-info-social-icons">
+                            <?php
+                                $found  = 0;                               
+
+                                foreach($arrUser as $keyt => $value){
+
+                                    if(!empty($value)){
+
+                                        switch ($keyt) {
+                                            case 'instagram':
+                                            case 'facebook':
+                                            case 'twitter':
+                                            case 'pinterest': 
+                                            case 'linkedin':
+											case 'youtube':
+											case 'tiktok':
+                                                echo  '<a class="m-1" target="_blank" href="'.$value.'"><i class="fab fa-'.$keyt.'"></i><span>'.ucfirst($keyt).'</span></a>';                                        
+                                                break;                                        
+                                            case 'website':
+											case 'web':
+                                                echo '<a class="m-1" target="_blank" href="'.$value.'"><i class="icon-globe"></i><span>'.ucfirst($keyt).'</span></a>';
+                                                
+                                                break;
+                                        }   
+                                    }
+                                }
+
+                                //$timer = bcadd( $timer,200);
+                            ?>
+                        </span>
+					</div> 
+				</div>
+			</div>		
+		</div>
+		<hr class="my-5">
+	</div>
+
+	<?php } ?>
+
 <div role="main" class="main">
 	<div class="container py-4">
 		<div class="row">
@@ -96,11 +171,11 @@ $path2 = 'blog';
 				<div class="blog-posts">
 					<?php foreach ($arrBlog as $key => $categories): ?>    
 						
-					<?php 
-				
+					<?php
+			
 						$arrTags = explode(',', $categories['tags']); 
 						$tagList = array();
-
+			
 						foreach($arrTags as $tag){	
 							foreach($tagsCategory as $category){
 								if($tag == $category['tag']){
@@ -114,8 +189,8 @@ $path2 = 'blog';
 							<div class="row mb-3">
 								<div class="col-lg-5">
 									<div class="post-image post-image google-map-borders ">
-										<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
-											<img src="<?= $categories['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="<?= Yii::t('app', $categories['alt']) ?>" />
+										<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">									
+											<img src="<?= $categories['path'].'322x179/'.$categories['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="<?= Yii::t('app', $categories['alt']) ?>" />
 										</a>
 									</div>
 								</div>
@@ -126,8 +201,14 @@ $path2 = 'blog';
 												<?= Yii::t('app', $categories['page_code_title']) ?>
 											</a>
 										</h2>
-										<p class="mb-0">
-											<?= Blogs::getWords( $categories['page_code_text'], 320); ?> [...]
+										<style>
+											.text-1 > p{
+												font-size: 54px !important;
+											}
+
+										</style>
+										<p class="font-weight-semibold  text-1">
+											<?= Blogs::getWords( Yii::t('app', $categories['page_code_text']), 350); ?> [...]
 										</p>
 									</div>
 								</div>
@@ -136,12 +217,23 @@ $path2 = 'blog';
 								<div class="col">
 									<div class="post-meta">
 										<span><i class="far fa-calendar-alt"></i><?= $categories['created_date'] ?> </span>
-											<span><i class="far fa-user"></i> By
+											<span><i class="far fa-user"></i> 
+												<?= Yii::t('app', 'blog_by') ?>
 												<?php $urlParamsVal = ['site/blog', 
 																		'username' => $categories['username']																								
 																	];?>
 												<a href="<?= Url::toRoute($urlParamsVal)?>">
-													<?= $categories['username'] ?>
+													
+													<?php
+														foreach ($teams as $member) {
+															if($categories['username'] == $member['username']){
+																?>
+																	<?= $member['full_name'] ?>
+																<?php
+																break;
+															}
+														}
+													?>
 												</a>											
 											</span>								
 											<span>
@@ -155,8 +247,9 @@ $path2 = 'blog';
 														if(!empty($tags)){																	
 															$comma = (($i == $count) ? '' : ',');
 															?>					
-																<?php $urlParamsVal = ['site/blog', 									
-																	'username' => '#',																
+																<?php $urlParamsVal = ['site/blog', 	
+																   //'pg' => $urlParams['pg'],								
+																	//'username' => $categories['username'],																
 																	'tag' => $tags['tag'],													
 																];?>
 																							
@@ -175,11 +268,11 @@ $path2 = 'blog';
 															];
 											?>
 											<?php $comments = (isset($comments['blog_' . $categories['id']]) ? $comments['blog_' .$categories['id']] : []); ?>											
-											<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= count($comments) ?> <?= Yii::t('app', 'Comments') ?></a><?= $comma  ?>								
+											<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= count($comments) ?> <?= Yii::t('app', 'blog_comments') ?></a><?= $comma  ?>								
 										</span>
 										<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">
 											<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
-												<?= Yii::t('app', 'Read More') ?>
+												<?= Yii::t('app', 'blog_read_more') ?>
 											</a>
 										</span>
 									</div>
@@ -195,7 +288,8 @@ $path2 = 'blog';
 					<?php }	?>
 				<?php if($numberOfDivisionsCeil > 1){ ?>
 					<ul class="pagination float-end">
-						<li class="page-item">		
+						<li class="page-item">								
+						
 							<?php $urlParamsVal = ['site/blog', 
 								'username' => $urlParams['username'],																	
 								'pg' =>  1,

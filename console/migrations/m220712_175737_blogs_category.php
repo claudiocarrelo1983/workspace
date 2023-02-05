@@ -39,12 +39,9 @@ class m220712_175737_blogs_category extends Migration
             'tag' => $this->string()->notNull()->unique(),          
             'page_code' => $this->string()->notNull()->unique(),  
             'description' => $this->string()->notNull(), 
-            'text_pt' => $this->string()->notNull(), 
-            'text_es' => $this->string()->notNull(), 
-            'text_en' => $this->string()->notNull(), 
-            'text_it' => $this->string()->notNull(), 
-            'text_fr' => $this->string()->notNull(), 
-            'text_de' => $this->string()->notNull(),
+            'text_pt' => $this->string()->notNull(),
+            'text_en' => $this->string()->notNull(),          
+            'order' => $this->integer(),
             'active' => $this->boolean()->defaultValue(true),                   
             'created_date' => $this->timestamp()
         ], $tableOptions);

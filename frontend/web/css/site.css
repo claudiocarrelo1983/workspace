@@ -17,6 +17,9 @@
     border-bottom: 1px  #43495d solid; 
 }
 
+hr{
+   height: 2px !important;
+}
 
 .vertical-menu {
     position: fixed !important; 

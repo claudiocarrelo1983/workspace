@@ -83,7 +83,7 @@ class PricingController extends Controller
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
 
-                $model::savePricing('pricing', $model);
+                $model::savePricing('pricing_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -114,7 +114,7 @@ class PricingController extends Controller
         $title = 'prices_title_'.$count->id;
         
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model::updatePricing('pricing', $model);
+            $model::updatePricing('pricing_text', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

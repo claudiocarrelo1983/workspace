@@ -2,13 +2,11 @@
 
 use yii\helpers\Url;
 use yii\db\Query;
-use common\models\Blogs;
-use common\models\GeneratorJson;
+use common\models\BlogsCategory;
 
-$model = new GeneratorJson(); 
-$structure = $model->getLastFileUploaded('blogs_category');  
+$blogCat = new BlogsCategory();
+$arrResult = $blogCat::organizeBlogCategories();
 
-$structure  = Blogs::blogTags($structure);
 
 $currentUrl = Yii::$app->controller->route;
 
@@ -33,7 +31,7 @@ $query = new Query;
                 <?= Yii::t('app', "blog_block_all") ?>
             </a>
         </li>
-            <?php foreach ($structure as $key => $categories): ?>           
+            <?php foreach ($arrResult as $key => $categories): ?>          
 
             <?php $count = (isset($categories['submenu']) ? count($categories['submenu']) : 0); ?>
 
@@ -50,8 +48,7 @@ $query = new Query;
 
                     if(empty($categories['submenu'])){                     
                         $url = 'href="'.Url::toRoute($urlParamsVal).'"';
-                    }
-
+                    }       
                     
 
                 ?>
@@ -59,16 +56,24 @@ $query = new Query;
                 
                 <ul id="dropdown-menu<?= $key ?>" style="display:none;">
                 <?php 
+
                 if($count > 0){
+
                     foreach ($categories['submenu'] as  $subcategory): 
                 ?>
-                	<?php $urlParamsVal = ['site/blog', 
+                <?php
+               
+                    $urlParamsVal2 = ['site/blog', 
                                             'username' => '#',																
                                             'pg' => (isset($urlParams['pg']) ? $urlParams['pg'] : ''),
                                             'tag' => $subcategory['tag'],													
                                         ];?>
 
-                    <li class="nav-item"><a class="nav-link" href="<?= Url::toRoute($urlParamsVal); ?>"><?= Yii::t('app',$subcategory['page_code']) ?></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= Url::toRoute($urlParamsVal2); ?>">
+                            <?= Yii::t('app',$subcategory['page_code']) ?>
+                        </a>
+                    </li>
                 <?php 
                     endforeach; 
                 }?>  

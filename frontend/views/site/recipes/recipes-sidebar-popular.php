@@ -31,7 +31,7 @@ foreach($blogs as $key => $blog){
                 <div class="post-image">
                     <div class="img-thumbnail img-thumbnail-no-borders d-block">                      
                         <a href="<?= str_replace('/frontend/web', '',Url::toRoute($urlParamsVal)); ?>">
-                            <img src="<?= $categories['image'] ?>" width="50" height="50" alt=" <?= Yii::t('app', $categories['recipe_code_title']) ?> ">
+                            <img src="<?= $categories['image'] ?>"  height="50" alt=" <?= Yii::t('app', $categories['recipe_code_title']) ?> ">
                         </a>
                     </div>
                 </div>

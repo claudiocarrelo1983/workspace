@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+use common\models\GeneratorJson;
+use common\models\Blogs;
 
 use yii\db\Query;
 
@@ -84,7 +86,7 @@ class BlogsCategory extends \yii\db\ActiveRecord
     }
 
 
-    public function updateBlogCategory($model){
+    public function updateBlogsCategory($page, $model){
 
         $connection = new Query;
 
@@ -96,20 +98,74 @@ class BlogsCategory extends \yii\db\ActiveRecord
 
         foreach ($countries as $val) {
 
-            $text = 'text_' . $val['country_code'];            
-           
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-           
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code)
-            ->execute();         
+            $text = 'text_' . $val['country_code'];   
+            
+            $connection->createCommand()->delete('translations',
+            [  
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code,
+                'text' => $model->$text,
+                'active' => 1,
+            ])->execute();          
 
         }
-    }   
+    }      
+    
+    public static function organizeBlogCategories()
+    {       
+
+        $model = new GeneratorJson(); 
+        $structure = $model->getLastFileUploaded('blogs_category');
+
+        $blogs = $model->getLastFileUploaded('blogs');  
+        $structure  = Blogs::blogTags($structure);                
+       
+                   
+        $blogCat = [];
+        $arrResult = [];
+
+        //helper for categories
+        foreach ($structure as $key => $submenu) {
+            foreach ($blogs as $blog) {          
+                $arrBlogTags = explode(',', $blog['tags']);    
+                foreach($arrBlogTags as $valueBlogTag){             
+                    if(empty($submenu['submenu'])){   
+                        
+                        $subcategories = ['submenu' => []];
+                        if($submenu['tag'] == $valueBlogTag){      
+                            $arrResult[$key] = array_merge($submenu, $subcategories);                  
+                        }           
+
+                    }else{
+
+                        foreach($submenu['submenu'] as $value){                     
+                            if(trim($valueBlogTag) == trim($value['tag'])){
+                                $blogCat[$valueBlogTag] = $value;
+                            }
+                        }      
+                        
+                        $subcategories = ['submenu' => []];
+                        foreach ($blogCat as $subcategory) {
+                            if($submenu['tag'] == $subcategory['tag_parent_id']){      
+                                $subcategories['submenu'][] = $subcategory;          
+                            }    
+                        }
+            
+                        if(!empty($subcategories['submenu'])){
+                            $arrResult[$key] = array_merge($submenu, $subcategories);
+                       }  
+                    }             
+                }        
+            }   
+        }
+
+        return $arrResult;
+
+    }
 }

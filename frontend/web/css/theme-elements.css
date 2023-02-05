@@ -16084,7 +16084,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 	background-color: #FFF;
 	border: 1px solid #EEE;
 	border-top: 0;
-	padding: 15px;
+	padding: 10px;
 }
 
 /* Right Aligned */
@@ -17173,7 +17173,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 	max-width: 90%;
 	font-size: 17px;
 	padding: 13px 21px 2px;
-	bottom: 13%;
+	bottom: 8%;
 }
 
 .thumb-info .thumb-info-title.thumb-info-title-vert-align {
@@ -17731,10 +17731,10 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 	background: #CCC;
 	border-radius: 8px;
 	display: inline-block;
-	height: 30px;
+	height: 40px;
 	line-height: 30px;
 	text-align: center;
-	width: 30px;
+	width: 40px;
 }
 
 .thumb-info-social-icons a:hover {
@@ -17747,9 +17747,9 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info-social-icons a i {
 	color: #FFF;
-	font-size: 1.5em;
+	font-size: 2em;
 	font-weight: normal;
-	padding: 4px;
+
 }
 
 /* Thumb Info Floating Caption */

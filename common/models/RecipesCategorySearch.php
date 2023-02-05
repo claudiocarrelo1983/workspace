@@ -18,7 +18,7 @@ class RecipesCategorySearch extends RecipesCategory
     {
         return [
             [['id', 'active'], 'integer'],
-            [['recipes_parent_id', 'page_code', 'recipe_cat_code', 'description', 'recipe_pt', 'recipe_es', 'recipe_en', 'recipe_it', 'recipe_fr', 'recipe_de', 'created_date'], 'safe'],
+            [['recipes_parent_id', 'page_code', 'recipe_cat_code', 'description', 'recipe_pt','recipe_en','created_date'], 'safe'],
         ];
     }
 
@@ -68,11 +68,7 @@ class RecipesCategorySearch extends RecipesCategory
             ->andFilterWhere(['like', 'recipe_cat_code', $this->recipe_cat_code])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'recipe_pt', $this->recipe_pt])
-            ->andFilterWhere(['like', 'recipe_es', $this->recipe_es])
-            ->andFilterWhere(['like', 'recipe_en', $this->recipe_en])
-            ->andFilterWhere(['like', 'recipe_it', $this->recipe_it])
-            ->andFilterWhere(['like', 'recipe_fr', $this->recipe_fr])
-            ->andFilterWhere(['like', 'recipe_de', $this->recipe_de]);
+            ->andFilterWhere(['like', 'recipe_en', $this->recipe_en]);
 
         return $dataProvider;
     }

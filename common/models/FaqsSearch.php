@@ -18,7 +18,7 @@ class FaqsSearch extends Faqs
     {
         return [
             [['id', 'order'], 'integer'],
-            [['question', 'answer', 'question_pt', 'answer_pt', 'question_en', 'answer_en', 'question_es', 'answer_es', 'question_it', 'answer_it', 'question_de', 'answer_de', 'question_fr', 'answer_fr', 'created_date'], 'safe'],
+            [['question', 'answer', 'question_pt', 'answer_pt', 'question_en', 'answer_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -68,15 +68,7 @@ class FaqsSearch extends Faqs
             ->andFilterWhere(['like', 'question_pt', $this->question_pt])
             ->andFilterWhere(['like', 'answer_pt', $this->answer_pt])
             ->andFilterWhere(['like', 'question_en', $this->question_en])
-            ->andFilterWhere(['like', 'answer_en', $this->answer_en])
-            ->andFilterWhere(['like', 'question_es', $this->question_es])
-            ->andFilterWhere(['like', 'answer_es', $this->answer_es])
-            ->andFilterWhere(['like', 'question_it', $this->question_it])
-            ->andFilterWhere(['like', 'answer_it', $this->answer_it])
-            ->andFilterWhere(['like', 'question_de', $this->question_de])
-            ->andFilterWhere(['like', 'answer_de', $this->answer_de])
-            ->andFilterWhere(['like', 'question_fr', $this->question_fr])
-            ->andFilterWhere(['like', 'answer_fr', $this->answer_fr]);
+            ->andFilterWhere(['like', 'answer_en', $this->answer_en]);
 
         return $dataProvider;
     }

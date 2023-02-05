@@ -21,16 +21,8 @@ use Yii;
  * @property int $number_of_people
  * @property string $recipe_title_pt
  * @property string $recipe_text_pt
- * @property string $recipe_title_es
- * @property string $recipe_text_es
  * @property string $recipe_title_en
  * @property string $recipe_text_en
- * @property string $recipe_title_it
- * @property string $recipe_text_it
- * @property string $recipe_title_fr
- * @property string $recipe_text_fr
- * @property string $recipe_title_de
- * @property string $recipe_text_de
  * @property int|null $active
  * @property string $created_date
  */
@@ -81,16 +73,8 @@ class Recipes extends \yii\db\ActiveRecord
             'number_of_people' => 'Number Of People',
             'recipe_title_pt' => 'Recipe Title Pt',
             'recipe_text_pt' => 'Recipe Text Pt',
-            'recipe_title_es' => 'Recipe Title Es',
-            'recipe_text_es' => 'Recipe Text Es',
             'recipe_title_en' => 'Recipe Title En',
             'recipe_text_en' => 'Recipe Text En',
-            'recipe_title_it' => 'Recipe Title It',
-            'recipe_text_it' => 'Recipe Text It',
-            'recipe_title_fr' => 'Recipe Title Fr',
-            'recipe_text_fr' => 'Recipe Text Fr',
-            'recipe_title_de' => 'Recipe Title De',
-            'recipe_text_de' => 'Recipe Text De',
             'active' => 'Active',
             'created_date' => 'Created Date',
         ];
@@ -174,21 +158,13 @@ class Recipes extends \yii\db\ActiveRecord
             'recipe_title_en' => $modelRecipe->recipe_title_en,
             'recipe_text_en' => $modelRecipe->recipe_text_en,
             'recipe_title_pt' => $modelRecipe->recipe_title_pt,
-            'recipe_text_pt' => $modelRecipe->recipe_text_pt,
-            'recipe_title_es' => $modelRecipe->recipe_title_es,
-            'recipe_text_es' => $modelRecipe->recipe_text_es,
-            'recipe_title_it' => $modelRecipe->recipe_title_it,
-            'recipe_text_it' => $modelRecipe->recipe_text_it,
-            'recipe_title_de' => $modelRecipe->recipe_title_de,
-            'recipe_text_de' => $modelRecipe->recipe_text_de,
-            'recipe_title_fr' => $modelRecipe->recipe_title_fr,
-            'recipe_text_fr' => $modelRecipe->recipe_text_fr,
+            'recipe_text_pt' => $modelRecipe->recipe_text_pt        
         ])->execute();
 
         return $code;
     }
 
-    public function updateSimple($page, $modelRecipe){
+    public  static function updateSimple($page, $modelRecipe){
 
         $connection = new Query;
      
@@ -205,15 +181,7 @@ class Recipes extends \yii\db\ActiveRecord
             'recipe_title_en' => $modelRecipe->recipe_title_en,
             'recipe_text_en' => $modelRecipe->recipe_text_en,
             'recipe_title_pt' => $modelRecipe->recipe_title_pt,
-            'recipe_text_pt' => $modelRecipe->recipe_text_pt,
-            'recipe_title_es' => $modelRecipe->recipe_title_es,
-            'recipe_text_es' => $modelRecipe->recipe_text_es,
-            'recipe_title_it' => $modelRecipe->recipe_title_it,
-            'recipe_text_it' => $modelRecipe->recipe_text_it,
-            'recipe_title_de' => $modelRecipe->recipe_title_de,
-            'recipe_text_de' => $modelRecipe->recipe_text_de,
-            'recipe_title_fr' => $modelRecipe->recipe_title_fr,
-            'recipe_text_fr' => $modelRecipe->recipe_text_fr,
+            'recipe_text_pt' => $modelRecipe->recipe_text_pt
         ],
         ['id' =>  $modelRecipe->id]
         )
@@ -234,7 +202,7 @@ class Recipes extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
-        $this->updateSimple($page, $model);       
+        Recipes::updateSimple($page, $model);       
 
         foreach($countries as $val){      
 

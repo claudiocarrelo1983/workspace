@@ -38,12 +38,8 @@ class m221216_134740_pricing_specs extends Migration
             'type' => $this->string()->notNull(),          
             'page_code' => $this->string()->notNull()->unique(),  
             'description' => $this->string()->notNull(), 
-            'text_pt' => $this->string()->notNull(), 
-            'text_es' => $this->string()->notNull(), 
+            'text_pt' => $this->string()->notNull(),    
             'text_en' => $this->string()->notNull(), 
-            'text_it' => $this->string()->notNull(), 
-            'text_fr' => $this->string()->notNull(), 
-            'text_de' => $this->string()->notNull(),
             'order' => $this->integer()->notNull(), 
             'active' => $this->boolean(),
             'created_date' => $this->timestamp()         

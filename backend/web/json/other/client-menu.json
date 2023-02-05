@@ -12,7 +12,7 @@
      {
       "key":"t-companies",
       "title":"Clients",
-      "url":"",           
+      "url":"companies/index",           
       "submenu":[
          {   
             "key":"t-blog-view",
@@ -52,7 +52,7 @@
      {
       "key":"t-blog",
       "title":"Blog",
-      "url":"",           
+      "url":"blogs/index",           
       "submenu":[
          {   
             "key":"t-blog-view",
@@ -83,7 +83,7 @@
       {
          "key":"t-blog",
          "title":"Forms",
-         "url":"",           
+         "url":"forms/index",           
          "submenu":[
             {   
                "key":"t-form-view",
@@ -106,7 +106,7 @@
       {
       "key":"t-blog",
       "title":"Trainings",
-      "url":"",           
+      "url":"training-values/index",           
       "submenu":[
          {   
             "key":"t-training-values-view",
@@ -161,7 +161,7 @@
       {
          "key":"t-nutricion",
          "title":"Nutricion",
-         "url":"",           
+         "url":"recipes/index",           
          "submenu":[
             {   
                "key":"t-profile-view",
@@ -192,7 +192,7 @@
       {
          "key":"t-multilanguages",
          "title":"Texts",
-         "url":"",           
+         "url":"pricing/index",           
          "submenu":[            
             {   
                "key":"t-pricing-view",
@@ -263,7 +263,7 @@
       {
          "key":"t-settings",
          "title":"Settings",
-         "url":"",           
+         "url":"configurations/index",           
          "submenu":[       
             {   
                "key":"t-configurations-view",

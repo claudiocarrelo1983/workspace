@@ -18,7 +18,7 @@ class SubjectsSearch extends Subjects
     {
         return [
             [['id', 'order'], 'integer'],
-            [['subject', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'created_date'], 'safe'],
+            [['subject', 'text_pt','text_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -65,11 +65,7 @@ class SubjectsSearch extends Subjects
 
         $query->andFilterWhere(['like', 'subject', $this->subject])
             ->andFilterWhere(['like', 'text_pt', $this->text_pt])
-            ->andFilterWhere(['like', 'text_es', $this->text_es])
-            ->andFilterWhere(['like', 'text_en', $this->text_en])
-            ->andFilterWhere(['like', 'text_it', $this->text_it])
-            ->andFilterWhere(['like', 'text_fr', $this->text_fr])
-            ->andFilterWhere(['like', 'text_de', $this->text_de]);
+            ->andFilterWhere(['like', 'text_en', $this->text_en]);
 
         return $dataProvider;
     }

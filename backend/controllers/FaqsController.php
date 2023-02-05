@@ -81,7 +81,7 @@ class FaqsController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->saveFaqs('faqs_list',$model);
+                $model->saveFaqs('faqs_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -113,7 +113,7 @@ class FaqsController extends Controller
         $answer = 'answer_faqs_'.$countValue;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updateFaqs('faqs_list',$model);
+            $model->updateFaqs('faqs_text',$model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

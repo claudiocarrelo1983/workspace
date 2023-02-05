@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
             <div class="card">
                 <div class="card-body border text-secondary">
                     <h2 class="card-title"><strong>Publish All</strong></h2>               
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Loads all database into prodution.</p>
 
                     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>    
                         <div class="container-fluid">
@@ -34,8 +34,8 @@ use yii\widgets\ActiveForm;
         <div class="col-sm">
             <div class="card border text-primary">
                 <div class="card-body">
-                    <h2 class="card-title"><strong>Revert All</strong></h2>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h2 class="card-title"><strong>Load Translations</strong></h2>
+                    <p class="card-text">Loads all translations if they are missing.</p>
 
                     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>    
                         <div class="container-fluid">

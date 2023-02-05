@@ -79,7 +79,7 @@ class SubjectsController extends Controller
         if ($this->request->isPost) {
      
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->saveSubject('subject_list',$model);
+                $model->saveSubjects('subjects_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -107,7 +107,7 @@ class SubjectsController extends Controller
         $code = 'contacts_label_choose_subject_'.$count->id;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updateSubject('subject_list', $model);
+            $model->updateSubjects('subjects_text', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

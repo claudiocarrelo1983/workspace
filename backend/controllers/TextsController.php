@@ -73,7 +73,7 @@ class TextsController extends Controller
             $model->page_code_title = 'title_'.$model->code;
             $model->page_code_text  = 'text_'.$model->code;       
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->saveTexts('texts',$model);
+                $model->saveTexts('texts_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -101,7 +101,7 @@ class TextsController extends Controller
             $model->page_code_title = 'title_' . $model->code;
             $model->page_code_text = 'text_' . $model->code;
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-                $model->updateTexts($model);
+                $model->updateTexts('texts_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

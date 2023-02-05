@@ -42,6 +42,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'yiier\\chartjs\\' => 14,
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
+            'yii\\imagine\\' => 12,
             'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
@@ -87,6 +88,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             'grptx\\tests\\' => 12,
             'grptx\\Firebase\\' => 15,
+            'gromovfjodor\\imageresize\\' => 25,
         ),
         'f' => 
         array (
@@ -180,6 +182,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             'JmesPath\\' => 9,
         ),
+        'I' => 
+        array (
+            'Imagine\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -233,6 +239,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'yii\\jui\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
+        ),
+        'yii\\imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
         ),
         'yii\\httpclient\\' => 
         array (
@@ -317,6 +327,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'grptx\\Firebase\\' => 
         array (
             0 => __DIR__ . '/..' . '/grptx/yii2-firebase/src',
+        ),
+        'gromovfjodor\\imageresize\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gromovfjodor/yii2-image-resize',
         ),
         'filsh\\yii2\\oauth2server\\' => 
         array (
@@ -530,6 +544,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
+        ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

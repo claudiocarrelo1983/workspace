@@ -13,16 +13,26 @@ $comments = $model->getLastFileUploaded('comments');
 
 $comments = (isset($comments['blog_' . $blog_id]) ? $comments['blog_' . $blog_id] : []);
 
+$teams = $model->getLastFileUploaded('team');
+
+$arrUser = array();
+
+foreach ($teams as $member) {
+	if($blog['username'] == $member['username'] ){
+		$arrUser = $member;
+		break;
+	}
+}
+
+
 $this->title = 'Blog';
 
 $this->params['breadcrumbs'][] = $this->title;
 
-$tagQuery  = new Query;
-
 $timestamp = strtotime($blog['created_date']);
 $key = 1;
 
-$path2 = 'all_pricing';
+$path2 = 'blog';
 
 ?>
 
@@ -51,7 +61,7 @@ $path2 = 'all_pricing';
 						</section>
 						<article class="post post-large blog-single-post border-0 m-0 p-0">
 							<div class="post-image ms-0 post-image google-map-borders">							
-									<img src="<?= $blog['image'] ?>"
+									<img src="<?= $blog['path'].'900x500/'.$blog['image'] ?>"
 										class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />								
 							</div>
 							<div class="post-date ms-0">
@@ -117,7 +127,9 @@ $path2 = 'all_pricing';
 											$count = count($tagList);
 											$i = 1;
 
-											foreach ($tagList as  $key => $tags): 
+											foreach ($tagList as $key => $tags):
+
+											
 												if(!empty($tags)){																	
 													$comma = (($i == $count) ? '' : ',');		
 													?>					
@@ -126,7 +138,7 @@ $path2 = 'all_pricing';
 															'tag' => $tags['tag'],													
 														];?>
 																					
-														<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= $tags['description'] ?></a><?= $comma  ?>								
+														<a href="<?= Url::toRoute($urlParamsVal); ?> "> <?= Yii::t('app', $tags['page_code']) ?></a><?= $comma  ?>								
 													<?php 
 													$i++;
 												}
@@ -134,7 +146,7 @@ $path2 = 'all_pricing';
 										?> 
 									</span> 
 
-									<?= (count($comments) > 0)? '<span><i class="far fa-comments"></i> <a href="#">'.count($comments).' Comments</a></span>' : '' ?> 
+									<?= (count($comments) > 0)? '<span><i class="far fa-comments"></i> <a href="#">'.count($comments).' '.Yii::t('app', 'blog_comments').'</a></span>' : '' ?> 
 								</div>
 
 								<span class="text-4 text-dark">
@@ -142,13 +154,42 @@ $path2 = 'all_pricing';
 								</span>
 
 									<div class="post-block mt-5 post-share">
-										<h4 class="mb-3">Share this Post</h4>
+										<h4 class="mb-3">
+											<?= Yii::t('app', 'blog_share') ?>
+										</h4>
 										<!-- Go to www.addthis.com/dashboard to customize your tools -->
 										<div class="addthis_inline_share_toolbox"></div>
 										<script type="text/javascript"
 											src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60ba220dbab331b0"></script>
 
 									</div>
+									<?php if (!empty($arrUser)) { ?>
+										<div class="post-block mt-4 pt-2 post-author">
+											<h4 class="mb-3">
+												<?= Yii::t('app', 'author') ?>
+											</h4>
+											<div class="img-thumbnail img-thumbnail-no-borders d-block pb-3  google-map-borders">
+											<?php $urlParamsVal = ['site/blog', 
+																		'username' => $arrUser['username']																								
+																	];?>											
+												<a href="<?= Url::toRoute($urlParamsVal)?>">
+													<div class="img-thumbnail d-block">
+														<img class="img-fluid" src="<?= $arrUser['path'].'80x80/'.$arrUser['image'] ?>" alt="">
+													</div>
+												</a>
+											</div>
+											<p>
+												<strong class="name">
+													<a href="<?= Url::toRoute($urlParamsVal)?>"  class="text-4 pb-2 pt-2 d-block">												
+														<?= $arrUser['full_name'] ?>
+													</a>
+												</strong>
+											</p>
+											<p>
+												<?= $arrUser['title'] ?>
+											</p>
+										</div>
+									<?php } ?>
 
 									<?= $this->render('blog-comments', ['modelComment' => $modelComment, 'blog_id' => $blog_id, 'comments' => $comments]) ?>
 							</div>

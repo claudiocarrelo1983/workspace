@@ -20,15 +20,8 @@
          "submenu":[
             
          ]
-      },   
-     
-      {
-         "key":"t-features",
-         "title":"menu_features",
-         "url":"site/features",       
-         "submenu":[            
-         ]
-      },   
+      },        
+      
       {
          "key":"t-calculators",
          "title":"menu_calculators",

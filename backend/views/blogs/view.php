@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+         <?= Html::a('Create Pricing', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -34,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'page_code_subtitle',
             'page_code_text',
             'image',
+            'path',
             'image_instagram',
             'title',
             'alt',

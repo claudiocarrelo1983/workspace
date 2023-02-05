@@ -95,7 +95,7 @@ class BlogscategoryController extends Controller
         if ($this->request->isPost) {
             $model->created_date = date('Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->saveBlogCategory('blog_category',$model);
+                $model->saveBlogCategory('blogs_category_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -129,7 +129,7 @@ class BlogscategoryController extends Controller
 
         $model->created_date = date('Y-m-d H:i:s');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->updateBlogCategory($model);
+            $model->updateBlogCategory('blogs_category_text', $model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

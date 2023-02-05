@@ -36,13 +36,7 @@ $path2 = 'contacts';
                 <div class="col-md-9 mx-md-auto">
                     <div class="overflow-hidden mb-3">
                         <h1 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
-                            <span><?= Yii::t('app', "contacts_block_title_1") ?></span>
-                            <span class="word-rotator-words bg-primary">
-                                <b class="is-visible"><?= Yii::t('app', "contacts_block_title_1_1") ?></b>
-                                <b><?= Yii::t('app', "contacts_block_title_1_2") ?></b>
-                                <b><?= Yii::t('app', "contacts_block_title_1_3") ?></b>
-                            </span>
-                            <span><?= Yii::t('app', "contacts_block_subtitle_1") ?></span>
+                            <span><?= Yii::t('app', "contacts_block_title_1") ?></span>                        
                         </h1>   
                     </div>
                     <div class="overflow-hidden mb-3">
@@ -94,14 +88,14 @@ $path2 = 'contacts';
         <div class="col-sm-9 col-lg-9">
             <div class="call-to-action-content">
                 <h3>
-                    <?=  Yii::t('app', "contacts_faqs_text") ?>
+                    <?=  Yii::t('app', "contacts_block_3_text_faqs") ?>
                 </h3>   
             </div>
         </div>
         <div class="col-sm-3 col-lg-3">
             <div class="call-to-action-btn">
                 <a href="<?= Url::toRoute('site/faqs') ?>" target="_blank" class="btn btn-modern text-2 btn-primary">
-                    <?=  Yii::t('app', "contacts_faqs_button") ?>
+                    <?=  Yii::t('app', "contacts_block_3_button_faqs") ?>
                 </a>
             </div>
         </div>

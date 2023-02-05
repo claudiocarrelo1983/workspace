@@ -48,12 +48,8 @@ class m220721_175242_recipes_food extends Migration
             'fat' => $this->integer()->notNull(), 
             'carbs' => $this->integer()->notNull(), 
             'protein' => $this->integer()->notNull(), 
-            'recipe_food_pt' => $this->string()->notNull(), 
-            'recipe_food_es' => $this->string()->notNull(), 
-            'recipe_food_en' => $this->string()->notNull(), 
-            'recipe_food_it' => $this->string()->notNull(), 
-            'recipe_food_fr' => $this->string()->notNull(), 
-            'recipe_food_de' => $this->string()->notNull(),    
+            'recipe_food_pt' => $this->string()->notNull(),        
+            'recipe_food_en' => $this->string()->notNull(),
             'active' => $this->boolean(),                   
             'created_date' => $this->timestamp()
         ], $tableOptions);

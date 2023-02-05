@@ -46,10 +46,10 @@ class RecipesFood extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['recipe_code_text','quantity','fat','recipe_code', 'recipe_food_name', 'protein','fat','carbs','measure', 'calories', 'recipe_food_pt', 'recipe_food_es', 'recipe_food_en', 'recipe_food_it', 'recipe_food_fr', 'recipe_food_de'], 'required'],
+            [['recipe_code_text','quantity','fat','recipe_code', 'recipe_food_name', 'protein','fat','carbs','measure', 'calories', 'recipe_food_pt','recipe_food_en'], 'required'],
             [[ 'calories', 'lipids', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein','quantity','active','protein','fat','carbs'], 'number'],
             [['created_date'], 'safe'],
-            [['recipe_code_text','fat','recipe_code', 'recipe_food_name', 'measure', 'recipe_food_pt', 'recipe_food_es', 'recipe_food_en', 'recipe_food_it', 'recipe_food_fr', 'recipe_food_de'], 'string', 'max' => 255],
+            [['recipe_code_text','fat','recipe_code', 'recipe_food_name', 'measure', 'recipe_food_pt', 'recipe_food_en'], 'string', 'max' => 255],
         ];
     }
 
@@ -71,12 +71,8 @@ class RecipesFood extends \yii\db\ActiveRecord
             'fibers' => 'Fibers',
             'sugar' => 'Sugar',
             'protein' => 'Protein',
-            'nutricion_pt' => 'Nutricion Pt',
-            'nutricion_es' => 'Nutricion Es',
+            'nutricion_pt' => 'Nutricion Pt',      
             'nutricion_en' => 'Nutricion En',
-            'nutricion_it' => 'Nutricion It',
-            'nutricion_fr' => 'Nutricion Fr',
-            'nutricion_de' => 'Nutricion De',
             'active' => 'Active',
             'created_date' => 'Created Date',
         ];
@@ -126,10 +122,7 @@ class RecipesFood extends \yii\db\ActiveRecord
                 'active' => $arrValue['active'],
                 'recipe_food_en' => $arrValue['recipe_food_en'],         
                 'recipe_food_pt' => $arrValue['recipe_food_pt'],         
-                'recipe_food_es' => $arrValue['recipe_food_es'],           
-                'recipe_food_it' => $arrValue['recipe_food_it'],
-                'recipe_food_de' => $arrValue['recipe_food_de'],          
-                'recipe_food_fr' => $arrValue['recipe_food_fr'],  
+
             ])->execute();      
             
             foreach($countries as $val){
@@ -189,10 +182,7 @@ class RecipesFood extends \yii\db\ActiveRecord
                 'active' => $arrValue['active'],
                 'recipe_food_en' => $arrValue['recipe_food_en'],         
                 'recipe_food_pt' => $arrValue['recipe_food_pt'],         
-                'recipe_food_es' => $arrValue['recipe_food_es'],           
-                'recipe_food_it' => $arrValue['recipe_food_it'],
-                'recipe_food_de' => $arrValue['recipe_food_de'],          
-                'recipe_food_fr' => $arrValue['recipe_food_fr'],  
+            
             ])->execute();
 
                 

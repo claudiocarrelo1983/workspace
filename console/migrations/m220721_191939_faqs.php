@@ -44,14 +44,6 @@ class m220721_191939_faqs extends Migration
             'answer_pt' => $this->text()->notNull(), 
             'question_en' => $this->string()->notNull(), 
             'answer_en' => $this->text()->notNull(), 
-            'question_es' => $this->string()->notNull(), 
-            'answer_es' => $this->text()->notNull(),
-            'question_it' => $this->string()->notNull(), 
-            'answer_it' => $this->text()->notNull(),
-            'question_de' => $this->string()->notNull(), 
-            'answer_de' => $this->text()->notNull(),
-            'question_fr' => $this->string()->notNull(), 
-            'answer_fr' => $this->text()->notNull(),            
             'order' => $this->integer()->notNull(),
             'created_date' => $this->timestamp()       
         ], $tableOptions);

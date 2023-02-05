@@ -11,11 +11,7 @@ use Yii;
  * @property int $id
  * @property string|null $subject
  * @property string $text_pt
- * @property string $text_es
  * @property string $text_en
- * @property string $text_it
- * @property string $text_fr
- * @property string $text_de
  * @property int|null $order
  * @property string $created_date
  */
@@ -35,10 +31,10 @@ class Subjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order','page_code','subject','text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'required'],
+            [['order','page_code','subject','text_pt', 'text_en'], 'required'],
             [['order'], 'integer'],
             [['created_date'], 'safe'],
-            [['subject', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'string', 'max' => 255],
+            [['subject', 'text_pt','text_en'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,12 +46,8 @@ class Subjects extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'subject' => 'Subject',
-            'text_pt' => 'Text Pt',
-            'text_es' => 'Text Es',
+            'text_pt' => 'Text Pt',          
             'text_en' => 'Text En',
-            'text_it' => 'Text It',
-            'text_fr' => 'Text Fr',
-            'text_de' => 'Text De',
             'order' => 'Order',
             'created_date' => 'Created Date',
         ];
@@ -71,7 +63,7 @@ class Subjects extends \yii\db\ActiveRecord
     }
 
     
-    public function saveSubject($page, $model){
+    public function saveSubjects($page, $model){
         
 
         $connection = new Query;
@@ -97,7 +89,7 @@ class Subjects extends \yii\db\ActiveRecord
     }
 
 
-    public function updateSubject($page, $model){
+    public function updateSubjects($page, $model){
 
         $connection = new Query;
 

@@ -39,12 +39,8 @@ class m221223_171108_recipes_steps extends Migration
             'recipe_code' => $this->string()->notNull(),  
             'page_code' => $this->string()->notNull(),  
             'recipe_step_text' => $this->text()->notNull(),    
-            'recipe_step_text_pt' => $this->text()->notNull(), 
-            'recipe_step_text_es' => $this->text()->notNull(), 
-            'recipe_step_text_en' => $this->text()->notNull(), 
-            'recipe_step_text_it' => $this->text()->notNull(), 
-            'recipe_step_text_fr' => $this->text()->notNull(), 
-            'recipe_step_text_de' => $this->text()->notNull(),        
+            'recipe_step_text_pt' => $this->text()->notNull(),         
+            'recipe_step_text_en' => $this->text()->notNull(),       
             'order' => $this->integer(),      
             'created_date' => $this->timestamp()
         ], $tableOptions);

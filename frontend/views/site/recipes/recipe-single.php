@@ -67,15 +67,15 @@ $path2 = 'recipes_single';
 							</h2>
 							<div class="post-meta text-right pt-4">
 								<span class="px-2 text-left" style='font-size:15px'>
-									<i class="far fa-clock"></i> <?= $recipe['cooking_time'] ?> <?= Yii::t('app', 'minutes') ?> 
+									<i class="far fa-clock"></i> <?= $recipe['cooking_time'] ?> <?= Yii::t('app', 'recipe_minutes') ?> 
 								</span>
 								<span class="px-2 text-left"  style='font-size:15px'>
-									<i class="far fa-lightbulb" ></i> 
-									<?= $recipe['difficulty'] ?>
+									<i class="far fa-lightbulb" ></i>									
+									<?= Yii::t('app', 'recipe_'.$recipe['difficulty']) ?> 
 								</span>
 								<span class="px-2 text-left"  style='font-size:15px'>
 									<i class="far fa-user-circle"></i>
-									<?= $recipe['number_of_people'] ?> <?= Yii::t('app', 'people') ?> 
+									<?= $recipe['number_of_people'] ?> <?= Yii::t('app', 'recipe_people') ?> 
 								</span>
 							
 								<span class="px-2 text-left" style='font-size:15px'>
@@ -257,6 +257,11 @@ $path2 = 'recipes_single';
 											<?= Yii::t('app','recipe_carbs') ?>
 										</strong>
 									</td>
+									<?php
+										if($totalNutri <= 0){
+											$totalNutri = 1;
+										}
+									?>
 									<td><?= $carbs ?> g</td>
 									<td><?= bcdiv(bcmul(100, $carbs), $totalNutri) ?> %</td>
 								</tr> 
@@ -347,9 +352,26 @@ $path2 = 'recipes_single';
 				$i = 0;				
 			?>
 			<?php foreach ($recipeArr as $key => $recipeVal):  ?>  			
-					<?php 					
+					<?php	
+					
+					$arrTags1 = explode(',',  $recipeVal['recipe_cat_code']); 				
+
+					$arrTags2 = explode(',',  $recipe['recipe_cat_code']); 
+					$diplay = 0;			
+
+					foreach($arrTags1 as $tag){
+						if (str_contains($recipe['recipe_cat_code'], $tag)) {	
+
+					
+					
+							$diplay = 1;
+							break;
+						}					
+					}
+
 					if ($i  <= 2) { 
-						if($recipe['recipe_cat_code'] == $recipeVal['recipe_cat_code'] && $recipe['id'] != $recipeVal['id'] ){
+						if($diplay === 1 && $recipe['id'] != $recipeVal['id']){		
+						
 					?>
 						<div class="col-lg-4">
 							<div class="card">
@@ -359,11 +381,12 @@ $path2 = 'recipes_single';
 										<?= Yii::t('app', $recipeVal['recipe_code_title']) ?>
 									</h4>
 									<span class=" text-left" style='font-size:15px'>
-										<i class="far fa-clock"></i> <?= $recipeVal['cooking_time'] ?> <?= Yii::t('app', 'recipe_minutes') ?> 
+										<i class="far fa-clock"></i> <?= $recipeVal['cooking_time'] ?> 
+										<?= Yii::t('app', 'recipe_minutes') ?> 
 									</span>
 									<span class="px-2 text-left"  style='font-size:15px'>
 										<i class="far fa-lightbulb" ></i> 
-										<?= $recipeVal['difficulty'] ?>
+										<?= Yii::t('app', 'recipe_'.$recipeVal['difficulty']) ?> 								
 									</span>
 									<span class=" px-2 text-right"  style='font-size:15px'>
 										<i class="far fa-user-circle"></i>

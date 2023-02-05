@@ -16,6 +16,24 @@ $countries = $tagQueryUser->select([
 $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 
 
+$users = $tagQueryUser->select([
+    'id', 
+    'guid', 
+    'first_name',
+    'last_name',
+    'username', 
+    'name'
+    ])
+->from('user')    
+->where(['active' => '1'])   
+->all();
+
+$arrUsers = array();
+
+foreach($users as $user){
+    $arrUsers[$user['username']] = $user['first_name'].' '.$user['last_name'];
+}
+
 /** @var yii\web\View $this */
 /** @var app\models\Team $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -40,8 +58,11 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
         <div class="tab-content">
             <div class="tab-pane active" id="popularPosts"> 
                 <div class="row" >
-                    <div class="col-3">
-                        <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+                    <?=  $form->field($model, 'page_code_title')->hiddenInput(['value'=> $title])->label(false); ?>
+                    <?=  $form->field($model, 'page_code_text')->hiddenInput(['value'=> $text])->label(false); ?>
+                    <div class="col-3">                    
+                        <?= $form->field($model, 'username')->dropdownList($arrUsers,
+                        ['prompt'=>'Select User']); ?> 
                     </div>
                     <div class="col-3">
                         <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
@@ -78,15 +99,8 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
                 <div class="row" >
                     <div class="col-3">
                         <?= $form->field($model, 'instagram')->textInput(['maxlength' => true]) ?>
-                    </div>                    
-                    <div class="col-3">
-                        <?= $form->field($model, 'pinterest')->textInput(['maxlength' => true]) ?>                    
-                    </div>
-
-                    <div class="col-3">
-                        <?= $form->field($model, 'instagram')->textInput(['maxlength' => true]) ?>                    
-                    </div>
-
+                    </div>                   
+                
                     <div class="col-3">
                         <?= $form->field($model, 'twitter')->textInput(['maxlength' => true]) ?>                    
                     </div>             

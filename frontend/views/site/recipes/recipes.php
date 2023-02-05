@@ -68,16 +68,8 @@ $path2 = 'recipes';
 			<div class="overflow-hidden mb-3">
 				<h1 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
 					<span>
-						<?= Yii::t('app', "recipes_block_1_title_1") ?>
-					</span>
-					<span class="word-rotator-words bg-primary">
-						<b class="is-visible"><?= Yii::t('app', "recipes_block_1_1") ?></b>
-						<b><?= Yii::t('app', "recipes_block__1_2") ?></b>
-						<b><?= Yii::t('app', "recipes_block__1_3") ?></b>
-					</span>
-					<span>
-						<?= Yii::t('app', "recipes_block__1_title_2") ?>
-					</span>
+						<?= Yii::t('app', "recipes_block_1_title") ?>
+					</span>		
 				</h1>   
 			</div>
 			<div class="overflow-hidden mb-3">

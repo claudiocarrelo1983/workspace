@@ -15,10 +15,6 @@ use Yii;
  * @property string $description
  * @property string $text_pt
  * @property string $text_es
- * @property string $text_en
- * @property string $text_it
- * @property string $text_fr
- * @property string $text_de
  * @property int|null $active
  */
 class PricingSpecs extends \yii\db\ActiveRecord
@@ -37,9 +33,9 @@ class PricingSpecs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order','type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'required'],
+            [['order','type', 'page_code', 'description', 'text_pt', 'text_en'], 'required'],
             [['active','order'], 'integer'],
-            [['type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'string', 'max' => 255],
+            [['type', 'page_code', 'description', 'text_pt', 'text_en'], 'string', 'max' => 255],
             [['page_code'], 'unique'],
         ];
     }
@@ -54,12 +50,8 @@ class PricingSpecs extends \yii\db\ActiveRecord
             'type' => 'Type',
             'page_code' => 'Page Code',
             'description' => 'Description',
-            'text_pt' => 'Text Pt',
-            'text_es' => 'Text Es',
+            'text_pt' => 'Text Pt',    
             'text_en' => 'Text En',
-            'text_it' => 'Text It',
-            'text_fr' => 'Text Fr',
-            'text_de' => 'Text De',
             'active' => 'Active',
         ];
     }

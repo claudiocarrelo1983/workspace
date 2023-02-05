@@ -43,12 +43,8 @@ class m220725_164124_pricing extends Migration
             'standard' => $this->integer(), 
             'professional' => $this->integer(),    
             'enterprise' => $this->integer(),
-            'title_pt' => $this->string()->notNull(), 
-            'title_es' => $this->string()->notNull(), 
+            'title_pt' => $this->string()->notNull(),        
             'title_en' => $this->string()->notNull(), 
-            'title_it' => $this->string()->notNull(), 
-            'title_fr' => $this->string()->notNull(), 
-            'title_de' => $this->string()->notNull(),  
             'active' => $this->boolean(),           
             'created_date' => $this->timestamp()
              

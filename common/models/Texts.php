@@ -91,7 +91,7 @@ class Texts extends \yii\db\ActiveRecord
     }
 
    
-    public function updateTexts($model){
+    public function updateTexts($page, $model){
 
         $connection = new Query;
 
@@ -104,32 +104,37 @@ class Texts extends \yii\db\ActiveRecord
         foreach ($countries as $val) {
 
             $title = 'title_' . $val['country_code'];   
-            $text = 'text_' . $val['country_code'];           
+            $text = 'text_' . $val['country_code'];          
            
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-           
-            ->bindValue(':text', $model->$title)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_title)
-            ->execute();   
-            
-            
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-        
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_text)
-            ->execute();  
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                       
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => 1,
+            ])->execute();
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_text                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_text,
+                'text' => $model->$text,
+                'active' => 1,
+            ])->execute();
+ 
         }
     }   
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+use common\models\RecipesCategory;
+use common\models\GeneratorJson;
 
 use yii\db\Query;
 use Yii;
@@ -38,10 +40,10 @@ class RecipesCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_code', 'recipe_cat_code', 'description', 'recipe_pt', 'recipe_es', 'recipe_en', 'recipe_it', 'recipe_fr', 'recipe_de'], 'required'],
+            [['page_code', 'recipe_cat_code', 'description', 'recipe_pt','recipe_en'], 'required'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
-            [['recipes_parent_id', 'page_code', 'recipe_cat_code', 'description', 'recipe_pt', 'recipe_es', 'recipe_en', 'recipe_it', 'recipe_fr', 'recipe_de'], 'string', 'max' => 255],
+            [['recipes_parent_id', 'page_code', 'recipe_cat_code', 'description', 'recipe_pt','recipe_en'], 'string', 'max' => 255],
             [['page_code'], 'unique'],
             [['recipe_cat_code'], 'unique'],
         ];
@@ -58,12 +60,8 @@ class RecipesCategory extends \yii\db\ActiveRecord
             'page_code' => 'Recipe Code',
             'recipe_cat_code' => 'Recipe Cat Code',
             'description' => 'Description',
-            'recipe_pt' => 'Recipe Pt',
-            'recipe_es' => 'Recipe Es',
+            'recipe_pt' => 'Recipe Pt',           
             'recipe_en' => 'Recipe En',
-            'recipe_it' => 'Recipe It',
-            'recipe_fr' => 'Recipe Fr',
-            'recipe_de' => 'Recipe De',
             'active' => 'Active',
             'created_date' => 'Created Date',
         ];
@@ -124,4 +122,57 @@ class RecipesCategory extends \yii\db\ActiveRecord
             ])->execute();
         }
     }   
+
+    public static function organizeRecipesCategories()
+    {       
+
+        $model = new GeneratorJson(); 
+        $structure = $model->getLastFileUploaded('recipes_category');
+        $structure  = Recipes::recipeTags($structure);  
+
+        $recipes = $model->getLastFileUploaded('recipes');      
+                
+        $recipeCat = [];
+        $arrResult = [];
+
+        //helper for categories
+
+        foreach ($structure as $key => $submenu) {
+            foreach ($recipes as $recipe) {          
+                $arrRecipesTags = explode(',', $recipe['recipe_cat_code']);    
+                foreach($arrRecipesTags as $valueRecipeTag){             
+                    if(empty($submenu['submenu'])){   
+                        
+                        $subcategories = ['submenu' => []];
+                        if($submenu['recipe_cat_code'] == $valueRecipeTag){      
+                            $arrResult[$key] = array_merge($submenu, $subcategories);                  
+                        }           
+
+                    }else{
+
+                        foreach($submenu['submenu'] as $value){                     
+                            if(trim($valueRecipeTag) == trim($value['recipe_cat_code'])){
+                                $recipeCat[$valueRecipeTag] = $value;
+                            }
+                        }      
+                        
+                        $subcategories = ['submenu' => []];
+                        foreach ($recipeCat as $subcategory) {
+                            if($submenu['recipe_cat_code'] == $subcategory['recipes_parent_id']){      
+                                $subcategories['submenu'][] = $subcategory;          
+                            }    
+                        }
+            
+                        if(!empty($subcategories['submenu'])){
+                            $arrResult[$key] = array_merge($submenu, $subcategories);
+                       }  
+                    }             
+                }        
+            }   
+        }
+
+
+        return $arrResult;
+
+    }
 }

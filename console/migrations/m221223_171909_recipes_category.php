@@ -39,12 +39,9 @@ class m221223_171909_recipes_category extends Migration
             'page_code' => $this->string()->notNull()->unique(),   
             'recipe_cat_code' => $this->string()->notNull()->unique(),         
             'description' => $this->string()->notNull(), 
-            'recipe_pt' => $this->string()->notNull(), 
-            'recipe_es' => $this->string()->notNull(), 
-            'recipe_en' => $this->string()->notNull(), 
-            'recipe_it' => $this->string()->notNull(), 
-            'recipe_fr' => $this->string()->notNull(), 
-            'recipe_de' => $this->string()->notNull(),     
+            'recipe_pt' => $this->string()->notNull(),          
+            'recipe_en' => $this->string()->notNull(),  
+            'order' => $this->integer(),    
             'active' => $this->boolean(),                     
             'created_date' => $this->timestamp()
         ], $tableOptions);

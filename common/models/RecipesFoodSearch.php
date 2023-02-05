@@ -18,7 +18,7 @@ class RecipesFoodSearch extends RecipesFood
     {
         return [
             [['id', 'active'], 'integer'],
-            [['recipe_code', 'name', 'measure', 'calories', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein', 'nutricion_pt', 'nutricion_es', 'nutricion_en', 'nutricion_it', 'nutricion_fr', 'nutricion_de', 'created_date'], 'safe'],
+            [['recipe_code', 'name', 'measure', 'calories', 'colesterol', 'sodium', 'carbs', 'fibers', 'sugar', 'protein', 'nutricion_pt','nutricion_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -85,11 +85,7 @@ class RecipesFoodSearch extends RecipesFood
             ->andFilterWhere(['like', 'measure', $this->measure])
             ->andFilterWhere(['like', 'quantity', $this->quantity])
             ->andFilterWhere(['like', 'recipe_food_pt', $this->recipe_food_pt])
-            ->andFilterWhere(['like', 'recipe_food_es', $this->recipe_food_es])
-            ->andFilterWhere(['like', 'recipe_food_en', $this->recipe_food_en])
-            ->andFilterWhere(['like', 'recipe_food_it', $this->recipe_food_it])
-            ->andFilterWhere(['like', 'recipe_food_fr', $this->recipe_food_fr])
-            ->andFilterWhere(['like', 'recipe_food_de', $this->recipe_food_de]);
+            ->andFilterWhere(['like', 'recipe_food_en', $this->recipe_food_en]);
 
         return $dataProvider;
     }

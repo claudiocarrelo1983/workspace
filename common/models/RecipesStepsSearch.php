@@ -18,7 +18,7 @@ class RecipesStepsSearch extends RecipesSteps
     {
         return [
             [['id', 'order'], 'integer'],
-            [['username', 'recipe_code', 'recipe_step_title', 'recipe_step_text', 'recipe_step_title_pt', 'recipe_step_text_pt', 'recipe_step_title_es', 'recipe_step_text_es', 'recipe_step_title_en', 'recipe_step_text_en', 'recipe_step_title_it', 'recipe_step_text_it', 'recipe_step_title_fr', 'recipe_step_text_fr', 'recipe_step_title_de', 'recipe_step_text_de', 'created_date'], 'safe'],
+            [['username', 'recipe_code', 'recipe_step_title', 'recipe_step_text', 'recipe_step_title_pt', 'recipe_step_text_pt', 'recipe_step_title_en', 'recipe_step_text_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -63,14 +63,10 @@ class RecipesStepsSearch extends RecipesSteps
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['=', 'recipe_code', $this->recipe_code])      
-            ->andFilterWhere(['like', 'recipe_step_text', $this->recipe_step_text])        
-            ->andFilterWhere(['like', 'recipe_step_text_pt', $this->recipe_step_text_pt])     
-            ->andFilterWhere(['like', 'recipe_step_text_es', $this->recipe_step_text_es])
-            ->andFilterWhere(['like', 'recipe_step_text_en', $this->recipe_step_text_en])     
-            ->andFilterWhere(['like', 'recipe_step_text_it', $this->recipe_step_text_it]) 
-            ->andFilterWhere(['like', 'recipe_step_text_fr', $this->recipe_step_text_fr])
-            ->andFilterWhere(['like', 'recipe_step_text_de', $this->recipe_step_text_de]);
+        $query->andFilterWhere(['=', 'recipe_code', $this->recipe_code])
+            ->andFilterWhere(['like', 'recipe_step_text', $this->recipe_step_text])
+            ->andFilterWhere(['like', 'recipe_step_text_pt', $this->recipe_step_text_pt])
+            ->andFilterWhere(['like', 'recipe_step_text_en', $this->recipe_step_text_en]);
 
         return $dataProvider;
     }

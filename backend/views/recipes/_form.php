@@ -15,7 +15,7 @@ $countries = $tagQueryUser->select([
 ->from('countries')    
 ->all();
 
-$arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
+$arrLanguages = ['en', 'pt'];
 
 /* @var $this yii\web\View */
 /* @var $modelCustomer app\modules\yii2extensions\models\Customer */

@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,NE,R=302]
+</IfModule>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^myspecialgym.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.myspecialgym.com$
+RewriteCond %{REQUEST_URI} !frontend/web/
+RewriteRule (.*) /frontend/web/$1 [L]

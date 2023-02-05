@@ -15,14 +15,6 @@ use Yii;
  * @property string $answer_pt
  * @property string $question_en
  * @property string $answer_en
- * @property string $question_es
- * @property string $answer_es
- * @property string $question_it
- * @property string $answer_it
- * @property string $question_de
- * @property string $answer_de
- * @property string $question_fr
- * @property string $answer_fr
  * @property int $order
  * @property string $created_date
  */
@@ -42,11 +34,11 @@ class Faqs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['position','page_code_question', 'page_code_answer', 'answer', 'answer_pt', 'answer_en', 'answer_es', 'answer_it', 'answer_de', 'answer_fr'], 'string'],
-            [['question','answer','position','order','question_pt', 'answer_pt', 'question_en', 'answer_en', 'question_es', 'answer_es', 'question_it', 'answer_it', 'question_de', 'answer_de', 'question_fr', 'answer_fr', 'order'], 'required'],
+            [['position','page_code_question', 'page_code_answer', 'answer', 'answer_pt', 'answer_en'], 'string'],
+            [['question','answer','position','order','question_pt', 'answer_pt', 'question_en', 'answer_en', 'order'], 'required'],
             [['order'], 'integer'],
             [['created_date'], 'safe'],
-            [['question', 'question_pt', 'question_en', 'question_es', 'question_it', 'question_de', 'question_fr'], 'string', 'max' => 255],
+            [['question', 'question_pt', 'question_en'], 'string', 'max' => 255],
         ];
     }
 
@@ -64,14 +56,6 @@ class Faqs extends \yii\db\ActiveRecord
             'answer_pt' => 'Answer Pt',
             'question_en' => 'Question En',
             'answer_en' => 'Answer En',
-            'question_es' => 'Question Es',
-            'answer_es' => 'Answer Es',
-            'question_it' => 'Question It',
-            'answer_it' => 'Answer It',
-            'question_de' => 'Question De',
-            'answer_de' => 'Answer De',
-            'question_fr' => 'Question Fr',
-            'answer_fr' => 'Answer Fr',
             'order' => 'Order',
             'created_date' => 'Created Date',
         ];

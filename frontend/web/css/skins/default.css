@@ -3033,6 +3033,7 @@ html .toggle-light.toggle-minimal .toggle.active > .toggle-title {
 .img-thumbnail .zoom,
 .thumb-info-ribbon {
 	background-color: #0088CC;
+	padding: 6px;
 }
 
 html .thumb-info .thumb-info-action-icon-primary {

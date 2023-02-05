@@ -186,7 +186,7 @@ class UploadedFile extends BaseObject
     {
         if ($this->hasError) {
             return false;
-        }
+        }        
 
         $targetFile = Yii::getAlias($file);
         if (is_resource($this->_tempResource)) {

@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '39f81ca59207c4426379835912218f8b8ce33069',
+    'reference' => '3a4fa81779cff137f99904f5e1a2060cdcb89244',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -395,6 +395,15 @@ private static $installed = array (
       ),
       'reference' => 'a8525f0dea6fca1893e1bae2f6e804c5f7d007fb',
     ),
+    'gromovfjodor/yii2-image-resize' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd4fcd0b5fced18d28237410df27dd74a59aa7176',
+    ),
     'grptx/yii2-firebase' => 
     array (
       'pretty_version' => 'v0.4',
@@ -439,6 +448,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f7e4a8dff1c127fdf5e6d95773755465bb6c70a7',
+    ),
+    'imagine/imagine' => 
+    array (
+      'pretty_version' => '1.3.3',
+      'version' => '1.3.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a6e6da93ea0f76aba33b0e8ed1325523c0413da2',
     ),
     'kartik-v/yii2-krajee-base' => 
     array (
@@ -1354,7 +1372,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '39f81ca59207c4426379835912218f8b8ce33069',
+      'reference' => '3a4fa81779cff137f99904f5e1a2060cdcb89244',
     ),
     'yiisoft/yii2-authclient' => 
     array (
@@ -1418,6 +1436,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '50d670d2e1a30a354c27aeebf806a2db16954836',
+    ),
+    'yiisoft/yii2-imagine' => 
+    array (
+      'pretty_version' => '2.3.1',
+      'version' => '2.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7ec4332dc25893aec5a7cf084722b162b3a4d55d',
     ),
     'yiisoft/yii2-jui' => 
     array (

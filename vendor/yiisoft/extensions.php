@@ -221,4 +221,22 @@ return array (
       '@dosamigos/chartjs' => $vendorDir . '/2amigos/yii2-chartjs-widget/src',
     ),
   ),
+  'yiisoft/yii2-imagine' => 
+  array (
+    'name' => 'yiisoft/yii2-imagine',
+    'version' => '2.3.1.0',
+    'alias' => 
+    array (
+      '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine/src',
+    ),
+  ),
+  'gromovfjodor/yii2-image-resize' => 
+  array (
+    'name' => 'gromovfjodor/yii2-image-resize',
+    'version' => '1.0.1.0',
+    'alias' => 
+    array (
+      '@gromovfjodor/imageresize' => $vendorDir . '/gromovfjodor/yii2-image-resize',
+    ),
+  ),
 );

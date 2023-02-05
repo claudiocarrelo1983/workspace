@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\db\Query;
+
 use Yii;
 
 /**
@@ -16,16 +18,8 @@ use Yii;
  * @property string $text
  * @property string $title_pt
  * @property string $text_pt
- * @property string $title_es
- * @property string $text_es
  * @property string $title_en
  * @property string $text_en
- * @property string $title_it
- * @property string $text_it
- * @property string $title_fr
- * @property string $text_fr
- * @property string $title_de
- * @property string $text_de
  * @property string|null $website
  * @property string|null $facebook
  * @property string|null $pinterest
@@ -57,10 +51,10 @@ class Team extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt', 'title_es', 'text_es', 'title_en', 'text_en', 'title_it', 'text_it', 'title_fr', 'text_fr', 'title_de', 'text_de'], 'required'],
+            [['page_code_title','page_code_text', 'username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt','title_en', 'text_en'], 'required'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
-            [['username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt', 'title_es', 'text_es', 'title_en', 'text_en', 'title_it', 'text_it', 'title_fr', 'text_fr', 'title_de', 'text_de', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'contact_number'], 'string', 'max' => 255],
+            [['username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt', 'title_en', 'text_en', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'contact_number'], 'string'],
             [['username'], 'unique'],
         ];
     }
@@ -79,17 +73,9 @@ class Team extends \yii\db\ActiveRecord
             'title' => 'Title',
             'text' => 'Text',
             'title_pt' => 'Title Pt',
-            'text_pt' => 'Text Pt',
-            'title_es' => 'Title Es',
-            'text_es' => 'Text Es',
+            'text_pt' => 'Text Pt',        
             'title_en' => 'Title En',
-            'text_en' => 'Text En',
-            'title_it' => 'Title It',
-            'text_it' => 'Text It',
-            'title_fr' => 'Title Fr',
-            'text_fr' => 'Text Fr',
-            'title_de' => 'Title De',
-            'text_de' => 'Text De',
+            'text_en' => 'Text En',        
             'website' => 'Website',
             'facebook' => 'Facebook',
             'pinterest' => 'Pinterest',
@@ -105,7 +91,96 @@ class Team extends \yii\db\ActiveRecord
     }
 
     public function imgUrl(){
-        return '/images/blog/';
+        return '/images/team/';
     }
 
+    public static function saveTeam($page, $model){
+        
+
+        $connection = new Query;
+
+        $countries = $connection->select([
+            'country_code' 
+            ])
+        ->from('countries')    
+        ->all();
+
+        foreach($countries as $val){
+
+            $title = 'title_'.$val['country_code'];   
+            $text = 'text_'.$val['country_code'];
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => $model->active,
+            ])->execute();
+       
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_text,
+                'text' => $model->$text,
+                'active' => $model->active,
+            ])->execute();
+        }
+
+        return true;    
+    }
+
+
+    public static function updateTeam($page, $model)
+    {
+
+        $connection = new Query;
+
+        $countries = $connection->select([
+            'country_code'
+        ])
+            ->from('countries')
+            ->all();
+
+        foreach ($countries as $val) {
+
+            $title = 'title_' . $val['country_code'];
+            $subtitle = 'subtitle_' . $val['country_code'];
+            $text = 'text_' . $val['country_code'];
+
+            $connection->createCommand()->delete(
+                'translations',
+                [
+                    'country_code' => $val['country_code'],
+                    'page_code' => $model->page_code_title
+                ]
+            )->execute();
+
+            $connection->createCommand()->insert('translations', [
+                'country_code' => $val['country_code'],
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => 1,
+            ])->execute();      
+
+            $connection->createCommand()->delete(
+                'translations',
+                [
+                    'country_code' => $val['country_code'],
+                    'page_code' => $model->page_code_text
+                ]
+            )->execute();
+
+            $connection->createCommand()->insert('translations', [
+                'country_code' => $val['country_code'],
+                'page' => $page,
+                'page_code' => $model->page_code_text,
+                'text' => $model->$text,
+                'active' => 1,
+            ])->execute();
+
+
+        }
+    }
 }

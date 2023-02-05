@@ -8,10 +8,12 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\db\Query;
 use common\models\GeneratorJson;
 use common\helpers\Helpers;
 use api;
 use Yii;
+use yii\imagine\Image;
 
 /**
  * BlogsController implements the CRUD actions for BlogsCategory model.
@@ -107,14 +109,11 @@ class BlogsController extends Controller
          $title = 'blog_title_'.bcadd($count->id, 1);
          $subtitle = 'blog_subtitle_'.bcadd($count->id, 1);
          $text = 'blog_text_'.bcadd($count->id, 1);
-       }
+       }  
  
-        if ($this->request->isPost) {     
+       if ($this->request->isPost && $model->load($this->request->post())){       
 
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-
-            $model->image = '';
-         
+           
             if(isset($model->imageFile->name)){
 
                 $fileName = $model->imageFile->baseName;
@@ -124,10 +123,41 @@ class BlogsController extends Controller
                 $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
                 //}  
 
-                $model->created_date = date('Y-m-d H:i:s');    
-             
             }      
 
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            $path = '@frontend/web' . $model->imgUrl();
+            $model->image = $model->imageFile->name;
+            $model->path = $model->imgUrl();
+ 
+            $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
+            
+            //creates small images 90x50
+             Image::thumbnail($filePath, 90, 50)
+                ->save(Yii::getAlias('@frontend/web/images/blog/90x50/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+            //creates medium images 322x179
+            Image::thumbnail($filePath, 322.25, 179.02)
+                ->save(Yii::getAlias('@frontend/web/images/blog/322x179/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+            //creates medium images 900x500
+            Image::thumbnail($filePath, 900, 500)
+                ->save(Yii::getAlias('@frontend/web/images/blog/900x500/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+            //creates medium images 900x500
+            Image::thumbnail($filePath, 665, 257)
+                ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+            //creates medium images 900x500
+            Image::thumbnail($filePath, 665, 257)
+                ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+
+                
+         
+            $model->created_date = date('Y-m-d H:i:s');   
             
             $model->tags = '';
             if(!empty($_POST['Blogs']['tagsArr'])){
@@ -135,10 +165,22 @@ class BlogsController extends Controller
                 $model->tags = implode(',',$_POST['Blogs']['tagsArr']);
             }
 
- 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $tagQuery = new Query;
 
-                $model::saveBlog('blogs_list', $model);
+            $countries = $tagQuery->select([
+                'country_code' 
+                ])
+            ->from('countries')    
+            ->all();
+    
+            foreach($countries as $country){
+                $m = 'text_' . $country['country_code'];
+                $model->$m = Helpers::cleanTynyMceText($model->$m);   
+            }
+         
+            if ($model->save()) {
+
+                $model::saveBlogs('blogs_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
     
@@ -163,38 +205,91 @@ class BlogsController extends Controller
      */
     public function actionUpdate($id)
     {
+
+        $tagQuery = new Query;
+
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
         
         $model = $this->findModel($id);
+      
+        $result = $model::find('page_code_title')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
+        $id = str_replace('blog_title_', '', $result->page_code_title);
+      
+        $title = 'blog_title_'.$id;
+        $subtitle = 'blog_subtitle_'.$id;
+        $text = 'blog_text_'.$id;        
 
-        $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
-        $title = 'blog_title_'.$count->id;
-        $subtitle = 'blog_subtitle_'.$count->id;
-        $text = 'blog_text_'.$count->id;
+        $model->load($this->request->post());     
 
-        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $countries = $tagQuery->select([
+            'country_code' 
+            ])
+        ->from('countries')    
+        ->all();
 
-        $model->image = '';
+        foreach($countries as $country){
+            $m = 'text_' . $country['country_code'];
+            $model->$m = Helpers::cleanTynyMceText($model->$m);   
+        }
 
-        if(isset($model->imageFile->name)){
-            $fileName = $model->imageFile->baseName;
-            $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension;                  
+        if ($this->request->isPost && $model->load($this->request->post())) {
 
-            //if ($model->imageFile && $model->validate()) {
-            $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
-            //}  
-        }    
+             
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if(isset($model->imageFile->name)){
+
+                $fileName = $model->imageFile->baseName;
+                $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension; 
+       
+                //if ($model->imageFile && $model->validate()) {
+                $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
+                //}  
+
+                
+                $path = '@frontend/web' . $model->imgUrl();
+                $model->image = $model->imageFile->name;
+                $model->path = $model->imgUrl();
+                
+                $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
+                
+                //creates small images 90x50
+                Image::thumbnail($filePath, 90, 50)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/90x50/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 322x179
+                Image::thumbnail($filePath, 322.25, 179.02)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/322x179/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 900x500
+                Image::thumbnail($filePath, 900, 500)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/900x500/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+
+            }     
+
+          
+
+ 
+            $model->tags = '';
+            if (!empty($_POST['Blogs']['tagsArr'])) {
+
+                $model->tags = implode(',', $_POST['Blogs']['tagsArr']);
+            }
+
+
+            $model->created_date = date('Y-m-d H:i:s');
         
-        $model->created_date = date('Y-m-d H:i:s');     
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model::updateBlog('blogs_list', $model);
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->save()) {
+                $model::updateBlogs('blogs_text', $model);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         $model->tagsArr = explode(',', $model->tags);
+
 
         return $this->render('update', [
             'model' => $model,

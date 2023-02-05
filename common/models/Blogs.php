@@ -1,10 +1,12 @@
 <?php
 
 namespace common\models;
+use common\Helpers\Helpers;
 use yii\base\Modl;
 use Yii;
 use yii\db\Query;
 use yii\web\UploadedFile;
+
 
 /**
  * This is the model class for table "blogs".
@@ -71,11 +73,11 @@ class Blogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text','title', 'tags', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de'], 'required'],
+            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text','title', 'tags', 'title_pt', 'title_en','text_pt','text_en','subtitle_pt','subtitle_en'], 'required'],
             [['text'], 'string'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
-            [['page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'image_instagram', 'title', 'alt', 'tags', 'subtitle', 'title_pt', 'title_es', 'title_en', 'title_it', 'title_fr', 'title_de', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de', 'subtitle_pt', 'subtitle_es', 'subtitle_en', 'subtitle_it', 'subtitle_fr', 'subtitle_de', 'username'], 'string'],
+            [['page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'image_instagram', 'title', 'alt', 'tags','subtitle', 'title_pt','title_en','text_pt','text_en','subtitle_pt','subtitle_en','username'], 'string'],
             [['page_code_title'], 'unique'],
             [['page_code_subtitle'], 'unique'],
             [['page_code_text'], 'unique'],
@@ -111,14 +113,25 @@ class Blogs extends \yii\db\ActiveRecord
   
         if ($model->validate()) {   
          
-            if(isset($this->imageFile)){             
+            if(isset($this->imageFile)){
 
+                Helpers::upload(
+                    '@frontend/web/images/blog/'.$this->imageFile->baseName, 
+                    900, 
+                    500, 
+                    'center', 
+                    70, 
+                    $this->imageFile->baseName
+                );
+
+               
+                /*
                 $fileName = $this->imageFile->baseName. date('YmdHis');;      
 
                 $this->image = $this->imgUrl() .$fileName.'.'.$this->imageFile->extension;                
 
                 $this->imageFile->saveAs('@frontend/web/images/blog/' . $fileName . '.' . $this->imageFile->extension, false);
-
+                */
                 $this->created_date = date('Y-m-d H:i:s');
                 
                 return true;
@@ -191,26 +204,14 @@ class Blogs extends \yii\db\ActiveRecord
                 if(trim($tag['tag_parent_id']) == trim($values['tag'])){
                     $arr[] =  $tag;
                 }      
-            }
-           
-            /*
-            if(isset($tag['tag_parent_id'])){
-                print"<pre>";
-                print_r($values);
-                if($tag['tag_parent_id'] == $values['tag']){                  
-                    $values = Blogs::blogTagsHelper($tag, $values);      
-                    $arr[] = $values;
-                }
-             
-            }    
-            */      
+            }      
              
         }    
     
         return  $arr;
     }
     
-    public static function saveBlog($page, $model){
+    public static function saveBlogs($page, $model){
         
 
         $connection = new Query;
@@ -256,7 +257,7 @@ class Blogs extends \yii\db\ActiveRecord
     }
 
 
-    public static function updateBlog($page, $model){
+    public static function updateBlogs($page, $model){
 
         $connection = new Query;
 
@@ -272,43 +273,50 @@ class Blogs extends \yii\db\ActiveRecord
             $subtitle = 'subtitle_'.$val['country_code'];
             $text = 'text_'.$val['country_code'];   
             
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page=:page,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-            ->bindValue(':text', $model->$title)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_title)
-            ->bindValue(':page', $page)
-            ->execute();   
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                        
+            ])->execute();
 
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page=:page,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-            ->bindValue(':text', $model->$subtitle)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_subtitle)
-            ->bindValue(':page', $page)
-            ->execute();   
-           
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_text)
-            ->execute();         
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => 1,
+            ])->execute();
+
+                
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_subtitle                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_subtitle,
+                'text' => $model->$subtitle,
+                'active' => 1,
+            ])->execute();
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_text                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_text,
+                'text' => $model->$text,
+                'active' => 1,
+            ])->execute();          
 
         }
-    }  
+    }
+
 }

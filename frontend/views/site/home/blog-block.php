@@ -28,18 +28,24 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
 
     <?php if($i == 1): ?>
 
-    <div class="col-lg-7 mb-4 pb-2">
+    <div class="col-lg-7 mb-4 pb-2 google-map-borders">
         <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
             <article class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
                 <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
-                    <img src="<?= $categories['image'] ?>" class="img-fluid" alt="<?= $categories['alt'] ?>">
+                    <img src="<?= $categories['path'].$categories['image'] ?>" class="img-fluid" alt="<?= Yii::t('app', $categories['page_code_title'])  ?>">
                     <div class="thumb-info-title bg-transparent p-4">
-                        <div class="thumb-info-type bg-color-dark px-2 mb-1"><?= $categories['subtitle'] ?></div>
+                        <div class="thumb-info-type bg-color-dark px-2 mb-1">
+                            <?= Yii::t('app', $categories['page_code_subtitle'])  ?>
+                        </div>
                         <div class="thumb-info-inner mt-1">
-                            <h2 class="font-weight-bold text-color-light line-height-2 text-5 mb-0"><?= $categories['title'] ?></h2>
+                            <h2 class="font-weight-bold text-color-light line-height-2 text-5 mb-0">
+                                <?= Yii::t('app', $categories['page_code_title'])  ?>
+                            </h2>
                         </div>
                         <div class="thumb-info-show-more-content">
-                            <p class="mb-0 text-1 line-height-9 mb-1 mt-2 text-light opacity-5"><?= $categories['text'] ?></p>
+                            <p class="mb-0 text-1 line-height-9 mb-1 mt-2 text-light opacity-5">
+                                <?= Yii::t('app', $categories['page_code_text'])  ?>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -49,14 +55,14 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
     <div class="col-lg-5">
     <?php elseif($i <= 4): ?>
 
-        <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-2">
-            <div class="row align-items-center pb-1">
-                <div class="col-sm-5">
+        <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-1">
+            <div class="row align-items-center pb-1 ">
+                <div class="col-sm-5 google-map-borders">
                     <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
-                        <img src="<?= $categories['image'] ?>" class="img-fluid border-radius-0" alt="Simple Ways to Have a Pretty Face">
+                        <img src="<?= $categories['path'].$categories['image'] ?>" class="img-fluid border-radius-0">
                     </a>
                 </div>
-                <div class="col-sm-7 ps-sm-1">
+                <div class="col-sm-7 ps-sm-4 ">
                     <div class="thumb-info-caption-text">
                 	
 					<?php 
@@ -83,14 +89,17 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
                         foreach ($tagList as  $key => $tags):                             
                             if(!empty($tags)){																	
                                 $comma = (($inc == $count) ? '' : ',');		
-                                ?>					
+                                ?>		
+                                			
                                     <?php $urlParamsVal = ['site/blog', 									
                                         'username' => '#',																
                                         'tag' => $tags['tag'],													
                                     ];?>
                                                                 
                                     <div class="thumb-info-type text-light text-uppercase d-inline-block bg-color-dark px-2 m-0 mb-1 float-none">						
-                                        <a href="<?= Url::toRoute(['site/blog', 'category' => $tags['tag']]); ?>" class="text-decoration-none text-color-light -5"><?= $tags['description'] ?></a> 	
+                                        <a href="<?= Url::toRoute($urlParamsVal); ?>" class="text-decoration-none text-color-light -5">
+                                            <?= Yii::t('app', $tags['page_code'])  ?>
+                                        </a> 	
                                     </div>								
                                 <?php 
                                 $inc++;
@@ -100,7 +109,9 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
                     ?>  
  
                         <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
-                            <a href="<?= Url::toRoute(['site/blog-single', 'id' => $key]); ?>" class="text-decoration-none text-color-dark text-color-hover-primary"><?= $categories['title'] ?></a>
+                            <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>" class="text-decoration-none text-color-dark text-color-hover-primary">
+                                <?= Yii::t('app', $categories['page_code_title'])  ?>
+                            </a>
                         </h2>
                     </div>
                 </div>

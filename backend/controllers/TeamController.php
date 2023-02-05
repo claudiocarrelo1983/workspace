@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use Yii;
+use yii\imagine\Image;
 /**
  * TeamController implements the CRUD actions for Team model.
  */
@@ -68,28 +70,51 @@ class TeamController extends Controller
     public function actionCreate()
     {
         $model = new Team();
+        $title = 'team_title_1';
+        $text = 'team_text_1';
+
+        $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
+
+       if(!empty($count->id)){
+         $title = 'team_title_'.bcadd($count->id, 1);
+         $text = 'team_text_'.bcadd($count->id, 1);
+       }  
 
         if ($this->request->isPost) {
 
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
-            $model->image = '';
-         
             if(isset($model->imageFile->name)){
 
                 $fileName = $model->imageFile->baseName;
-                $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension; 
-       
+                $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension;
+
                 //if ($model->imageFile && $model->validate()) {
                 $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
                 //}  
 
-                $model->created_date = date('Y-m-d H:i:s');    
-             
-            }      
+                $path = '@frontend/web' . $model->imgUrl();
+                $model->image = $model->imageFile->name;
+                $model->path = $model->imgUrl();
+     
+                $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
+                
+                //creates small images 80x80
+                 Image::thumbnail($filePath, 80, 80)
+                    ->save(Yii::getAlias('@frontend/web/images/team/80x80/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+    
+    
+                //creates medium images 250x250
+                Image::thumbnail($filePath, 250, 250)
+                    ->save(Yii::getAlias('@frontend/web/images/team/250x250/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 70]);
+        
+    
+
+            }               
 
 
             if ($model->load($this->request->post()) && $model->save()) {
+                $model::saveTeam('team_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -98,6 +123,8 @@ class TeamController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'title' => $title,
+            'text' => $text,
         ]);
     }
 
@@ -112,12 +139,60 @@ class TeamController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $result = $model::find('page_code_title')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
+        $id = str_replace('team_title_', '', $result->page_code_title);
+      
+        $title = 'team_title_'.$id;     
+        $text = 'team_text_'.$id;  
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if(isset($model->imageFile->name)){
+
+                $fileName = $model->imageFile->baseName;
+                $model->image = $model->imgUrl() .$fileName.'.'.$model->imageFile->extension;
+
+                //if ($model->imageFile && $model->validate()) {
+                $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
+                //}  
+
+                
+            $path = '@frontend/web' . $model->imgUrl();
+            $model->image = $model->imageFile->name;
+            $model->path = $model->imgUrl();
+ 
+            $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
+
+                      
+            //creates small images 80x80
+            Image::thumbnail($filePath, 80, 80)
+            ->save(Yii::getAlias('@frontend/web/images/team/80x80/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+
+        //creates medium images 250x250
+            Image::thumbnail($filePath, 250, 250)
+            ->save(Yii::getAlias('@frontend/web/images/team/250x250/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 70]);
+
+
+
+            }               
+
+  
+            if($model->save()){
+                $model::updateTeam('team_text', $model);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+
+           
         }
 
         return $this->render('update', [
             'model' => $model,
+            'title' => $title,
+            'text' => $text,
         ]);
     }
 

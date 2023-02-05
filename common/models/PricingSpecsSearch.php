@@ -18,7 +18,7 @@ class PricingSpecsSearch extends PricingSpecs
     {
         return [
             [['id', 'active'], 'integer'],
-            [['type', 'page_code', 'description', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'safe'],
+            [['type', 'page_code', 'description', 'text_pt', 'text_en'], 'safe'],
         ];
     }
 
@@ -66,11 +66,7 @@ class PricingSpecsSearch extends PricingSpecs
             ->andFilterWhere(['like', 'page_code', $this->page_code])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'text_pt', $this->text_pt])
-            ->andFilterWhere(['like', 'text_es', $this->text_es])
-            ->andFilterWhere(['like', 'text_en', $this->text_en])
-            ->andFilterWhere(['like', 'text_it', $this->text_it])
-            ->andFilterWhere(['like', 'text_fr', $this->text_fr])
-            ->andFilterWhere(['like', 'text_de', $this->text_de]);
+            ->andFilterWhere(['like', 'text_en', $this->text_en]);
 
         return $dataProvider;
     }
