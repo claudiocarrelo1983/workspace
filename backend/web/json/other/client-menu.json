@@ -274,6 +274,14 @@
                ]
             },
             {   
+               "key":"t-tickets-view",
+               "title":"Tickets",
+               "url":"tickets/index",
+               "submenu":[                    
+                  
+               ]
+            },            
+            {   
                "key":"t-publish-view",
                "title":"Publish",
                "url":"publish/index",

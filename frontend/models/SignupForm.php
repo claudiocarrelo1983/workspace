@@ -19,6 +19,8 @@ class SignupForm extends Model
     public $password_hash;
     public $password;
 
+    public $company_code_url;
+
     public $level;
 
     public $first_name;
@@ -87,10 +89,14 @@ class SignupForm extends Model
             return null;
         }
 
+        $code = Helpers::generateCompanyCode();
+
         $user = new User();
         
         $user->level = 'subscriber';
-        $user->guid = Helpers::GUID();
+        $user->id = Helpers::GUID();
+        $user->company_code = $code;
+        $user->company_code_url = $code;
         $user->username = $this->username;      
         $user->email = $this->email;
         $user->company = $this->company;

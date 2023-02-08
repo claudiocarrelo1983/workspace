@@ -10,8 +10,11 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    const LEVEL_ATIVE = 'admin';
     public $username;
     public $password;
+
+    public $level;
     public $rememberMe = true;
 
     private $_user;
@@ -28,7 +31,7 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            ['password', 'validatePassword'],    
         ];
     }
 
@@ -41,9 +44,20 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
+
+        $user = $this->getUser();  
+        if (strtolower($user->level) !== 'admin') {        
+             $this->addError($attribute, 'You have no permission');          
+        }
+
+        if ($user->active == false) {        
+            $this->addError($attribute, 'You user is not active.');          
+       }
+
+        if (!$this->hasErrors()) {      
+          
             if (!$user || !$user->validatePassword($this->password)) {
+          
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
@@ -56,7 +70,9 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
+        
+       
+        if ($this->validate()) {            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         

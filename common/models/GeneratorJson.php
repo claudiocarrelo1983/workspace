@@ -492,6 +492,8 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'team':  
                     case 'recipes':     
                     case 'recipes_category': 
+                    case 'recipes_steps': 
+                    case 'recipes_food': 
                     case 'blogs_category':  
                     case 'blogs':     
                         GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns);             

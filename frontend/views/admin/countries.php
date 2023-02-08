@@ -9,15 +9,14 @@ $arrCountries = $model->getLastFileUploaded('countries');
 ?>
 
 <div class="dropdown d-inline-block">
-    <button type="button" class="btn header-item waves-effect"
-            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img id="header-lang-img" src="<?= $arrCountries[0]['img'] ?>" alt="Header Language" height="16">
-    </button>
-    <div class="dropdown-menu dropdown-menu-end">
-        <?php foreach ($arrCountries as $key => $language): ?>     
-            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="<?= $key  ?>">
-                <img src="<?= $language['img']  ?>" alt="user-image" class="me-1" height="12"> <span class="align-middle"><?= $language['full_title']  ?></span>
-            </a>
-        <?php endforeach; ?>
+    <div class="btn header-item waves-effect py-4">
+        <div class="header-column justify-content-start">	
+            <div class="header-row">                
+                <nav class="header-nav-top">	|
+                <?php foreach (Yii::$app->params['languages'] as $key => $language): ?>
+                <span class="px-2 language" data-csrf= <?= (Yii::$app->request->getCsrfToken()) ?>   id=<?= $key ?>><?= Yii::t('app', $language ) ?></span> |								
+                <?php endforeach; ?>                  
+            </div>
+        </div>  
     </div>
-</div>
+</div>  

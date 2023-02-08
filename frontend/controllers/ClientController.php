@@ -7,6 +7,7 @@ use common\models\LoginForm;
 use yii\db\Query;
 use yii\helpers\Url;
 use common\models\Clients;
+use common\models\User;
 
 use Yii;
 //Yii::$app->language = 'en-EN';
@@ -56,61 +57,12 @@ class ClientController extends Controller
         $blogQuery = new Query;
         $request = Yii::$app->request;
 
-        $companyArr = $blogQuery->select([
-            'code',
-            'type',            
-            'name',
-            'description',
-            'address',      
-            'postcode',
-            'location',
-            'nif',
-            'logo',      
-            'website',
-            'facebook',
-            'pinterest',
-            'instagram',
-            'twitter',
-            'tiktok',
-            'linkedin',
-            'youtube',  
-            'active'
-
-        ])
-        ->from(['companies'])
-        ->where(['code' => $request->get('code')]) 
-        ->one();
- 
-        if(empty($companyArr)){
-            return Yii::$app->response->redirect(Url::to(['clients/index'], true));
-        }
-      
-
-        $company = array_merge(
-            array(
-                'id' => '',
-                'code' => '',
-                'type'=> '',           
-                'name'=> '',
-                'description'=> '',
-                'address'=> '',    
-                'postcode'=> '',
-                'location'=> '',
-                'nif' => '',
-                'logo' => '',     
-                'website' => '',
-                'facebook' => '',
-                'pinterest'=> '',
-                'instagram'=> '',
-                'twitter' => '',
-                'tiktok' => '',
-                'linkedin' => '',
-                'youtube' => '',
-                'active' => ''
-            ),
-            $companyArr);    
-
-        $model = new Clients();     
+        $user = $blogQuery->select('*')
+            ->from(['user'])
+            ->where(['company_code_url' => $request->get('code')]) 
+            ->one();
+            
+        $model = new User();     
 
         if ($this->request->isPost) {          
 
@@ -131,8 +83,8 @@ class ClientController extends Controller
         }
 
 
-        return $this->render('registration', [
-            'company' => $company,
+        return $this->render('registration', [     
+            'user' => $user,       
             'model' => $model,
             'code' => $request->get('code')
         ]);

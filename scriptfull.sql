@@ -62,7 +62,10 @@ DELETE FROM `translations`
     'team_text',
     'texts_text'
 );
-
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'cpanel_big'  ,'Painel de Controlo',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'cpanel_small'  ,'Cpanel',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'training_big'  ,'Meu Treino',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'training_small'  ,'Treino',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'login'  ,'Login',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'register'  ,'Registro',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'recover_password'  ,'Recupere a Password',1);
@@ -222,12 +225,6 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipes_block_popular'  ,'Popular',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipes_block_recent'  ,'Recente',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_read_more'  ,'Ler Mais',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_minutes  '  ,'Minutos',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_easy  '  ,'Fácil ',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_easy '  ,'Médio',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_hard'  ,'Dificil',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'recipe_people'  ,'Pessoas',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','recipes', 'autor'  ,'Autor',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_1_title'  ,'Escolha o seu  plano.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_1_title_1'  ,'Basic',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_1_title_2'  ,'Standard',1);
@@ -248,8 +245,8 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_4_text'  ,'Existem muitos motivos com uma conta personalizada, segurança, bons recursos para melhorar o  seu metodo de trabalho, possibilidade de enviar e-mails em massa com a possibilidade d  apenas utilizar o  que precisa e crescer quando estiver pronto. Não há anúncios que distraem em sua caixa de correio, nenhum conteúdo não solicitado e nenhuma preocupação com as informações que você pode estar compartilhando involuntariamente com os anunciantes. Sua personalização é única, certifique-se de que seus clientes também sejam. Cause uma impressão profissional e duradoura.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_3_contact_us                                                  '  ,'Contate-nos',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_block_2_free'  ,'Free Trial',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', '
-pricing_per_block_per_month '  ,'Por mês',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','pricing', 'pricing_per_block_per_month '  ,'Por mês',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','contacts', 'contacts_block_title_1'  ,'Contate-nos',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','contacts', 'contacts_block_text_1'  ,'Para assistência técnica ou informações comerciais, fale com a equipa de suporte.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','contacts', 'contacts_block_2_contact_us'  ,'Contate-nos',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','contacts', 'contacts_block_2_text'  ,'Sinta-se à vontade para pedir detalhes, não economize perguntas!',1);
@@ -291,6 +288,10 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','sitemap', 'sitemap_blog_categories'  ,'Categorias de blog',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','sitemap', 'sitemap_login_pages'  ,'Páginas de login',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','sitemap', 'sitemap_other_pages'  ,'Outras Páginas ',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'cpanel_big' ,'Control Panel',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'cpanel_small' ,'Cpanel',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'training_big' ,'My Training',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'training_small' ,'Training',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'login' ,'Login',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'register' ,'Register',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'topmenu', 'recover_password' ,'Recover Password',1);
@@ -428,8 +429,7 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'blog', 'blog_reply' ,'Reply',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'blog', 'blog_save' ,'Save Time',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_1_title' ,'Recipes',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_1_text' ,'
-The best cooking tips so you can make the best recipes in the comfort of your home.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_1_text' ,'The best cooking tips so you can make the best recipes in the comfort of your home.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_search       ' ,'Search',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_categories' ,'Categories',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_all            ' ,'All Recipes',1);
@@ -451,12 +451,6 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_popular' ,'Popular',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipes_block_recent' ,'Recent',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_read_more' ,'Read More',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_minutes  ' ,'Minutes',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_easy  ' ,'Easy ',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_easy ' ,'Medium',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_hard' ,'Hard',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'recipe_people' ,'People',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'recipes', 'autor' ,'Author',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_1_title' ,'Choose your plan.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_1_title_1' ,'Basic',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_1_title_2' ,'Standard',1);
@@ -477,8 +471,8 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_4_text' ,'There are lots of reasons - you get an access to an customize account, more security, better features, possibilty of sending buld emails plus you only pay for what you need so you can grow when you’re ready. There are no distracting adverts in your mailbox, no unsolicited content and no worries about the information you may unwittingly be sharing with advertisers. Your customization is unique, make sure your clients are too. Make a professional and lasting impression.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_3_contact_us                                                  ' ,'Contact Us',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_block_2_free' ,'Free Trial',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', '
-pricing_per_block_per_month ' ,'Per Month',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'pricing', 'pricing_per_block_per_month ' ,'Per Month',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'contacts', 'contacts_block_title_1' ,'Contact Us',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'contacts', 'contacts_block_text_1' ,'For technical assistance or commercial information, speak to the support team.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'contacts', 'contacts_block_2_contact_us' ,'Contact Us',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'contacts', 'contacts_block_2_text' ,'Feel free to ask for details, don´t save any questions!',1);
@@ -520,3 +514,4 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_blog_categories' ,'Blog Categories',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_login_pages' ,'Login Pages',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_other_pages' ,'Other Pages',1);
+

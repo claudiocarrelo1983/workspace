@@ -909,8 +909,7 @@ class SiteController extends Controller
         }
 
         $submitEmail = '';
-
-
+      
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {            
            
             $submitEmail = 'success';

@@ -98,22 +98,28 @@ use yii\helpers\Url;
                     </form>
                 </div>
             </div>
+            <!--
             <div class="dropdown dropdown-mega d-none d-lg-block p-3">
-              <?= Html::a(
-                        Yii::t('app', '
-                        <span class="pr-2">
-                        <svg fill="none" height="22" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg" id="icon_241655987234908" data-filename="icon-cloud.svg"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" x2="12" y1="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
-                        </span>
-                        Download App'), 
-                        Url::toRoute('site/download-app'),     
-                        [
-                        'class' => 'btn btn-primary',
-                        'data-hash' => '',         
-                        'data-hash-offset' => 0,  
-                        'data-hash-offset-lg' => 130,  
-                        ]      
-                    ) ?>
+              <?php
+              /* 
+              Html::a(
+                    Yii::t('app', '
+                    <span class="pr-2">
+                    <svg fill="none" height="22" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg" id="icon_241655987234908" data-filename="icon-cloud.svg"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" x2="12" y1="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
+                    </span>
+                    Download App'), 
+                    Url::toRoute('site/download-app'),     
+                    [
+                    'class' => 'btn btn-primary',
+                    'data-hash' => '',         
+                    'data-hash-offset' => 0,  
+                    'data-hash-offset-lg' => 130,  
+                    ]      
+                ) 
+                */
+                ?>
             </div>
+            -->
             <?= $this->render('/admin/countries'); ?>
 
             <div class="dropdown d-none d-lg-inline-block ms-1">

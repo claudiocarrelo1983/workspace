@@ -177,9 +177,10 @@ class BlogsController extends Controller
                 $m = 'text_' . $country['country_code'];
                 $model->$m = Helpers::cleanTynyMceText($model->$m);   
             }
-         
-            if ($model->save()) {
 
+            $model->url = strtolower(str_replace("-", "", $model->title));
+
+            if ($model->save()) {
                 $model::saveBlogs('blogs_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -270,9 +271,6 @@ class BlogsController extends Controller
 
             }     
 
-          
-
- 
             $model->tags = '';
             if (!empty($_POST['Blogs']['tagsArr'])) {
 
@@ -282,6 +280,8 @@ class BlogsController extends Controller
 
             $model->created_date = date('Y-m-d H:i:s');
         
+            //$model->url = str_replace(" ", "-", strtolower($model->title));
+
             if ($model->save()) {
                 $model::updateBlogs('blogs_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);

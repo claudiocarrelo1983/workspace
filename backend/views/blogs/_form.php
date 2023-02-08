@@ -32,11 +32,10 @@ $tags = $tagQuery->select([
 
 $users = $tagQuery->select([
     'id', 
-    'guid', 
     'first_name',
     'last_name',
-    'username', 
-    'name'
+    'username'
+
     ])
 ->from('user')    
 ->all();

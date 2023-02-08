@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
 <header id="header" class="header-dark header-effect-shrink " data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
     <div class="header-body border-top-0 bg-dark box-shadow-none overflow-visible">
         <div class="header-top">
@@ -36,21 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="header-container container">
             <div class="header-row">
-                <?= Html::a(
-                    Yii::t('app',
-                    '<div class="header-row">
-                        <div class="header-logo">							
-                                <span class="text-color-light font-weight-normal text-8 mb-2 mt-2">'.$company['name'].'</span>				
-                        </div>
-                    </div>'),
-                    Url::home(),     
-                    [
-                    'class' => 'logo-url',
-                    'data-hash' => '',         
-                    'data-hash-offset' => 0,  
-                    'data-hash-offset-lg' => 130,  
-                    ]      
-                ) ?>
+                <?= 
+                Yii::t('app',
+                '<div class="header-row">
+                    <div class="header-logo">							
+                            <span class="text-color-light font-weight-normal text-8 mb-2 mt-2">'.$user['company'].'</span>				
+                    </div>
+                </div>') ?>
                 <div class="header-column justify-content-end">                       
                     <div class="header-row">
                         <div class="header-nav header-nav-line header-nav-bottom-line header-nav-bottom-line-no-transform header-nav-bottom-line-active-text-light header-nav-bottom-line-effect-1 header-nav-light-text order-2 order-lg-1">
@@ -82,38 +73,41 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-</header>    
-<div class="spacer"></div>   
+</header>  
+
+
+<div class="spacer"></div>  
+
+<section id="intro" class="section section-no-border section-angled bg-light pt-0 pb-5 m-0">  
+    <div class="container pb-2">
+        <div class="col-lg-10 text-center offset-lg-1">
+            <h2 class="font-weight-bold text-9 mb-0"><?= Yii::t('app', "client_registration_title") ?></h2>         
+        </div>      
+    </div>
+</section>
 
 
 <div role="main" class="main">      
     <div class="container">
         <div class="card-body">
-            <div class="row">
+            <div class="row mb-5">
                 <div class="form-group col-lg-3">
-                    <img src="<?= Url::base('http').'/'.$company['logo'] ?>" class="img-fluid"/>
+                    <img src="<?= $user['path'].$user['image'] ?>" class="img-fluid"/>
+                        <ul class="social-icons social-icons-big social-icons-dark-2">  
+                            <?= (empty($user['facebook']) ? '' : '<li><a href="'.$user['facebook'].'" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>') ?>                          
+                            <?= (empty($user['twitter']) ? '' : '<li class="social-icons-twitter"><a href="'.$user['twitter'].'" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>') ?>  
+                            <?= (empty($user['instagram']) ? '' : '<li class="social-icons-instagram"><a href="'.$user['instagram'].'" target="_blank" title="Instagram"><i class="icon-social-instagram icons fa-lg"></i></a></li>') ?>  
+                            <?= (empty($user['linkedin']) ? '' : '<li class="social-icons-linkedin"><a href="'.$user['linkedin'].'" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in fa-lg"></i></a></li>') ?>  
+                            <?= (empty($user['pinterest']) ? '' : '<li class="social-icons-pinterest"><a href="'.$user['pinterest'].'" target="_blank" title="Pinterest"><i class="fab fa-tiktok fa-lg"></i></a></li>') ?> 
+                            <?= (empty($user['youtube']) ? '' : '<li class="social-icons-youtube"><a href="'.$user['youtube'].'" target="_blank" title="Youtube"><i class="fab fa-youtube fa-lg"></i></a></li>') ?>
+                        </ul>
+                        <p class="py-5-0">
+                            <?= $user['description'] ?>
+                        </p>            
+                  
                 </div>
                 <div class="form-group col-lg-9">
-                    <div class="post-content">
-                        <h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
-                        <h1 class=""><?= $company['name'] ?></h1>    
-                        </h2>
-                        <p class="py-5-0">
-                            <?= $company['description'] ?>
-                        </p>            
-                        <ul class="social-icons social-icons-big social-icons-dark-2">  
-                            <?= (empty($company['facebook']) ? '' : '<li><a href="'.$company['facebook'].'" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>') ?>                          
-                            <?= (empty($company['twitter']) ? '' : '<li class="social-icons-twitter"><a href="'.$company['twitter'].'" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>') ?>  
-                            <?= (empty($company['instagram']) ? '' : '<li class="social-icons-instagram"><a href="'.$company['instagram'].'" target="_blank" title="Instagram"><i class="icon-social-instagram icons fa-lg"></i></a></li>') ?>  
-                            <?= (empty($company['linkedin']) ? '' : '<li class="social-icons-linkedin"><a href="'.$company['linkedin'].'" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in fa-lg"></i></a></li>') ?>  
-                            <?= (empty($company['pinterest']) ? '' : '<li class="social-icons-pinterest"><a href="'.$company['pinterest'].'" target="_blank" title="Pinterest"><i class="fab fa-tiktok fa-lg"></i></a></li>') ?> 
-                            <?= (empty($company['youtube']) ? '' : '<li class="social-icons-youtube"><a href="'.$company['youtube'].'" target="_blank" title="Youtube"><i class="fab fa-youtube fa-lg"></i></a></li>') ?>
-                        </ul>
-                            
-                    </div>
-                </div>
-                <div class="col">
-                    <?php $form = ActiveForm::begin(); ?>    
+                <?php $form = ActiveForm::begin(); ?>    
                         <div class="row">
                             <div class="form-group col-lg-6">                              
                                 <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label('First Name') ?>                             
@@ -154,18 +148,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="row">
                             <div class="form-group col">
-                                <?= $form->field($model, 'text')->widget(TinyMce::className(), [
-                                    'options' => ['rows' => 6],
-                                    'language' => 'es',
-                                    'clientOptions' => [
-                                        'plugins' => [
-                                            "advlist autolink lists link charmap print preview anchor",
-                                            "searchreplace visualblocks code fullscreen",
-                                            "insertdatetime media table contextmenu paste"
-                                        ],
-                                        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                                    ]
-                                ]);?>
+                                <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label('First Name') ?>                             
+                     
                              </div>
                         </div>
                         <div class="row">
@@ -184,8 +168,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                     <?php ActiveForm::end(); ?>
-                </div>         
-            </div>      
+                </div>
+            </div>              
         </div>
     </div>
 </div>

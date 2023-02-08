@@ -18,6 +18,14 @@ foreach($subject as $value){
     $arrSubject[Yii::t('app', $value['page_code'])] = Yii::t('app', $value['page_code']);  
 }
 
+/*
+$form->field($model, 'subject')->dropDownList(
+                        $arrSubject,                  
+                        ['style' => 'height:52.75px;'],                                                                                                                 
+                        ['separator' => "</br>"]
+                    )->label(Yii::t('app', "contacts_label_subject").':')
+                    ?> 
+*/
 
 $path2 = 'contacts';
 ?>
@@ -66,12 +74,7 @@ $path2 = 'contacts';
                 </div>
                 <div class="row">             
                     <div class=" col-lg-6">   
-                    <?= $form->field($model, 'subject')->dropDownList(
-                        $arrSubject,                  
-                        ['style' => 'height:52.75px;'],                                                                                                                 
-                        ['separator' => "</br>"]
-                    )->label(Yii::t('app', "contacts_label_subject").':')
-                    ?>  
+                        <?= $form->field($model, 'subject')->textInput(['class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "contacts_label_subject").':') ?>                    
                     </div>    
                 </div>    
 

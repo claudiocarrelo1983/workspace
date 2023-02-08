@@ -40,6 +40,8 @@ class ClientsSearch extends Clients
      */
     public function search($params)
     {
+
+        return $params;
         $query = Clients::find();
 
         // add conditions that should always apply here

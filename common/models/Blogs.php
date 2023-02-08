@@ -74,7 +74,7 @@ class Blogs extends \yii\db\ActiveRecord
     {
         return [
             [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text','title', 'tags', 'title_pt', 'title_en','text_pt','text_en','subtitle_pt','subtitle_en'], 'required'],
-            [['text'], 'string'],
+            [['text','url'], 'string'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
             [['page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'image_instagram', 'title', 'alt', 'tags','subtitle', 'title_pt','title_en','text_pt','text_en','subtitle_pt','subtitle_en','username'], 'string'],

@@ -3,10 +3,14 @@
 namespace frontend\controllers;
 
 use common\models\Clients;
-use common\Models\ClientsSearch;
+use common\models\UserSearch;
+use SplQueue;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
+use common\models\User;
 use Yii;
 
 //Yii::$app->language = 'en-EN';
@@ -41,10 +45,36 @@ class ClientsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ClientsSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $this->layout = 'adminLayout';  
 
-        $this->layout = 'adminLayout';        
+        $searchModel = new UserSearch();
+
+        $query = new Query();
+
+        $blogArr = $query->select('*')
+                    ->from(['user'])  
+                    ->where([
+                        'active' => true,
+                        'username' =>  Yii::$app->user->identity->username
+                    ])    
+                    ->one();
+   
+        $dataProvider = new ActiveDataProvider([
+            'query' => User::find()->where(
+                [
+                    'level' => 'client', 
+                    'active' => true,                  
+                    'company_code_parent' => $blogArr['company_code']
+                ]
+            ),
+            
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+      
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -62,8 +92,11 @@ class ClientsController extends Controller
     {
         $this->layout = 'adminLayout';        
 
+        $model = User::find($id);
+
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -74,7 +107,7 @@ class ClientsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Clients();
+        $model = new User();
 
         $this->layout = 'adminLayout';
         
@@ -102,10 +135,10 @@ class ClientsController extends Controller
     public function actionUpdate($id)
     {
 
-        $this->layout = 'adminLayout';
-        
+        $this->layout = 'adminLayout';        
 
-        $model = $this->findModel($id);
+        $model = User::find($id);
+
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

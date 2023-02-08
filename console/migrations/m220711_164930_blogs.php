@@ -21,6 +21,7 @@ class m220711_164930_blogs extends Migration
             'page_code_title' => $this->string()->notNull()->unique(),  
             'page_code_subtitle' => $this->string()->notNull()->unique(),  
             'page_code_text' => $this->string()->notNull()->unique(),   
+            'url' => $this->string(),  
             'path' => $this->string(),  
             'image' => $this->string(),
             'image_instagram' => $this->string(),

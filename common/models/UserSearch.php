@@ -4,7 +4,7 @@ namespace common\Models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
+use common\models\User;
 
 /**
  * UserSearch represents the model behind the search form of `app\models\User`.
@@ -18,7 +18,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'first_name', 'last_name', 'name', 'company', 'level', 'sublevel', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
+            [['username', 'first_name', 'last_name', 'company', 'level', 'sublevel', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
         ];
     }
 
@@ -62,12 +62,11 @@ class UserSearch extends User
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+        ]);    
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'last_name', $this->last_name])       
             ->andFilterWhere(['like', 'company', $this->company])
             ->andFilterWhere(['like', 'level', $this->level])
             ->andFilterWhere(['like', 'sublevel', $this->sublevel])
