@@ -52,4 +52,45 @@ class CalculatorBmiLbs extends \yii\base\Model
             'weight' => Yii::t('app', "weight"),
         ];
     }
+
+    public static function conditionLbsBmi($imc){
+        
+        $result = [
+            'color' => '#5c9baa',
+            'answer' => '',
+        ];
+
+        if ($imc <= '0.001850') {
+            $color = '#5c9baa';
+            $answer = Yii::t('app', "calculator_bmi_answer_underweight");
+        }
+
+        if ($imc >= '0.001850' && $imc <= '0.002490') {
+            $color = '#91c058';
+            $answer = Yii::t('app', "calculator_bmi_answer_normal");
+        }
+
+        if ($imc >= '0.002500' && $imc <= '0.002990') {
+            $color = '#e4b345';
+            $answer = Yii::t('app', "calculator_bmi_answer_overweight");
+        }
+
+        if ($imc >= '0.003000' && $imc <= '0.003490') {
+            $color = '#d18b4b';
+            $answer = Yii::t('app', "calculator_bmi_answer_obesity_1");
+        }
+
+        if ($imc >= '0.003500' && $imc <= '0.003990') {
+            $color = '#c44b42';
+            $answer = Yii::t('app', "calculator_bmi_answer_obesity_2");
+        }
+
+        if ($imc >= '0.004000') {
+            $color = '#b33e36';
+            $answer = Yii::t('app', "calculator_bmi_answer_obesity_3");
+        }
+
+        return $result;
+
+    }
 }
