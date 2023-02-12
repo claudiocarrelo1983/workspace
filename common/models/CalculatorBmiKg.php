@@ -93,4 +93,5 @@ class CalculatorBmiKg extends \yii\base\Model
         return $result;
 
     }
+    
 }
