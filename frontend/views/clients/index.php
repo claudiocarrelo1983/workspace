@@ -21,6 +21,10 @@ $userArr = $query->select('*')
 ->from(['user'])
 ->where(['username' => Yii::$app->user->identity->username]) 
 ->one();
+
+print"<pre ";
+print_r($userArr);
+die();
 ?>
 
 <!-- start page title -->

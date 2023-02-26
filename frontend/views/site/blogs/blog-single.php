@@ -85,7 +85,7 @@ $path2 = 'blog';
 														];?>
 																							
 										<a href="<?= Url::toRoute($urlParamsVal); ?> ">
-											<?= $blog['username'] ?>
+											<?= $arrUser['full_name'] ?>
 										</a> 
 									</span>
 

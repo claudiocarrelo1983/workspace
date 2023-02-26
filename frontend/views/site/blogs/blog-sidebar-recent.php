@@ -22,7 +22,8 @@ foreach(array_reverse($blogs) as $key => $blog){
         <?php 
             $timestamp = strtotime($categories['created_date']);        
             $urlParamsVal = ['site/blog-single', 														
-                'id' => $categories['id'],													
+                'id' => $categories['id'],	
+                'url' => $categories['url']												
             ];
         ?> 
             <li>

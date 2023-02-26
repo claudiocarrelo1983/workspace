@@ -34,8 +34,12 @@ class PublicAsset extends AssetBundle
         'css/icons.min.css',
         'css/site.css',
         'css/demos/demo-app-landing.css',
-        'vendor/animate/animate.compat.css'       
+        'vendor/animate/animate.compat.css' ,
+        'vendor/bootstrap-star-rating/css/star-rating.min.css',
+        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css'
+
     ]; 
+
 
     public $js = [
         //'vendor/jquery/jquery.min.js',
@@ -64,7 +68,11 @@ class PublicAsset extends AssetBundle
         //'assets/libs/apexcharts/apexcharts.min.js',
         //'js/pages/dashboard.init.js',
         //'js/app.js'
+        'vendor/bootstrap-star-rating/js/star-rating.min.js',
+        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js'
+
     ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',

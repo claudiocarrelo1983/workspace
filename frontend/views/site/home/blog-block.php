@@ -29,10 +29,13 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
     <?php if($i == 1): ?>
 
     <div class="col-lg-7 mb-4 pb-2 google-map-borders">
-        <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
+        <a href="<?= Url::toRoute(['site/blog-single', 
+            'id' => $categories['id'],
+            'url' => $categories['url']
+        ]); ?>">
             <article class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
                 <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
-                    <img src="<?= $categories['path'].$categories['image'] ?>" class="img-fluid" alt="<?= Yii::t('app', $categories['page_code_title'])  ?>">
+                    <img src="<?= $categories['path'].'665x377/'.$categories['image'] ?>" class="img-fluid" alt="<?= Yii::t('app', $categories['page_code_title'])  ?>">
                     <div class="thumb-info-title bg-transparent p-4">
                         <div class="thumb-info-type bg-color-dark px-2 mb-1">
                             <?= Yii::t('app', $categories['page_code_subtitle'])  ?>
@@ -58,8 +61,11 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
         <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-1">
             <div class="row align-items-center pb-1 ">
                 <div class="col-sm-5 google-map-borders">
-                    <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
-                        <img src="<?= $categories['path'].$categories['image'] ?>" class="img-fluid border-radius-0">
+                    <a href="<?= Url::toRoute(['site/blog-single', 
+                        'id' => $categories['id'],
+                        'url' => $categories['url']
+                    ]); ?>">
+                        <img src="<?= $categories['path'].'188x104/'.$categories['image'] ?>" class="img-fluid border-radius-0">
                     </a>
                 </div>
                 <div class="col-sm-7 ps-sm-4 ">
@@ -109,7 +115,11 @@ $tagsCategory = $model->getLastFileUploaded('blogs_category');
                     ?>  
  
                         <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
-                            <a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>" class="text-decoration-none text-color-dark text-color-hover-primary">
+                            <a href="<?= Url::toRoute(['site/blog-single', 
+                                'id' => $categories['id'],
+                                'url' => $categories['url']
+                                ]); 
+                            ?>" class="text-decoration-none text-color-dark text-color-hover-primary">
                                 <?= Yii::t('app', $categories['page_code_title'])  ?>
                             </a>
                         </h2>

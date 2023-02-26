@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\db\Query;
 use dosamigos\tinymce\TinyMce;
 use yii\helpers\Url;
+use marqu3s\summernote\Summernote;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Blogs */
@@ -108,6 +109,7 @@ foreach($tags as $tag){
             <div class="tab-content">
                 <div class="tab-pane active" id="popularPosts"> 
                     <?=  $form->field($model, 'page_code_title')->hiddenInput(['value'=> $title])->label(false); ?>
+                    <?=  $form->field($model, 'page_code_description')->hiddenInput(['value'=> $description])->label(false); ?>
                     <?=  $form->field($model, 'page_code_subtitle')->hiddenInput(['value'=> $subtitle])->label(false); ?>
                     <?=  $form->field($model, 'page_code_text')->hiddenInput(['value'=> $text])->label(false); ?>
                     <div clasS="row">
@@ -128,20 +130,9 @@ foreach($tags as $tag){
                     </div>
                     <div class="row">
                          <div class="col">
-                            <?= $form->field($model, 'text')->widget(TinyMce::className(), [
-                                    'options' => ['rows' => 6],
-                                    'language' => 'es',
-                                    'clientOptions' => [
-                                        'plugins' => [
-                                            "advlist autolink lists link charmap print preview anchor",
-                                            "searchreplace visualblocks code fullscreen",
-                                            "insertdatetime media table contextmenu paste"
-                                        ],
-                                        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                                    ]
-                                ]);?>
+                            <?= $form->field($model, 'text')->textarea(['maxlength' => true]) ?>                                                  
                          </div>                                             
-                    </div>                 
+                    </div>                
                
 
                     <?= $form->field($model, 'username')->dropdownList($arrUsers,
@@ -178,19 +169,31 @@ foreach($tags as $tag){
 
                         ?>  
                         <?=  $form->field($model, 'title_'.$valLang)->textInput() ?>   
+                        <?=  $form->field($model, 'description_'.$valLang)->textarea() ?> 
                         <?=  $form->field($model, 'subtitle_'.$valLang)->textInput() ?>  
-                        <?= $form->field($model, 'text_'.$value['country_code'])->widget(TinyMce::className(), [
-                            'options' => ['rows' => 6],
-                            'language' => 'es',
-                            'clientOptions' => [
-                                'plugins' => [
-                                    "advlist autolink lists link charmap print preview anchor",
-                                    "searchreplace visualblocks code fullscreen",
-                                    "insertdatetime media table contextmenu paste"
+
+                        <?php
+                        
+                        $text_lang = 'text_'.$value['country_code'];
+                        
+                        echo $form->field($model, $text_lang)
+                        ->widget(Summernote::class, [                             
+                                //'value'=> $model->  $text_lang,                            
+                                'clientOptions' => [                               
+                                    'toolbar' => [      
+                                        ['undo', ['undo']],
+                                        ['redo', ['redo']],
+                                        ['fontname', ['fontname']],    
+                                        ['font', ['bold', 'italic', 'underline']], 
+                                        ['fontsize', ['fontsize']],                               
+                                        ['color', ['color']],
+                                        ['para', ['ul', 'ol', 'paragraph']],                                        
+                                        ['table', ['table']],
+                                        ['insert', ['link', 'picture', 'hr']],
+                                        ['view', ['fullscreen', 'codeview']],                                          
+                                    ]
                                 ],
-                                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                            ]
-                        ]);?>
+                            ]); ?>                 
                     
                     <?php 
                         }else{

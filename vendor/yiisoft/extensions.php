@@ -239,4 +239,31 @@ return array (
       '@gromovfjodor/imageresize' => $vendorDir . '/gromovfjodor/yii2-image-resize',
     ),
   ),
+  'kartik-v/yii2-editors' => 
+  array (
+    'name' => 'kartik-v/yii2-editors',
+    'version' => '1.0.1.0',
+    'alias' => 
+    array (
+      '@kartik/editors' => $vendorDir . '/kartik-v/yii2-editors/src',
+    ),
+  ),
+  'yiisoft/yii2-bootstrap' => 
+  array (
+    'name' => 'yiisoft/yii2-bootstrap',
+    'version' => '2.0.11.0',
+    'alias' => 
+    array (
+      '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap/src',
+    ),
+  ),
+  'marqu3s/yii2-summernote' => 
+  array (
+    'name' => 'marqu3s/yii2-summernote',
+    'version' => '1.0.1.0',
+    'alias' => 
+    array (
+      '@marqu3s/summernote' => $vendorDir . '/marqu3s/yii2-summernote',
+    ),
+  ),
 );

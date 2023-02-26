@@ -118,6 +118,9 @@ $path2 = 'recipes_single';
 							<div class="text-3 text-justify post post-large blog-single-post  py-3">
 								<?= Yii::t('app', $recipe['recipe_code_text']) ?>
 							</div>
+							<div class="d-block pb-2">
+								<input type="text" class="rating-invisible" value="3" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'dark', 'size':'sm'}">
+							</div>
 							<div class="row">
 								<div class="col-lg-6 pt-5">
 									<h4>                    

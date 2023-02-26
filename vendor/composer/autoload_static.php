@@ -48,6 +48,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
+            'yii\\bootstrap\\' => 14,
             'yii\\bootstrap4\\' => 15,
             'yii\\authclient\\' => 15,
             'yii\\' => 4,
@@ -70,6 +71,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'm' => 
         array (
             'mhunesi\\formio\\' => 15,
+            'marqu3s\\summernote\\' => 19,
         ),
         'l' => 
         array (
@@ -77,6 +79,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         'k' => 
         array (
+            'kartik\\editors\\' => 15,
             'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
@@ -264,6 +267,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-composer',
         ),
+        'yii\\bootstrap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap/src',
+        ),
         'yii\\bootstrap4\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap4/src',
@@ -304,9 +311,17 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/mhunesi/yii2-formio/src',
         ),
+        'marqu3s\\summernote\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marqu3s/yii2-summernote',
+        ),
         'libphonenumber\\' => 
         array (
             0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src',
+        ),
+        'kartik\\editors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-editors/src',
         ),
         'kartik\\date\\' => 
         array (

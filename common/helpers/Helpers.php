@@ -45,17 +45,33 @@ class Helpers{
         return $key;
     }
 
-    public static function cleanTynyMceText($text)
-    {
-
-        $arrOptions = ['strong', 'p', 'span','table','h1','div', 'h2', 'h3', 'h4', 'h5'];
+    public static function cleanTynyMceText($text, $arrOptions = ['strong', 'p', 'span','table','h1','div', 'h2', 'h3', 'h4', 'h5'])
+    {        
 
         foreach($arrOptions as $value){
 
             switch($value){
+                case 'font-weight-semibold':
+                case '<b>':
+                case '</b>':
+                    $text = str_replace($value, ' ', $text); 
+                    break;
                 case 'strong':
+            
+              
+                    $start = '<'.$value;
+                    $end = '>';
+                  
+                    
+                    $start = preg_quote($start, '/');
+                    $end = preg_quote($end, '/');
+                    $regex = "/({$start})(.*?)({$end})/";
+        
+                    $text = preg_replace($regex, '', $text); 
+
+                    break;
                 case 'p':
-                case 'span':          
+                case 'span':                      
                 case 'div':
 
                     $start = '<'.$value;
@@ -110,6 +126,8 @@ class Helpers{
         $str = strtr($str, $unwanted_array);
 
        $str = str_replace(" ", "-", strtolower($str));
+       $str = str_replace(")", "", strtolower($str));
+       $str = str_replace("(", "", strtolower($str));
 
         return $str;
     }

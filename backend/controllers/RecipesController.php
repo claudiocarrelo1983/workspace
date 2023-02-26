@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\db\Query;
+use common\Helpers\Helpers;
 use Yii;
 use Adcuz\FatSecret\OAuthBase;
 use Adcuz\FatSecret\FatSecretException;
@@ -172,8 +173,14 @@ class RecipesController extends Controller
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
 
+
+            $modelRecipe->url = Helpers::removeSpecialChars($modelRecipe->recipe_title_en);
+
+            print_r($modelRecipe->url);
+            die();
        
-            if($modelRecipe->validate()){      
+            if($modelRecipe->validate() && $modelRecipe->save()){      
+                die('___');
                 if(isset(Yii::$app->request->post()['Recipes'])){  
                     $recipesCode = $modelRecipe->saveRecipes('recipe_list', $modelRecipe);
                     if (isset(Yii::$app->request->post()['RecipesSteps'])) {
@@ -271,7 +278,12 @@ class RecipesController extends Controller
                 $modelRecipe->imageFile->saveAs('@frontend/web/images/recipes/'. $fileName . '.' . $modelRecipe->imageFile->extension, false);      
             }
        
-          
+
+            $modelRecipe->url = Helpers::removeSpecialChars($modelRecipe->recipe_title_en);
+
+      
+            //if($modelRecipe->validate() && $modelRecipe->save()){      
+         
             if($recipeCode = $modelRecipe->updateRecipes('recipes_text',$modelRecipe)){
                 if (isset(Yii::$app->request->post()['RecipesSteps'])) {                
                     $RecipesSteps->updateRecipesSteps('recipes_text', Yii::$app->request->post()['RecipesSteps'], $modelRecipe);

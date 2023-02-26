@@ -21,6 +21,8 @@ use yii\helpers\Json;
 use common\models\GeneratorJson;
 use sammaye\mailchimp\Mailchimp;
 use common\models\Comments;
+use common\Helpers\Helpers;
+use yii\db\Query;
 
 
 /**
@@ -273,7 +275,7 @@ class SiteController extends Controller
         $blog = '';        
 
         foreach($blogList as $key => $values){
-            if($values['id'] ==  $request->get('id')){
+            if($values['url'] ==  $request->get('url') && $values['id'] ==  $request->get('id')){
                 $blog = $values;
                 break;
             }
@@ -343,13 +345,14 @@ class SiteController extends Controller
         $model = new GeneratorJson(); 
         $recipeArr = $model->getLastFileUploaded('recipes');  
 
-        $recipe = '';        
+        $recipe = '';       
 
-        foreach($recipeArr as  $values){
-            if($values['id'] ==  $request->get('id')){
+        foreach($recipeArr as $key => $values){
+            if($values['url'] ==  $request->get('url') && $values['id'] ==  $request->get('id')){
                 $recipe = $values;
+                break;
             }
-        }       
+        }
 
         if(empty($recipe)){
            return Yii::$app->response->redirect(Url::to(['site/blog'], true));
@@ -514,6 +517,7 @@ class SiteController extends Controller
 
     public function actionCalculators()
     {
+
 
         $this->layout = 'public';
       
@@ -871,7 +875,10 @@ class SiteController extends Controller
 
         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
 
-        if (Yii::$app->user->isGuest && $maintenance == true) {
+        $user = User::findOne(['username' => $model->username]);
+
+
+        if (Yii::$app->user->isGuest && $maintenance == true && $user->level !== 'admin') {
 
             $this->layout = 'maintenance';
 
@@ -901,7 +908,21 @@ class SiteController extends Controller
 
         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
 
-        if (Yii::$app->user->isGuest && $maintenance == true) {
+        $connection = new Query;
+
+        $request = Yii::$app->request;
+
+        $level = $connection->select([
+            'level' 
+            ])
+        ->from('user')   
+        ->where(['username' => $request->post('username')]) 
+        ->one();
+
+        print_r($level);
+        ///die('___');
+
+        if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
 
             $this->layout = 'maintenance';
 
@@ -909,8 +930,13 @@ class SiteController extends Controller
         }
 
         $submitEmail = '';
+
+        $model->guid = Helpers::GUID();
       
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {            
+        if ($model->load(Yii::$app->request->post())) {              
+        
+
+            $model->signup();         
            
             $submitEmail = 'success';
 

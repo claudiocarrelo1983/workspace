@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3a4fa81779cff137f99904f5e1a2060cdcb89244',
+    'reference' => '7960de69b547e6cd9acadf96d82793a21149e768',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -47,6 +47,15 @@
       ),
       'reference' => '0bc8d1e30e96183e4f36db9dc79caead300beff4',
     ),
+    'bower-asset/bootstrap' => 
+    array (
+      'pretty_version' => 'v3.4.1',
+      'version' => '3.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '68b0d231a13201eb14acd3dc84e51543d16e5f7e',
+    ),
     'bower-asset/chart.js' => 
     array (
       'pretty_version' => 'v2.9.4',
@@ -55,6 +64,15 @@
       array (
       ),
       'reference' => '9bd4cf82fda9f50a5fb50b72843e06ab88124278',
+    ),
+    'bower-asset/codemirror' => 
+    array (
+      'pretty_version' => '6.65.7',
+      'version' => '6.65.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e90054a9063d3ceece4869563681901d5acd5003',
     ),
     'bower-asset/fullcalendar' => 
     array (
@@ -109,6 +127,15 @@
       array (
       ),
       'reference' => '38c8d3131a82567bfef18da09f7f4db68c84f8a3',
+    ),
+    'bower-asset/summernote' => 
+    array (
+      'pretty_version' => 'v0.8.20',
+      'version' => '0.8.20.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cd06928b8f978e8c852df5de0b87a008573dac4c',
     ),
     'bower-asset/yii2-pjax' => 
     array (
@@ -434,6 +461,15 @@
       ),
       'reference' => 'a6e6da93ea0f76aba33b0e8ed1325523c0413da2',
     ),
+    'kartik-v/yii2-editors' => 
+    array (
+      'pretty_version' => 'v1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '529cff31afda936ac5c98d7f9c53bb01c4452419',
+    ),
     'kartik-v/yii2-krajee-base' => 
     array (
       'pretty_version' => 'v3.0.5',
@@ -550,6 +586,15 @@
       array (
       ),
       'reference' => '728434227fe21be27ff6d86621a1b13107a2562c',
+    ),
+    'marqu3s/yii2-summernote' => 
+    array (
+      'pretty_version' => 'v1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a7038f5d55f2d7b6c4dbb788a0be1e0555365184',
     ),
     'mhunesi/yii2-formio' => 
     array (
@@ -1348,7 +1393,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3a4fa81779cff137f99904f5e1a2060cdcb89244',
+      'reference' => '7960de69b547e6cd9acadf96d82793a21149e768',
     ),
     'yiisoft/yii2-authclient' => 
     array (
@@ -1358,6 +1403,15 @@
       array (
       ),
       'reference' => '6bd4b4efc60db2b31bb957a473442900c704857e',
+    ),
+    'yiisoft/yii2-bootstrap' => 
+    array (
+      'pretty_version' => '2.0.11',
+      'version' => '2.0.11.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '83d144f4089adaa7064ad60dc4c1436daa2eb30e',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

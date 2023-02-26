@@ -73,11 +73,13 @@ class Blogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_text','title', 'tags', 'title_pt', 'title_en','text_pt','text_en','subtitle_pt','subtitle_en'], 'required'],
+            [['tagsArr','text','page_code_title', 'page_code_subtitle', 'page_code_description', 'page_code_text','title', 'tags', 'title_pt', 'title_en','text_pt','text_en','subtitle_pt','subtitle_en','description_pt','description_en'], 'required'],
             [['text','url'], 'string'],
+            [['title_pt','title_en'], 'string', 'max' => 38],
+            [['description_pt','description_en'], 'string', 'max' => 370, 'min' => 200],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
-            [['page_code_title', 'page_code_subtitle', 'page_code_text', 'image', 'image_instagram', 'title', 'alt', 'tags','subtitle', 'title_pt','title_en','text_pt','text_en','subtitle_pt','subtitle_en','username'], 'string'],
+            [['page_code_title', 'page_code_subtitle', 'page_code_description','page_code_text', 'image', 'image_instagram', 'title', 'alt', 'tags','subtitle', 'title_pt','title_en','text_pt','text_en','subtitle_pt','subtitle_en','username'], 'string'],
             [['page_code_title'], 'unique'],
             [['page_code_subtitle'], 'unique'],
             [['page_code_text'], 'unique'],
@@ -226,6 +228,7 @@ class Blogs extends \yii\db\ActiveRecord
 
             $title = 'title_'.$val['country_code'];
             $subtitle = 'subtitle_'.$val['country_code'];
+            $description = 'description_'.$val['country_code'];       
             $text = 'text_'.$val['country_code'];
 
             $connection->createCommand()->insert('translations', [      
@@ -233,6 +236,14 @@ class Blogs extends \yii\db\ActiveRecord
                 'page' => $page,
                 'page_code' => $model->page_code_title,
                 'text' => $model->$title,
+                'active' => $model->active,
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_description,
+                'text' => $model->$description,
                 'active' => $model->active,
             ])->execute();
 
@@ -271,6 +282,7 @@ class Blogs extends \yii\db\ActiveRecord
 
             $title = 'title_'.$val['country_code'];
             $subtitle = 'subtitle_'.$val['country_code'];
+            $description = 'description_'.$val['country_code'];       
             $text = 'text_'.$val['country_code'];   
             
             $connection->createCommand()->delete('translations',
@@ -284,6 +296,21 @@ class Blogs extends \yii\db\ActiveRecord
                 'page' => $page,
                 'page_code' => $model->page_code_title,
                 'text' => $model->$title,
+                'active' => 1,
+            ])->execute();
+
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_description                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_description,
+                'text' => $model->$description,
                 'active' => 1,
             ])->execute();
 

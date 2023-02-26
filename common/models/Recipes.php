@@ -46,7 +46,7 @@ class Recipes extends \yii\db\ActiveRecord
     {
         return [
             [['recipe_cat_code','tagsArr','difficulty','recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_text','cooking_time', 'number_of_people', 'recipe_title_pt', 'recipe_text_pt', 'recipe_title_es', 'recipe_text_es', 'recipe_title_en', 'recipe_text_en', 'recipe_title_it', 'recipe_text_it', 'recipe_title_fr', 'recipe_text_fr', 'recipe_title_de', 'recipe_text_de'], 'required'],
-            [['recipe_cat_code','difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
+            [['url','recipe_cat_code','difficulty','recipe_text', 'recipe_text_pt', 'recipe_text_es', 'recipe_text_en', 'recipe_text_it', 'recipe_text_fr', 'recipe_text_de'], 'string'],
             [['cooking_time', 'number_of_people', 'active'], 'integer'],
             [['tagsArr','created_date','imageFile'], 'safe'],
             [['username', 'recipe_code_title', 'recipe_code_text', 'recipe_title', 'recipe_title_pt', 'recipe_title_es', 'recipe_title_en', 'recipe_title_it', 'recipe_title_fr', 'recipe_title_de'], 'string', 'max' => 255],
@@ -169,7 +169,8 @@ class Recipes extends \yii\db\ActiveRecord
         $connection = new Query;
      
        $connection->createCommand()->update('recipes', [   
-            'username' => '',        
+            'username' => '',   
+            'url' => $modelRecipe->url,      
             'recipe_title' => $modelRecipe->recipe_title, 
             'cooking_time' => $modelRecipe->cooking_time, 
             'number_of_people' => $modelRecipe->number_of_people, 

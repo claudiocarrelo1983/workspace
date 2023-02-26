@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use common\models\Blogs;
 use common\models\GeneratorJson;
+use common\helpers\Helpers;
 
 $model = new GeneratorJson(); 
 $tagsCategory = $model->getLastFileUploaded('blogs_category');  
@@ -51,6 +52,8 @@ if(0 < $pg){
 }else{
 	$arrBlog = (isset($arrBlog[1]) ? $arrBlog['1'] : $arrBlog);
 }
+
+
 
 $teams = $model->getLastFileUploaded('team');
 
@@ -189,7 +192,10 @@ $path2 = 'blog';
 							<div class="row mb-3">
 								<div class="col-lg-5">
 									<div class="post-image post-image google-map-borders ">
-										<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">									
+										<a href="<?= Url::toRoute(['site/blog-single', 
+											'id' => $categories['id'],
+											'url' => $categories['url']
+										]); ?>">									
 											<img src="<?= $categories['path'].'322x179/'.$categories['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="<?= Yii::t('app', $categories['alt']) ?>" />
 										</a>
 									</div>
@@ -197,7 +203,12 @@ $path2 = 'blog';
 								<div class="col-lg-7">
 									<div class="post-content">
 										<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
-											<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>">
+											<a href="<?= Url::toRoute(['site/blog-single',
+											 	'id' => $categories['id'],
+												 'url' => $categories['url']
+												]
+											); 
+											 ?>">
 												<?= Yii::t('app', $categories['page_code_title']) ?>
 											</a>
 										</h2>
@@ -207,8 +218,8 @@ $path2 = 'blog';
 											}
 
 										</style>
-										<p class="font-weight-semibold  text-1">
-											<?= Blogs::getWords( Yii::t('app', $categories['page_code_text']), 350); ?> [...]
+										<p class="text-3">
+											<?= Yii::t('app', $categories['page_code_description'])?> [...]
 										</p>
 									</div>
 								</div>
@@ -264,14 +275,18 @@ $path2 = 'blog';
 										
 											<?php 
 											$urlParamsVal = ['site/blog-single', 
-															'id' => $categories['id']												
+																'id' => $categories['id'],
+																'url' => $categories['url']												
 															];
 											?>
 											<?php $comments = (isset($comments['blog_' . $categories['id']]) ? $comments['blog_' .$categories['id']] : []); ?>											
 											<a href="<?= Url::toRoute($urlParamsVal); ?> "><?= count($comments) ?> <?= Yii::t('app', 'blog_comments') ?></a><?= $comma  ?>								
 										</span>
 										<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">
-											<a href="<?= Url::toRoute(['site/blog-single', 'id' => $categories['id']]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
+											<a href="<?= Url::toRoute(['site/blog-single', 
+												'id' => $categories['id'],
+												'url' => $categories['url']
+											]); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
 												<?= Yii::t('app', 'blog_read_more') ?>
 											</a>
 										</span>

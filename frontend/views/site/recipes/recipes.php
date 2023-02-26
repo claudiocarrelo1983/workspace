@@ -92,7 +92,10 @@ $path2 = 'recipes';
 						<div class="row mb-3">
 							<div class="col-lg-5">
 								<div class="post-image google-map-borders">
-									<a href="<?= str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>">
+									<a href="<?= str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 
+										'id' => $recipeValues['id'],
+										'url' => $recipeValues['url']
+									])); ?>">
 										<img src="<?= $recipeValues['image'] ?>" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
 									</a>
 								</div>
@@ -100,7 +103,10 @@ $path2 = 'recipes';
 							<div class="col-lg-7">
 								<div class="post-content">
 									<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2">
-										<a href="<?=str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>">
+										<a href="<?=str_replace('/frontend/web', '', Url::toRoute(['site/recipe-single',
+											'id' => $recipeValues['id'],									
+											'url' => $recipeValues['url']
+										 ])); ?>">
 											<?= Yii::t('app',$recipeValues['recipe_code_title']) ?>
 										</a>
 									</h2>
@@ -108,9 +114,10 @@ $path2 = 'recipes';
 										<?= substr(Yii::t('app',$recipeValues['recipe_code_text']), 0, 1000).'[..]' ?>
 									</p>
 								</div>
-							</div>
+							</div>					
 						</div>
-						<div class="row">
+						
+						<div class="row">						
 							<div class="col">
 								<div class="post-meta">
 									<span style='font-size:15px'>
@@ -159,9 +166,17 @@ $path2 = 'recipes';
 											endforeach; 
 										?> 							
 									</span>
-									
+									<span style='font-size:15px'>
+									<i class="far fa-star"></i>
+									<i class="far fa-star"></i>
+									<i class="far fa-star"></i>
+										<input type="text" class="rating-invisible" value="3" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'dark', 'size':'xs'}">
+									</span>											
 									<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0">
-										<a href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/recipe-single', 'id' => $recipeValues['id']])); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
+										<a href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/recipe-single', 
+											'id' => $recipeValues['id'],
+											'url' => $recipeValues['url']
+										])); ?>" class="btn btn-xs btn-light text-1 text-uppercase">
 											<?= Yii::t('app', 'read_more') ?>
 										</a>
 									</span>

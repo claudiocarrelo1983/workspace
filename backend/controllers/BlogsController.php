@@ -101,6 +101,7 @@ class BlogsController extends Controller
         $model = new Blogs();   
         $title = 'blog_title_1';
         $subtitle = 'blog_subtitle_1';
+        $description = 'blog_description_1';
         $text = 'blog_text_1';
 
         $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
@@ -108,6 +109,7 @@ class BlogsController extends Controller
        if(!empty($count->id)){
          $title = 'blog_title_'.bcadd($count->id, 1);
          $subtitle = 'blog_subtitle_'.bcadd($count->id, 1);
+         $description = 'blog_description_'.bcadd($count->id, 1);
          $text = 'blog_text_'.bcadd($count->id, 1);
        }  
  
@@ -123,39 +125,40 @@ class BlogsController extends Controller
                 $model->imageFile->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
                 //}  
 
+                
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+                $path = '@frontend/web' . $model->imgUrl();
+                $model->image = $model->imageFile->name;
+                $model->path = $model->imgUrl();
+    
+                $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
+                
+                //creates small images 90x50
+                Image::thumbnail($filePath, 90, 50)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/90x50/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 322x179
+                Image::thumbnail($filePath, 322.25, 179.02)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/322x179/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 900x500
+                Image::thumbnail($filePath, 900, 500)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/900x500/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 900x500
+                Image::thumbnail($filePath, 665, 257)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+                //creates medium images 900x500
+                Image::thumbnail($filePath, 665, 257)
+                    ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
+
+
+                    
             }      
 
 
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-
-            $path = '@frontend/web' . $model->imgUrl();
-            $model->image = $model->imageFile->name;
-            $model->path = $model->imgUrl();
- 
-            $filePath = $path.$model->imageFile->baseName . '.' . $model->imageFile->extension;
-            
-            //creates small images 90x50
-             Image::thumbnail($filePath, 90, 50)
-                ->save(Yii::getAlias('@frontend/web/images/blog/90x50/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
-
-            //creates medium images 322x179
-            Image::thumbnail($filePath, 322.25, 179.02)
-                ->save(Yii::getAlias('@frontend/web/images/blog/322x179/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
-
-            //creates medium images 900x500
-            Image::thumbnail($filePath, 900, 500)
-                ->save(Yii::getAlias('@frontend/web/images/blog/900x500/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
-
-            //creates medium images 900x500
-            Image::thumbnail($filePath, 665, 257)
-                ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
-
-            //creates medium images 900x500
-            Image::thumbnail($filePath, 665, 257)
-                ->save(Yii::getAlias('@frontend/web/images/blog/665x257/'.$model->imageFile->baseName .'.'. $model->imageFile->extension), ['quality' => 80]);
-
-
-                
          
             $model->created_date = date('Y-m-d H:i:s');   
             
@@ -175,10 +178,10 @@ class BlogsController extends Controller
     
             foreach($countries as $country){
                 $m = 'text_' . $country['country_code'];
-                $model->$m = Helpers::cleanTynyMceText($model->$m);   
+                $model->$m = $model->$m; //Helpers::cleanTynyMceText();   
             }
-
-            $model->url = strtolower(str_replace("-", "", $model->title));
+            
+            $model->url = Helpers::removeSpecialChars($model->title_en);
 
             if ($model->save()) {
                 $model::saveBlogs('blogs_text', $model);
@@ -192,6 +195,7 @@ class BlogsController extends Controller
         return $this->render('create', [
             'model' => $model,
             'title' => $title,
+            'description' => $description,
             'subtitle' => $subtitle,
             'text' => $text,
         ]);
@@ -220,6 +224,7 @@ class BlogsController extends Controller
       
         $title = 'blog_title_'.$id;
         $subtitle = 'blog_subtitle_'.$id;
+        $description = 'blog_description_'.$id;
         $text = 'blog_text_'.$id;        
 
         $model->load($this->request->post());     
@@ -229,15 +234,27 @@ class BlogsController extends Controller
             ])
         ->from('countries')    
         ->all();
-
+      
+        /*
         foreach($countries as $country){
             $m = 'text_' . $country['country_code'];
-            $model->$m = Helpers::cleanTynyMceText($model->$m);   
+            $model->$m ='hhh'; //Helpers::cleanTynyMceText();   
         }
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
+        */
+     
+        if ($this->request->isPost && $model->load($this->request->post())) {   
 
-             
+
+      
+            foreach($countries as $country){
+                $m = 'text_' . $country['country_code'];
+                $arrOptions = ['p','font-weight-semibold'];
+                $model->$m = Helpers::cleanTynyMceText($model->$m, $arrOptions);   
+            }
+        
+
+
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
             if(isset($model->imageFile->name)){
@@ -277,11 +294,13 @@ class BlogsController extends Controller
                 $model->tags = implode(',', $_POST['Blogs']['tagsArr']);
             }
 
+            $model->url = Helpers::removeSpecialChars($model->title_en);
 
             $model->created_date = date('Y-m-d H:i:s');
         
             //$model->url = str_replace(" ", "-", strtolower($model->title));
 
+      
             if ($model->save()) {
                 $model::updateBlogs('blogs_text', $model);
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -294,6 +313,7 @@ class BlogsController extends Controller
         return $this->render('update', [
             'model' => $model,
             'title' => $title,
+            'description' => $description,
             'subtitle' => $subtitle,
             'text' => $text,
         ]);
@@ -312,6 +332,53 @@ class BlogsController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    public function actionApi()
+    {
+   
+
+
+// Set the API endpoint and parameters
+$url = 'https://api.openai.com/v1/completions';
+$data = array(
+    'model' => 'text-davinci-003',
+    'prompt' => 'Write me a post with 1000 words about macronutrients',
+    //'temperature' => '0',
+   //'max_tokens' => '4000',
+);
+$headers = array(
+    'Authorization: Bearer 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',
+    'Content-Type: application/json',
+);
+
+// Send the API request
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+$response = curl_exec($ch);
+curl_close($ch);
+
+
+
+
+
+
+// Parse the API response
+$result = json_decode($response, true);
+
+print"<pre>";
+print_r($result['choices']);
+die();
+$answer = $result['result']['fulfillment']['speech'];
+print_r($response);
+die();
+
+    }
+
 
     /**
      * Finds the BlogsCategory model based on its primary key value.
