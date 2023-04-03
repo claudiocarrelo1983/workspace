@@ -43,11 +43,21 @@ class Fullcalendar extends \yii\base\Widget
 	 */
 	public $header = [
 		'center' => 'title',
-		'left'   => 'prev,next, today',
-		'right'  => 'agendaDay,agendaWeek,month',
+		'left'   => 'prev,next today',
+		'right'  => 'dayGridMonth,timeGridWeek,timeGridDay',
 	];
 	/** @var string  Text to display while the calendar is loading */
 	public $loading = 'Please wait, calendar is loading';
+
+	/** @var string  Text to display while the calendar is loading */
+	public $themeSystem = 'bootstrap';
+
+	public $defaultView = 'dayGridMonth';
+
+	
+	/** @var string  Text to display while the calendar is loading */
+	public $plugins = ["bootstrap", "interaction", "dayGrid", "timeGrid"];
+
 	/**
 	 * @var array  Default options for the id and class HTML attributes
 	 */
@@ -68,6 +78,10 @@ class Fullcalendar extends \yii\base\Widget
 		if (!isset($this->options['id'])) {
 			$this->options['id'] = $this->getId();
 		}
+		
+		$this->options['themeSystem'] = $this->themeSystem;
+		$this->options['plugins'] = $this->plugins;
+
 		if (!isset($this->options['class'])) {
 			$this->options['class'] = 'fullcalendar';
 		}
@@ -93,8 +107,10 @@ class Fullcalendar extends \yii\base\Widget
 		}
 
 		$assets->googleCalendar = $this->googleCalendar;
+
 		$this->clientOptions['header'] = $this->header;
 
+	
 		$this->view->registerJs(implode("\n", [
 			"jQuery('#{$this->options['id']}').fullCalendar({$this->getClientOptions()});",
 		]), \yii\web\View::POS_READY);
@@ -124,6 +140,7 @@ class Fullcalendar extends \yii\base\Widget
         }");
 
 		$options['events'] = $this->events;
+
 		$options = array_merge($options, $this->clientOptions);
 
 		return \yii\helpers\Json::encode($options);

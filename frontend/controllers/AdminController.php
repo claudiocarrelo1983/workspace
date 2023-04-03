@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use yii\web\Controller;
 use common\models\LoginForm;
 use Yii;
+use common\models\Events;
+use yii\db\Query;
 
 Yii::$app->language = 'en-EN';
 class AdminController extends Controller
@@ -13,6 +15,20 @@ class AdminController extends Controller
     {
         return $this->render('index');
     }
+    public function actionMyAction()
+    { 
+        $query = new Query;
+        $eventsArr = $query->select('*')
+                            ->from(['events'])
+                            ->where(['username' => Yii::$app->user->identity->username]) 
+                            ->all();
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        return $eventsArr;
+
+    }
+
   /**
      * Logs in a user.
      *
@@ -32,7 +48,7 @@ class AdminController extends Controller
         $model->password = '';
 
         $this->layout = 'adminLayout';
-
+        die('___');
         return $this->render('calendar', [
             'model' => $model,
         ]);
@@ -171,11 +187,58 @@ class AdminController extends Controller
     }
 
     
+
+    
     public function actionCalendar()
     {
         $this->layout = 'adminLayout';
         
-        return $this->render('calendar');
+        $modelEvents = new Events();          
+
+        if(isset($this->request->post()['Events']['id']) && $this->request->post()['Events']['id'] > 0){
+            $modelEvents = $this->findModelEvents($this->request->post()['Events']['id']); 
+        }
+      
+
+        if($this->request->isPost && isset($this->request->post()['Events'])){
+            $modelEvents->start = (isset($this->request->post()['start'])) ? $this->request->post()['start'] : '';
+            $modelEvents->end = (isset($this->request->post()['end'])) ? $this->request->post()['end'] : '';       
+            $modelEvents->username = Yii::$app->user->identity->username; 
+        }
+        
+        if ($this->request->isPost && $modelEvents->load($this->request->post())) {
+            
+            $modelEvents->save();
+            return $this->refresh();
+        }        
+
+        $query = new Query;
+        $eventsArr = $query->select('*')
+                    ->from(['events'])
+                    ->where(
+                        [
+                            'username' => Yii::$app->user->identity->username,
+                            'active' => true
+                        ]) 
+                    ->all();
+
+        $myDataArr = [];
+
+        foreach($eventsArr as $event){
+            $myDataArr[] = [                
+                'title' => (Yii::t('app', $event['page_code'])),
+                'className' => $event['color_code'],
+                'start' => $event['start'],
+                'end' => $event['end']                        
+            ];
+        }
+     
+    
+        return $this->render('calendar', [
+            'modelEvents' => $modelEvents,
+            'myData' => json_encode($myDataArr)      
+         
+        ]);
     }
 
 
@@ -206,6 +269,15 @@ class AdminController extends Controller
         $this->layout = 'adminLayout';
         
         return $this->render('new-client');
+    }
+
+    protected function findModelEvents($id)
+    {
+        if (($model = Events::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
 }

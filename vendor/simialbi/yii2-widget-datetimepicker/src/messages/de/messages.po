@@ -1,0 +1,124 @@
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Go to today"
+msgstr "Gehe zu Heute"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Clear selection"
+msgstr "Selektion löschen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Close the picker"
+msgstr "Schliessen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Select Month"
+msgstr "Monat wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Previous Month"
+msgstr "Vorheriger Monat"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Next Month"
+msgstr "Nächster Monat"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Select Year"
+msgstr "Jahr wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Previous Year"
+msgstr "Vorheriges Jahr"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Next Year"
+msgstr "Nächstes Jahr"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Select Decade"
+msgstr "Jahrzehnt wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Previous Decade"
+msgstr "Vorheriges Jahrzehnt"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Next Decade"
+msgstr "Nächstes Jahrzehnt"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Previous Century"
+msgstr "Vorheriges Jahrhundert"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Next Century"
+msgstr "Nächstes Jahrhundert"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Increment of {delta, plural, =1{one hour} other{# hours}}"
+msgstr "+{delta, plural, =1{# Stunde} other{# Stunden}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Pick Hour"
+msgstr "Stunde wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Decrement of {delta, plural, =1{one hour} other{# hours}}"
+msgstr "-{delta, plural, =1{# Stunde} other{# Stunden}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Increment of {delta, plural, =1{one minute} other{# minutes}}"
+msgstr "+{delta, plural, =1{# Minute} other{# Minuten}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Pick Minute"
+msgstr "Minute wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Decrement of {delta, plural, =1{one minute} other{# minutes}}"
+msgstr "-{delta, plural, =1{# Minute} other{# Minuten}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Increment of {delta, plural, =1{one second} other{# seconds}}"
+msgstr "+{delta, plural, =1{# Sekunde} other{# Sekunden}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Pick Second"
+msgstr "Sekunde wählen"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Decrement of {delta, plural, =1{one second} other{# seconds}}"
+msgstr "-{delta, plural, =1{# Sekunde} other{# Sekunden}}"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Toggle Period"
+msgstr "Vormittag / Nachmittag"
+
+#: Datepicker.php
+msgctxt "simialbi/date/datepicker"
+msgid "Select Time"
+msgstr "Zeit wählen"

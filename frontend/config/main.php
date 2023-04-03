@@ -7,6 +7,10 @@ $params = array_merge(
 );
 
 return [
+    'controllerNamespace' => [
+        'frontend\controllers',
+        'frontend\web\ajax', // add the AJAX namespace here
+    ],
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -14,6 +18,13 @@ return [
     'controllerNamespace' => 'frontend\controllers',   
     'sourceLanguage' => 'uk',
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+            ],
+        ],
         'i18n' => [
             'translations' => [
                 'app*' => [

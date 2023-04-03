@@ -330,7 +330,7 @@ $path2 = 'recipes_single';
 										$carbs,
 										$protein
 									],
-									'colors'=> ['#e0440e', '#e6693e', '#ec8f6e']
+									'borderColor'=> '#084de0'
 								]
 							]
 						],

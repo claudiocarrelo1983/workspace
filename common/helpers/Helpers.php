@@ -2,7 +2,10 @@
 namespace common\Helpers;
 use yii\imagine\Image;  
 use Imagine\Image\Box;
+use yiier\chartjs\ChartJs;
 use Yii;
+
+use yii\db\Query;
 
 class Helpers{       
     
@@ -134,6 +137,202 @@ class Helpers{
 
     public static function upload($sImageFilePath, $width, $height, $mode, $quality, $chosenFileName) {    
         Yii::$app->imageresize->getUrl($sImageFilePath, $width, $height, $mode, $quality, $chosenFileName);
+    }
+
+    public static function lines($resultIntake){
+
+        return  ChartJs::widget([
+            'type' => 'line',
+            
+            'options' => [
+                'responsive' => true,
+                'height' => 200,
+                'width' => 400,	
+                'legend' => [	
+                    'position'=> 'top',
+                    'display'=> true		
+                ],													
+            ],										
+            'data' => [
+                'labels' => $resultIntake['date'],
+                'datasets' => [
+                    [					
+                        'fill' => false,
+                        'backgroundColor' => 'none',
+                        'label'=> 'Calories',
+                        'borderColor' => "#f7a923",
+                        'data' => $resultIntake['calories']									
+                    ]
+                ]
+            ],
+            'clientOptions' => [
+                'legend' => [
+                    'display' => true,
+                    'position' => 'top',
+                ]
+            ]
+
+        ]);
+    }
+
+    public static function bars($foodIntake, $chart = 'bar')
+    {
+     
+        echo ChartJs::widget([
+                'type' => $chart,   
+                'options' => [
+                    'responsive' => true,
+             
+                    'legend' => [	
+                        'position'=> 'top',
+                        'display'=> true		
+                    ],	
+                    'scales' => [
+                        'x' => [
+                            
+                            'stacked' => true,
+                            'display' => true,
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Value',                        
+                            ]
+                          
+                        ],
+                        'y' => [
+                            'stacked' => true,
+                            'display' => true,
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Value',                        
+                            ]
+                        ]
+                    ]												
+                ],	         
+                'data' => [
+                    'labels' =>  $foodIntake['date'],
+                    'datasets' => [[
+                        'type' => $chart,
+                        'label'=> 'Fat (%)',
+                        'yAxisID'=>"y-axis-0",
+                        'backgroundColor' => "#1abd99",
+                        'data' =>  $foodIntake['lipids'],
+                    ],
+                    [
+                        'type'=> $chart,
+                        'label'=> 'Carbs (%)',
+                        'yAxisID'=>"y-axis-0",
+                        'backgroundColor' => "#f7a923",
+                        'data' =>  $foodIntake['carbs'],
+                    ],
+            
+                    [
+                        'type' => $chart,
+                        'label'=> 'Protein (%)',
+                        'yAxisID'=>"y-axis-0",
+                        'backgroundColor' => "#e64a18",
+                        'data' =>  $foodIntake['protein'],
+                    ],
+                    ]
+                ],
+                'clientOptions' =>
+                [
+                    'options' => [
+                        'title'=>[
+                            'display' => true,
+                        ],
+                        'tooltips'=>[
+                            'mode'=> 'label'
+                        ],
+                        'responsive'=> true,
+                    ],
+                    
+                    'scales'=> [
+                        'xAxes'=> [
+                            [
+                                'stacked'=>true,
+                                'labelString' =>  '%'
+
+                    
+                            ],
+                        ],
+                        'yAxes'=>[
+                            [
+                                'stacked'=>true,
+                                'labelString' =>  '%'
+                    
+                            ],                          
+
+                        ]
+                    ],
+                ],
+            ]);
+
+    }
+
+    public static function getFoodIntake($username){
+
+
+        $result = [];
+        $macrosArr = [];
+
+        $types = ['all','month','week'];
+
+        foreach($types as $type){            
+
+            switch($type){
+                case 'all':
+                    $command = Yii::$app->db->createCommand("SELECT * FROM (
+                        SELECT *
+                            FROM `macros` WHERE username='".$username."'  ORDER BY `date` DESC LIMIT 90
+                        ) t1 ORDER BY t1.date");
+                    
+                    $macrosArr = $command->queryAll();
+                    break;
+                case 'month':
+                    $command = Yii::$app->db->createCommand("SELECT * FROM (
+                        SELECT *
+                            FROM `macros` WHERE username='".$username."'  ORDER BY `date` DESC LIMIT 30
+                        ) t1 ORDER BY t1.date");
+                    
+                    $macrosArr = $command->queryAll();
+                    break;                   
+                case 'week':
+
+                    $command = Yii::$app->db->createCommand("SELECT * FROM (
+                        SELECT *
+                        FROM `macros` WHERE username='".$username."'  ORDER BY `date` DESC LIMIT 7
+                    ) t1 ORDER BY t1.date");
+                    $macrosArr = $command->queryAll();
+                    break;
+            }
+        
+
+            $protein = [];
+            $calories = [];
+            $carbs = [];
+            $lipids = [];
+            $date = [];
+
+            foreach($macrosArr as $macros){
+                $date[]  =  date('d M', strtotime($macros['date']));
+                $calories[] = $macros['calories'];
+                $protein[] = $macros['protein'];
+                $carbs[]  = $macros['carbs'];
+                $lipids[]  = $macros['lipids'];
+            }
+
+            $result[$type] = [
+                'date' => $date,
+                'calories' => $calories,
+                'protein' => $protein,
+                'carbs' => $carbs,
+                'lipids' => $lipids,
+            ];
+
+        }
+
+        return $result;
+
     }
 }
 

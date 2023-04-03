@@ -21,6 +21,8 @@ class m130524_201442_init extends Migration
             'full_name' => $this->string(),   
             'gender' => $this->string(),     
             'title' => $this->string(),   
+            'height_meters' => $this->string(), 
+            'height_ft' => $this->string(), 
             'path' => $this->string(),   
             'image' => $this->string(),      
             'dob' => $this->date(),              

@@ -8,6 +8,7 @@ use yii\db\Query;
 use yii\helpers\Url;
 use common\models\Clients;
 use common\models\User;
+use common\Helpers\Helpers;
 
 use Yii;
 //Yii::$app->language = 'en-EN';
@@ -19,7 +20,11 @@ class ClientController extends Controller
     {
         $this->layout = 'training';
         
-        return $this->render('stats');
+        $foodIntake = Helpers::getFoodIntake('carrelo1983');
+
+        return $this->render('stats', [
+            'foodIntake' =>  $foodIntake
+        ]);
     }
 
     public function actionWeight()

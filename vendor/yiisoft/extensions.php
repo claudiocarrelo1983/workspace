@@ -266,4 +266,76 @@ return array (
       '@marqu3s/summernote' => $vendorDir . '/marqu3s/yii2-summernote',
     ),
   ),
+  'thiagotalma/yii2-fullcalendar' => 
+  array (
+    'name' => 'thiagotalma/yii2-fullcalendar',
+    'version' => '2.0.0.0',
+    'alias' => 
+    array (
+      '@talma' => $vendorDir . '/thiagotalma/yii2-fullcalendar',
+    ),
+  ),
+  'kartik-v/yii2-widget-datetimepicker' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-datetimepicker',
+    'version' => '1.5.1.0',
+    'alias' => 
+    array (
+      '@kartik/datetime' => $vendorDir . '/kartik-v/yii2-widget-datetimepicker/src',
+    ),
+  ),
+  'kartik-v/yii2-widget-select2' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-select2',
+    'version' => '2.2.4.0',
+    'alias' => 
+    array (
+      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2/src',
+    ),
+  ),
+  'kartik-v/yii2-date-range' => 
+  array (
+    'name' => 'kartik-v/yii2-date-range',
+    'version' => '1.7.3.0',
+    'alias' => 
+    array (
+      '@kartik/daterange' => $vendorDir . '/kartik-v/yii2-date-range/src',
+    ),
+  ),
+  '2amigos/yii2-date-picker-widget' => 
+  array (
+    'name' => '2amigos/yii2-date-picker-widget',
+    'version' => '1.0.7.0',
+    'alias' => 
+    array (
+      '@dosamigos/datepicker' => $vendorDir . '/2amigos/yii2-date-picker-widget/src',
+    ),
+  ),
+  '2amigos/yii2-date-time-picker-widget' => 
+  array (
+    'name' => '2amigos/yii2-date-time-picker-widget',
+    'version' => '1.0.4.0',
+    'alias' => 
+    array (
+      '@dosamigos/datetimepicker' => $vendorDir . '/2amigos/yii2-date-time-picker-widget/src',
+    ),
+  ),
+  'simialbi/yii2-simialbi-base' => 
+  array (
+    'name' => 'simialbi/yii2-simialbi-base',
+    'version' => '0.13.1.0',
+    'alias' => 
+    array (
+      '@simialbi/yii2' => $vendorDir . '/simialbi/yii2-simialbi-base/src',
+    ),
+  ),
+  'simialbi/yii2-widget-datetimepicker' => 
+  array (
+    'name' => 'simialbi/yii2-widget-datetimepicker',
+    'version' => '2.6.1.0',
+    'alias' => 
+    array (
+      '@simialbi/yii2/date' => $vendorDir . '/simialbi/yii2-widget-datetimepicker/src',
+    ),
+  ),
 );

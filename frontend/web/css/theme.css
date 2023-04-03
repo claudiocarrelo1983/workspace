@@ -11488,3 +11488,28 @@ html.gap-outside .pin-wrapper .sticky-wrapper.sticky-effect-active .sticky-body 
 .white-text  {
     color: #fff;
 }
+
+
+.fc-state-active{
+    color: #fff;
+	background-color: #4458b8 !important;
+    border-color: #4458b8;
+}
+
+
+.fc-state-default{
+	color: #fff;
+    background-color: #556ee6;
+	border-color: #556ee6; 
+}
+
+.fc-today-button {
+	margin: 0 0 0 12px !important;
+	background-color: #556ee6 !important;
+}
+
+.fc-state-disabled {
+    opacity: 1;
+}
+
+

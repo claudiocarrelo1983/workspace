@@ -6937,3 +6937,50 @@ html .slide-overlay.slide-overlay-gradient .slotholder:after {
 html.boxed .body {
 	border-top-color: #0088CC;
 }
+
+
+select#events-color_code > option:nth-child(2){
+	/* Danger background-color:#f46a6a; */
+  
+	color: #f46a6a;
+}
+
+select#events-color_code > option:nth-child(3){
+	/* Warning background-color:#ffc107;*/
+	
+
+	color: #ffc107;
+}
+
+select#events-color_code > option:nth-child(4){
+	/* Success background-color:#34c38f;*/
+
+	color: #34c38f;
+}
+
+select#events-color_code > option:nth-child(5){
+   /*  Info background-color:#f46a6a;*/
+
+	color: #0dcaf0;
+}
+
+select#events-color_code > option:nth-child(6){
+   /*  Primary background-color:#f46a6a;*/
+
+	color: #0d6efd;
+}
+
+
+select#events-color_code > option:nth-child(8){
+   /*  Dark  background-color:#f46a6a;*/
+
+	color: #343a40;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+label{
+	margin-top: 5px;
+}
