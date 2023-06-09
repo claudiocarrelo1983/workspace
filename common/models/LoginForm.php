@@ -14,7 +14,7 @@ class LoginForm extends Model
     public $username;
     public $password;
 
-    public $level;
+  
     public $rememberMe = true;
 
     private $_user;
@@ -46,6 +46,7 @@ class LoginForm extends Model
     {
 
         $user = $this->getUser();  
+
         if (strtolower($user->level) !== 'admin') {        
              $this->addError($attribute, 'You have no permission');          
         }
@@ -70,9 +71,9 @@ class LoginForm extends Model
      */
     public function login()
     {
-        
-       
-        if ($this->validate()) {            
+   
+        if ($this->validate()) {    
+
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         
@@ -86,8 +87,9 @@ class LoginForm extends Model
      */
     protected function getUser()
     {
+    
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findOne(['username' => $this->username]);
         }
 
         return $this->_user;

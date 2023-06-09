@@ -4,9 +4,30 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
+use common\Helpers\Helpers;
 
 $model = new GeneratorJson(); 
-$structure = $model->getLastFileUploaded('other','public-menu');
+
+$base_url = Helpers::getBaseUrl();
+
+switch($base_url){
+    case 'localhost:100':
+    case 'specialcalendar.com':
+        $structure = $model->getLastFileUploaded('other','calendar-menu');                   
+        break;
+  
+    case 'localhost':
+    case 'myspecialgym.com':
+        $structure = $model->getLastFileUploaded('other','public-menu');
+        break;
+    default:
+        $structure = $model->getLastFileUploaded('other','public-menu');
+    break;
+}   
+
+
+
+
 
 /*
 $json = file_get_contents(Yii::$app->basePath.'\web\json\public-menu.json');

@@ -11,7 +11,6 @@ use yii\bootstrap4\NavBar;
 use frontend\assets\PublicAsset;
 
 
-PublicAsset::register($this);
 
 $structure = array(
 

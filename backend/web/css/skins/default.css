@@ -2167,9 +2167,8 @@ html .btn-with-arrow-solid.btn-light span {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-	color: #0088CC;
-    padding: 8px;
-    border: 1px solid;
+    border: 1px solid #ced4da;
+    padding: 0.5rem 0.75rem !important;
 }
 
 .pagination > .active > a,
@@ -2180,7 +2179,8 @@ html .btn-with-arrow-solid.btn-light span {
 .pagination > .active > span:focus,
 .pagination .page-item.active .page-link {
 	background-color: #0088CC !important;
-	border-color: #0088CC;
+    border-color: #0088CC !important;
+    padding: 0.5rem 0.75rem !important;
 }
 
 body.dark .pagination > li > a,
@@ -3033,6 +3033,7 @@ html .toggle-light.toggle-minimal .toggle.active > .toggle-title {
 .img-thumbnail .zoom,
 .thumb-info-ribbon {
 	background-color: #0088CC;
+	padding: 6px;
 }
 
 html .thumb-info .thumb-info-action-icon-primary {
@@ -6935,4 +6936,51 @@ html .slide-overlay.slide-overlay-gradient .slotholder:after {
 
 html.boxed .body {
 	border-top-color: #0088CC;
+}
+
+
+select#events-color_code > option:nth-child(2){
+	/* Danger background-color:#f46a6a; */
+  
+	color: #f46a6a;
+}
+
+select#events-color_code > option:nth-child(3){
+	/* Warning background-color:#ffc107;*/
+	
+
+	color: #ffc107;
+}
+
+select#events-color_code > option:nth-child(4){
+	/* Success background-color:#34c38f;*/
+
+	color: #34c38f;
+}
+
+select#events-color_code > option:nth-child(5){
+   /*  Info background-color:#f46a6a;*/
+
+	color: #0dcaf0;
+}
+
+select#events-color_code > option:nth-child(6){
+   /*  Primary background-color:#f46a6a;*/
+
+	color: #0d6efd;
+}
+
+
+select#events-color_code > option:nth-child(8){
+   /*  Dark  background-color:#f46a6a;*/
+
+	color: #343a40;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+label{
+	margin-top: 5px;
 }

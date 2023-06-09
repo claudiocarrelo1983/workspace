@@ -8,11 +8,9 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-use frontend\assets\PublicAsset;
+
 use yii\helpers\Url;
-
-
-PublicAsset::register($this);
+use yii\caching\Cache;
 
 ?>
 <?= $this->render('/layouts/public_header'); ?>

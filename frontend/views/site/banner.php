@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use common\helpers\Helpers;
 
 /* @var $this yii\web\View */
 $this->params['breadcrumbs'][] = $this->title;
@@ -8,7 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- Banner -->
 
-<section class="section section-concept section-no-border section-dark section-angled section-angled-reverse pt-5 m-0" style="background-image: url(images/generic/header_bg.jpg); background-size: cover; background-position: center; animation-duration: 750ms; animation-delay: 300ms; animation-fill-mode: forwards; min-height: 600px;">
+<section class="section banner-header  section-concept section-no-border section-dark section-angled section-angled-reverse pt-5 m-0" >
 	<div class="section-angled-layer-bottom section-angled-layer-increase-angle bg-light" style="padding: 8rem 0;"></div>
     <div class="container pt-lg-5 mt-5">
         <div class="row pt-3 pb-lg-0 pb-xl-0">
@@ -19,12 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li class="text-color-primary">
                         <a href="#">
-                            <?= Yii::t('app','menu_'.strtolower($path2)) ?>
+                            <?= Yii::t('app','menu_'.strtolower($path2).Helpers::languageTranslations()) ?>
                         </a>
                     </li>          
                 </ul>
                 <h1 class="font-weight-bold text-10 text-xl-10 line-height-2 mb-3">
-                    <?= Yii::t('app', 'menu_text') ?>
+                    <?= Yii::t('app', 'menu_text'.Helpers::languageTranslations()) ?>
                 </h1>                 
                 <p class="font-weight-light opacity-7 pb-2 mb-4"></p>
                 <a href="<?= str_replace('/frontend/web', '',Url::toRoute(['site/checkout','plan' => 'basic'])) ?>" data-hash="" data-hash-offset="0" data-hash-offset-lg="100" class="btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3">

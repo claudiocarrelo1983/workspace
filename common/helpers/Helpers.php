@@ -4,6 +4,9 @@ use yii\imagine\Image;
 use Imagine\Image\Box;
 use yiier\chartjs\ChartJs;
 use Yii;
+use frontend\assets\PublicAsset;
+//use frontend\assets\CalendarAsset;
+
 
 use yii\db\Query;
 
@@ -12,6 +15,98 @@ class Helpers{
     public static function tableName()
     {
         return 'blogs';
+    }
+
+    public static function getBaseUrl(){
+
+        $url = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        //$url = parse_url($url, PHP_URL_SCHEME).'://'.parse_url($url, PHP_URL_HOST); 
+        $base_url = trim($url, '/');  
+        $base_url = explode('/', $base_url);
+        $base_url =  $base_url['0'];
+        $base_url = str_replace('http://','', $base_url);
+        $base_url = str_replace('https://','', $base_url);    
+
+        return $base_url;
+    }
+
+    public static function languageTranslations(){
+  
+        $base_url = Helpers::getBaseUrl();
+
+        $tag = '';
+        
+        switch($base_url){
+            case 'localhost:100':
+            case 'specialcalendar.com':
+                $tag =  '_calendar';                  
+                break;
+          
+            case 'localhost':
+            case 'myspecialgym.com':
+                $tag =  '';     
+                break;
+            default:
+                $tag = ''; 
+            break;
+        } 
+
+        return $tag;
+    }
+
+    public static function logoHeader($size = 8){
+        
+        $logo = '';
+
+        $base_url = Helpers::getBaseUrl();
+
+        switch($base_url){
+            case 'localhost:100':
+            case 'specialcalendar.com':
+                $logo =  '<div class="header-row">
+                                <div class="header-logo">							
+                                    <span class="text-color-light font-weight-normal text-'.$size.' mb-2 mt-2">Special</span>
+                                    <span class="font-weight-extra-bold blue-lettering text-'.$size.' mb-2 mt-2">Calendar</span>						
+                                </div>
+                            </div>';                  
+                break;
+          
+            case 'localhost':
+            case 'myspecialgym.com':
+                $logo =  '<div class="header-row">
+                    <div class="header-logo">							
+                            <span class="text-color-light font-weight-normal text-'.$size.' mb-2 mt-2">My </span>
+                            <span class="text-color-light font-weight-extra-bold text-'.$size.' mb-2 mt-2">Special</span>
+                            <span class="font-weight-extra-bold blue-lettering text-'.$size.' mb-2 mt-2">Gym</span>						
+                    </div>
+                </div>';   
+                break;
+            default:
+                $logo = ''; 
+            break;
+        } 
+
+        return $logo;
+    }
+
+    public static function companyUrl($val){     
+
+        $base_url = Helpers::getBaseUrl();
+
+        switch($base_url){
+            case 'localhost:100':
+            case 'specialcalendar.com':
+                \frontend\assets\CalendarAsset::register($val);                    
+                 break;
+          
+            case 'localhost':
+            case 'myspecialgym.com':
+                \frontend\assets\PublicAsset::register($val);
+                break;
+            default:
+                \frontend\assets\PublicAsset::register($val);
+            break;
+        }              
     }
 
 

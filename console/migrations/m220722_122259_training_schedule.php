@@ -47,7 +47,7 @@ class m220722_122259_training_schedule extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%training_shedule}}');
+        $this->dropTable('{{%training_schedule}}');
     }
 
     /*

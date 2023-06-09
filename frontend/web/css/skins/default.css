@@ -15,6 +15,17 @@
 	--quaternary: #383f48;
 }
 
+.banner-header{
+	background-image: url(../../images/generic/header_bg.jpg);
+    background-size: cover;
+    background-position: center;
+    animation-duration: 750ms;
+    animation-delay: 300ms;
+    animation-fill-mode: forwards;
+    min-height: 600px;
+}
+
+
 a {
 	color: #0088CC;
 }

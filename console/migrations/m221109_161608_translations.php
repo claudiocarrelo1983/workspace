@@ -39,8 +39,6 @@ class m221109_161608_translations extends Migration
             'page' => $this->string(), 
             'page_code' => $this->string(),            
             'text' => $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 
-            'text_pt' =>  $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 
-            'text_en' =>  $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 
             'active' => $this->boolean(),
             'created_date' => $this->timestamp()
              

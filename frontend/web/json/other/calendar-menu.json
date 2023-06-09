@@ -1,0 +1,46 @@
+{
+    "logo-dark":{
+       "img-sm":"@web/images/logo.svg",
+       "img-lg":"@web/images/logo-dark.png",
+       "url":"#"
+    },
+    "logo-light":{
+       "img-sm":"@web/images/logo-light.svg",
+       "img-lg":"@web/images/logo-light.png",
+       "url":"#"
+    },
+    "top-menu":[
+       
+    ],
+    "menu":[
+      {
+         "key":"t-home",
+         "title":"menu_home_calendar",
+         "url":"site/home",           
+         "submenu":[
+            
+         ]
+      }, 
+      {
+         "key":"t-schedule-calendar",
+         "title":"menu_schedule_calendar",
+         "url":"site/schedule-calendar",       
+         "submenu":[            
+         ]
+      },
+      {
+         "key":"t-pricing",
+         "title":"menu_pricing",
+         "url":"site/pricing",       
+         "submenu":[            
+         ]
+      },        
+      {
+         "key":"t-contact-us",
+         "title":"menu_contacts",
+         "url":"site/contact-us",       
+         "submenu":[            
+         ]
+      }   
+    ]
+ }

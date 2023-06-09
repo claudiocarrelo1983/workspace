@@ -17,15 +17,44 @@
     border-bottom: 1px  #43495d solid; 
 }
 
+hr{
+   height: 2px !important;
+}
 
 .vertical-menu {
     position: fixed !important; 
 }
 
-#footer {
-    bottom: 0;
-    width: 100%;   
-  }
+.footer{
+    position: fixed;
+}
+
+.pagination {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.card-body {
+    border: 1px solid #f0f2f7;
+}
+
+.custom-control {
+    padding-top:10px;
+    padding-bottom:10px;
+    /* padding-left: 0; */
+}
+#calculator-weight::after {
+    background:red;
+    content: 'Kg'
+}
+
+.vertical-menu {
+    position: fixed !important; 
+}
+
 
 
 /*

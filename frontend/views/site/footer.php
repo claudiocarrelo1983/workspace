@@ -6,11 +6,42 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
+use common\Helpers\Helpers;
 
 $model = new GeneratorJson(); 
-$menu = $model->getLastFileUploaded('other','public-menu');  
+
+$base_url = Helpers::getBaseUrl();
+$facebook = '';
+$linkedin = '';
+$instagram = '';
+
+switch($base_url){
+    case 'localhost:100':
+    case 'specialcalendar.com':
+        $menu = $model->getLastFileUploaded('other','calendar-menu');     
+		$facebook = '';
+		$linkedin = '';
+		$instagram = '';              
+        break;
+  
+    case 'localhost':
+    case 'myspecialgym.com':
+        $menu = $model->getLastFileUploaded('other','public-menu');
+		$facebook = 'https://www.facebook.com/myspecialgym2022';
+		$linkedin = 'https://www.linkedin.com/company/myspecialgym';
+		$instagram = 'https://www.instagram.com/myspecialgym/';  
+        break;
+    default:
+        $menu = $model->getLastFileUploaded('other','public-menu');
+		$facebook = '';
+		$linkedin = '';
+		$instagram = '';  
+    break;
+}   
+
 
 $structure = $model->getLastFileUploaded('other','footer');  
+
 
 ?>
 <footer id="footer">
@@ -32,9 +63,9 @@ $structure = $model->getLastFileUploaded('other','footer');
 					</li>
 					<li class="pb-1 mb-2">
 						<ul class="social-icons social-icons-big social-icons-dark-2">
-							<li class="social-icons-facebook"><a href="https://www.facebook.com/myspecialgym2022" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-							<li class="social-icons-linkedin"><a href="https://www.linkedin.com/company/myspecialgym" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-							<li class="social-icons-instagram"><a href="https://www.instagram.com/myspecialgym/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+							<li class="social-icons-facebook"><a href="<?= $facebook  ?>" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+							<li class="social-icons-linkedin"><a href="<?= $linkedin  ?>" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+							<li class="social-icons-instagram"><a href="<?= $instagram  ?>" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
 							
 						</ul>
 					</li>
@@ -90,9 +121,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 		<div class="container py-2">
 			<div class="row py-6">			
 				<a  href="<?= str_replace('/frontend/web', '',Url::home()) ?>" class="col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
-					<span class="text-color-light font-weight-normal text-6 mb-2 mt-2">My</span>
-					<span class="text-color-light font-weight-extra-bold text-6 mb-2 mt-2">Special</span>
-					<span class="font-weight-extra-bold blue-lettering text-6 mb-2 mt-2">Gym</span>	
+					<?= Helpers::logoHeader(6) ?>
 				</a>			
 				<div class="col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end">
 					<p><?= Yii::t('app', 'footer_copywrite') ?> </p>

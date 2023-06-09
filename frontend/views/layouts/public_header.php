@@ -10,9 +10,11 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use frontend\assets\PublicAsset;
 use yii\helpers\Url;
+use common\Helpers\Helpers;
+
+Helpers::companyUrl($this);
 
 
-PublicAsset::register($this);
 
 ?>
 

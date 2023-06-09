@@ -25,7 +25,6 @@ class AdminAsset extends AssetBundle
         'assets/libs/@fullcalendar/daygrid/main.min.css',
         'assets/libs/@fullcalendar/bootstrap/main.min.css',
         'assets/libs/@fullcalendar/timegrid/main.min.css'
-
     ];
 
     public $js = [

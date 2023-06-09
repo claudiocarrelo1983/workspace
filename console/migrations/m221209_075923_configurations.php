@@ -44,7 +44,7 @@ class m221209_075923_configurations extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%companys_levels}}');
+        $this->dropTable('{{%configurations}}');
     }
 
     /*

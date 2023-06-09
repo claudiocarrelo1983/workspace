@@ -4,16 +4,14 @@
 /* @var $content string */
 
 use common\widgets\Alert;
+use frontend\assets\AppAsset;
 use yii\bootstrap4\Breadcrumbs;
-use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-use backend\assets\PublicAsset;
+use frontend\assets\AdminAsset;
+use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\db\Query;
-
-PublicAsset::register($this);
-
+AdminAsset::register($this);
 
 ?>
 
@@ -22,107 +20,178 @@ PublicAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
+    <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css">
+    <script src="https://cdn.form.io/formiojs/formio.full.min.js"></script>
     <meta charset="<?= Yii::$app->charset ?>">
-    <link id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-
+<body data-sidebar="dark">
 <?php $this->beginBody() ?>
-<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 500, 'effect': 'speedingWheel'}">
-<div class="loading-overlay">
-    <div class="bounce-loader">
-        <div class="cssload-speeding-wheel-container">
-            <div class="cssload-speeding-wheel"></div>
-        </div>
-    </div>
-</div>
-<div class="body">
 
-<!--Top Menu -->
-    <header id="header" class="header-dark header-effect-shrink " data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
-        <div class="header-body border-top-0 bg-dark box-shadow-none overflow-visible">
-            <div class="header-top">
-                <div class="container-fluid">
-                    <div class="header-row py-2">                     
-                        <div class="header-column">
-                            <div class="header-row white-text ">   
-                                <span class="d-block d-lg-none">     
-                                    <?= Html::a(
-                                            Yii::t('app', 'Go to Website'), 
-                                            Url::home(),     
-                                            [                                 
-                                            'data-hash' => '',         
-                                            'data-hash-offset' => 0,  
-                                            'data-hash-offset-lg' => 130,  
-                                            ]      
-                                        ) ?>   
-                                </span> 
-                                <span class="d-none d-lg-block pl-3">                     
-                                    <?= Html::a(
-                                        Yii::t('app', 'Go to Website'), 
-                                        Url::home(),     
-                                        [                                 
-                                        'data-hash' => '',         
-                                        'data-hash-offset' => 0,  
-                                        'data-hash-offset-lg' => 130,  
-                                        ]      
-                                    ) ?>    
-                                </span>                                    
-                            </div>                            
-                        </div>                
-                        <div class="header-column justify-content-end">
-                            <div class="header-row">                            
-                                <?= $this->render('/site/top_header'); ?>	                                        
+ <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+                       
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+                        
+                            <?= Html::a(
+                                Yii::t('app',
+                                '                    <div class="navbar-box-small">
+                                    <span class="logo-sm">
+                                        <img src="images/logo.png" alt="" height="50">
+                                    </span>	
+                                </div>
+                                <div class="navbar-box-big">
+                                    <span class="logo-lg">	
+                                        <div class="header-logo">					
+                                            <span class="text-color-light font-weight-normal text-5 ">My</span>
+                                            <span class="text-color-light font-weight-extra-bold text-5  ">Special</span>
+                                            <span class="font-weight-extra-bold blue-lettering text-5 ">Gym</span>	
+                                        </div>
+                                    </span>	
+                                </div>	
+                                    '),
+                                Url::home(),     
+                                [
+                                'class' => 'logo logo-light',
+                                'data-hash' => '',         
+                                'data-hash-offset' => 0,  
+                                'data-hash-offset-lg' => 130,  
+                                ]      
+                            ) ?>
+                
+                        </div>
+                
+
+                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>   
+
+                        <?php //$this->render('/site/mainmenu'); ?>
+
+                    </div>
+
+                    <div class="d-flex">
+
+                        <div class="dropdown d-inline-block d-lg-none ms-2">
+                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                aria-labelledby="page-header-search-dropdown">
+
+                                <form class="p-3">
+                                    <div class="form-group m-0">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>                
-                    </div>                   
+                        </div>
+                        <!--
+                        <div class="dropdown dropdown-mega d-none d-lg-block p-3">
+                        <?php
+                        /* 
+                        Html::a(
+                                Yii::t('app', '
+                                <span class="pr-2">
+                                <svg fill="none" height="22" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg" id="icon_241655987234908" data-filename="icon-cloud.svg"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" x2="12" y1="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
+                                </span>
+                                Download App'), 
+                                Url::toRoute('site/download-app'),     
+                                [
+                                'class' => 'btn btn-primary',
+                                'data-hash' => '',         
+                                'data-hash-offset' => 0,  
+                                'data-hash-offset-lg' => 130,  
+                                ]      
+                            ) 
+                            */
+                            ?>
+                        </div>
+                        --> 
+
+                        <div class="dropdown d-none d-lg-inline-block ms-1">
+                            <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                                <i class="bx bx-fullscreen"></i>
+                            </button>
+                        </div>                  
+
+                        <div class="dropdown d-inline-block">                        
+                            <?= $this->render('/layouts/notifications'); ?>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <?= $this->render('/layouts/myaccount'); ?>
+                        </div>    
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="vertical-menu">
+
+                <div data-simplebar class="h-100">
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <!-- Left Menu Start -->
+                        <ul class="metismenu list-unstyled" id="side-menu">   
+
+                        <?= $this->render('/layouts/sidebar-left'); ?>
+    
+                    </div>
+                    <!-- Sidebar -->
                 </div>
             </div>
-            <div class="header-container container-fluid px-3">
-                <div class="header-row">
-                    <?= Html::a(
-                        Yii::t('app',
-                        '<div class="header-row">
-                            <div class="header-logo">							
-                                    <span class="text-color-light font-weight-normal text-8 mb-2 mt-2">My </span>
-                                    <span class="text-color-light font-weight-extra-bold text-8 mb-2 mt-2">Special</span>
-                                    <span class="font-weight-extra-bold blue-lettering text-8 mb-2 mt-2">Gym</span>						
-                            </div>
-                        </div>'),
-                        Url::home(),     
-                        [
-                        'class' => 'logo-url',
-                        'data-hash' => '',         
-                        'data-hash-offset' => 0,  
-                        'data-hash-offset-lg' => 130,  
-                        ]      
-                    ) ?>
-                    <div class="header-column justify-content-end">                       
-                        <?= $this->render('/site/headerPublicDark'); ?>
+            <!-- Left Sidebar End -->
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                         <?= $content ?>
                     </div>
                 </div>
             </div>
+
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> ©MySpecialGym.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Barba Ruiva
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
         </div>
-    </header>    
-    <div class="spacer"></div> 
- 
-    <div class="container-fluid ">
-        <div role="main" class="main">
-          
-            <span class="d-none d-lg-block px-5">   
-                <?= $content ?>
-            </span>    
-        </div>
-    </div>
-    <div class="spacer"></div>
-
-    <?= $this->render('/site/footer_simple'); ?>		
-</div>
-
-
+        <!-- END layout-wrapper -->    
 
 <?php $this->endBody() ?>
 </body>

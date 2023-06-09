@@ -53,6 +53,9 @@ class BlogsController extends Controller
      */
     public function actionIndex()
     {
+
+       // $this->layout = 'adminLayout';
+
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -75,7 +78,7 @@ class BlogsController extends Controller
      */
     public function actionView($id)
     {
-
+     
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }

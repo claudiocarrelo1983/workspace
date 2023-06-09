@@ -860,12 +860,15 @@ class SiteController extends Controller
         }      
 
         $model = new LoginForm();
+ 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             return $this->render('home/index', [
                 'model' => $model,
             ]);
         }
 
+      
         $model->password = '';
         $this->layout = 'public';
 
@@ -876,7 +879,6 @@ class SiteController extends Controller
         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
 
         $user = User::findOne(['username' => $model->username]);
-
 
         if (Yii::$app->user->isGuest && $maintenance == true && $user->level !== 'admin') {
 
@@ -918,9 +920,7 @@ class SiteController extends Controller
         ->from('user')   
         ->where(['username' => $request->post('username')]) 
         ->one();
-
-        print_r($level);
-        ///die('___');
+   
 
         if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
 
@@ -933,8 +933,7 @@ class SiteController extends Controller
 
         $model->guid = Helpers::GUID();
       
-        if ($model->load(Yii::$app->request->post())) {              
-        
+        if ($model->load(Yii::$app->request->post())) {             
 
             $model->signup();         
            

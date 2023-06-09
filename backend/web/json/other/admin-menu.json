@@ -1,0 +1,510 @@
+{
+    "logo-dark":{
+       "img-sm":"@web/images/logo.svg",
+       "img-lg":"@web/images/logo-dark.png",
+       "url":"#"
+    },
+    "logo-light":{
+       "img-sm":"@web/images/logo-light.svg",
+       "img-lg":"@web/images/logo-light.png",
+       "url":"#"
+    },
+    "top-menu":[
+       
+    ],
+    "left-menu":[
+      {
+         "key":"t-home",
+         "title":"Dashboards",
+         "icon":"bx bx-home-circle",    
+         "url":"home",           
+         "submenu":[
+                   
+         ]
+      },
+      {
+       "key":"t-companies",
+       "title":"Clients",
+       "icon":"dripicons-user-group",    
+       "url":"null",       
+       "submenu":[
+          {   
+             "key":"t-blog-view",
+             "title":"Companies",
+             "url":"companies/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-profile-coments",
+             "title":"Company Details ",
+             "url":"company-details/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-blog-category",
+             "title":"Users ",
+             "url":"user/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-blog-coments",
+             "title":"Permissions ",
+             "url":"company-permissions/index",
+             "submenu":[                    
+                
+             ]
+          }       
+       ]
+       },  
+ 
+      {
+       "key":"t-blog",
+       "title":"Blog",
+       "icon":"bx bx-home-circle",    
+       "url":"null",         
+       "submenu":[
+          {   
+             "key":"t-blog-view",
+             "title":"Posts",
+             "url":"blogs/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-blog-category",
+             "title":"Tags ",
+             "url":"blogscategory/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-blog-coments",
+             "title":"Comments ",
+             "url":"blogscomments/index",
+             "submenu":[                    
+                
+             ]
+          }  
+       ]
+       },   
+       {
+          "key":"t-blog",
+          "title":"Forms",
+          "icon":"bx bx-home-circle",    
+          "url":"null",          
+          "submenu":[
+             {   
+                "key":"t-form-view",
+                "title":"List",
+                "url":"forms/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-profile-view",
+                "title":"Templates",
+                "url":"forms-templates/index",
+                "submenu":[                    
+                   
+                ]
+             }          
+          ]
+       },   
+       {
+       "key":"t-blog",
+       "title":"Trainings",
+       "icon":"bx dripicons-lifting",  
+       "url":"null",           
+       "submenu":[
+          {   
+             "key":"t-training-values-view",
+             "title":"Results",
+             "url":"training-values/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-training-view",
+             "title":"Training",
+             "url":"training/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-training-category",
+             "title":"Categories ",
+             "url":"training-category/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-training-plans",
+             "title":"Plans ",
+             "url":"training-plans/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-training-coments",
+             "title":"Shedule ",
+             "url":"training-schedule/index",
+             "submenu":[                    
+                
+             ]
+          },
+          {   
+             "key":"t-training-machines",
+             "title":"Machines ",
+             "url":"machines/index",
+             "submenu":[                    
+                
+             ]
+          }     
+       ]
+       }, 
+       {
+          "key":"t-nutricion",
+          "title":"Nutricion",
+          "icon":"bx bx-home-circle",    
+          "url":"null",           
+          "submenu":[
+             {   
+                "key":"t-profile-view",
+                "title":"Recipes",
+                "url":"recipes/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-food-category",
+                "title":"Recipes Category ",
+                "url":"recipes-category/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-recipe-coments",
+                "title":"comments",
+                "url":"comments/index",
+                "submenu":[                    
+                   
+                ]
+             }    
+          ]
+       },  
+       {
+          "key":"t-multilanguages",
+          "title":"Texts",
+          "icon":"bx bx-home-circle",    
+          "url":"null",           
+          "submenu":[            
+             {   
+                "key":"t-pricing-view",
+                "title":"Prices",
+                "url":"pricing/index",
+                "submenu":[                    
+                   
+                ]
+             }, 
+             {   
+                "key":"t-pricing-view",
+                "title":"Pricing Options",
+                "url":"pricing-specs/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-team-view",
+                "title":"Team",
+                "url":"team/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-subjects-view",
+                "title":"Subjects",
+                "url":"subjects/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-faqs-view",
+                "title":"Faq´s",
+                "url":"faqs/index",
+                "submenu":[                    
+                   
+                ]
+             } ,
+             {   
+                "key":"t-texts-view",
+                "title":"Texts",
+                "url":"texts/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-translations-list",
+                "title":"Tanslations",
+                "url":"translations/index",
+                "submenu":[                    
+                   
+                ]
+             },           
+             {   
+                "key":"t-countries-view",
+                "title":"Countries",
+                "url":"countries/index",
+                "submenu":[                    
+                   
+                ]
+             }                      
+          ]
+       },
+       {
+          "key":"t-settings",
+          "title":"Settings",
+          "icon":"bx bx-cog",  
+          "url":"null",           
+          "submenu":[       
+             {   
+                "key":"t-configurations-view",
+                "title":"Configurations",
+                "url":"configurations/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {   
+                "key":"t-tickets-view",
+                "title":"Tickets",
+                "url":"tickets/index",
+                "submenu":[                    
+                   
+                ]
+             },            
+             {   
+                "key":"t-publish-view",
+                "title":"Publish",
+                "url":"publish/index",
+                "submenu":[                    
+                   
+                ]
+             }                        
+          ]
+       }
+    ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "left-menu1":[
+       {
+          "key":"t-dashboard",
+          "title":"Dashboard",
+          "url":"admin/dashboard",
+          "icon":"bx bx-home-circle",         
+          "submenu":[
+             
+          ]
+       },
+       {
+          "key":"t-clients",
+          "title":"Clientes",
+          "url":"null",
+          "icon":"dripicons-user-group",
+          "childs" : ["admin/clients", "admin/new-client"],
+          "submenu":[
+             {
+                "key":"t-clients-list",
+                "title":"Gestão ",
+                "url":"clients/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {
+                "key":"t-new-client",
+                "title":"Adicionar novo cliente",
+                "url":"clients/create",
+                "submenu":[
+                   
+                ]
+             }
+          ]
+       },
+       {
+         "key":"t-goals",
+         "title":"Questionário",
+         "url":"null",
+         "icon":"bx dripicons-question",
+         "open" : "true",
+         "childs" : ["admin/set-forms", "admin/question-list"],
+         "submenu":[
+            {
+               "key":"t-set-forms",
+               "title":"Criar Formularios",
+               "url":"admin/set-forms",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-question-list",
+               "title":"Lista de Questões",
+               "url":"admin/question-list",
+               "submenu":[
+                  
+               ]
+            }
+         ]
+      },
+       {
+          "key":"t-organizer",
+          "title":"Organizador",
+          "url":"null",
+          "icon":"bx bx bx-calendar",
+          "open" : "true",
+          "new" : "true",
+          "childs" : ["admin/goals", "admin/todolist","admin/calendar"],
+          "submenu":[
+             {
+                "key":"t-goals",
+                "title":"Objectivos",
+                "url":"admin/goals",
+                "submenu":[
+                   
+                ]
+             },
+             {
+                "key":"t-todo-list",
+                "title":"Lista de Tarefas",
+                "url":"admin/todolist",
+                "submenu":[
+                   
+                ]
+             },
+         
+             {
+               "key":"t-schedule",
+               "title":"Calendario",
+               "url":"admin/calendar",
+               "icon":"bx bx-world",
+               "submenu":[
+            
+               ]
+            }
+           
+          ]
+       },   
+
+       {
+         "key":"t-nutricion",
+         "title":"Nutrição",
+         "url":"null",
+         "icon":"bx dripicons-cutlery",
+         "open" : "true",
+         "childs" : ["admin/foods", "admin/recipes"],
+         "submenu":[
+            {
+               "key":"t-alimentation",
+               "title":"Alimentos",
+               "url":"admin/foods",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-Recipes",
+               "title":"Receitas",
+               "url":"admin/recipes",
+               "submenu":[
+                  
+               ]
+            }
+         ]
+      },
+       {
+          "key":"t-objectives",
+          "title":"Treino",
+          "url":"null",
+          "icon":"bx dripicons-lifting",
+          "open" : "true",
+          "childs" : ["admin/training-list", "admin/machines"],
+          "submenu":[
+             {
+                "key":"t-training-goals",
+                "title":"Lista de Treinos",
+                "url":"admin/training-list",
+                "submenu":[
+                   
+                ]
+             },
+             {
+                "key":"t-saude",
+                "title":"Maquinas",
+                "url":"admin/machines",
+                "submenu":[
+                   
+                ]
+             }
+          ]
+       },
+      
+       {
+         "key":"t-messages",
+         "title":"Mensagens",
+         "url":"admin/notifications-list",
+         "icon":"bx bx-message",
+         "submenu":[
+      
+         ]
+      },
+      {
+         "key":"t-settings",
+         "title":"Definições",
+         "url":"admin/settings",
+         "icon":"bx bx-cog",
+         "submenu":[
+      
+         ]
+      },
+       {
+         "key":"t-webadmin",
+         "title":"Webadmin & Blog",
+         "url":"admin/webadmin",
+         "icon":"bx dripicons-rocket",
+         "submenu":[
+      
+         ]
+      }
+    ]
+ }

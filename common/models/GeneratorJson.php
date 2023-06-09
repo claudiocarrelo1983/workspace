@@ -485,6 +485,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'comments':       
                     case 'team':     
                     */ 
+                    case 'translations':
                     case 'pricing_specs':
                     case 'faqs':
                     case 'subjects':  
