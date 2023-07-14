@@ -5,6 +5,7 @@ use Yii;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use common\Helpers\Helpers;
 
    /*
 
@@ -20,122 +21,61 @@ class GeneratorJson extends \yii\db\ActiveRecord
     public $generate;
   
 
-    public static function getAllTables()
-    {
-        preg_match("/dbname=([^;]*)/", Yii::$app->db->dsn, $matches);
-        $database = $matches[1]; 
-      
-        $sql="SELECT TABLE_NAME 
-        FROM INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='".$database."'";
-        $tables = Yii::$app->db
-                ->createCommand($sql)
-                ->queryAll();
-
- 
-       return  $tables;
-    }
-
     public  function generatejson()
     {    
-        $tables = GeneratorJson::getAllTables();    
+        $tables = Helpers::getAllTables();        
 
         foreach($tables as $table){
             if(isset($table['TABLE_NAME'])){
 
-                $method = GeneratorJson::methodTitle($table['TABLE_NAME']);
+                $method = Helpers::methodTitle($table['TABLE_NAME']);
 
-                $columns = GeneratorJson::getTableColumns($table['TABLE_NAME']);
+                $columns = Helpers::getTableColumns($table['TABLE_NAME']);
 
-                switch ($table['TABLE_NAME']) {
+                switch ($table['TABLE_NAME']){
+                  
                     case 'pricing':
                     case 'pricing_specs':
-                    case 'translations':
+                    //case 'translations':
                     case 'blogs':
                     case 'blogs_category':
                     case 'configurations':
-                    case 'countries':
+                    case 'company':
                     case 'faqs':
                     case 'subjects': 
                     case 'texts':    
                     case 'recipes':     
                     case 'recipes_category': 
                     case 'comments':       
-                    case 'team':                
+                    case 'team':                              
                         if(method_exists(__CLASS__, $method)){
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
                             GeneratorJson::updateTablesGeneric($table['TABLE_NAME'],  $columns);  
-                        }             
-                }
-             
+                        }   
+
+                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns); 
+
+                    break;
+                }             
             }           
         }
-    }
+    } 
 
-    public static function methodTitle($table){
+    public static function updateTablesGeneric($table,  $columns){
 
-        $result = '';
-        $method = '';       
-      
-        $table = explode("_",$table);            
-    
-        if(is_array($table)){
-            foreach($table as $name){
-                $method .= ucfirst($name);
-            
-            }              
-        }else{
-            $method = ucfirst($table);
-        }                 
-          
-        $result = 'update'.$method;
+        $query = new Query; 
 
-        return $result;
-    }
+        $tableArr = $query->select(
+            $columns
+        )
+        ->from([$table])      
+        ->all();    
 
-    public static function methodTitleSimple($table){
+        GeneratorJson::saveJson($tableArr, $table);
+    }      
 
-        $method = '';       
-      
-        $table = explode("_",$table);            
-    
-        if(is_array($table)){
-            foreach($table as $name){
-                $method .= ucfirst($name);
-            
-            }              
-        }else{
-            $method = ucfirst($table);
-        }                 
-          
-        return $method;
-    }
-    
-
-
-    public static function getTableColumns($table){    
-
-        $result = array();
-        $connection = Yii::$app->db;//get connection
-        $dbSchema = $connection->schema;
-        $tables = $dbSchema->getTableNames();
-      
-        //or $connection->getSchema();
-        $tables = $dbSchema->getTableSchemas();//returns array of tbl schema's
-        foreach($tables as $tbl)
-        {            
-            if($tbl->name == $table){     
-                foreach($tbl->columns as $key => $value) {
-                    $result[] = $key;
-                }      
-            }         
-        }
-
-        return  $result;    
-    }
-
-    public static function saveJson($blogArr, $table){       
+    public static function saveJson($tableArr, $table){       
      
         $directory = Yii::getAlias('@frontend/web/json/'.$table.'/');
      
@@ -145,9 +85,9 @@ class GeneratorJson extends \yii\db\ActiveRecord
             GeneratorJson::deleteOldJson($table); 
         }
 
-        $fileName = $table.'_'.date('YmdHis');        
+        $fileName = $table.'_'.date('YmdHis');       
 
-        file_put_contents($directory.$fileName.'.json', json_encode($blogArr));  
+        file_put_contents($directory.$fileName.'.json', json_encode($tableArr));  
 
     }
 
@@ -165,39 +105,85 @@ class GeneratorJson extends \yii\db\ActiveRecord
         }       
     }
 
-    public static function getLastFileUploaded($dir, $specificfile = '', $pathParent = ''){
+    public static function updateTranslationsGeneric($table,  $columns){
+       
+        $query = new Query;       
 
-        $pathParent = (empty($pathParent)) ? 'frontend' : $pathParent;
-        $url = Yii::getAlias('@'.$pathParent.'/web/json/'.$dir.'/');
+        $name = Helpers::methodTitleSimple($table);
 
-        $path = '';
-        $return = array();
+        $class = "common\models\\".ucfirst($name);  
 
-        if (file_exists($url)) {
-            $rrFiles = scandir($url, 1);
-        }else{
-            return $return;
-        }
+        $valuesArr = $query->select('*')
+            ->from([$table])      
+            ->all();
+       
+        $model = new $class();
 
-        if(isset($rrFiles[0])){       
-            if (strlen($rrFiles[0]) >= 3) {
-                $path = $rrFiles[0];
-            }          
+        foreach($valuesArr as $blog){
+            foreach ($blog as $key => $value) {
+                $model->$key = $blog[$key];      
+            }    
+
+            $method = 'update'.ucfirst($name);            
+      
+            $class::$method($table.'_text', $model);
         }    
-
-        if(!empty($specificfile)){       
-            $path = $specificfile . '.json';        
-        }
-    
-        if (!empty($path)) { 
-            if (file_exists($url.$path)) {         
-                $json = file_get_contents($url.$path);
-                 $return = Json::decode($json);
-            }
-        }    
-
-        return  $return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 
     public static function updateTranslations($table, $columns){
         
@@ -210,6 +196,12 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         GeneratorJson::saveJson($blogArr, $table);
     }
+
+
+
+
+    
+
 
 
     public static function updateRecipes($table, $columns){
@@ -253,18 +245,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
         GeneratorJson::saveJson($recipesResult , $table);
     }
 
-    public static function updateTablesGeneric($table,  $columns){
-
-        $blogQuery = new Query; 
-
-        $blogArr = $blogQuery->select(
-            $columns
-        )
-        ->from([$table])      
-        ->all();        
-
-        GeneratorJson::saveJson($blogArr, $table);
-    }  
+  
 
     public static function updateFaqs($table, $columns){
         
@@ -300,9 +281,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         GeneratorJson::saveJson($recipesArr, $table);
     }
-
-
-    
+   
 
     public static function updateBlogs($table, $columns){
         
@@ -422,54 +401,81 @@ class GeneratorJson extends \yii\db\ActiveRecord
         GeneratorJson::saveJson($blogArr, $table);
     }
 
-    public static function getTranslations($language){
+    public function populateMissingTranslation(){
+
+        $tables = Helpers::getAllTables();   
         
-        $model = new GeneratorJson(); 
-        $translations = $model->getLastFileUploaded('translations');  
+        foreach($tables as $table){
+            if(isset($table['TABLE_NAME'])){
 
-        $result = array(); 
+                $columns = Helpers::getTableColumns($table['TABLE_NAME']);
 
-        foreach($translations as $value){
-            if($language ==  $value['country_code']){
-                $result[trim($value['page_code'])] = trim($value['text']);
-            }            
+                switch ($table['TABLE_NAME']) {
+          
+                    case 'company':
+                    case 'pricing':
+                    case 'pricing_specs':
+                    case 'translations':
+                    case 'blogs':
+                    case 'blogs_category':
+                    case 'configurations':                    
+                    case 'subjects': 
+                    case 'texts':    
+                    case 'recipes':     
+                    case 'recipes_category': 
+                    case 'comments':       
+                    case 'team':
+                    case 'faqs':
+                    case 'services_category':  
+                    case 'services':     
+                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns);        
+                        //GeneratorJson::populateMissingTranslationsGeneric($table['TABLE_NAME']);   
+                                  
+                }             
+            }           
         }
-
-        return  $result;
-  
+       
     }
 
-    public static function getCountries(){              
 
-        $model = new GeneratorJson(); 
-        $countries = $model->getLastFileUploaded('countries');  
-        
-        $result =  array();
 
-        foreach($countries as $country){
-            $result[$country['country_code']] = $country['small_title'];               
-        }
 
-        $resultR['languages'] = $result;            
-        
-        return  $resultR;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    /*
+
+   
+
+
+
+    
   
-    }
-
     
     public function populateTable(){
 
-        $tables = GeneratorJson::getAllTables();    
+        $tables = Helpers::getAllTables();    
 
         foreach($tables as $table){
             if(isset($table['TABLE_NAME'])){
 
-                $method = 'updateTranslations'.ucfirst($table['TABLE_NAME']);    
-
-                $columns = GeneratorJson::getTableColumns($table['TABLE_NAME']);
+                $columns = Helpers::getTableColumns($table['TABLE_NAME']);
 
                 switch ($table['TABLE_NAME']) {
-                    /*
+                
                     case 'pricing':
                     case 'pricing_specs':
                     case 'translations':
@@ -484,7 +490,8 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'recipes_category': 
                     case 'comments':       
                     case 'team':     
-                    */ 
+                   
+                    
                     case 'translations':
                     case 'pricing_specs':
                     case 'faqs':
@@ -496,40 +503,15 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'recipes_steps': 
                     case 'recipes_food': 
                     case 'blogs_category':  
-                    case 'blogs':     
-                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns);             
+                    case 'blogs':                       
+                        GeneratorJson::populateTablesGeneric($table['TABLE_NAME'],  $columns);             
                 }             
             }           
         }
     }
 
-    public static function updateTranslationsGeneric($table,  $columns){
-       
-        $blogQuery = new Query;       
 
-        $name = GeneratorJson::methodTitleSimple($table);
-
-        $class = "common\models\\".ucfirst($name);        
-    
-        $blogArr = $blogQuery->select('*')
-        ->from([$table])      
-        ->all();
-       
-        $model = new $class();
-
-        foreach($blogArr as $blog){
-            foreach ($blog as $key => $value) {
-                $model->$key = $blog[$key];      
-            }    
-
-            $method = 'update'.ucfirst($name);    
-        
-            $class::$method($table.'_text', $model);
-        }     
- 
-    } 
-    
-    public static function populateTablesGeneric($table,  $columns){
+        public static function populateTablesGeneric($table,  $columns){
 
         $connection = new Query;
 
@@ -545,28 +527,148 @@ class GeneratorJson extends \yii\db\ActiveRecord
                 }
               
                 switch($table){
-                    case "blogs":
-                    case "blogs_category":
-                    case "countries":
-                    case "texts":
-                    case "translations":
-                        //$connection->createCommand()->delete($table)->execute();
-                        $connection->createCommand()->insert($table, $arrColumns)->execute();
-        
+                    case 'translations':
+                    case 'pricing_specs':
+                    case 'faqs':
+                    case 'subjects':  
+                    case 'texts':    
+                    case 'team':  
+                    case 'recipes':     
+                    case 'recipes_category': 
+                    case 'recipes_steps': 
+                    case 'recipes_food': 
+                    case 'blogs_category':  
+                    case 'blogs':    
+                        $connection->createCommand()->delete($table)->execute();
+                        $connection->createCommand()->insert($table, $arrColumns)->execute();        
                     
                     break;
                     case "comments":
                         break;
                     default:
-                    print_r($table);
-                    die();
+                 
                         break;
-                }
-              
+                }            
 
             }       
         }  
     }  
+
+
+
+    public static function updateGeneric($table,  $columns){
+       
+        $blogQuery = new Query;       
+
+        $name = Helpers::methodTitleSimple($table);
+
+        $class = "common\models\\".ucfirst($name);        
+    
+        $blogArr = $blogQuery->select('*')
+        ->from([$table])      
+        ->all();
+       
+        $model = new $class();
+
+        foreach($blogArr as $blog){
+            foreach ($blog as $key => $value) {
+                $model->$key = $blog[$key];      
+            }    
+
+            if(method_exists($class, $method)){
+                print_r($class);
+                die();
+            }
+            $method = 'populate'.ucfirst($name);    
+        
+            $class::$method($table.'_text', $model);
+        }     
+ 
+    } 
+ 
+    
+
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function getCountries(){            
+
+       
+        $model = new GeneratorJson(); 
+        $countries = $model->getLastFileUploaded('countries');  
+        
+        $result =  array();
+
+        foreach($countries as $country){
+            $result[$country['country_code']] = $country['small_title'];               
+        }
+
+        $resultR['languages'] = $result;            
+        
+        return  $resultR;
+  
+    }
+
+    public static function getLastFileUploaded($dir, $specificfile = '', $pathParent = ''){
+
+        $pathParent = (empty($pathParent)) ? 'frontend' : $pathParent;
+        $url = Yii::getAlias('@'.$pathParent.'/web/json/'.$dir.'/');
+
+        $path = '';
+        $return = array();
+
+        if (file_exists($url)) {
+            $rrFiles = scandir($url, 1);
+        }else{
+            return $return;
+        }
+
+        if(isset($rrFiles[0])){       
+            if (strlen($rrFiles[0]) >= 3) {
+                $path = $rrFiles[0];
+            }          
+        }    
+
+        if(!empty($specificfile)){       
+            $path = $specificfile . '.json';        
+        }
+    
+        if (!empty($path)) { 
+            if (file_exists($url.$path)) {         
+                $json = file_get_contents($url.$path);
+                 $return = Json::decode($json);
+            }
+        }    
+
+        return  $return;
+    }
+
+    public static function getTranslations($language){
+        
+        $model = new GeneratorJson(); 
+        $translations = $model->getLastFileUploaded('translations');  
+
+        $result = array(); 
+
+        foreach($translations as $value){
+            if($language ==  $value['country_code']){
+                $result[trim($value['page_code'])] = trim($value['text']);
+            }            
+        }
+
+        return  $result;  
+    }
 
     public function deploy(){
       

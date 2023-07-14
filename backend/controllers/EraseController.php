@@ -28,6 +28,10 @@ class EraseController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $searchModel = new CustomerQuery();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -44,6 +48,9 @@ class EraseController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }        
         //$model = $this->findModel($id);
 
 
@@ -67,6 +74,10 @@ class EraseController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $modelCustomer = new Recipes;
         $modelsAddress = [new RecipesFood];
 
@@ -129,6 +140,10 @@ class EraseController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $modelCustomer = $this->findModel($id);
         $modelsAddress = $modelCustomer->addresses;
 
@@ -182,6 +197,10 @@ class EraseController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $model = $this->findModel($id);
         $name = $model->first_name;
 

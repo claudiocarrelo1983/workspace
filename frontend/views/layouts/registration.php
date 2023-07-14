@@ -35,8 +35,24 @@ PublicAsset::register($this);
 <div class="body">
 <!--Top Menu -->    
     <?= $content ?>
-    <div class="spacer"></div>
-
+    
+    <section class=" call-to-action call-to-action-default with-button-arrow content-align-center call-to-action-in-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="call-to-action-content">
+                        <h2 class="font-weight-normal text-5 mb-0">
+                            My Calendar                   
+                        </h2>
+                        <p class="mb-0">
+                            Secure Your Spot Now: Book Instantly and Hassle-Free with Our Quick and Easy Online Booking Button!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <?= $this->render('/site/footer_simple'); ?>			
 
 </div>

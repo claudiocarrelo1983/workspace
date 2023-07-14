@@ -4,6 +4,99 @@ Name: 			theme-elements.css
 Written by: 	Okler Themes - (http://www.okler.net)
 Theme Version:	9.3.0
 */
+
+
+html,body{
+    min-height: 100vh;
+    min-width: 100vw;
+}
+.parent{
+    height: 100vh;
+}
+.parent>.row{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.col img{
+    height:100px;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 1s;
+    object-fit: cover;
+}
+.col label{
+    overflow: hidden;
+    position: relative;
+}
+.imgbgchk:checked + label>.tick_container{
+    opacity: 1;
+}
+/*         aNIMATION */
+.imgbgchk:checked + label>img{   
+    opacity: 0.3;
+}
+.tick_container {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 48%;
+    left: 54px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-align: center;
+}
+.tick {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 6px 12px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+}
+
+.process .process-step-circle-fill {
+    display: flex;
+    justify-content: center;
+    height: 90px;
+    text-align: center;
+    width: 90px;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    background: #0088CC;
+    transition: all 0.2s ease-in-out;
+    color:white;
+}
+
+.Element {
+    padding:0px;
+    width:100%;
+    position:absolute;
+    height:100%;
+}
+
+#container {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    overflow: auto;
+}
+
+.fa-lg {
+    font-size: 80px;
+    line-height: .75em;
+    vertical-align: -0.0667em;
+}
+
+.team-card{
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
 /* Accordion */
 .accordion .card {
 	margin-top: 5px;
@@ -3253,7 +3346,6 @@ html.sticky-header-active .hamburguer-btn.hamburguer-btn-sticky-dark .close span
 .call-to-action.call-to-action-in-footer {
 	padding-top: 70px;
 	padding-bottom: 70px;
-	margin-top: 30px;
 	margin-bottom: -50px !important;
 }
 
@@ -5442,7 +5534,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 	border-top: 1px solid rgba(0, 0, 0, 0.06);
 	border-top-width: 4px;
 	padding: 28.8px;
-	padding: 1.8rem;
+	padding: 0.8rem;
 	position: relative;
 }
 
@@ -8392,7 +8484,7 @@ h4 {
 	font-size: 1.4em;
 	font-weight: 600;
 	line-height: 27px;
-	margin: 0 0 14px 0;
+	margin: 0 0 10px 0;
 }
 
 h5 {
@@ -9494,7 +9586,7 @@ html.lightbox-opened.sticky-header-active #header .header-body {
 
 /* List */
 .list li {
-	margin-bottom: 13px;
+	margin-bottom: 4px;
 }
 
 .list.pull-left li {
@@ -13738,6 +13830,15 @@ html.boxed .nav-secondary.sticky-active {
 	position: relative;
 }
 
+.process .process-step-active {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+    background-color: #0088CC;
+}
+
 .process .process-step-circle {
 	display: flex;
 	justify-content: center;
@@ -14050,7 +14151,7 @@ html.boxed .nav-secondary.sticky-active {
 }
 
 .process-connecting-line .process-step {
-	align-items: flex-start;
+	align-items: center;
 	padding-right: 48px;
 	padding-right: 3rem;
 	padding-left: 48px;
@@ -16702,13 +16803,14 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 	font-style: normal;
 }
 
-.testimonial.testimonial-style-3 .testimonial-author {
-	margin-left: 8px;
+
+.testimonial.testimonial-style-4 .testimonial-author {
+	margin-left: 5%;
 	align-items: center;
 }
 
-.testimonial.testimonial-style-3 .testimonial-author img {
-	max-width: 55px;
+.testimonial.testimonial-style-4 .testimonial-author img {
+	max-width: 100px;
 }
 
 .testimonial.testimonial-style-3 .testimonial-author p {
@@ -17406,7 +17508,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info.thumb-info-bottom-info-show-more .thumb-info-title {
 	transform: translate3d(0, 0, 0);
-	opacity: 1;
+	opacity: 0.7;
 }
 
 .thumb-info.thumb-info-bottom-info-show-more .thumb-info-show-more-content {
@@ -19950,3 +20052,5 @@ ul.team-list .team-item .thumb-info-social-icons {
     box-shadow: 0;
     opacity: 0;
 }
+
+

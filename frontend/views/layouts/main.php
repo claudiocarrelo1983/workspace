@@ -12,8 +12,6 @@ use yii\bootstrap4\NavBar;
 
 use common\Helpers\Helpers;
 
-print_r(Helpers::companyUrl());
-die();
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

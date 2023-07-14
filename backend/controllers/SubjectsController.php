@@ -38,6 +38,10 @@ class SubjectsController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $searchModel = new SubjectsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -55,6 +59,10 @@ class SubjectsController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,6 +75,10 @@ class SubjectsController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new Subjects();
         $code = 'contacts_label_choose_subject_1';
         
@@ -101,6 +113,10 @@ class SubjectsController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $model = $this->findModel($id);
 
         $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
@@ -126,6 +142,10 @@ class SubjectsController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

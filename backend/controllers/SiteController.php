@@ -69,8 +69,8 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    {
-   
+    {         
+    
         return $this->render('index');
     }
 
@@ -106,6 +106,10 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -113,6 +117,10 @@ class SiteController extends Controller
 
     public function actionGenerator(){
 
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $this->layout = 'main';
    
         return $this->render('index');

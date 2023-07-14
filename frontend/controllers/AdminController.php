@@ -8,7 +8,8 @@ use Yii;
 use common\models\Events;
 use yii\db\Query;
 
-Yii::$app->language = 'en-EN';
+//Yii::$app->language = 'en-EN';
+
 class AdminController extends Controller
 {
     public function actionIndex()
@@ -69,6 +70,22 @@ class AdminController extends Controller
         $this->layout = 'adminLayout';
 
         return $this->render('dashboard');
+    }
+
+        /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionDashboardCalendar()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $this->layout = 'adminLayout';
+
+        return $this->render('dashboard-calendar');
     }
 
     public function actionWebsite()
@@ -170,7 +187,6 @@ class AdminController extends Controller
 
         return $this->render('schedule');
     }
-
   
     public function actionProfile()
     {
@@ -184,9 +200,7 @@ class AdminController extends Controller
         $this->layout = 'adminLayout';
         
         return $this->render('clients-list');
-    }
-
-    
+    }   
 
     
     public function actionCalendar()
@@ -278,6 +292,20 @@ class AdminController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionLanguage()
+    {       
+
+       if(isset($_POST['lang'])){          
+            Yii::$app->language = $_POST['lang'];   
+            $cookies = new \yii\web\Cookie([
+                'name' => 'lang',
+                'value' => $_POST['lang'],
+            ]);
+
+            Yii::$app->getResponse()->getCookies()->add($cookies);
+       }
     }
 
 }

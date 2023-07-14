@@ -107,8 +107,9 @@ class Faqs extends \yii\db\ActiveRecord
     }
 
 
+    
     public function updateFaqs($page, $model){
-
+      
         $connection = new Query;
 
         $countries = $connection->select([
@@ -117,37 +118,44 @@ class Faqs extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
+      
         foreach ($countries as $val) {
 
-            $question = 'question_' . $val['country_code'];   
-            $answer = 'answer_' . $val['country_code'];            
-           
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page=:page,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-            ->bindValue(':page', $page)
-            ->bindValue(':text', $model->$question)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_question)
-            ->execute();   
+            $question = 'question_' . $val['country_code'];  
+            $answer = 'answer_' . $val['country_code']; 
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                        
+            ])->execute();
+     
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_question,
+                'text' => $model->$question,
+                'active' => 1,
+            ])->execute();    
             
             
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page=:page,
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-            ->bindValue(':page', $page)
-            ->bindValue(':text', $model->$answer)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code_answer)
-            ->execute();  
-        }
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                        
+            ])->execute();
+     
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_answer,
+                'text' => $model->$answer,
+                'active' => 1,
+            ])->execute(); 
+         
+        }    
     }   
+
 }

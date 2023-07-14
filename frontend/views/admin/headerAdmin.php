@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use common\Helpers\Helpers;
 ?>
             
 <header id="page-topbar">
@@ -21,9 +21,7 @@ use yii\helpers\Url;
                     <div class="navbar-box-big">
                         <span class="logo-lg">	
                             <div class="header-logo">					
-                                <span class="text-color-light font-weight-normal text-5 ">My</span>
-                                <span class="text-color-light font-weight-extra-bold text-5  ">Special</span>
-                                <span class="font-weight-extra-bold blue-lettering text-5 ">Gym</span>	
+                                '. Helpers::logoHeader(5).'
                             </div>
                         </span>	
                     </div>	
@@ -57,7 +55,7 @@ use yii\helpers\Url;
             <div class="dropdown dropdown-mega d-none d-lg-block p-3">                    
                     
                     <?= Html::a(
-                        Yii::t('app', 'Home'), 
+                        Yii::t('app', 'menu_home'), 
                         Url::home(),     
                         [
                         'class' => 'btn',

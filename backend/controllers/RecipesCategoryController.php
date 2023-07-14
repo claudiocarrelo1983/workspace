@@ -38,6 +38,10 @@ class RecipesCategoryController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $searchModel = new RecipesCategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -55,6 +59,10 @@ class RecipesCategoryController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,6 +75,9 @@ class RecipesCategoryController extends Controller
      */
     public function actionCreate()
     {     
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
         $model = new RecipesCategory();
      
@@ -103,7 +114,10 @@ class RecipesCategoryController extends Controller
      */
     public function actionUpdate($id)
     {      
-
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $model = $this->findModel($id);
 
         $count = $model::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
@@ -130,6 +144,10 @@ class RecipesCategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -2,18 +2,12 @@
 
 namespace frontend\controllers;
 
-use common\models\Clients;
-use common\models\UserSearch;
-use SplQueue;
-use yii\db\Query;
+use frontend\models\Clients;
+use frontend\Models\ClientsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
-use common\models\User;
 use Yii;
-
-//Yii::$app->language = 'en-EN';
 
 /**
  * ClientsController implements the CRUD actions for Clients model.
@@ -45,36 +39,14 @@ class ClientsController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
         $this->layout = 'adminLayout';  
-
-        $searchModel = new UserSearch();
-
-        $query = new Query();
-
-        $blogArr = $query->select('*')
-                    ->from(['user'])  
-                    ->where([
-                        'active' => true,
-                        'username' =>  Yii::$app->user->identity->username
-                    ])    
-                    ->one();
-   
-        $dataProvider = new ActiveDataProvider([
-            'query' => User::find()->where(
-                [
-                    'level' => 'client', 
-                    'active' => true,                  
-                    'company_code_parent' => $blogArr['company_code']
-                ]
-            ),
-            
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-
-      
-
+        
+        $searchModel = new ClientsSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -90,13 +62,14 @@ class ClientsController extends Controller
      */
     public function actionView($id)
     {
-        $this->layout = 'adminLayout';        
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
 
-        $model = User::find($id);
+        $this->layout = 'adminLayout';  
 
-        
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -107,10 +80,14 @@ class ClientsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
 
-        $this->layout = 'adminLayout';
-        
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
+        $this->layout = 'adminLayout';  
+
+        $model = new Clients();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -134,11 +111,13 @@ class ClientsController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
 
-        $this->layout = 'adminLayout';        
+        $model = $this->findModel($id);
 
-        $model = User::find($id);
-
+        $this->layout = 'adminLayout';  
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -158,7 +137,11 @@ class ClientsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->layout = 'adminLayout';        
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
+        $this->layout = 'adminLayout';  
 
         $this->findModel($id)->delete();
 

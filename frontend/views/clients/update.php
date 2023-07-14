@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Clients */
+/** @var yii\web\View $this */
+/** @var app\models\Clients $model */
 
-$this->title = 'Update Clients: ' ;
+$this->title = 'Update Clients: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Clients', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'w', 'url' => ['view', 'id' => 's']];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="clients-update">

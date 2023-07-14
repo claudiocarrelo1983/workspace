@@ -87,6 +87,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         $this->layout = 'public';
 
         $modelGeneratorjson = new GeneratorJson(); 
@@ -125,21 +126,7 @@ class SiteController extends Controller
         return $this->render('home/index');
     }
 
-    public function actionLanguage()
-    {       
-    
-       if(isset($_POST['lang'])){
-        Yii::$app->language = $_POST['lang'];
-
-        $cookies = new \yii\web\Cookie([
-            'name' => 'lang',
-            'value' => $_POST['lang'],
-        ]);
-
-        Yii::$app->getResponse()->getCookies()->add($cookies);
-
-       }
-    }
+ 
     public function actionSitemap()
     {
         $this->layout = 'public';
@@ -1065,27 +1052,51 @@ class SiteController extends Controller
         }
 
         switch ($plan) {
-            case "basic":
-                $plan = 'Basic';
-              break;
-            case "standard":
-                $plan = 'Standard';
-              break;
-            case "professional":
-                $plan = 'Professional';
-              break;
-            case "enterprise":
-                $plan = 'Enterprise';
-            break;
-          
-          }
+                case "basic":
+                    $plan = 'Basic';
+                break;
+                case "standard":
+                    $plan = 'Standard';
+                break;
+                case "professional":
+                    $plan = 'Professional';
+                break;
+                case "enterprise":
+                    $plan = 'Enterprise';
+                break;
+            
+            }
 
-        return $this->render('payment/checkout',
-        [
-            'plan' => $plan,    
-            'price' => $price,           
-            'arrPriceSpecs' => $arrPriceSpecs
-        ]
-    );
+            return $this->render('payment/checkout',
+            [
+                'plan' => $plan,    
+                'price' => $price,           
+                'arrPriceSpecs' => $arrPriceSpecs
+            ]
+        );
+    }
+
+    public function actionLanguage()
+    {           
+
+   
+        
+        Yii::$app->language = 'en';  
+        $cookies = new \yii\web\Cookie([
+            'name' => 'lang',
+            'value' => 'en',
+        ]);
+        Yii::$app->getResponse()->getCookies()->add($cookies);
+
+       if(isset($_POST['lang'])){
+        Yii::$app->language = $_POST['lang'];   
+        $cookies = new \yii\web\Cookie([
+            'name' => 'lang',
+            'value' => $_POST['lang'],
+        ]);
+
+        Yii::$app->getResponse()->getCookies()->add($cookies);
+
+       }
     }
 }

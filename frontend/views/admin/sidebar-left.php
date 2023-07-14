@@ -4,10 +4,27 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
+use common\Helpers\Helpers;
 
 
+$base_url = Helpers::getBaseUrl();
 $model = new GeneratorJson(); 
-$structure = $model->getLastFileUploaded('other','admin-menu');
+
+switch($base_url){
+    case 'localhost:100':
+    case 'specialcalendar.com':
+        $structure = $model->getLastFileUploaded('other','admin-menu-calendar');                   
+         break;
+  
+    case 'localhost':
+    case 'myspecialgym.com':
+        $structure = $model->getLastFileUploaded('other','admin-menu');
+        break;
+    default:
+        $structure = $model->getLastFileUploaded('other','admin-menu');
+    break;
+}   
+
 
 $currentUrl = Yii::$app->controller->route;
 
@@ -25,7 +42,7 @@ $active3 = '';
 
     $key = $menucategory['key']; 
     $url = (($menucategory['url'] == 'null') ? null : Url::toRoute($menucategory['url']));
-    $title = $menucategory['title']; 
+    $title = Yii::t('app',trim($menucategory['title']));
     $icon = $menucategory['icon']; 
 
     $hasArrow = (empty($menucategory['submenu']) ? '' : 'has-arrow');
@@ -51,7 +68,7 @@ $active3 = '';
     if(isset($menucategory['key']) && $menucategory['key'] == 't-messages'){
         $numberMessages = 102;
         $badge = '<span class="badge rounded-pill bg-danger float-end">'.$numberMessages.'</span>';
-    }
+    } 
  
 ?>
 
@@ -74,7 +91,7 @@ $active3 = '';
 
                     $key = $submenu['key']; 
                     $url = (($submenu['url'] == 'null') ? null : Url::toRoute($submenu['url']));
-                    $title = $submenu['title']; 
+                    $title = Yii::t('app',trim($submenu['title']));
                     $hasArrow = (empty($submenu['submenu']) ? '' : 'has-arrow');      
                     $active2 = (($currentUrl  == $submenu['url']) ? 'mm-active' : '');
                 ?>
@@ -93,7 +110,7 @@ $active3 = '';
                         <?php 
                             $key = $submenu2['key']; 
                             $url = (($submenu2['url'] == 'null') ? null : Url::toRoute($submenu2['url']));
-                            $title = $submenu2['title']; 
+                            $title = Yii::t('app',trim($submenu2['title']));
                             $hasArrow = (empty($submenu2['submenu']) ? '' : 'has-arrow');                     
                         ?>
 

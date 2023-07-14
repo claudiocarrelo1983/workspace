@@ -40,6 +40,7 @@ class AdminAsset extends AssetBundle
         'assets/libs/dropzone/min/dropzone.min.js',
         'assets/libs/moment/min/moment.min.js',
         'assets/libs/jquery-ui-dist/jquery-ui.min.js',
+        'js/main.js',
         //'assets/libs/@fullcalendar/core/main.min.js',
         //'assets/libs/@fullcalendar/bootstrap/main.min.js',
         //'assets/libs/@fullcalendar/daygrid/main.min.js',

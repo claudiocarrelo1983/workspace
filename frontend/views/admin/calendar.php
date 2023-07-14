@@ -38,7 +38,25 @@ $eventsArr = $query->select('*')
                     ->where(['username' => Yii::$app->user->identity->username]) 
                     ->all();
 
-
+                    $colors = [
+                        '#4e71b0',
+                        '##e08632',
+                        '#60a339',
+                        '#b73232',
+                        '#8b5fba',
+                        '#7e584d',
+                        '#cb74c0',
+                        '#7f7f7f',
+                        '#b9c23e',
+                        '#72bccc',
+                        '#e36159',
+                        '#2BAAB1',
+                        '#d1e7dd',
+                        '#cff4fc',  
+                        '#fff3cd',
+                        '#f8d7da',
+                    ];
+                    
 
 $events = array();
   //Testing

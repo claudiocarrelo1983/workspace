@@ -14,15 +14,13 @@ class m130524_201442_init extends Migration
 
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey()->unique(),
-            'guid' => $this->string(),
-            'username' => $this->string()->notNull()->unique(),
+            'guid' => $this->string()->unique(),
+            'username' => $this->string()->notNull()->unique(),          
             'first_name' => $this->string(),
             'last_name' => $this->string(),    
             'full_name' => $this->string(),   
             'gender' => $this->string(),     
-            'title' => $this->string(),   
-            'height_meters' => $this->string(), 
-            'height_ft' => $this->string(), 
+            'title' => $this->string(),  
             'path' => $this->string(),   
             'image' => $this->string(),      
             'dob' => $this->date(),              
@@ -69,6 +67,8 @@ class m130524_201442_init extends Migration
             'active' => $this->boolean(),
             'created_at' => $this->integer()->notNull(),       
             'updated_at' => $this->integer()->notNull(),
+            'subscription' => $this->string(),
+            'subscription_startingdate' => $this->date(),
             'created_date' => $this->timestamp(), 
         ], $tableOptions);
     }

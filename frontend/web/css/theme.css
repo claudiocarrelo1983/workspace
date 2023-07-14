@@ -187,7 +187,7 @@ pre {
 	align-self: stretch;
 	align-items: center;
 	flex-grow: 1;
-	flex-direction: column;
+/*	flex-direction: column; */
 }
 
 #header .header-column.header-column-border-right {
@@ -3489,7 +3489,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 		display: block;
 		float: none;
 		margin: 0;
-		padding: 0;
+		padding: 5px 0px;
 		position: relative;
 	}
 

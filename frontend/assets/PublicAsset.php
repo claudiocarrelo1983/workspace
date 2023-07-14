@@ -36,7 +36,11 @@ class PublicAsset extends AssetBundle
         'css/demos/demo-app-landing.css',
         'vendor/animate/animate.compat.css' ,
         'vendor/bootstrap-star-rating/css/star-rating.min.css',
-        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css'
+        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css',
+        'assets/libs/@fullcalendar/core/main.min.css',
+        'assets/libs/@fullcalendar/daygrid/main.min.css',
+        'assets/libs/@fullcalendar/bootstrap/main.min.css',
+        'assets/libs/@fullcalendar/timegrid/main.min.css'
 
     ]; 
 
@@ -69,7 +73,13 @@ class PublicAsset extends AssetBundle
         //'js/pages/dashboard.init.js',
         //'js/app.js'
         'vendor/bootstrap-star-rating/js/star-rating.min.js',
-        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js'
+        'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js',
+        //'assets/libs/@fullcalendar/core/main.min.js',
+        'assets/libs/@fullcalendar/bootstrap/main.min.js',
+        'assets/libs/@fullcalendar/daygrid/main.min.js',
+        'assets/libs/@fullcalendar/timegrid/main.min.js',
+        'assets/libs/@fullcalendar/interaction/main.min.js',
+        'js/pages/calendars-full.init.js'
 
     ];
 

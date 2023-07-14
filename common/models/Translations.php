@@ -32,10 +32,10 @@ class Translations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'string'],
+            [['text', 'text_pt','text_en'], 'string'],
             [['created_date'], 'safe'],
             [['active'], 'integer'],
-            [['page', 'page_code', 'text', 'text_pt', 'text_es', 'text_en', 'text_it', 'text_fr', 'text_de'], 'required'],
+            [['page', 'page_code', 'text', 'text_pt', 'text_en'], 'required'],
             [['page', 'page_code'], 'string', 'max' => 255]        
         ];
     }
@@ -90,7 +90,7 @@ class Translations extends \yii\db\ActiveRecord
     }
 
 
-    public function updateTranslations($model){
+    public function updateTranslations($name, $model){
 
         $connection = new Query;
 
@@ -98,20 +98,18 @@ class Translations extends \yii\db\ActiveRecord
             'country_code' 
             ])
         ->from('countries')    
-        ->all();
+        ->all();    
 
         foreach ($countries as $val) {
-
-            $text = 'text_' . $val['country_code'];            
-           
+      
             Yii::$app->db->createCommand("UPDATE translations SET             
                 text=:text,
                 page_code=:page_code            
                 WHERE  page_code=:page_code 
                 AND country_code=:country_code"
-            )          
-           
-            ->bindValue(':text', $model->$text)
+            )         
+
+            ->bindValue(':text', $model->text)
             ->bindValue(':country_code', $val['country_code'])
             ->bindValue(':page_code', $model->page_code)
             ->execute();         

@@ -47,13 +47,17 @@ class LoginForm extends Model
 
         $user = $this->getUser();  
 
-        if (strtolower($user->level) !== 'admin') {        
-             $this->addError($attribute, 'You have no permission');          
+        if(isset($user->level)){
+            if (strtolower($user->level) !== 'admin') {        
+                $this->addError($attribute, 'You have no permission');          
+           }
         }
-
-        if ($user->active == false) {        
-            $this->addError($attribute, 'You user is not active.');          
-       }
+      
+        if(isset($user->active)){
+            if ($user->active == false) {        
+                $this->addError($attribute, 'You user is not active.');          
+        }
+        }
 
         if (!$this->hasErrors()) {      
           

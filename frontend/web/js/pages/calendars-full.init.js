@@ -47,6 +47,7 @@
                 l.modal("show"), a[0].reset(), i = e.event, g("#event-title").val(i.title), g("#event-category").val(i.classNames[0]), r = null, t.text("Edit Event"), r = null
             },
             dateClick: function(e) {
+                alert();
                 u(e)
             },
             events: g.ajax({

@@ -8,3 +8,9 @@ RewriteCond %{HTTP_HOST} ^myspecialgym.com$ [NC,OR]
 RewriteCond %{HTTP_HOST} ^www.myspecialgym.com$
 RewriteCond %{REQUEST_URI} !frontend/web/
 RewriteRule (.*) /frontend/web/$1 [L]
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\?*$ index.php?r=$1 [L,QSA]

@@ -4,7 +4,7 @@ DELETE FROM `user` WHERE `username` in ('joana2022','carrelo1983','silvia1984');
 INSERT INTO `user` (`guid`, `username`, `first_name`, `last_name`, `full_name`, `gender`, `title`, `path`, `image`, `dob`, `company_dob`, `company_code_parent`, `company_code_url`, `company_code`, `company`, `starting_date`, `payment_month_fee`, `payment_year_fee`, `role`, `level`, `sublevel`, `status`, `language`, `email`, `type`, `summary`, `description`, `address`, `postcode`, `location`, `country`, `nif`, `logo`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `code`, `terms_and_conditions`, `gdpr`, `privacy`, `newsletter`, `auth_key`, `password_hash`, `password_reset_token`, `active`, `created_at`, `updated_at`, `created_date`, `verification_token`) VALUES ('8A3C000C-A404-4870-BCD9-19167FC89254', 'carrelo1983', 'Claudio', 'Carrelo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '091229030121', '091229030121', 'FTX Team', NULL, NULL, NULL, NULL, 'admin', NULL, 10, NULL, 'maurosoares@hotmail.co.uk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 1, 1, 'kSfzrCz9_0B8PkH8cTO9NeU5qg5aXpDV', '$2y$13$vdnqqvl7CsJbz//mXgV.Fui7Rq4Jsxz0tO2nk5sGzT9aXpzRDdQdm', NULL, 1, 1686298379, 1686298379, '2023-06-09 09:20:58', 'qbEKC3EF4822yHEBMsS_dMfONEDE_XG__1686298379');
 
 DELETE FROM `team`;
-INSERT INTO `team` (`username`, `page_code_title`, `page_code_text`, `full_name`, `path`, `image`, `location`, `title`, `text`, `title_pt`, `text_pt`, `title_en`, `text_en`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `active`, `created_date`) VALUES ('joana2022', 'team_title_1', 'team_text_1', 'Joana Fernandes', '/images/team/', 'joana_fernandes.jpg', 'Seixal', 'Personal Training', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac ligula mi, non suscipitaccumsan', 'Personal Trainer', 'Chamo-me Joana, sou licenciada em Educação Física e Desporto , estando atualmente no 1.º ano do Mestrado em Saúde e Bem-estar.\\r\\n\\r\\nPercebendo da dificuldade de algumas pessoas aderirem à atividade física, e no sentido de criar um programa de treino que fosse ao encontro das necessidades individuias de cada pessoa, criei a Outlier. A Outlier representa a minha própria metodologia de treino, com o objetivo de que todos encontrem nela, motivação para um estilo de vida saudável.', 'Personal Trainer', 'My name is Joana, I have a degree in Physical Education and Sports, and I am currently in the 1st year of the Master in Health and Wellbeing.\\r\\n\\r\\nRealizing the difficulty of some people to adhere to physical activity, and in order to create a training program that would meet the individual needs of each person, I created Outlier. Outlier represents my own training methodology, with the aim that everyone finds themselves in it, motivated towards a healthy lifestyle.', 'https://treinos-outlier.my.canva.site/', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', '96726377', 1, '2023-06-09 10:38:46');
+INSERT INTO `team` (`company`, `username`, `page_code_title`, `page_code_text`, `full_name`, `path`, `image`, `location`, `title`, `text`, `title_pt`, `text_pt`, `title_en`, `text_en`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `color`, `active`, `created_date`) VALUES ('myspecialgym', 'joana2022', 'team_title_1', 'team_text_1', 'Joana Fernandes', '/images/team/', 'joana_fernandes.jpg', 'Seixal', 'Personal Training', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac ligula mi, non suscipitaccumsan', 'Personal Trainer', 'Chamo-me Joana, sou licenciada em Educação Física e Desporto , estando atualmente no 1.º ano do Mestrado em Saúde e Bem-estar.\\r\\n\\r\\nPercebendo da dificuldade de algumas pessoas aderirem à atividade física, e no sentido de criar um programa de treino que fosse ao encontro das necessidades individuias de cada pessoa, criei a Outlier. A Outlier representa a minha própria metodologia de treino, com o objetivo de que todos encontrem nela, motivação para um estilo de vida saudável.', 'Personal Trainer', 'My name is Joana, I have a degree in Physical Education and Sports, and I am currently in the 1st year of the Master in Health and Wellbeing.\\r\\n\\r\\nRealizing the difficulty of some people to adhere to physical activity, and in order to create a training program that would meet the individual needs of each person, I created Outlier. Outlier represents my own training methodology, with the aim that everyone finds themselves in it, motivated towards a healthy lifestyle.', 'https://treinos-outlier.my.canva.site/', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', '96726377', '#4e71b0', 1, '2023-06-15 17:51:36');
 
 DELETE FROM `countries`;
 INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `active`, `created_date`) VALUES ('en', 'EN', 'English', 'e', 0, '2022-12-28 17:36:33');
@@ -518,4 +518,164 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_blog_categories' ,'Blog Categories',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_login_pages' ,'Login Pages',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'sitemap', 'sitemap_other_pages' ,'Other Pages',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_title_1', 'Registe-se', 1, '2023-07-12 10:13:31');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_text_1', 'Comece o seu trial grátis', 1, '2023-07-12 10:12:58');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_title_1', 'Sign Up', 1, '2023-07-12 10:11:39');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_text_1', 'Start your free trial', 1, '2023-07-12 10:11:03');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_register', 'Registro', 1, '2023-07-12 10:13:31');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_register', 'Sign Up', 1, '2023-07-12 10:13:31');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_title', 'Title', 1, '2023-07-12 10:13:31');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_title', 'Titulo', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_first_name', 'First Name', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_first_name', 'Primeiro Nome', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_last_name', 'Surname', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_last_name', 'Apelido', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_role', 'Job Title', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_role', 'Posição', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_company', 'Company Name', 1, '2023-07-12 10:28:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_company', 'Nome da Empresa', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_contact_number', 'Contact Number', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_contact_number', 'Contacto Movel', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_email', 'Email', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_email', 'Email', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_address', 'Address', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_address', 'Morada', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_address_1', 'Address 1', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_address_1', 'Morada 1', 1, '2023-07-12 10:37:08');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_address_2', 'Address 2', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_address_2', 'Morada 2', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_city', 'City', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_city', 'Cidade', 1, '2023-07-12 10:30:56');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_postcode', 'Postcode', 1, '2023-07-12 10:42:16');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_postcode', 'Codigo Postal', 1, '2023-07-12 10:42:16');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_location', 'Location', 1, '2023-07-12 10:42:16');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_location', 'Localização', 1, '2023-07-12 11:07:41');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_country', 'Country', 1, '2023-07-12 10:42:16');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_country', 'País', 1, '2023-07-12 10:42:16');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_country_select', 'Select Country', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_country_select', 'Selecione o Pais', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_login', 'Login Details', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_login', 'Detalhes de Login', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_username', 'Username', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_username', 'Username', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_password', 'Password', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_password', 'Password', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_validation_newsletter', 'Subscribe Newsletter', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_validation_newsletter', 'Subrescreva a Newsletter', 1, '2023-07-12 11:23:20');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_validation_terms', 'Accept Terms & Conditions', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_validation_terms', 'Aceitar os Termos & Condições', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_validation_privacy', 'Accept Privacy Policy', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_validation_privacy', 'Aceitar a Politica de Privacidade', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_privacy_link', 'privacy policy', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_privacy_link', 'politica de privacidade', 1, '2023-07-12 11:09:28');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'signup', 'signup_block_register', 'Submit', 1, '2023-07-12 11:28:32');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'signup', 'signup_block_register', 'Submeter', 1, '2023-07-12 11:09:28');
 
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'coin', 'eur', '€', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'coin', 'eur', '€', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'coin', 'usd', '$', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'coin', 'usd', '$', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'coin', 'gbp', '£', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'coin', 'gbp', '£', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_dashboard', 'Dashboard', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_dashboard', 'Dashboard', 1, '2023-07-12 17:29:24');
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients', 'Clientes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients', 'Clients', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients_list', 'Lista de Clientes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients_list', 'Lista de Clientes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients_add_client', 'Adicionar Novo Cliente', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients_add_client', 'Add New Client', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_question', 'Questionário', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_question', 'Questions', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_question_create_form', 'Criar Formularios', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_question_create_form', 'Create Forms', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_question_list', 'Lista de Questões', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_question_list', 'Questions List', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_organizator', 'Organizador', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_organizator', 'Organizator', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_organizator_goals', 'Objectivos', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_organizator_goals', 'Goals', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_organizator_task_list', 'Lista de Tarefas', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_organizator_task_list', 'Task List', 1, '2023-07-12 17:29:24');
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule', 'Marcações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule', 'Sheddule', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule_clients', 'Clientes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_clients', 'Clients', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule_list', 'Lista de Marcações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_list', 'Marcações List', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_events', 'Eventos', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_events', 'Events', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_events_list', 'Lista de Eventos', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_events_list', 'List Events', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_events_attendes', 'Participantes ', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_events_attendes', 'Attendes', 1, '2023-07-12 17:29:24');
+
+
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda', 'Agenda', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_agenda', 'Agenda', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda_goals', 'Objectivos', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_agenda_goals', 'Goals', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda_calendar', 'Calendario', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_agenda_calendar', 'Calendar', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda_task_list', 'Lista de Tarefas', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_agenda_task_list', 'Task List', 1, '2023-07-12 17:29:24');
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_messages', 'Messages', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_messages', 'Mensagens', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services', 'Services', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services', 'Serviços', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_details', 'Detalhes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_category', 'Categories', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_category', 'Categorias', 1, '2023-07-12 17:29:24');
+
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company', 'Company', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company', 'Empresa', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_details', 'Detalhes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_team', 'Team', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_team', 'Equipa', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_locations', 'Locations', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_locations', 'Localizações', 1, '2023-07-12 17:29:24');
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign', 'Campaign', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign', 'Campanhas', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign_details', 'Detalhes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_social', 'Social', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign_social', 'Social', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings', 'Settings', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings', 'Configurações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_profile', 'User Profile', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_profile', 'Perfil do User', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_notifications', 'Notificações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_notifications', 'Notifications', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_webpage', 'Minha Pagina', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_webpage', 'My Page', 1, '2023-07-12 17:29:24');

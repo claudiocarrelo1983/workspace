@@ -36,6 +36,7 @@ class m230315_230346_events extends Migration
         $this->createTable('{{%events}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull(),
+            'company_code' => $this->string()->notNull(),
             'event_code' => $this->string()->notNull(),
             'page_code' => $this->string()->notNull(),
             'title' => $this->string()->notNull(),
