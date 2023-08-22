@@ -64,7 +64,7 @@ class TeamSearch extends Team
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'full_name', $this->full_name])
+            ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'title', $this->title])

@@ -114,9 +114,13 @@ class Company extends \yii\db\ActiveRecord
         ->from('countries')    
         ->all();
 
+        //team_title_pt
+
         foreach ($countries as $val) {
    
-            $text = 'text_' . $val['country_code'];               
+            $text = 'text_'. $val['country_code'];   
+            $teamTitle = 'team_title_'. $val['country_code'];
+            $teamText = 'team_text_'. $val['country_code'];              
 
             $connection->createCommand()->delete('translations',
             [   
@@ -130,7 +134,37 @@ class Company extends \yii\db\ActiveRecord
                 'page_code' => $model->page_code_text,
                 'text' => $model->$text,
                 'active' => 1,
-            ])->execute();          
+            ])->execute();     
+                       
+            
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_team_title                       
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_team_title,
+                'text' => $model->$teamTitle,
+                'active' => 1,
+            ])->execute();  
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_team_text                       
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_team_text,
+                'text' => $model->$teamText,
+                'active' => 1,
+            ])->execute(); 
+
         }
     }   
 }

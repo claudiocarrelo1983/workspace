@@ -7,6 +7,9 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Url;
+use common\Helpers\Helpers;
+
+
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,6 +36,9 @@ $path2 = 'login';
                     <div class="m-2 pb-2 pt-2">        
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>                   
                         <div class="row">    
+                            <div class="form-group col-12">                                     
+                                <?= $form->field($model, 'field')->hiddenInput(['value' => Helpers::encrypt('frontend', '10')])->label(false)?>
+                            </div>
                             <div class="form-group col-12">                                     
                                 <?= $form->field($model, 'username')->textInput(['class' => 'form-control form-control-lg text-4',  'autofocus' => true])->label(Yii::t('app', "login_label_username_2"))?>
                             </div>

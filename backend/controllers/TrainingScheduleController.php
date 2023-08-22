@@ -7,6 +7,7 @@ use common\models\TrainingScheduleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * TrainingScheduleController implements the CRUD actions for TrainingSchedule model.

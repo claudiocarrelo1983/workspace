@@ -7,6 +7,7 @@ use common\models\FormsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * FormsController implements the CRUD actions for Forms model.

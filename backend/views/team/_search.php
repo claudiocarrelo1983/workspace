@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'username') ?>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <?= $form->field($model, 'full_name') ?>
+            <?= $form->field($model, 'first_name') ?>
         </div> 
         <div class="col-lg-3 col-sm-12">
             <?= $form->field($model, 'location') ?>

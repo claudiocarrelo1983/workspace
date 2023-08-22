@@ -36,7 +36,7 @@ class m230615_080116_services_category extends Migration
 
         $this->createTable('{{%services_category}}', [
             'id' => $this->primaryKey(),
-            'company' => $this->string()->notNull(),         
+            'company_code' => $this->string()->notNull(),         
             'category_code' => $this->string()->notNull(),
             'page_code_title' => $this->string()->notNull()->unique(),            
             'title' => $this->string()->notNull(),   

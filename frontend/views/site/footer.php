@@ -93,6 +93,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/coockies')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_coockies') ?></a></li>
 					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/gdpr')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_gdpr') ?></a></li>		
 					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/terms-and-conditions')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_terms') ?></a></li>		
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/signup-reseller')) ?>"><?= Yii::t('app', 'footer_category_usefull_affiliate_program') ?></a></li>
 				</ul>
 			</div>	
 			<div class="col-md-6 col-lg-3 align-items-center">

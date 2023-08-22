@@ -1,6 +1,6 @@
 <?php
 
-namespace common\Models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,8 +17,9 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'first_name', 'last_name', 'company', 'level', 'sublevel', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at','active'], 'integer'],
+            [['company_code'], 'string'],
+            [['contact_number','nif','type','username', 'voucher_parent', 'voucher', 'first_name', 'last_name', 'company', 'level', 'sublevel', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
         ];
     }
 
@@ -59,15 +60,25 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'company_code' => $this->company_code,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);    
 
+
+
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
+            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'active', $this->active])
+            ->andFilterWhere(['like', 'contact_number', $this->contact_number])  
+            ->andFilterWhere(['like', 'nif', $this->nif])  
+            ->andFilterWhere(['like', 'voucher', $this->voucher])  
+            ->andFilterWhere(['like', 'voucher_parent', $this->voucher_parent])  
             ->andFilterWhere(['like', 'last_name', $this->last_name])       
             ->andFilterWhere(['like', 'company', $this->company])
+            ->andFilterWhere(['=', 'company_code', $this->company_code])
             ->andFilterWhere(['like', 'level', $this->level])
             ->andFilterWhere(['like', 'sublevel', $this->sublevel])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
@@ -77,5 +88,28 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
 
         return $dataProvider;
+    }
+
+    public function searchQuery($params)
+
+    {
+
+        $query = Model::find();
+
+
+        $this->load($params);
+
+
+        // grid filtering conditions
+
+        $query->andFilterWhere([
+
+		// ...
+
+        ]);
+
+
+        return $dataProvider;
+
     }
 }

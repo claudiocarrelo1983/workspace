@@ -8,6 +8,7 @@ use common\models\Translations;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * FaqsController implements the CRUD actions for Faqs model.

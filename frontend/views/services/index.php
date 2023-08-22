@@ -1,6 +1,6 @@
 <?php
 
-use frontend\models\Services;
+use common\models\Services;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'company',
+            'company_code',
             'username',
             'service_code',
             'category_code',

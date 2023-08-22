@@ -1,5 +1,6 @@
 <?php
 namespace common\Helpers;
+use yii\bootstrap\Dropdown;
 use yii\imagine\Image;  
 use Imagine\Image\Box;
 use yiier\chartjs\ChartJs;
@@ -219,20 +220,7 @@ class Helpers{
         }              
     }
 
-   public static function titleDropdownArr(){
 
-        $titleList =    [
-            'mr' => Yii::t('app', 'Mr'),
-            'miss' => Yii::t('app', 'Miss'),
-        ];
-    
-        $arrTitle = [];
-        foreach($titleList as  $key => $value){
-            $arrTitle[$key] = $value;
-        }
-
-        return $arrTitle;
-    }
 
     public static function getCurrencyName($currencyCode){
 
@@ -601,6 +589,20 @@ class Helpers{
 
         return $result;
 
+    }
+
+    public static function timeSheddulleArr(){   
+
+        $timeArr = array(
+            "15" => "15",
+            "30" => "30",
+            "45" => "45",
+            "60" => "60",      
+            "90" => "90",  
+            "120" => "120"  
+        );
+
+        return $timeArr;
     }
 
     public static function currencyArr(){   
@@ -1061,6 +1063,266 @@ class Helpers{
         return $countryList;
     }
 
+    public static function encrypt($data, $key) {
+   
+        $plaintext = $data;
+        $ivlen = openssl_cipher_iv_length($cipher = 'AES-128-CBC');
+        $iv = openssl_random_pseudo_bytes($ivlen);
+        $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+        $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+        $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+        return $ciphertext;
+    }
+
+    public static function decrypt($data, $key) {    
+        
+        if(empty($data)){
+            return null;
+        }
+   
+        $c = base64_decode($data);
+        $ivlen = openssl_cipher_iv_length($cipher = 'AES-128-CBC');
+        $iv = substr($c, 0, $ivlen);
+        $hmac = substr($c, $ivlen, $sha2len = 32);
+        $ciphertext_raw = substr($c, $ivlen + $sha2len);
+        $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+        $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+        if (hash_equals($hmac, $calcmac))
+        {
+            return $original_plaintext;
+        }
+    }
+    
+    public static function dropdownLevel(){
+
+        $titleList =    [
+            'team' => Yii::t('app', 'team'),
+            'client' => Yii::t('app', 'client'),
+        ];
+
+        $arrTitle = [];
+        foreach($titleList as  $key => $value){
+            $arrTitle[$key] = $value;
+        }
+
+        return $arrTitle;
+    }
+    
+   public static function dropdownTitle(){
+
+        $titleList =    [
+            'mr' => Yii::t('app', 'Mr'),
+            'miss' => Yii::t('app', 'Miss'),
+        ];
+
+        $arrTitle = [];
+        foreach($titleList as  $key => $value){
+            $arrTitle[$key] = $value;
+        }
+
+        return $arrTitle;
+    }
+
+
+    public static function dropdownTimeWindow(){
+
+        $titleList =    [
+            '15' => 15,
+            '20' => 20,
+            '30' => 30,
+            '45' => 45,
+            '60' => 60,
+            '75' => 75,
+            '90' => 90,
+            '120' => 120,
+        ];
+    
+        $arrTitle = [];
+        foreach($titleList as  $key => $value){
+            $arrTitle[$key] = $value;
+        }
+
+        return $arrTitle;
+    }
+
+
+    public static function dropdownGender(){
+
+        $titleList =    [
+            'men' => Yii::t('app', 'Men'),
+            'women' => Yii::t('app', 'Women'),
+        ];
+    
+        $arrTitle = [];
+        foreach($titleList as  $key => $value){
+            $arrTitle[$key] = $value;
+        }
+
+        return $arrTitle;
+    }
+
+    
+    public static function dropdownActive(){
+
+        $titleList =    [
+            '1' => Yii::t('app', 'yes'),
+            '0' => Yii::t('app', 'no'),
+        ];
+    
+        $arrTitle = [];
+        foreach($titleList as  $key => $value){
+            $arrTitle[$key] = $value;
+        }
+
+        return $arrTitle;
+    }
+
+
+    public static function dropdownCompanyLocations(){
+
+        $query = new Query;
+     
+        $locationArr = $query->select([
+            'location_code', 
+            'full_name',
+            'location',
+        ])
+        ->from('company_locations')    
+        ->where(['company_code' => Yii::$app->user->identity->company_code])
+        ->all();
+        
+        $arrLocations = array();
+        
+        foreach($locationArr as $value){
+            $arrLocations[$value['location_code']] = $value['full_name'] . ' ('.$value['location'].')';
+        }
+        
+
+        return $arrLocations;
+    }
+
+    public static function dropdownSheddulleHours($serviceTimeMin = '60'){
+
+        $start = strtotime('00:00'); //9:00
+        $end = strtotime('24:00'); //18:00   
+
+        while ($start < $end) {
+        
+            $hour = $start;         
+
+            $sum = (60*$serviceTimeMin);
+
+            $arrServices[date('H:i',$hour)][] = date('H:i',$hour);
+
+            $start += $sum;
+
+        }
+
+        $arrHourDropdown = [];
+
+        foreach($arrServices as $key => $value){   
+            $arrHourDropdown[strtotime($key)] = $key; 
+        }
+
+        return $arrHourDropdown;
+
+    }
+
+    
+
+    public static function dropdownTeam(){
+
+        $query = new Query;
+        $arrTeam = array();
+
+        $teamArr = $query->select([
+                'guid', 
+                'first_name',     
+                'last_name',  
+            ])
+        ->from('user')    
+        ->where(
+            [
+                'company_code' => Yii::$app->user->identity->company_code,
+                'level' => 'team'
+            ])
+        ->all();
+
+        foreach($teamArr as $value){
+            $arrTeam[$value['guid']] = $value['first_name'].' '.$value['last_name'];
+        }
+
+        return $arrTeam;
+    }
+
+    public static function dropdownServiceCategory(){
+
+        $query = new Query;
+
+        $serviceArr = $query->select([
+            'category_code', 
+            'page_code_title',     
+        ])
+        ->from('services_category')    
+        ->where(['company_code' => Yii::$app->user->identity->company_code])
+        ->all();
+        
+        $arrServiceCat = array();
+        
+        foreach($serviceArr as $value){
+            $arrServiceCat[$value['category_code']] = Yii::t('app',$value['page_code_title']);
+        }
+
+        return $arrServiceCat;
+    }
+
+    public static function dropdownServices(){
+
+        $query = new Query;
+
+        $serviceArr = $query->select([
+            'service_code', 
+            'page_code_title',     
+        ])
+        ->from('services')    
+        ->where(
+            [
+                'company_code' => Yii::$app->user->identity->company_code,
+                'location_code' => Yii::$app->user->identity->location_code
+            ]
+            )
+        ->all();
+        
+        $arrServiceCat = array();
+        
+        foreach($serviceArr as $value){
+            $arrServiceCat[$value['service_code']] = Yii::t('app',$value['page_code_title']);
+        }
+
+        return $arrServiceCat;
+    }
+
+    public static function getTeamArr(){
+
+        $query = new Query;
+
+        $userArr = $query->select([
+                'guid', 
+                'username', 
+                'location_code',
+                'full_name',    
+                'color',       
+            ])
+        ->from('user')    
+        ->where(
+            [
+                'company_code' => Yii::$app->user->identity->company_code,
+                'level' => 'team'
+            ])
+        ->all();
+
+        return $userArr;
+    }
 
 }
 

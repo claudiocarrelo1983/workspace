@@ -6,24 +6,27 @@ use yii\helpers\Url;
 use common\models\GeneratorJson;
 use common\Helpers\Helpers;
 
+$type = Yii::$app->user->identity->level;
 
 $base_url = Helpers::getBaseUrl();
 $model = new GeneratorJson(); 
 
+
 switch($base_url){
     case 'localhost:100':
     case 'specialcalendar.com':
-        $structure = $model->getLastFileUploaded('other','admin-menu-calendar');                   
+        $structure = $model->getLastFileUploaded('other','admin-menu-calendar-'.$type);                   
          break;
   
     case 'localhost':
     case 'myspecialgym.com':
-        $structure = $model->getLastFileUploaded('other','admin-menu');
+        $structure = $model->getLastFileUploaded('other','admin-menu-'.$type);
         break;
     default:
-        $structure = $model->getLastFileUploaded('other','admin-menu');
+        $structure = $model->getLastFileUploaded('other','admin-menu-calendar-admin');
     break;
 }   
+
 
 
 $currentUrl = Yii::$app->controller->route;

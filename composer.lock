@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "beda5809dd9aaec798ed932641efcbdd",
+    "content-hash": "972ded8d4f49420b908106e19d5a4b27",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -3607,6 +3607,54 @@
                 }
             ],
             "time": "2022-08-04T09:53:51+00:00"
+        },
+        {
+            "name": "nickcv/yii2-encrypter",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcv-ln/yii2-encrypter.git",
+                "reference": "eaedea577f10ba605c1408cb9901e591d8034a8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcv-ln/yii2-encrypter/zipball/eaedea577f10ba605c1408cb9901e591d8034a8b",
+                "reference": "eaedea577f10ba605c1408cb9901e591d8034a8b",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "nickcv\\encrypter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Puddu",
+                    "email": "n.puddu@outlook.com"
+                }
+            ],
+            "description": "Openssl Encrypter for Yii2",
+            "keywords": [
+                "Active Record",
+                "Behavior",
+                "encryption",
+                "extension",
+                "openssl",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/nickcv-ln/yii2-encrypter/issues",
+                "source": "https://github.com/nickcv-ln/yii2-encrypter/tree/1.1.0"
+            },
+            "time": "2015-02-04T09:50:53+00:00"
         },
         {
             "name": "nnnick/chartjs",

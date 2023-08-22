@@ -74,6 +74,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             'phpseclib\\' => 10,
         ),
+        'n' => 
+        array (
+            'nickcv\\encrypter\\' => 17,
+        ),
         'm' => 
         array (
             'mhunesi\\formio\\' => 15,
@@ -330,6 +334,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'nickcv\\encrypter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nickcv/yii2-encrypter',
         ),
         'mhunesi\\formio\\' => 
         array (

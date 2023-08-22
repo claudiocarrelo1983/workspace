@@ -7,6 +7,7 @@ use common\models\TrainingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * TrainingController implements the CRUD actions for Training model.

@@ -35,7 +35,7 @@ class m230615_074248_services extends Migration
 
         $this->createTable('{{%services}}', [
             'id' => $this->primaryKey(),
-            'company' => $this->string()->notNull(),  
+            'company_code' => $this->string()->notNull(),  
             'location_code' => $this->string(),        
             'username' => $this->string()->notNull(),
             'category_code' => $this->string()->notNull(),
@@ -51,7 +51,8 @@ class m230615_074248_services extends Migration
             'advanced_money' => $this->boolean(),   
             'percentage' => $this->integer(),    
             'price' => $this->integer(), 
-            'price_range' => $this->integer(),      
+            'price_range' => $this->integer(),   
+            'time' => $this->integer()->notNull(), 
             'order' => $this->integer(),      
             'active' => $this->boolean(),
             'created_date' => $this->timestamp(), 

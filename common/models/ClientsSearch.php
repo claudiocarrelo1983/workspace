@@ -1,6 +1,6 @@
 <?php
 
-namespace common\Models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -40,8 +40,7 @@ class ClientsSearch extends Clients
      */
     public function search($params)
     {
-
-        return $params;
+ 
         $query = Clients::find();
 
         // add conditions that should always apply here
@@ -69,17 +68,15 @@ class ClientsSearch extends Clients
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'name', $this->name])
+            //->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'company', $this->company])
-            ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'level', $this->level])
-            ->andFilterWhere(['like', 'sublevel', $this->sublevel])
+            ->andFilterWhere(['like', 'company_code', $this->company_code])           
             ->andFilterWhere(['like', 'contact_number', $this->contact_number])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token]);
 
+     
         return $dataProvider;
     }
 }

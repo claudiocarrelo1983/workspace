@@ -38,10 +38,10 @@ class ServicesCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'required'],
+            [['company_code', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'required'],
             [['order', 'active'], 'integer'],
             [['created_date'], 'safe'],
-            [['company', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'string', 'max' => 255],
+            [['company_code', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'string', 'max' => 255],
             [['page_code_title'], 'unique'],
         ];
     }
@@ -53,7 +53,7 @@ class ServicesCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'company' => 'Company',
+            'company_code' => 'Company',
             'category_code' => 'Category Code',
             'page_code_title' => 'Page Code Title',
             'title' => 'Title',

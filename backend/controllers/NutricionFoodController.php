@@ -7,6 +7,7 @@ use common\Models\NutricionFoodSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * NutricionFoodController implements the CRUD actions for NutricionFood model.

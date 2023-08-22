@@ -7,6 +7,7 @@ use common\models\RecipesPlanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * RecipesPlanController implements the CRUD actions for RecipesPlan model.

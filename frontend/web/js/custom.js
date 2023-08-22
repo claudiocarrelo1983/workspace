@@ -1,4 +1,14 @@
+
+
 setPricing();
+getTeamByLocation();
+
+function getTeamByLocation(){
+
+    if(jQuery('#location-dropdown-select').val()){   
+        displayTeam('#location-dropdown-select');
+    }
+}
 
 function BlogToogle(id){    
     jQuery("#dropdown-menu" + id).toggle();
@@ -26,16 +36,16 @@ function closeAlert(){
     jQuery('.alert ').hide();
 }
 
-function displayTeam(attr) {   
-    
+function displayTeam(attr) {    
+
     var value = jQuery(attr).val();   
     
     jQuery('table[id^="table-services-"]').hide();
-    jQuery('div[id^="services-choice"]').hide();
+   // jQuery('div[id^="services-choice"]').hide();
 
     jQuery('#choice-all').prop('checked', false); 
-    jQuery("input[name='imgbackground'").prop('checked', false);
-    jQuery('div[id^="services-choice"]').hide();
+    jQuery("input[name='team-choice'").prop('checked', false);
+    //jQuery('div[id^="services-choice"]').hide();
 
     if(value == ''){
         jQuery('div[id^="location-team-"]').hide();
@@ -44,16 +54,28 @@ function displayTeam(attr) {
         jQuery('div[id^="location-teamsomeone"]').show();
         jQuery('div[id^="location-team-"]').hide();
         jQuery('div[id^=location-team-' + value).show();  
-    }
-    
+    }      
+
+    jQuery('div[id^="display-choice-all-"]').hide();
+    jQuery('#display-choice-all-'+ value).show(); 
+
+    jQuery('div[id^="services-choice-all-"]').hide();
+    jQuery('div[id^="services-"]').hide();
                         
 }  
 
-function displayServices(attr) {        
+function displayServices(attr) {  
+ 
     jQuery('table[id^="table-services-"]').hide();
     jQuery('div[id^="mobile-hours-"]').hide();
+
+    jQuery('div[id^="sheddule-choice-"]').hide();
+    jQuery('#sheddule-' + attr.id).show();  
+     
     jQuery('div[id^="services-choice"]').hide();
-    jQuery('#services-' + attr.id).show();                           
+    jQuery('#services-' + attr.id).show();  
+    jQuery('#services-choice-all-'+ attr.id).show();  
+     
 }  
 
 function goToThisPage(attr){
@@ -119,6 +141,7 @@ function checkRadioButtonServices(attr){
 
    
     var username = jQuery(attr).data('username');
+    var location  = jQuery(attr).data('location');
     var service  = jQuery(attr).data('service-code');
     var today  = jQuery(attr).data('today');
     
@@ -126,8 +149,14 @@ function checkRadioButtonServices(attr){
     jQuery('div[id^="mobile-hours-'+ service + '-' + username + '-' + today +'"]').show();
 
     
-    jQuery('table[id^="table-services-"]').hide();
-    jQuery('table[id^="table-services-'+ service + '-' + username + '"]').show();
+    //jQuery('table[id^="table-services"]').hide();
+    //jQuery('table[id^="table-services-'+ service + '-' + username + '"]').show();
+
+    //<?= $locationT['location_code'] ?>-<?= $serviceT['service_code'] ?>-<?= $valueT['username_code'] ?>
+    jQuery('table[id^="table-services"]').show();     
+    jQuery('td[id^="column-"]').hide();
+    jQuery('td[id^="column-'+ location + '-'+ service + '-'+ username + '"]').show();
 
 }
+
 

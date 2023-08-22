@@ -18,7 +18,7 @@ class ServicesCategorySearch extends ServicesCategory
     {
         return [
             [['id', 'order', 'active'], 'integer'],
-            [['company', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en', 'created_date'], 'safe'],
+            [['company_code', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class ServicesCategorySearch extends ServicesCategory
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'company', $this->company])
+        $query->andFilterWhere(['like', 'company_code', $this->company_code])
             ->andFilterWhere(['like', 'category_code', $this->category_code])
             ->andFilterWhere(['like', 'page_code_title', $this->page_code_title])
             ->andFilterWhere(['like', 'title', $this->title])

@@ -7,6 +7,7 @@ use common\models\ConfigurationsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ConfigurationsController implements the CRUD actions for Configurations model.

@@ -41,8 +41,8 @@ $path2 = 'sign_up'
                             </h2>                      
                             <div class="form-group col-lg-2"> 
                                 <?= $form->field($modelSignupForm, 'title')->dropdownList(
-                                    Helpers::titleDropdownArr(),
-                                    ['prompt'=>'Select Title', 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                    Helpers::dropdownTitle(),
+                                    ['prompt'=>'Select Title', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
                             <div class="form-grou col-lg-5">                              
@@ -53,13 +53,24 @@ $path2 = 'sign_up'
                             </div>                             
                         </div>                   
                         <div class="row pt-5">  
-                            <div class="form-group col">          
-                                <?= $form->field($modelSignupForm, 'role')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_role").':') ?>                             
+                            <div class="form-group col-lg-2"> 
+                                <?= $form->field($modelSignupForm, 'gender')->dropdownList(
+                                    Helpers::dropdownGender(),
+                                    ['prompt'=>'Select Gender', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                ?>                              
+                            </div>
+                            <div class="form-group col-lg-5">          
+                                <?= $form->field($modelSignupForm, 'job_title')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_role").':') ?>                             
                             </div>  
-                            <div class="form-group col">          
+                            <div class="form-group col-lg-5">          
                                 <?= $form->field($modelSignupForm, 'company')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_company").':') ?>                             
                             </div>                       
-                        </div>                   
+                        </div> 
+                        <div class="row pt-5">  
+                            <div class="form-group col-lg-6">          
+                                <?= $form->field($modelSignupForm, 'nif')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_nif").':') ?>                             
+                            </div>                                          
+                        </div>                  
                         <div class="row pt-5">  
                             <div class="form-group col">          
                                 <?= $form->field($modelSignupForm, 'contact_number')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_contact_number").':') ?>                             
@@ -102,7 +113,10 @@ $path2 = 'sign_up'
                                     Helpers::currencyDropdownArr(),
                                     ['class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_coin").':'); 
                                 ?> 
-                            </div>                                                      
+                            </div>  
+                            <div class="form-group col-lg-4">                        
+                                <?= $form->field($modelSignupForm, 'voucher_parent')->textInput(['class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_voucher").':') ?>
+                            </div>                                                    
                         </div>                     
                         <div class="row">
                             <h2 class="font-weight-bold text-3 mb-0 pt-5">

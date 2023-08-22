@@ -7,6 +7,7 @@ use common\Models\EventsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * EventsController implements the CRUD actions for Events model.

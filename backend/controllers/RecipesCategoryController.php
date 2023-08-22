@@ -7,6 +7,7 @@ use common\models\RecipesCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * RecipesCategoryController implements the CRUD actions for RecipesCategory model.

@@ -67,6 +67,15 @@ $rows = count($notifications);
         <span key="t-profile">FAQ's</span>
     </a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+    <?=
+            Html::beginForm(        
+                str_replace('/frontend/web', '',Url::toRoute('site/logout')), 
+                'post', ['class' => 'form-inline'])
+                . Html::submitButton(
+                '<i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> '.Yii::t('app', 'login_logout'),
+                ['class' => 'dropdown-item text-danger']
+            )
+            . Html::endForm()
+    ?>  
     
 </div>

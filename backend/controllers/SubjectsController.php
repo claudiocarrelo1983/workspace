@@ -7,6 +7,7 @@ use common\models\SubjectsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * SubjectsController implements the CRUD actions for Subjects model.

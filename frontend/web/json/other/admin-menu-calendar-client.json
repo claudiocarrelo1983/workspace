@@ -1,0 +1,72 @@
+{
+ 
+    "left-menu":[
+       {
+          "key":"t-dashboard",
+          "title":"menu_admin_dashboard",
+          "url":"admin/dashboard",
+          "icon":"bx bx-home-circle",         
+          "submenu":[
+             
+          ]
+       },
+  
+       {
+         "key":"t-clients",
+         "title":"menu_admin_clients",
+         "url":"null",
+         "icon":"dripicons-user-group",
+         "childs" : ["admin/clients", "admin/new-client"],
+         "submenu":[
+            {
+               "key":"t-clients-list",
+               "title":"menu_admin_clients_list",
+               "url":"clients/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {
+              "key":"t-new-client",
+              "title":"menu_admin_clients_add_client",
+              "url":"clients/create",
+              "submenu":[
+                 
+              ]
+           }
+         ]
+      },         
+      {
+         "key":"t-settings",
+         "title":"menu_admin_settings",
+         "url":"null",
+         "icon":"bx bx-cog",
+         "submenu":[
+            {
+               "key":"t-team",
+               "title":"menu_admin_settings_profile",
+               "url":"admin/profile",
+               "submenu":[
+                  
+               ]
+            },   
+            {
+               "key":"t-company",
+               "title":"menu_admin_settings_notifications",
+               "url":"admin/notifications",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-team",
+               "title":"menu_admin_settings_webpage",
+               "url":"admin/webadmin",
+               "submenu":[
+                  
+               ]
+            }              
+         ]
+      }
+    ]
+ }

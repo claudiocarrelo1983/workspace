@@ -71,7 +71,7 @@ class UserSearch extends User
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'name', $this->name])
+            //->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'company', $this->company])
             ->andFilterWhere(['like', 'level', $this->level])
             ->andFilterWhere(['like', 'sublevel', $this->sublevel])

@@ -12,7 +12,7 @@ $servicesCatArr = $query->select([
         'title'   
     ])
 ->from('services_category')    
-->where(['company' => Yii::$app->user->identity->company_code])
+->where(['company_code' => Yii::$app->user->identity->company_code])
 ->orderBy(['order' => SORT_DESC])
 ->all();
 

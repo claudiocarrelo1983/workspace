@@ -21,7 +21,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
     public $generate;
   
 
-    public  function generatejson()
+    public static function generatejson()
     {    
         $tables = Helpers::getAllTables();        
 
@@ -29,7 +29,6 @@ class GeneratorJson extends \yii\db\ActiveRecord
             if(isset($table['TABLE_NAME'])){
 
                 $method = Helpers::methodTitle($table['TABLE_NAME']);
-
                 $columns = Helpers::getTableColumns($table['TABLE_NAME']);
 
                 switch ($table['TABLE_NAME']){
@@ -38,7 +37,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'pricing_specs':
                     //case 'translations':
                     case 'blogs':
-                    case 'blogs_category':
+                   case 'blogs_category':
                     case 'configurations':
                     case 'company':
                     case 'faqs':
@@ -47,24 +46,27 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'recipes':     
                     case 'recipes_category': 
                     case 'comments':       
-                    case 'team':                              
-                        if(method_exists(__CLASS__, $method)){
+                    case 'team':       
+                    case 'translations':        
+
+                        if(method_exists(__CLASS__, $method)){                        
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
-                            GeneratorJson::updateTablesGeneric($table['TABLE_NAME'],  $columns);  
+                            GeneratorJson::updateTablesGeneric($table['TABLE_NAME']);  
                         }   
-
-                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME'],  $columns); 
-
-                    break;
+                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME']); 
+                    break;                 
+              
                 }             
             }           
         }
     } 
 
-    public static function updateTablesGeneric($table,  $columns){
+    public static function updateTablesGeneric($table){
 
         $query = new Query; 
+        
+        $columns = Helpers::getTableColumns($table);
 
         $tableArr = $query->select(
             $columns
@@ -73,7 +75,26 @@ class GeneratorJson extends \yii\db\ActiveRecord
         ->all();    
 
         GeneratorJson::saveJson($tableArr, $table);
-    }      
+    }    
+    
+    public static function updateSingleTableGeneric($table){
+
+        $query = new Query; 
+        
+        $columns = Helpers::getTableColumns($table);
+
+        $tableArr = $query->select(
+            $columns
+        )
+        ->from([$table])      
+        ->all();    
+
+
+        $model = new GeneratorJson; 
+        $translations = $model->getLastFileUploaded('translations');  
+        
+        GeneratorJson::saveJson($tableArr, $table);
+    }  
 
     public static function saveJson($tableArr, $table){       
      
@@ -85,7 +106,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
             GeneratorJson::deleteOldJson($table); 
         }
 
-        $fileName = $table.'_'.date('YmdHis');       
+        $fileName = $table.'_'.date('YmdHis');     
 
         file_put_contents($directory.$fileName.'.json', json_encode($tableArr));  
 
@@ -105,7 +126,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
         }       
     }
 
-    public static function updateTranslationsGeneric($table,  $columns){
+    public static function updateTranslationsGeneric($table){
        
         $query = new Query;       
 
@@ -113,21 +134,51 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
         $class = "common\models\\".ucfirst($name);  
 
-        $valuesArr = $query->select('*')
+        $tableArr = $query->select('*')
             ->from([$table])      
             ->all();
        
         $model = new $class();
 
-        foreach($valuesArr as $blog){
-            foreach ($blog as $key => $value) {
-                $model->$key = $blog[$key];      
+        foreach($tableArr as $valuesArr){   
+
+            foreach ($valuesArr as $key => $value) {
+                $model->$key = $valuesArr[$key];      
             }    
 
             $method = 'update'.ucfirst($name);            
       
             $class::$method($table.'_text', $model);
-        }    
+        }   
+        
+    }
+
+    
+    public static function updateSingleTranslationsGeneric($table){
+       
+        $query = new Query;       
+
+        $name = Helpers::methodTitleSimple($table);
+
+        $class = "common\models\\".ucfirst($name);  
+
+        $tableArr = $query->select('*')
+            ->from([$table])      
+            ->all();
+       
+        $model = new $class();
+
+        foreach($tableArr as $valuesArr){   
+
+            foreach ($valuesArr as $key => $value) {
+                $model->$key = $valuesArr[$key];      
+            }    
+
+            $method = 'update'.ucfirst($name);            
+      
+            $class::$method($table.'_text', $model);
+        }   
+        
     }
 
 
@@ -193,7 +244,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
             ->from(['t' => 'translations'])
             ->innerJoin(['c' => 'countries'], 'c.country_code = t.country_code')
             ->all();
-
+              
         GeneratorJson::saveJson($blogArr, $table);
     }
 

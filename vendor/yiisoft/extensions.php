@@ -338,4 +338,13 @@ return array (
       '@simialbi/yii2/date' => $vendorDir . '/simialbi/yii2-widget-datetimepicker/src',
     ),
   ),
+  'nickcv/yii2-encrypter' => 
+  array (
+    'name' => 'nickcv/yii2-encrypter',
+    'version' => '1.1.0.0',
+    'alias' => 
+    array (
+      '@nickcv/encrypter' => $vendorDir . '/nickcv/yii2-encrypter',
+    ),
+  ),
 );

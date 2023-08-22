@@ -36,6 +36,41 @@ class Team extends \yii\db\ActiveRecord
 {
 
     public $imageFile;
+    public $monday_open_checkbox;
+    public $monday_starting_hour;
+    public $monday_end_hour;
+    public $monday_starting_break;
+    public $monday_end_break;
+    public $tuesday_open_checkbox;
+    public $tuesday_starting_hour;
+    public $tuesday_end_hour;
+    public $tuesday_starting_break;
+    public $tuesday_end_break;
+    public $wednesday_open_checkbox;
+    public $wednesday_starting_hour;
+    public $wednesday_end_hour;
+    public $wednesday_starting_break;
+    public $wednesday_end_break;
+    public $thursday_open_checkbox;
+    public $thursday_starting_hour;
+    public $thursday_end_hour;
+    public $thursday_starting_break;
+    public $thursday_end_break;
+    public $friday_open_checkbox;
+    public $friday_starting_hour;
+    public $friday_end_hour;
+    public $friday_starting_break;
+    public $friday_end_break;
+    public $saturday_open_checkbox;
+    public $saturday_starting_hour;
+    public $saturday_end_hour;
+    public $saturday_starting_break;
+    public $saturday_end_break;
+    public $sunday_open_checkbox;
+    public $sunday_starting_hour;
+    public $sunday_end_hour;
+    public $sunday_starting_break;
+    public $sunday_end_break;
     
     /**
      * {@inheritdoc}
@@ -51,12 +86,24 @@ class Team extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_code_title','page_code_text', 'username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt','title_en', 'text_en'], 'required'],
+            [['company_code', 'username', 'page_code_title', 'page_code_text', 'title', 'first_name', 'surname', 'location', 'job_title'], 'required'],
+            [['text', 'text_pt', 'text_en','time_window'], 'string'],
+            [['order', 'active'], 'integer'],
+            [['created_date'], 'safe'],
+            [['company_code', 'username', 'username_code', 'page_code_title', 'page_code_text', 'title', 'first_name', 'surname', 'contact_number', 'email', 'path', 'image', 'location', 'job_title', 'title_pt', 'title_en', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'color'], 'string', 'max' => 255],
+            [['username','username_code'], 'unique'],
+            [['page_code_title'], 'unique'],
+            [['page_code_text'], 'unique'],
+        ];
+        /*
+        return [
+            [['page_code_title','page_code_text', 'username', 'first_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt','title_en', 'text_en'], 'required'],
             [['active'], 'integer'],
             [['created_date'], 'safe'],
-            [['username', 'full_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt', 'title_en', 'text_en', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'contact_number'], 'string'],
+            [['username', 'first_name', 'image', 'location', 'title', 'text', 'title_pt', 'text_pt', 'title_en', 'text_en', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'contact_number'], 'string'],
             [['username'], 'unique'],
         ];
+        */
     }
 
     /**
@@ -133,7 +180,6 @@ class Team extends \yii\db\ActiveRecord
 
     public static function updateTeam($page, $model)
     {
-
         $connection = new Query;
 
         $countries = $connection->select([
@@ -144,8 +190,7 @@ class Team extends \yii\db\ActiveRecord
 
         foreach ($countries as $val) {
 
-            $title = 'title_' . $val['country_code'];
-            $subtitle = 'subtitle_' . $val['country_code'];
+            $title = 'title_' . $val['country_code'];          
             $text = 'text_' . $val['country_code'];
 
             $connection->createCommand()->delete(
@@ -178,8 +223,7 @@ class Team extends \yii\db\ActiveRecord
                 'page_code' => $model->page_code_text,
                 'text' => $model->$text,
                 'active' => 1,
-            ])->execute();
-
+            ])->execute();       
 
         }
     }

@@ -1,0 +1,219 @@
+{
+ 
+    "left-menu":[
+       {
+          "key":"t-dashboard",
+          "title":"menu_admin_dashboard",
+          "url":"admin/dashboard",
+          "icon":"bx bx-home-circle",         
+          "submenu":[
+             
+          ]
+       },
+       {
+          "key":"t-clients",
+          "title":"menu_admin_sheddule",
+          "url":"null",
+          "icon":"dripicons-clock",
+          "childs" : ["admin/clients"],
+          "submenu":[
+             {
+                "key":"t-sheddule-list",
+                "title":"menu_admin_sheddule_list",
+                "url":"sheddule/index",
+                "submenu":[                    
+                   
+                ]
+             },
+             {
+               "key":"t-sheddule-list",
+               "title":"menu_admin_sheddule_create",
+               "url":"sheddule/create",
+               "submenu":[                    
+                  
+               ]
+            }            
+          ]
+       },  
+       {
+         "key":"t-clients",
+         "title":"menu_admin_clients",
+         "url":"null",
+         "icon":"dripicons-user-group",
+         "childs" : ["admin/clients", "admin/new-client"],
+         "submenu":[
+            {
+               "key":"t-clients-list",
+               "title":"menu_admin_clients_list",
+               "url":"clients/index",
+               "submenu":[                    
+                  
+               ]
+            },
+            {
+              "key":"t-new-client",
+              "title":"menu_admin_clients_add_client",
+              "url":"clients/create",
+              "submenu":[
+                 
+              ]
+           }
+         ]
+      },    
+   
+
+       {
+         "key":"t-organizer",
+         "title":"menu_admin_events",
+         "url":"null",
+         "icon":"bx bx bx-calendar",
+         "open" : "true",
+         "childs" : ["admin/goals", "admin/todolist","admin/calendar"],
+         "submenu":[       
+            {
+              "key":"t-schedule",
+              "title":"menu_admin_agenda_calendar",
+              "url":"admin/calendar",
+              "icon":"bx bx-world",
+              "submenu":[
+           
+              ]
+           }
+          
+         ]
+      },  
+   
+      
+       {
+         "key":"t-messages",
+         "title":"menu_admin_messages",
+         "url":"admin/notifications-list",
+         "icon":"bx bx-message",
+         "submenu":[
+      
+         ]
+      },   
+      {
+         "key":"t-services",
+         "title":"menu_admin_services",
+         "url":"null",
+         "icon":"bx dripicons-blog",
+         "submenu":[
+            {
+               "key":"t-services",
+               "title":"menu_admin_services_details",
+               "url":"services/index",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-todo-list",
+               "title":"menu_admin_services_category",
+               "url":"services-category/index",
+               "submenu":[
+                  
+               ]
+            }       
+         ]
+      },   
+      {
+         "key":"t-webadmin",
+         "title":"menu_admin_company",
+         "url":"null",
+         "icon":"bx dripicons-web",
+         "submenu":[
+            {
+               "key":"t-company-details",
+               "title":"menu_admin_company_details",
+               "url":"company/index",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-team",
+               "title":"menu_admin_company_team",
+               "url":"team/index",
+               "submenu":[
+                  
+               ]
+            },            
+            {
+               "key":"t-company-locations",
+               "title":"menu_admin_company_locations",
+               "url":"company-locations/index",
+               "submenu":[
+                  
+               ]
+            }
+           
+         ]
+      },
+      {
+         "key":"t-webadmin",
+         "title":"menu_admin_campaign",
+         "url":"null",
+         "icon":"bx dripicons-rocket",
+         "submenu":[
+            {
+               "key":"t-company",
+               "title":"menu_admin_campaign_details",
+               "url":"company/index",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-webpage",
+               "title":"Webpage",
+               "url":"admin/webadmin",
+               "submenu":[
+                  
+               ]
+            },            
+          
+            {
+               "key":"t-social",
+               "title":"menu_admin_campaign_social",
+               "url":"social/index",
+               "submenu":[
+                  
+               ]
+            }             
+         ]
+      },
+      {
+         "key":"t-settings",
+         "title":"menu_admin_settings",
+         "url":"null",
+         "icon":"bx bx-cog",
+         "submenu":[
+            {
+               "key":"t-team",
+               "title":"menu_admin_settings_profile",
+               "url":"profile/index",
+               "submenu":[
+                  
+               ]
+            },   
+            {
+               "key":"t-company",
+               "title":"menu_admin_settings_notifications",
+               "url":"notifications/index",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-team",
+               "title":"menu_admin_settings_webpage",
+               "url":"admin/webadmin",
+               "submenu":[
+                  
+               ]
+            }              
+         ]
+      }
+    ]
+ }

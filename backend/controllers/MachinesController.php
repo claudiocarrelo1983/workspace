@@ -7,6 +7,7 @@ use common\models\MachinesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * MachinesController implements the CRUD actions for Machines model.

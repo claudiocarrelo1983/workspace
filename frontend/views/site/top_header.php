@@ -8,7 +8,7 @@ use yii\helpers\Url;
 <nav class="header-nav-top">							         
 	<?php
  
-	    if (!Yii::$app->user->isGuest) { ?>                                
+	    if (!Yii::$app->user->isGuest && Yii::$app->user->identity->first_name == 'admin') { ?>                                
 		<span class="white-text  text-center">
 			<div class="d-block d-lg-none">
 				<i class="fas fa-user ms-1"> </i>
@@ -60,10 +60,10 @@ use yii\helpers\Url;
 
 
 	<?php } else { ?>
-
+	
 		<span class="m-2">|</span>   
 		<?= Html::a(
-		    	Yii::t('app', 'login'),
+		    	Yii::t('app', 'Login'),
 		    	Url::toRoute('site/login'),
 		    	[
 		    		'class' => 'white-text',
@@ -75,7 +75,7 @@ use yii\helpers\Url;
 		<span class="m-2">|</span>   
 		<?= Html::a(
 		    	Yii::t('app', 'register'),
-		    	Url::toRoute('site/signup'),
+		    	Url::toRoute('site/signup-client'),
 		    	[
 		    		'class' => 'white-text',
 		    		'data-hash' => '',

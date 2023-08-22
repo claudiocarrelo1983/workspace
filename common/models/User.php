@@ -29,7 +29,49 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    public $password;
 
+    public $surname;
+
+    public $text;
+
+    public $imageFile;
+    public $monday_open_checkbox;
+    public $monday_starting_hour;
+    public $monday_end_hour;
+    public $monday_starting_break;
+    public $monday_end_break;
+    public $tuesday_open_checkbox;
+    public $tuesday_starting_hour;
+    public $tuesday_end_hour;
+    public $tuesday_starting_break;
+    public $tuesday_end_break;
+    public $wednesday_open_checkbox;
+    public $wednesday_starting_hour;
+    public $wednesday_end_hour;
+    public $wednesday_starting_break;
+    public $wednesday_end_break;
+    public $thursday_open_checkbox;
+    public $thursday_starting_hour;
+    public $thursday_end_hour;
+    public $thursday_starting_break;
+    public $thursday_end_break;
+    public $friday_open_checkbox;
+    public $friday_starting_hour;
+    public $friday_end_hour;
+    public $friday_starting_break;
+    public $friday_end_break;
+    public $saturday_open_checkbox;
+    public $saturday_starting_hour;
+    public $saturday_end_hour;
+    public $saturday_starting_break;
+    public $saturday_end_break;
+    public $sunday_open_checkbox;
+    public $sunday_starting_hour;
+    public $sunday_end_hour;
+    public $sunday_starting_break;
+    public $sunday_end_break;
+    
     /**
      * {@inheritdoc}
      */
@@ -56,6 +98,18 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['surname','text'],'string'],
+            [
+                ['sheddule_array',
+                    'monday_starting_hour','monday_end_hour','monday_starting_break','monday_end_break','monday_open_checkbox',
+                    'tuesday_starting_hour','tuesday_end_hour','tuesday_starting_break','tuesday_end_break','tuesday_open_checkbox',
+                    'wednesday_starting_hour','wednesday_end_hour','wednesday_starting_break','wednesday_end_break','wednesday_open_checkbox',
+                    'thursday_starting_hour','thursday_end_hour','thursday_starting_break','thursday_end_break','thursday_open_checkbox',
+                    'friday_starting_hour','friday_end_hour','friday_starting_break','friday_end_break','friday_open_checkbox',
+                    'saturday_starting_hour','saturday_end_hour','saturday_starting_break','saturday_end_break','saturday_open_checkbox',
+                    'sunday_starting_hour','sunday_end_hour','sunday_starting_break','sunday_end_break','sunday_open_checkbox'
+                ], 
+            'string'],
         ];
     }
 
@@ -209,5 +263,26 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function defaultSheddulle($model)
+    {
+
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        foreach($weekDays as $dayWeek){
+
+            $sh = $dayWeek.'_starting_hour';
+            $eh = $dayWeek.'_end_hour';
+            $bs = $dayWeek.'_starting_break';
+            $be = $dayWeek.'_end_break';                
+
+            $model->$sh = strtotime('9:00');
+            $model->$eh = strtotime('18:00');
+            $model->$bs = strtotime('12:00');
+            $model->$be = strtotime('13:00');          
+   
+        }
+
     }
 }

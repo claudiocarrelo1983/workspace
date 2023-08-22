@@ -644,9 +644,6 @@ class SiteController extends Controller
             }	
         }
 
-  
-  
-
 
         return $this->render('blogs/blog',
         [            
@@ -835,13 +832,15 @@ class SiteController extends Controller
         ]);
     }
 
+
     /**
      * Logs in a user.
      *
      * @return mixed
      */
-    public function actionLogin()
+    public function actionClientLogin()
     {
+
         if (!Yii::$app->user->isGuest) {
             return $this->render('home/index');
         }      
@@ -850,9 +849,67 @@ class SiteController extends Controller
  
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
+     
             return $this->render('home/index', [
                 'model' => $model,
             ]);
+        }
+
+      
+        $model->password = '';
+        $this->layout = 'public';
+
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        $user = User::findOne(['username' => $model->username]);
+
+        if (Yii::$app->user->isGuest && $maintenance == true && $user->level !== 'admin') {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('login/login_maintenance', [
+                'model' => $model,
+            ]);
+        }
+
+
+     
+        return $this->render('../site/login/login_client', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Logs in a user.
+     *
+     * @return mixed
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->first_name == 'admin') {
+            return $this->render('home/index');
+        }      
+
+        $model = new LoginForm();
+ 
+        if ($model->load(Yii::$app->request->post())) {           
+          
+            $userModel =  new User();
+            //Yii::$app->security->decryptByKey(utf8_decode($encrypted), $key);
+            
+            $userResult = $userModel::find('id')->orderBy("id desc")->where(['username' => $model->username, 'active' => 1])->limit(1)->one();
+
+          
+            if($model->login()){
+           
+                return $this->redirect(['/admin/dashboard']);             
+            }
+           
+                
         }
 
       
@@ -881,14 +938,81 @@ class SiteController extends Controller
         ]);
     }
 
+
     /**
      * Signs user up.
      *
      * @return mixed
      */
 
-    public function actionSignup()
+     public function actionSignupReseller()
+     {        
+       
+         $model = new SignupForm(); 
+         
+         $modelGeneratorjson = new GeneratorJson(); 
+         $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+ 
+         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+ 
+         $connection = new Query;
+ 
+         $request = Yii::$app->request;
+ 
+         $level = $connection->select([
+             'level' 
+             ])
+         ->from('user')   
+         ->where(['username' => $request->post('username')]) 
+         ->one();
+    
+ 
+         if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
+ 
+             $this->layout = 'maintenance';
+ 
+             return $this->render('home/maintenance');
+         }
+ 
+         $submitEmail = '';
+ 
+         $model->guid = Helpers::GUID();
+       
+         if ($model->load(Yii::$app->request->post())) {           
+      
+            if($model->validate()){
+
+                 $model->signUpReseller($model);         
+             
+                 $submitEmail = 'success';
+ 
+                 $modelLogin = new LoginForm();
+ 
+                 return $this->render('login/login', [
+                     'model' => $modelLogin,
+                     'submitEmail' => $submitEmail
+                 ]);
+ 
+           }         
+         }
+ 
+         //$this->layout = 'publicDark';
+ 
+         return $this->render('login/signup-resseller', [
+             'modelSignupForm' => $model,
+             'submitEmail' => $submitEmail,
+         ]);
+     }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+
+    public function actionSignupClient()
     {
+       
         $model = new SignupForm();
 
         
@@ -908,7 +1032,7 @@ class SiteController extends Controller
         ->where(['username' => $request->post('username')]) 
         ->one();
    
-
+   
         if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
 
             $this->layout = 'maintenance';
@@ -920,20 +1044,28 @@ class SiteController extends Controller
 
         $model->guid = Helpers::GUID();
       
-        if ($model->load(Yii::$app->request->post())) {             
+      
+        if ($model->load(Yii::$app->request->post())) {     
 
-            $model->signup();         
-           
-            $submitEmail = 'success';
+        
 
-            $modelLogin = new LoginForm();
+            $model->voucher = 'null';
 
-            return $this->render('login/login', [
-                'model' => $modelLogin,
-                'submitEmail' => $submitEmail
-            ]);
+            if($model->validate()){
+
+                    $model->signup();         
+                
+                    $submitEmail = 'success';
+
+                    $modelLogin = new LoginForm();
+
+                    return $this->redirect( [
+                        'site/login'
+                    ]);
+
+            }         
         }
-
+     
         //$this->layout = 'publicDark';
 
         return $this->render('login/signup', [

@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Team;
-use frontend\Models\TeamSearch;
+use common\models\User;
+use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\Helpers\Helpers;
+use common\models\GeneratorJson;
 use Yii;
 
 /**
@@ -46,9 +46,24 @@ class TeamController extends Controller
         
         $this->layout = 'adminLayout';  
 
-        $searchModel = new TeamSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new UserSearch();
+   
+        $dataProvider = $searchModel->search([
+            $searchModel->formName()=>
+            [
+                'company_code'=> Yii::$app->user->identity->company_code,
+                'active'=> 1,
+                'status'=> 10,
+                'level' => 'team'
+                //'type'=> 'trial',
+            ]
+        ]);
 
+        /*
+        
+        echo Yii::$app->user->identity->company_code;
+        die();
+        */
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -85,29 +100,39 @@ class TeamController extends Controller
             return $this->goHome();
         }       
 
-        $model = new Team();
+        $model = new User();
 
         $this->layout = 'adminLayout';  
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
 
+
                 $title = 'team_title_1'; 
                 $text = 'team_text_1'; 
+                $username = 'username_1';
 
                 $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
         
                 if(!empty($count->id)){
                  $title = 'team_title_'.bcadd($count->id, 1);  
-                 $text = 'team_text_'.bcadd($count->id, 1);             
+                 $text = 'team_text_'.bcadd($count->id, 1);  
+                 $username = 'username_'.bcadd($count->id, 1);           
                 }                
     
                 $model->company_code = Yii::$app->user->identity->company_code;         
                 $model->page_code_title = $title;
                 $model->page_code_text = $text;
-
+                $model->username_code = $username;
+                
+              
 
                 if($model->save()){
+                    $model->updateTeam('team', $model);
+                    GeneratorJson::updateTablesGeneric('translations');  
+                    GeneratorJson::updateTranslationsGeneric('translations');  
                     return $this->redirect(['view', 'id' => $model->id]);
                 }               
             }
@@ -115,8 +140,12 @@ class TeamController extends Controller
             $model->loadDefaultValues();
         }
 
+        $serviceTimeMin = (empty($model->time_window) ? '60' : $model->time_window);
+
         return $this->render('create', [
             'model' => $model,
+            'weekDays' => $weekDays,
+            'serviceTimeMin' => $serviceTimeMin
         ]);
     }
 
@@ -137,12 +166,70 @@ class TeamController extends Controller
         
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        $model->defaultSheddulle($model);
+
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        $arrShedulle = (empty($model->sheddule_array) ? [] : json_decode($model->sheddule_array));
+
+        foreach($arrShedulle as $dayWeek => $arrValues){
+
+            $sh = $dayWeek.'_starting_hour';
+            $eh = $dayWeek.'_end_hour';
+            $bs = $dayWeek.'_starting_break';
+            $be = $dayWeek.'_end_break';
+            $oc = $dayWeek.'_open_checkbox';          
+
+            $model->$sh = strtotime($arrValues->start);
+            $model->$eh = strtotime($arrValues->end);
+            $model->$bs = strtotime($arrValues->break_start);
+            $model->$be = strtotime($arrValues->break_end);
+            $model->$oc = ($arrValues->closed == 'false') ? '1' : '0';
+   
         }
+
+        if ($this->request->isPost && $model->load($this->request->post())) {  
+                        
+            $arrWeek = [];
+        
+            $str = '';
+
+            foreach($weekDays as $value){
+
+                $sh = $value.'_starting_hour';
+                $eh = $value.'_end_hour';
+                $bs = $value.'_starting_break';
+                $be = $value.'_end_break';
+                $oc = $value.'_open_checkbox';
+           
+                $arrWeek[$value] = [
+                    'start' => (empty($model->$sh) ? '' : date('H:i', $model->$sh)),
+                    'end' => (empty($model->$eh) ? '' : date('H:i', $model->$eh)),
+                    'break_start' => (empty($model->$bs) ? '' : date('H:i', $model->$bs)),
+                    'break_end' => (empty($model->$be) ? '' : date('H:i', $model->$be)), 
+                    'closed' => ($model->$oc == '0') ? 'true' : 'false',                      
+                ];               
+            }
+
+            $model->sheddule_array = json_encode($arrWeek);
+     
+            if($model->save()){
+                //$model->updateTeam('team', $model);
+                GeneratorJson::updateTablesGeneric('translations');  
+                GeneratorJson::updateTranslationsGeneric('translations'); 
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+ 
+        }
+   
+        $serviceTimeMin = (empty($model->time_window) ? '60' : $model->time_window);
+
 
         return $this->render('update', [
             'model' => $model,
+            'weekDays' => $weekDays,
+            'serviceTimeMin' => $serviceTimeMin
         ]);
     }
 
@@ -173,10 +260,11 @@ class TeamController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Team::findOne(['id' => $id])) !== null) {
+        if (($model = User::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

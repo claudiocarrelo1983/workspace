@@ -2,11 +2,12 @@
 
 jQuery(function(){
     jQuery(document).on('click','.language',function(data) {
+      var url = jQuery(this).data('url');
 		  var language = jQuery(this).attr('id');
       var csrfToken = jQuery(this).data('csrf');    
 
         jQuery.ajax({
-               url: "http://localhost/index.php/site/language",
+               url: url + "/index.php/site/language",
                type: "post",            
                data: {lang: language, _csrf : csrfToken},
                success: function (response) {
@@ -27,11 +28,12 @@ jQuery(function(){
 
 jQuery(function(){
   jQuery(document).on('click','.language-admin',function(data) {
+    var url = jQuery(this).data('url');
     var language = jQuery(this).attr('id');
     var csrfToken = jQuery(this).data('csrf');  
 
       jQuery.ajax({
-             url: "http://localhost/index.php/admin/language",
+             url: url + "/index.php/admin/language",
              type: "post",            
              data: {lang: language, _csrf : csrfToken},
              success: function (response) {
@@ -48,8 +50,8 @@ jQuery(function(){
 
 });
 
-
 /*
+
 	$(document).on('click','.language',function(){        
 		var lang = $(this).attr('id');
 

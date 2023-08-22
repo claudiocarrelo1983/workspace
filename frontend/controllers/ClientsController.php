@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Clients;
-use frontend\Models\ClientsSearch;
+use common\models\User;
+use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,14 +43,79 @@ class ClientsController extends Controller
             return $this->goHome();
         }
 
+        if (Yii::$app->user->identity->level != 'admin') {
+            return $this->goHome();
+        }  
+
         $this->layout = 'adminLayout';  
+
+        $searchModel = new UserSearch();
+
+        $arrFilter = [
+            'company_code'=> Yii::$app->user->identity->company_code,
+            //'active'=> 1,
+            'status'=> 10,
+            'level' => 'client'
+            //'type'=> 'trial',
+        ];
+
+        if(isset($this->request->queryParams['UserSearch'])){
+            $arrFilter = array_merge($arrFilter, $this->request->queryParams['UserSearch']);
         
-        $searchModel = new ClientsSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }else{
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }
+     
+
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+     
+        // ->andFilterWhere(['like', 'type', $this->type])
+     
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' =>  $dataProvider,
+        ]);
+    }
+
+     /**
+     * Lists all Clients models.
+     *
+     * @return string
+     */
+    public function actionRessellerIndex()
+    {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }     
+
+        $this->layout = 'adminLayout';  
+
+        $searchModel = new UserSearch();
+        
+        $dataProvider = $searchModel->search([
+            $searchModel->formName()=>
+            [
+                'company_code'=> Yii::$app->user->identity->company_code,
+                'voucher_parent'=> Yii::$app->user->identity->voucher,
+                'active'=> 1,
+                'status'=> 10,
+                'level' => 'client'
+                //'type'=> 'trial',
+            ]
+        ]);
+     
+        // ->andFilterWhere(['like', 'type', $this->type])
+     
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' =>  $dataProvider,
         ]);
     }
 
@@ -85,9 +150,14 @@ class ClientsController extends Controller
             return $this->goHome();
         }
 
+        
+        if (Yii::$app->user->identity->level != 'admin') {
+            return $this->goHome();
+        }  
+
         $this->layout = 'adminLayout';  
 
-        $model = new Clients();
+        $model = new User();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -113,7 +183,7 @@ class ClientsController extends Controller
     {
         if (Yii::$app->user->isGuest) {    
             return $this->goHome();
-        }
+        }        
 
         $model = $this->findModel($id);
 
@@ -157,7 +227,7 @@ class ClientsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Clients::findOne(['id' => $id])) !== null) {
+        if (($model = User::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

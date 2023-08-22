@@ -35,8 +35,12 @@ class m220725_172034_tickets extends Migration
 
         $this->createTable('{{%tickets}}', [
             'id' => $this->primaryKey(),  
-            'team_code'=> $this->string(), 
+            'ticket_number'=> $this->string()->unique(),
+            'company_code'=> $this->string(), 
+            'username_code'=> $this->string(), 
+            'type'=> $this->string(), 
             'full_name' => $this->string(),    
+            'contact_number' => $this->string(), 
             'email' => $this->string(),            
             'subject' => $this->string(),            
             'text' => $this->text(),

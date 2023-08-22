@@ -7,6 +7,7 @@ use common\models\PricingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * PricingController implements the CRUD actions for Pricing model.

@@ -7,6 +7,7 @@ use common\models\CountriesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * CountriesController implements the CRUD actions for Countries model.

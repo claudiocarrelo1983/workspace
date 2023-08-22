@@ -141,13 +141,85 @@ class CompanyLocationsController extends Controller
         
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $this->defaultSheddulle($model);
+
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        $arrShedulle = (empty($model->sheddule_array) ? [] : json_decode($model->sheddule_array));
+
+        foreach($arrShedulle as $dayWeek => $arrValues){
+
+            $sh = $dayWeek.'_starting_hour';
+            $eh = $dayWeek.'_end_hour';
+            $bs = $dayWeek.'_starting_break';
+            $be = $dayWeek.'_end_break';
+            $oc = $dayWeek.'_open_checkbox';          
+
+            $model->$sh = strtotime($arrValues->start);
+            $model->$eh = strtotime($arrValues->end);
+            $model->$bs = strtotime($arrValues->break_start);
+            $model->$be = strtotime($arrValues->break_end);
+            $model->$oc = ($arrValues->closed == 'false') ? '1' : '0';
+   
+        }
+
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+          
+
+            $arrWeek = [];
+
+        
+            foreach($weekDays as $value){
+
+                $sh = $value.'_starting_hour';
+                $eh = $value.'_end_hour';
+                $bs = $value.'_starting_break';
+                $be = $value.'_end_break';
+                $oc = $value.'_open_checkbox';
+
+                $arrWeek[$value] = [
+                    'start' => (empty($model->$sh) ? '' : date('H:i', $model->$sh)),
+                    'end' => (empty($model->$eh) ? '' : date('H:i', $model->$eh)),
+                    'break_start' => (empty($model->$bs) ? '' : date('H:i', $model->$bs)),
+                    'break_end' => (empty($model->$be) ? '' : date('H:i', $model->$be)), 
+                    'closed' => ($model->$oc == '0') ? 'true' : 'false',                      
+                ];               
+            }
+
+            $model->sheddule_array = json_encode($arrWeek);
+            
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+   
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function defaultSheddulle($model)
+    {
+
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        foreach($weekDays as $dayWeek){
+
+            $sh = $dayWeek.'_starting_hour';
+            $eh = $dayWeek.'_end_hour';
+            $bs = $dayWeek.'_starting_break';
+            $be = $dayWeek.'_end_break';                
+
+            $model->$sh = strtotime('9:00');
+            $model->$eh = strtotime('18:00');
+            $model->$bs = strtotime('12:00');
+            $model->$be = strtotime('13:00');          
+   
+        }
+
     }
 
     /**

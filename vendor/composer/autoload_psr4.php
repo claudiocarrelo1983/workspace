@@ -28,6 +28,7 @@ return array(
     'simialbi\\yii2\\' => array($vendorDir . '/simialbi/yii2-simialbi-base/src'),
     'sammaye\\mailchimp\\' => array($vendorDir . '/sammaye/yii2-mailchimp'),
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'nickcv\\encrypter\\' => array($vendorDir . '/nickcv/yii2-encrypter'),
     'mhunesi\\formio\\' => array($vendorDir . '/mhunesi/yii2-formio/src'),
     'marqu3s\\summernote\\' => array($vendorDir . '/marqu3s/yii2-summernote'),
     'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php/src'),

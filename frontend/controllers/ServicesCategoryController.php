@@ -4,10 +4,12 @@ namespace frontend\controllers;
 
 use common\models\ServicesCategory;
 use common\models\ServicesCategorySearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\Helpers\Helpers;
+use common\models\GeneratorJson;
 use Yii;
 
 /**
@@ -75,7 +77,9 @@ class ServicesCategoryController extends Controller
     {
         $this->layout = 'adminLayout';  
 
-        $model = new ServicesCategory();     
+        $model = new ServicesCategory(); 
+
+        $query = new Query;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -88,11 +92,13 @@ class ServicesCategoryController extends Controller
                  $title = 'service_category_title_'.bcadd($count->id, 1);             
                }
 
-                $model->company = Yii::$app->user->identity->company_code;
+                $model->company_code = Yii::$app->user->identity->company_code;
                 $model->category_code = 'service_category_'.Helpers::generateRandowHumber();  
                 $model->page_code_title = $title;
 
                 if($model->save()){
+                    $model->updateServicesCategory('services_category', $model);
+                    GeneratorJson::generatejson();   
                     return $this->redirect(['view', 'id' => $model->id]);
                 }         
             }
@@ -119,6 +125,8 @@ class ServicesCategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $model->updateServicesCategory('services_category', $model);
+            GeneratorJson::generatejson();          
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

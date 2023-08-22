@@ -6,10 +6,6 @@ INSERT INTO `user` (`guid`, `username`, `first_name`, `last_name`, `full_name`, 
 DELETE FROM `team`;
 INSERT INTO `team` (`company`, `username`, `page_code_title`, `page_code_text`, `full_name`, `path`, `image`, `location`, `title`, `text`, `title_pt`, `text_pt`, `title_en`, `text_en`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `color`, `active`, `created_date`) VALUES ('myspecialgym', 'joana2022', 'team_title_1', 'team_text_1', 'Joana Fernandes', '/images/team/', 'joana_fernandes.jpg', 'Seixal', 'Personal Training', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac ligula mi, non suscipitaccumsan', 'Personal Trainer', 'Chamo-me Joana, sou licenciada em Educação Física e Desporto , estando atualmente no 1.º ano do Mestrado em Saúde e Bem-estar.\\r\\n\\r\\nPercebendo da dificuldade de algumas pessoas aderirem à atividade física, e no sentido de criar um programa de treino que fosse ao encontro das necessidades individuias de cada pessoa, criei a Outlier. A Outlier representa a minha própria metodologia de treino, com o objetivo de que todos encontrem nela, motivação para um estilo de vida saudável.', 'Personal Trainer', 'My name is Joana, I have a degree in Physical Education and Sports, and I am currently in the 1st year of the Master in Health and Wellbeing.\\r\\n\\r\\nRealizing the difficulty of some people to adhere to physical activity, and in order to create a training program that would meet the individual needs of each person, I created Outlier. Outlier represents my own training methodology, with the aim that everyone finds themselves in it, motivated towards a healthy lifestyle.', 'https://treinos-outlier.my.canva.site/', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', '96726377', '#4e71b0', 1, '2023-06-15 17:51:36');
 
-DELETE FROM `countries`;
-INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `active`, `created_date`) VALUES ('en', 'EN', 'English', 'e', 0, '2022-12-28 17:36:33');
-INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `active`, `created_date`) VALUES ('pt', 'PT', 'Portuguese', 'a', 0, '2022-12-28 17:37:25');
-
 
 DELETE FROM `blogs_category`;
 INSERT INTO `blogs_category` (`tag_parent_id`, `tag`, `page_code`, `description`, `text_pt`, `text_en`, `active`, `created_date`) VALUES
@@ -59,6 +55,10 @@ DELETE FROM `translations`
     'team_text',
     'texts_text'
 );
+
+DELETE FROM `countries`;
+INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `active`, `created_date`) VALUES ('en', 'EN', 'English', 'e', 0, '2022-12-28 17:36:33');
+INSERT INTO `countries` (`country_code`, `small_title`, `full_title`, `img`, `active`, `created_date`) VALUES ('pt', 'PT', 'Portuguese', 'a', 0, '2022-12-28 17:37:25');
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'cpanel_big'  ,'Painel de Controlo',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','topmenu', 'cpanel_small'  ,'Cpanel',1);
@@ -274,7 +274,8 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_usefull_links_privacy_policy'  ,'Política de Privacidade',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_usefull_links_coockies'  ,'Cookies',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_usefull_links_gdpr'  ,'RGPD',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_usefull_links_terms'  ,'Ttermos e Condições',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_usefull_links_terms'  ,'Termos e Condições',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt', 'footer', 'footer_category_usefull_affiliate_program' ,'Junte-se ao Nosso Programa de Afiliados',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_subscribe'  ,'SUBSCREVA A NEWSLETTER',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_subscribe_text'  ,'Obtenha todas as informações, vendas e ofertas mais recentes. subscreva-se a newsletter:',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','footer', 'footer_category_subscribe_placeholder'  ,'Email ',1);
@@ -504,6 +505,7 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_usefull_links_coockies' ,'Cookies',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_usefull_links_gdpr' ,'GDPR',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_usefull_links_terms' ,'Terms & Conditions',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_usefull_affiliate_program' ,'Join Our Affiliate Program',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_subscribe' ,'SUBSCRIBE NEWSLETTER',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_subscribe_text' ,'Get all the latest information, sales and offers. Sign up for newsletter:',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en', 'footer', 'footer_category_subscribe_placeholder' ,'Email Address',1);
@@ -613,7 +615,10 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule_clients', 'Clientes', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_clients', 'Clients', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule_list', 'Lista de Marcações', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_list', 'Marcações List', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_list', 'Sheddule List', 1, '2023-07-12 17:29:24');
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_sheddule_create', 'Criar Marcação', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_sheddule_create', 'Create Sheddule', 1, '2023-07-12 17:29:24');
 
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_events', 'Eventos', 1, '2023-07-12 17:29:24');

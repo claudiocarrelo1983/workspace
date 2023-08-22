@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use common\Helpers\Helpers;
+use common\models\GeneratorJson;
 
 /**
  * ServicesController implements the CRUD actions for Services model.
@@ -86,8 +87,7 @@ class ServicesController extends Controller
      * @return string|\yii\web\Response
      */
     public function actionCreate()
-    {
-       
+    {       
      
         if (Yii::$app->user->isGuest) {    
             return $this->goHome();
@@ -100,10 +100,9 @@ class ServicesController extends Controller
         $modelCat = new ServicesCategory();
         
         $countCat = $modelCat::find('id')->orderBy("id desc")->limit(1)->one();    
-     
  
-        if ($this->request->isPost) {
-            
+        if ($this->request->isPost) {            
+       
             if ($model->load($this->request->post())) {
 
                 $model->username = '';
@@ -134,6 +133,8 @@ class ServicesController extends Controller
                 $model->page_code_text = $text;     
 
                 if($model->save()){
+                    $model->updateServices('services', $model);
+                    GeneratorJson::generatejson();                  
                     return $this->redirect(['view', 'id' => $model->id]);
                 }     
 
@@ -168,7 +169,7 @@ class ServicesController extends Controller
         if (Yii::$app->user->isGuest) {    
             return $this->goHome();
         }
-
+     
         $this->layout = 'adminLayout';  
 
         $model = $this->findModel($id);
@@ -187,10 +188,12 @@ class ServicesController extends Controller
             }   
       
             if($model->save()) {
+                $model->updateServices('services', $model);
+                GeneratorJson::generatejson();   
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-
+       
         $model->usernameArr = explode(',', $model->username);
         $model->locationCodeArr = explode(',', $model->location_code);
 

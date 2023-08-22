@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'url:url',
             'text',
             'date',
-            'name',
+       
             'tags',
             'created_date',
         ],

@@ -17,6 +17,13 @@ use yii\base\Model;
  */
 class Tickets extends \yii\db\ActiveRecord
 {
+
+    public $verification_token;
+
+    public $username;
+
+    public $title;
+
     /**
      * {@inheritdoc}
      */
@@ -34,7 +41,8 @@ class Tickets extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['created_date'], 'safe'],
             [['email'], 'email'],
-            [['full_name', 'email', 'subject'], 'string', 'max' => 255],
+            [['full_name','type', 'email', 'text', 'subject','contact_number','company_code','username_code','ticket_number'], 'string', 'max' => 255],
+            ['text', 'string'],
         ];
     }
 
@@ -47,9 +55,31 @@ class Tickets extends \yii\db\ActiveRecord
             'id' => 'ID',
             'full_name' => 'Full Name',
             'email' => 'Email',
-            'subject' => 'Subject',
+            'subject' => 'Subject',             
+            'contact_number' => 'Contact Number',
             'text' => 'Text',
             'created_date' => 'Created Date',
         ];
     }
+
+    
+    /**
+     * Sends confirmation email to user
+     * @param User $user user model to with email should be send
+     * @return bool whether the email was sent
+     */
+    public function sendEmail($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->send();
+    }
+    
 }

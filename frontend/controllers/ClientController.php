@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+
+use common\models\ShedduleSearch;
+use frontend\Models\ClientsSearch;
 use yii\web\Controller;
 use common\models\LoginForm;
 use yii\db\Query;
@@ -10,13 +13,17 @@ use common\models\Clients;
 use common\models\User;
 use common\Helpers\Helpers;
 use common\models\Events;
+use common\models\Sheddule;
+use common\models\Services;
+use common\models\GeneratorJson;
+use frontend\models\SignupClientForm;
 
 use Yii;
 //Yii::$app->language = 'en-EN';
 
 class ClientController extends Controller
 {
-    
+       
     public function actionStats()
     {
         $this->layout = 'training';
@@ -42,11 +49,18 @@ class ClientController extends Controller
         return $this->render('nutricion');
     }
 
-    public function actionNewClient()
+    public function actionClientProfile()
     {
-        $this->layout = 'clientLayout';
+        $this->layout = 'registration';
         
-        return $this->render('new-client');
+        return $this->render('client-profile');
+    }
+
+    public function actionClientInvoices()
+    {
+        $this->layout = 'registration';
+        
+        return $this->render('client-invoices');
     }
 
     public function actionClientMenu()
@@ -84,6 +98,7 @@ class ClientController extends Controller
                
                 return $this->redirect(['registration', 'code' => $request->get('code')]);
             }
+
         } else {
             $model->loadDefaultValues();
         }
@@ -96,7 +111,7 @@ class ClientController extends Controller
         ]);
     }    
 
-    public function actionRegistrationCalendarPayment()
+    public function actionClientBooking()
     {    
 
         $this->layout = 'registration';
@@ -104,6 +119,8 @@ class ClientController extends Controller
         $query2 = new Query;
 
         $companyArr = $query2->select([
+            'c.page_code_team_title',
+            'c.page_code_team_text',
             'c.color',
             'c.coin' ,
             'c.path' ,
@@ -138,8 +155,82 @@ class ClientController extends Controller
         ->all();
         
         if (empty($companyArr)) {
-            return $this->goHome();
+            //return $this->goHome();
         }    
+
+     
+
+        $modelSheddule = new Sheddule();      
+        $this->layout = 'registration';      
+
+        $dateGet = Yii::$app->request->get('day');
+        $date = ((empty($dateGet)) ? strtotime(date('Y-m-d')) : $dateGet);
+
+        //searchs for date
+        $this->actionShedduleSearch();    
+
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(empty($modelSheddule->id)){
+
+            //creates
+                $this->actionShedduleCreate($modelSheddule);
+
+                if($modelSheddule->save()){
+                    $this->refresh();
+                }
+
+            }else{                 
+
+                $modelSheddule->time = date('H:i',$modelSheddule->time);          
+
+                if($modelSheddule->canceled ==  1){    
+
+                    //Cancel
+                    $this->actionShedduleCancel($modelSheddule);
+                }elseif ($modelSheddule->confirm ==  1) {     
+
+                    //Confirm
+                    $this->actionShedduleCheck($modelSheddule);
+                    
+                } else{
+
+                    //edit
+                    $this->actionShedduleEdit($modelSheddule);
+
+                }
+
+                $this->refresh();
+            }
+        }
+      
+
+
+
+        if (Yii::$app->user->isGuest) {
+
+            $modelLogin = new LoginForm();
+
+            return $this->render('login/login_client', [
+                'model' => $modelLogin,
+                'companyArr' => $companyArr
+            ]);
+            
+            return $this->render('client-booking', [   
+                'date' => $date,   
+                'model' => $modelSheddule,
+                'companyArr' => $companyArr
+            ]);
+    
+            return $this->goHome();
+        }  
+      
+       
+        return $this->render('client-booking', [   
+            'date' => $date,   
+            'model' => $modelSheddule,
+            'companyArr' => $companyArr
+        ]);
 
         return $this->render('registration-calendar-payment',[
                 'companyArr' => $companyArr
@@ -148,318 +239,175 @@ class ClientController extends Controller
 
     }
     
-    public function actionRegistrationCalendar()
-    {        
-        $this->layout = 'registration';
 
-        $query2 = new Query;
-
-        $companyArr = $query2->select([
-            'c.color',
-            'c.path' ,
-            'c.coin' ,
-            'c.image' ,
-            'c.company_code' ,
-            'c.company_code_url' ,
-            'c.company_name' ,
-            'c.page_code_text',
-            'l.address_line_1',
-            'l.address_line_2',
-            'l.city',
-            'l.postcode',
-            'l.country',
-            'c.website',
-            'c.facebook',
-            'c.pinterest',
-            'c.instagram',
-            'c.twitter',
-            'c.tiktok',   
-            'c.linkedin',
-            'c.youtube',
-            'l.google_location',
-            'l.contact_number',   
-            'l.email',   
-            'l.location_code',
-            'l.location',
-            'l.sheddule_array'
-        ])
-        ->from(['c' => 'company'])
-        ->leftJoin(['l' => 'company_locations'], 'c.company_code = l.company_code')
-        ->where(
-            [
-            'c.company_code_url' => Yii::$app->request->get('code')           
-            ])
-        ->all();
-
-        if(empty($companyArr)){
-            return $this->goHome();
-        }    
-
-        $modelEvents = new Events();          
-
-        if(isset($this->request->post()['Events']['id']) && $this->request->post()['Events']['id'] > 0){
-            $modelEvents = $this->findModelEvents($this->request->post()['Events']['id']); 
-        }
-      
-
-        if($this->request->isPost && isset($this->request->post()['Events'])){
-            $modelEvents->start = (isset($this->request->post()['start'])) ? $this->request->post()['start'] : '';
-            $modelEvents->end = (isset($this->request->post()['end'])) ? $this->request->post()['end'] : '';       
-            $modelEvents->username = Yii::$app->user->identity->username; 
-        }
-        
-        if ($this->request->isPost && $modelEvents->load($this->request->post())) {
-            
-            $modelEvents->save();
-            return $this->refresh();
-        }        
-
-        $query = new Query;
-        $eventsArr = [];
-
-        if(isset(Yii::$app->user->identity->username)){
-            $eventsArr = $query->select('*')
-                ->from(['events'])
-                ->where(
-                    [
-                        'username' => Yii::$app->user->identity->username,
-                        'active' => true
-                    ]) 
-                ->all();
-        }
-    
-
-        $myDataArr = [];
-
-        foreach($eventsArr as $event){
-            $myDataArr[] = [                
-                'title' => (Yii::t('app', $event['page_code'])),
-                'className' => $event['color_code'],
-                'start' => $event['start'],
-                'end' => $event['end']                        
-            ];
-        }
-     
-    
-        return $this->render('registration-calendar', [
-            'modelEvents' => $modelEvents,
-            'companyArr' =>  $companyArr,
-            'myData' => json_encode($myDataArr)      
-         
-        ]);
-
-
-
-
-        $this->layout = 'registration';
-
-        $blogQuery = new Query;
-        $request = Yii::$app->request;
-
-        $user = $blogQuery->select('*')
-            ->from(['user'])
-            ->where(['company_code_url' => $request->get('code')]) 
-            ->one();
-            
-        $model = new User();     
-
-        if ($this->request->isPost) {          
-
-            $data = Yii::$app->request->post();     
-
-            $model->name = $data['Clients']['first_name'].' '.$data['Clients']['last_name'];
-            $model->company = Yii::$app->user->identity->company;
-            $model->level = 'student';
-
-            $model->created_date = date('Y-m-d H:i:s');
-
-            if ($model->load($this->request->post()) && $model->save()) { 
-               
-                return $this->redirect(['registration', 'code' => $request->get('code')]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-
-        $modelEvents = new Events();  
-
-        return $this->render('registration-calendar', [     
-            'user' => $user,       
-            'modelEvents' => $modelEvents,
-            'code' => $request->get('code')
-        ]);
-    }    
-
-
-    public function actionIndex()
+    public function actionSheddule()
     {
-        
-        $this->layout = 'training';
 
-        $categorySteps = [
-            '0' => [
-                'title' => 'Aquecimento',
-                'icon' => 'bx bx-receipt nav-icon'
-            ],
-            '1' => [
-                'title' => 'Exercicios Principal',
-                'icon' => 'bx bx-receipt nav-icon'
-            ],
-            '2' => [
-                'title' => 'Cardio',
-                'icon' => 'bx bx-receipt nav-icon'
-            ],
-            '3' => [
-                'title' => 'Alongamento',
-                'icon' => 'bx bx-receipt nav-icon'
-            ]
-            ];
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }       
 
-        $arrTraining = [
-            '0' => [
-                
-                    'title' => 'Aquecimento', 
-                    'code' => 'bicicleta_estatica',  
-                    'training' => [
-                                        [
+        $modelSheddule = new Sheddule();      
+        $this->layout = 'registration';      
 
-                                                'title' => 'Press Inclinada', 
-                                                'code' => 'bicicleta_estatica',                                    
-                                                'maquina' => 'Bicicleta estatica',
-                                                'image' => '/web/img/equipament/bicicleta.jpg',
-                                                'type' => 'reps',
-                                                'data' => '21-10-2021',
-                                                'lastvalues'=>  [
-                                                        [
-                                                            'id_treino' => '2',
-                                                            'reps' => '10',
-                                                            'type' => 'Kg',
-                                                            'week' => '30',
-                                                            'value' => '30'   
-                                                        ],
-                                                        [
-                                                            'id_treino' => '2',
-                                                            'reps' => '10',
-                                                            'type' => 'Kg',
-                                                            'week' => '30',
-                                                            'value' => '30'   
-                                                        ],
+        $dateGet = Yii::$app->request->get('day');
+        $date = ((empty($dateGet)) ? strtotime(date('Y-m-d')) : $dateGet);
 
-                                                ],
-                                                'currentValues' =>   [
-                                                [
-                                                    'id_treino' => '2',
-                                                    'reps' => '10',
-                                                    'type' => 'Kg',
-                                                    'week' => '30',
-                                                    'value' => '30'   
-                                                ]  
+        //searchs for date
+        $this->actionShedduleSearch();    
 
-                                            ]
-                                                                                                        
-                                        ],
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(empty($modelSheddule->id)){
 
-                                        
-                                        [
+            //creates
+                $this->actionShedduleCreate($modelSheddule);
 
-                                            'title' => 'Peck Deck', 
-                                            'code' => 'bicicleta_estatica',                                    
-                                            'maquina' => 'Bicicleta estatica',
-                                            'image' => 'equipament/bicicleta.jpg',
-                                            'type' => 'time',
-                                            'data' => '21-10-2021',
-                                            'lastvalues'=>  [
-                                                    [
-                                                        'id_treino' => '2',
-                                                        'reps' => '10',
-                                                        'type' => 'Kg',
-                                                        'week' => '30',
-                                                        'value' => '30'   
-                                                    ]                                                                 
-                                            ],
-                                            'currentValues' =>   [
-                                            [
-                                                'id_treino' => '2',
-                                                'reps' => '10',
-                                                'type' => 'Kg',
-                                                'week' => '30',
-                                                'value' => '30'   
-                                            ]  
+                if($modelSheddule->save()){
+                    $this->refresh();
+                }
 
-                                        ]
-                                                                                                    
-                                    ],
-                                ]
+            }else{                 
 
-                    ],
-            '1' => [
-                                    'title' => 'Aquecimento 2',                                             
-                                    'maquina' => 'Cadeira extensora',
-                                    'image' => 'equipament/IMG_20211116_200214.jpg',
-                                    'type' => 'reps',
-                                    'data' => '21-10-2021',
-                                     'lastvalues'=>  [
-                                            [
-                                                        'id_treino' => '2',
-                                                        'reps' => '10',
-                                                        'type' => 'Kg',
-                                                        'week' => '30',
-                                                        'value' => '30'   
-                                                    ]                                                                 
-                                            ],
-                                            'currentValues' =>   [
-                                            [
-                                                'id_treino' => '2',
-                                                'reps' => '10',
-                                                'type' => 'Kg',
-                                                'week' => '30',
-                                                'value' => '30'   
-                                            ]  
-                                    ]  
-                                ],
-            '2' => 	[
-                                    'title' => 'Press Perna',                                
-                                    'maquina' => 'Maquina',
-                                    'image' => 'bicicleta.jpg',
-                                    'type' => 'reps',
-                                    'data' => '21-10-2021',
-                                    'lastvalues'=>  [
-                                        [
-                                                    'id_treino' => '2',
-                                                    'reps' => '10',
-                                                    'type' => 'Kg',
-                                                    'week' => '30',
-                                                    'value' => '30'   
-                                                ]                                                                 
-                                        ],
-                                        'currentValues' =>   [
-                                        [
-                                            'id_treino' => '2',
-                                            'reps' => '10',
-                                            'type' => 'Kg',
-                                            'week' => '30',
-                                            'value' => '30'   
-                                        ]  
-                                    ]  
-                                ]
-        ];
+                $modelSheddule->time = date('H:i',$modelSheddule->time);          
 
-  
+                if($modelSheddule->canceled ==  1){    
+
+                    //Cancel
+                    $this->actionShedduleCancel($modelSheddule);
+                }elseif ($modelSheddule->confirm ==  1) {     
+
+                    //Confirm
+                    $this->actionShedduleCheck($modelSheddule);
+                    
+                } else{
+
+                    //edit
+                    $this->actionShedduleEdit($modelSheddule);
+
+                }
+
+                $this->refresh();
+            }
+        }
       
-        //$arrTraining = $model->getTreinos();       
-            
-
-        return $this->render('my-training', [
-            'traininglist' => $arrTraining,
-            'categorysteps' => $categorySteps
-         
+       
+        return $this->render('sheddule', [   
+            'date' => $date,   
+            'model' => $modelSheddule
         ]);
-
-        
-  
     }
 
-    
+    public function actionShedduleSearch()
+    {
+        if($this->request->isPost && isset($this->request->post()['date'])) {
+            $date = strtotime($this->request->post()['date']);            
+       
+            return $this->redirect(['sheddule', 'day' => $date]);
+        }    
+    }
+
+    public function actionShedduleEdit($modelSheddule)
+    {
+
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(!empty($modelSheddule->id)){
+
+                if($modelSheddule->canceled ==  0 && $modelSheddule->confirm ==  0){                       
+            
+                    $modelSheddule->time = date('H:i',$modelSheddule->time);   
+
+                    Yii::$app->db->createCommand("UPDATE sheddule SET 
+                        full_name=:full_name, 
+                        contact_number=:contact_number,
+                        canceled=:canceled,
+                        email = :email,
+                        nif = :nif,
+                        service_cat= :service_cat,
+                        time = :time,
+                        date = :date
+                    WHERE id=:id")
+                    ->bindValue(':full_name', $modelSheddule->full_name)
+                    ->bindValue(':contact_number', $modelSheddule->contact_number)
+                    ->bindValue(':email', $modelSheddule->email)
+                    ->bindValue(':nif', $modelSheddule->nif)
+                    ->bindValue(':service_cat', $modelSheddule->service_cat) 
+                    ->bindValue(':canceled', $modelSheddule->canceled)           
+                    ->bindValue(':time', $modelSheddule->time)
+                    ->bindValue(':date', date('Y-m-d', strtotime(Yii::$app->request->post()['date'])))
+                    ->bindValue(':id', $modelSheddule->id)
+                    ->execute();
+                    
+                    $this->refresh();
+
+                }
+            }
+        }
+    }
+
+    public function actionShedduleCreate($modelSheddule)
+    {
+
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(empty($modelSheddule->id)){
+
+                $modelSheddule->client_username = 'client_username_'.Helpers::generateRandowHumber();
+                $modelSheddule->team_username = Yii::$app->user->identity->username;
+                $modelSheddule->company_code = Yii::$app->user->identity->company_code;     
+                $modelServices = Services::find()->select(['page_code_title'])->where(['service_code' => $modelSheddule->service_cat])->one();
+                $modelSheddule->service_name = $modelServices->page_code_title;                         
+                $modelSheddule->date = date('Y-m-d',$modelSheddule->date);       
+                $modelSheddule->time = date('H:i',strtotime($modelSheddule->time));  
+
+                if($modelSheddule->save()){
+                    $this->refresh();
+                }
+            }
+        }
+
+    }
+    public function actionShedduleCancel($modelSheddule)
+    {
+
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(!empty($modelSheddule->id)){
+
+                if($modelSheddule->canceled ==  1){                 
+                    Yii::$app->db->createCommand("UPDATE sheddule SET 
+                        canceled=:canceled
+                    WHERE id=:id")
+                    ->bindValue(':canceled', $modelSheddule->canceled) 
+                    ->bindValue(':id', $modelSheddule->id)
+                    ->execute();
+
+                }
+            }
+        }
+
+    }    
+    public function actionShedduleCheck($modelSheddule)
+    {
+
+        if ($this->request->isPost && $modelSheddule->load($this->request->post())) {
+           
+            if(!empty($modelSheddule->id)){
+
+              if($modelSheddule->confirm ==  1) {
+                 
+                    Yii::$app->db->createCommand("UPDATE sheddule SET 
+                        confirm=:confirm
+                    WHERE id=:id")
+                    ->bindValue(':confirm', $modelSheddule->confirm) 
+                    ->bindValue(':id', $modelSheddule->id)
+                    ->execute();
+                    
+                }
+            }
+        }
+    }
+
 
 }

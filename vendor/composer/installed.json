@@ -4613,6 +4613,57 @@
             "install-path": "../myclabs/php-enum"
         },
         {
+            "name": "nickcv/yii2-encrypter",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcv-ln/yii2-encrypter.git",
+                "reference": "eaedea577f10ba605c1408cb9901e591d8034a8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcv-ln/yii2-encrypter/zipball/eaedea577f10ba605c1408cb9901e591d8034a8b",
+                "reference": "eaedea577f10ba605c1408cb9901e591d8034a8b",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "time": "2015-02-04T09:50:53+00:00",
+            "type": "yii2-extension",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "nickcv\\encrypter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Puddu",
+                    "email": "n.puddu@outlook.com"
+                }
+            ],
+            "description": "Openssl Encrypter for Yii2",
+            "keywords": [
+                "Active Record",
+                "Behavior",
+                "encryption",
+                "extension",
+                "openssl",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/nickcv-ln/yii2-encrypter/issues",
+                "source": "https://github.com/nickcv-ln/yii2-encrypter/tree/1.1.0"
+            },
+            "install-path": "../nickcv/yii2-encrypter"
+        },
+        {
             "name": "nnnick/chartjs",
             "version": "v2.9.4",
             "version_normalized": "2.9.4.0",

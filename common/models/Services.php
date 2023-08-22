@@ -52,7 +52,7 @@ class Services extends \yii\db\ActiveRecord
             [['company','location_code','username', 'category_code', 'page_code_title', 'page_code_text', 'title', 'text', 'title_pt', 'text_pt', 'title_en', 'text_en'], 'required'],
             [['text',  'text_pt', 'text_en'], 'string'],
             [['price', 'order', 'active'], 'integer'],
-            [['created_date'], 'safe'],
+            [['created_date','time'], 'safe'],
             [['company', 'username', 'category_code', 'page_code_title', 'page_code_text', 'title', 'title_pt', 'title_en'], 'string', 'max' => 255],
             [['service_code'], 'string', 'max' => 50],
             [['page_code_title'], 'unique'],
