@@ -906,7 +906,7 @@ class SiteController extends Controller
           
             if($model->login()){
            
-                return $this->redirect(['/admin/dashboard']);             
+                return $this->redirect(['/dashboard']);             
             }
            
                 

@@ -58,7 +58,7 @@ class CalendarAsset extends AssetBundle
         'vendor/vivus/vivus.min.js',
         'vendor/circle-flip-slideshow/js/jquery.flipshow.min.js',
         'js/main.js',
-        'js/views/view.home3.js',
+        'js/views/view.home.js',
         'js/theme.js',
         'js/custom.js',
         'js/theme.init.js',

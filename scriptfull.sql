@@ -588,7 +588,7 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients', 'Clientes', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients', 'Clients', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients_list', 'Lista de Clientes', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients_list', 'Lista de Clientes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients_list', 'Client List', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_clients_add_client', 'Adicionar Novo Cliente', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_clients_add_client', 'Add New Client', 1, '2023-07-12 17:29:24');
 
@@ -629,9 +629,6 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_events_attendes', 'Attendes', 1, '2023-07-12 17:29:24');
 
 
-
-
-
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda', 'Agenda', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_agenda', 'Agenda', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_agenda_goals', 'Objectivos', 1, '2023-07-12 17:29:24');
@@ -643,44 +640,63 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 
 
 
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_messages', 'Messages', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_messages', 'Mensagens', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_messages', 'Notifications', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_messages', 'Notificações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_messages_list', 'Messages', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_messages_list', 'Mensagens', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_messages_subject', 'Subjects', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_messages_subject', 'Assuntos', 1, '2023-07-12 17:29:24');
 
 
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services', 'Services', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services', 'Serviços', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_details', 'Details', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_details', 'Detalhes', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_category', 'Categories', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_category', 'Categorias', 1, '2023-07-12 17:29:24');
-
-
-
-
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company', 'Company', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company', 'Empresa', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_details', 'Details', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_details', 'Detalhes', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_team', 'Team', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_team', 'Equipa', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_locations', 'Locations', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_locations', 'Localizações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services', 'Serviços', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services', 'Services', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_details', 'Detalhes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_services_category', 'Categories', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_services_category', 'Categorias', 1, '2023-07-12 17:29:24');
 
 
 
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign', 'Campaign', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign', 'Campanhas', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_details', 'Details', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign_details', 'Detalhes', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_social', 'Social', 1, '2023-07-12 17:29:24');
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company', 'Company', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company', 'Empresa', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_details', 'Detalhes', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_team', 'Team', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_team', 'Equipa', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_company_locations', 'Locations', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_company_locations', 'Localizações', 1, '2023-07-12 17:29:24');
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign', 'Campaign', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign', 'Campanhas', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign_details', 'Details', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_details', 'Detalhes', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_campaign_social', 'Social', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_campaign_social', 'Social', 1, '2023-07-12 17:29:24');
 
 
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings', 'Settings', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings', 'Configurações', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_profile', 'User Profile', 1, '2023-07-12 17:29:24');
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_profile', 'Perfil do User', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings', 'Settings', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings', 'Configurações', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_profile', 'User Profile', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_profile', 'Perfil do User', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_notifications', 'Notificações', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_notifications', 'Notifications', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_webpage', 'Minha Pagina', 1, '2023-07-12 17:29:24');
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_webpage', 'My Page', 1, '2023-07-12 17:29:24');
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_my_application', 'Minha Conta', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_my_application', 'My Account', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_definitions', 'Definições', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_definitions', 'Definitions', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'login_logout', 'Terminar Sessão', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'login_logout', 'Log Out', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'your_registration_url', ' URL de registro', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'your_registration_url', ' Your registration Url', 1, '2023-07-12 17:29:24');
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('pt', 'admin_leftside', 'general_questions', 'Questões Gerais', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`, `created_date`) VALUES ('en', 'admin_leftside', 'general_questions', 'General Questions', 1, '2023-07-12 17:29:24');
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_leftside', 'privacy_policy'  ,'Politica de Privacidade',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_leftside', 'privacy_policy'  ,'Privacy Policy',1);

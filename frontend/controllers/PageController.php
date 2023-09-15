@@ -67,26 +67,7 @@ class PageController extends Controller
         ]);
     }
 
-    public function actionWeight()
-    {
-        $this->layout = 'training';
-        
-        return $this->render('weight');
-    }
 
-    public function actionNutricion()
-    {
-        $this->layout = 'training';
-        
-        return $this->render('nutricion');
-    }
-
-    public function actionClientProfile()
-    {
-        $this->layout = 'registration';
-        
-        return $this->render('client-profile');
-    }
 
     public function actionClientInvoices()
     {
@@ -754,7 +735,7 @@ class PageController extends Controller
                 return $this->refresh();
             }            
         }
-
+     
 
         $query = new Query;
         $eventsArr = [];
@@ -787,7 +768,7 @@ class PageController extends Controller
         if (empty($company)) {    
             return $this->goHome();
         }
-       
+    
         return $this->render('../client/page', [
             'modelEvents' => $modelEvents,
             'companyArr' =>  $companyArr,
@@ -798,44 +779,6 @@ class PageController extends Controller
         ]);
 
 
-        $this->layout = 'registration';
-
-        $blogQuery = new Query;
-        $request = Yii::$app->request;
-
-        $user = $blogQuery->select('*')
-            ->from(['user'])
-            ->where(['company_code_url' => $request->get('code')]) 
-            ->one();
-            
-        $model = new User();     
-
-        if ($this->request->isPost) {          
-
-            $data = Yii::$app->request->post();     
-
-            $model->name = $data['Clients']['first_name'].' '.$data['Clients']['last_name'];
-            $model->company = Yii::$app->user->identity->company;
-            $model->level = 'student';
-
-            $model->created_date = date('Y-m-d H:i:s');
-
-            if ($model->load($this->request->post()) && $model->save()) { 
-               
-                return $this->redirect(['registration', 'code' => $request->get('code')]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-
-        $modelEvents = new Events();  
-
-        return $this->render('site', [     
-            'user' => $user,       
-            'modelEvents' => $modelEvents,
-            'code' => $request->get('code')
-        ]);
     }   
     
 

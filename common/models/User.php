@@ -35,6 +35,16 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $text;
 
+    public $address_line_1;
+
+    public $address_line_2;
+
+    public $city;
+
+    public $postcode;
+
+    public $location;
+
     public $imageFile;
     public $monday_open_checkbox;
     public $monday_starting_hour;
@@ -99,7 +109,9 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['surname','text'],'string'],
+            [['email'],'required'],
             [
+                
                 ['sheddule_array',
                     'monday_starting_hour','monday_end_hour','monday_starting_break','monday_end_break','monday_open_checkbox',
                     'tuesday_starting_hour','tuesday_end_hour','tuesday_starting_break','tuesday_end_break','tuesday_open_checkbox',
@@ -135,9 +147,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername($guid)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['guid' => $guid, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**

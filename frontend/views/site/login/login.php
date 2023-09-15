@@ -46,16 +46,15 @@ $path2 = 'login';
                                 <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control form-control-lg text-4'])->label(Yii::t('app', "login_label_password_2"))?>
                             </div>  
                         </div>   
-                        <div class="row justify-content-between">
-                        
-                                <div class="col-6">      
-                                    <?= $form->field($model, 'rememberMe', ['template'=>'<div class="control-group">
-                                            <label class="control control--checkbox checkbox-small-text">  
-                                                {input} '.Yii::t('app', "login_block_remember_me_1").'                                    
-                                            <div class="control__indicator"></div>
-                                        </label>
-                                    </div>'])->textInput(['class'=>"",'type'=>'checkbox'])?>                                
-                                </div>  
+                        <div class="row justify-content-between">                        
+                            <div class="col-6">      
+                                <?= $form->field($model, 'rememberMe', ['template'=>'<div class="control-group">
+                                        <label class="control control--checkbox checkbox-small-text">  
+                                            {input} '.Yii::t('app', "login_block_remember_me_1").'                                    
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>'])->textInput(['class'=>"",'type'=>'checkbox'])?>                                
+                            </div>  
                 
                             <div class="form-group col-md-auto">                        
                                 <?= Html::a(
@@ -82,12 +81,10 @@ $path2 = 'login';
                         </div>
                     </div>
                     <?php ActiveForm::end(); ?>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <!-- Sub Footer -->
 <?= $this->render('@frontend/views/site/subfooter',['path2' => $path2]); ?>

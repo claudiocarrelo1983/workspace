@@ -15,67 +15,77 @@ use common\Helpers\Helpers;
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <div class="row">
-        <h4 class="mb-sm-0 font-size-18 pb-4 pt-5">           
-            <?= Yii::t('app', ' Dados do Colaborador') ?>
-        </h4>  
+    <div class="row">   
         <div class="col">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'value' => 'teamuser_'.Helpers::generateRandowHumber()]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'value' => 'teamuser_'.Helpers::generateRandowHumber()])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">           
             <?= $form->field($model, 'title')->dropdownList(
                 Helpers::dropdownTitle(),
-                ['prompt'=>'Select Location']); 
+                ['prompt'=> Yii::t('app', 'select_title')]
+                )->label(Yii::t('app', 'title')); 
             ?> 
-        </div>        
+        </div> 
+        <div class="col">           
+            <?= $form->field($model, 'gender')->dropdownList(
+                Helpers::dropdownGender(),
+                ['prompt'=> Yii::t('app', 'select_gender')]
+                )->label(Yii::t('app', 'gender')); 
+            ?> 
+        </div>    
         <div class="col">
-            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'password')->textInput(['maxlength' => true])->label(Yii::t('app', 'password')) ?>
+        </div>     
+        <div class="col">
+            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'first_name')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'last_name')) ?>
         </div>  
         <div class="col">
-            <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true])->label(Yii::t('app', 'contact_number')) ?>
         </div> 
         <div class="col">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true])->label(Yii::t('app', 'email')) ?>
         </div>  
     </div>
     <div class="row">
    
         <div class="col">          
-            <?= $form->field($model, 'location')->dropdownList(Helpers::dropdownCompanyLocations(),
-                ['prompt'=>'Select Location']); 
+            <?= $form->field($model, 'location')->dropdownList(
+                Helpers::dropdownCompanyLocations(),
+                ['prompt'=> Yii::t('app', 'select_company_location')]
+                )->label(Yii::t('app', 'location')); 
             ?> 
         </div>  
         <div class="col">
-            <?= $form->field($model, 'job_title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'job_title')->textInput(['maxlength' => true])->label(Yii::t('app', 'job_title')) ?>
         </div>   
         <div class="col">
-            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_pt')) ?>
         </div>   
         <div class="col">
-            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_en')) ?>
         </div>  
 
         <div class="col">           
             <?= $form->field($model, 'time_window')->dropdownList(
                 Helpers::dropdownTimeWindow(),
-                ['prompt'=>'Select Time Window']); 
+                ['prompt'=> Yii::t('app', 'time_window')]
+                )->label(Yii::t('app', 'time_window')); 
             ?> 
         </div>  
         <div class="col">            
             <?= $form->field($model, 'active')->dropdownList(
-                [
-                1 => Yii::t('app', 'yes'),
-                    0 => Yii::t('app', 'no'),
-                ]); 
+                Helpers::dropdownActive(),
+                ['prompt'=> Yii::t('app', 'select_active')]
+                )->label(Yii::t('app', 'active')); 
             ?>
         </div> 
     </div>
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'text')->textarea(['maxlength' => true]) ?>
+            <?= $form->field($model, 'text')->textarea(['maxlength' => true])->label(Yii::t('app', 'text')) ?>
         </div>    
     </div>
 
@@ -85,31 +95,31 @@ use common\Helpers\Helpers;
             <?= Yii::t('app', 'Redes Sociais') ?>
         </h4>  
         <div class="col">
-            <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'website')->textInput(['maxlength' => true])->label(Yii::t('app', 'website')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'facebook')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'facebook')->textInput(['maxlength' => true])->label(Yii::t('app', 'facebook')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'pinterest')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'pinterest')->textInput(['maxlength' => true])->label(Yii::t('app', 'pinterest')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'instagram')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'instagram')->textInput(['maxlength' => true])->label(Yii::t('app', 'instagram')) ?>
         </div>         
     </div>
 
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'twitter')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'twitter')->textInput(['maxlength' => true])->label(Yii::t('app', 'twitter')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'tiktok')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'tiktok')->textInput(['maxlength' => true])->label(Yii::t('app', 'tiktok')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'linkedin')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'linkedin')->textInput(['maxlength' => true])->label(Yii::t('app', 'linkedin')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'youtube')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'youtube')->textInput(['maxlength' => true])->label(Yii::t('app', 'youtube')) ?>
         </div>       
     </div>
 

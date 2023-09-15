@@ -39,10 +39,11 @@ class Tickets extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
-            [['created_date'], 'safe'],
+            [['created_date','closed_ticket'], 'safe'],
             [['email'], 'email'],
-            [['full_name','type', 'email', 'text', 'subject','contact_number','company_code','username_code','ticket_number'], 'string', 'max' => 255],
+            [['full_name','type', 'email', 'text', 'subject','contact_number','company_code','username_code','ticket_number','ticket_parent'], 'string', 'max' => 255],
             ['text', 'string'],
+            ['read', 'integer']
         ];
     }
 

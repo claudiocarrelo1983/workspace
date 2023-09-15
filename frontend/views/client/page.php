@@ -1,7 +1,5 @@
 <?php
 
-
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\db\Query;
@@ -9,8 +7,6 @@ use common\Helpers\Helpers;
 use yii\widgets\ActiveForm;
 
 $query = new Query;
-
-
 
 $teamArr = $query->select('*')
     ->from(['team'])
@@ -44,13 +40,14 @@ foreach($servicesCatArr as $serviceCat){
             ])
         ->where(
             [
-                's.company' => $company,
+                's.company_code' => $company,
                 's.category_code' => $serviceCat['category_code']
             ]
         )->orderBy(['order'=>SORT_ASC])->all();
 
     $arrServices[$serviceCat['page_code_sc_title']] = $servicesArr;
 }
+
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
@@ -83,15 +80,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </style>
 <?php } ?>
 
-
-
-
-
-
-
 <span id="anchor-about-us"></span>
 
 <?= $this->render('/client/client-booking-header', ['myData' => $myData, 'code' => $company, 'logo' => $companyArr[0]['path'].$companyArr[0]['image']]); ?>
+
+<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu','code' => $company,'path2' => '']); ?>
 
 
 <div role="main" class="main">  
@@ -108,10 +101,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-sm-8 col-lg-8">
                     <div class="call-to-action-content">
                         <h3>
-                            <strong>Secure Your Spot Now.</strong>
+                            <strong>
+                                <?= Yii::t('app', 'page_booking_title') ?>                                
+                            </strong>
                         </h3>
                         <p class="mb-0 opacity-7">
-                            Secure your reservation instantly by clicking the 'Book Now'.
+                            <?= Yii::t('app', 'page_booking_text') ?>               
                         </p>
                     </div>
                 </div>
@@ -119,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="call-to-action-btn">                   
                         <?= 
                         Html::a(
-                            Yii::t('app', 'Book Now'),                      
+                            Yii::t('app', Yii::t('app', 'book_now_button')),                      
                             Url::to(['/client-booking', 'code' => $company]),
                             [
                             'class' => 'btn btn-primary btn-xl mb-2 text-5 py-3 px-5',                                                  
@@ -208,8 +203,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <span class="solid">  </span> 
     <div class="row  mb-5">
         <div class="col">  
-            <div class="heading text-primary heading-border ">            
-                <h1>Services</h1>
+            <div class="heading text-primary heading-border pt-5">            
+                <h2>
+                    <?=  Yii::t('app', 'menu_services') ?>
+                </h2>
                 <hr class="solid mb-5"> 
             </div> 
 
@@ -266,28 +263,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     <hr class="solid mb-5"> 
                 </div>        
                 <?php $form = ActiveForm::begin(); ?>  
-                    <?= $form->field($model, 'company_code')->hiddenInput(['value' => Yii::$app->user->identity->company_code])->label(false)  ?>
-                    <?= $form->field($model, 'type')->hiddenInput(['value' => 'message'])->label(false) ?>
-                    <?= $form->field($model, 'username_code')->hiddenInput(['value' => Yii::$app->user->identity->guid])->label(false) ?>
+                    <?= $form->field($model, 'company_code')->hiddenInput(['value' => $company])->label(false)  ?>
+                    <?= $form->field($model, 'type')->hiddenInput(['value' => 'message'])->label(false) ?>       
                     <div class="row">
                         <div class="form-group col-lg-6">                     
-                            <?= $form->field($model, 'full_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                            <?= $form->field($model, 'full_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'full_name')) ?>
                         </div>
                         <div class="form-group col-lg-3">
-                            <?= $form->field($model, 'email')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                            <?= $form->field($model, 'email')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'email')) ?>
                        </div>
                         <div class="form-group col-lg-3">
-                            <?= $form->field($model, 'contact_number')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                            <?= $form->field($model, 'contact_number')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'contact_number')) ?>
                         </div>
                     </div>
-                
+                    <div class="row">
+                        <div class="form-group col-lg-6">                     
+                            <?= $form->field($model, 'subject')->dropdownList(  
+                                Helpers::dropdownClientContactsUsSubject($company),
+                                ['prompt'=> Yii::t('app', 'select_subject'),
+                                'class' => 'form-control text-3 h-auto py-2','maxlength' => true]
+                                )->label(Yii::t('app', 'subject'));
+                            ?>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="form-group col pt-4">                     
-                            <?= $form->field($model, 'text')->textarea(['rows' => '5', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label('Massage') ?></div>
+                            <?= $form->field($model, 'text')->textarea(['rows' => '5', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'text')) ?></div>
                     </div>
                     <div class="row">                 
                         <div class="form-group pt-3">
-                            <?= Html::submitButton('Save', ['class' => 'btn btn-primary btn-modern']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'save_button'), ['class' => 'btn btn-primary btn-modern']) ?>
                         </div>
                     </div>         
                 <?php ActiveForm::end(); ?>
@@ -297,7 +302,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div>  
             <span class="my-5"></span>  
             <div class="heading text-primary heading-border my-5">          
-                <h1>Location</h1>
+                <h1>
+                    <?= Yii::t('app', 'menu_location') ?>
+                </h1>
                 <hr class="solid mb-5"> 
             </div>    
         <div class="row my-5 ">  
@@ -307,76 +314,68 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h4>
                     <?= $companyLocations['company_name'] ?> (<?= $companyLocations['location'] ?>)
                 </h4>
-                <h4 >Our <strong>Address</strong></h4>
-                    <ul class="list list-icons list-icons-style-3 ">
-                        <?php        
-
-                                $str = '';
-
-                                $str .= '<li>';
-                                $str .= '<i class="fas fa-map-marker-alt top-6"></i> '.$companyLocations['address_line_1'].' , '.$companyLocations['address_line_2'];
-                                $str .= '</li>';  
-                                $str .= '<li>';
-                                $str .= '<i class="fas fa-map-marker-alt top-6"></i> '.$companyLocations['city'].' , '.$companyLocations['postcode'].' ('.Helpers::getCountryName($companyLocations['country']).')';
-                                $str .= '</li>';
-                                                            
-                                $str .= '<li>';
-                                $str .= '<i class="fas fa-phone top-6"></i> '.$companyLocations['contact_number'];
-                                $str .= '</li>';
-                                $str .= '<li>';
-                                $str .= '<i class="fas fa-envelope top-6"></i> <a href="mailto:'.$companyLocations['email'].'">'.$companyLocations['email'].'</a>';   
-                                $str .= '</li>';  
-                                
-                                
-                            echo $str;
-                           
-                        ?>                      
-                    </ul>
-    
-                <h4 class="pt-2">Business <strong>Hours</strong></h4>
-                    <ul class="list list-icons list-dark mt-2">
-                        <?php                            
-
-
-
-                            $str = '';   
+                <h4 >
+                    <?= Yii::t('app', 'our_address_title') ?>
+                </h4>
+                <ul class="list list-icons list-icons-style-3 ">
+                    <li>
+                        <i class="fas fa-map-marker-alt top-6"></i><?= $companyLocations['address_line_1'] ?> , <?= $companyLocations['address_line_2'] ?>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt top-6"></i><?= $companyLocations['city'] ?> , <?= $companyLocations['postcode'].' ('.Helpers::getCountryName($companyLocations['country']).')' ?>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone top-6"></i><?= $companyLocations['contact_number'] ?> 
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope top-6"></i> <a href="mailto:'<?= $companyLocations['email'] ?> .'"><?= $companyLocations['email'] ?></a> 
+                    </li>
                             
-                            $arrWeek = ((is_array(json_decode($companyLocations['sheddule_array'],true))) ? json_decode($companyLocations['sheddule_array'], true) : []);
+                </ul>    
+                <h4 class="pt-2">
+                    <?= Yii::t('app', 'business_hours_title') ?>
+                </h4>
+                <ul class="list list-icons list-dark mt-2">
+                    <?php                           
 
-                            foreach($arrWeek as $key => $value){
-                                $str .= '<li><i class="far fa-clock top-6"></i> ';
-                                if($value['closed'] == 'false'){
-                                    $str .= Yii::t('app',$key);
-                                    $str .= ((empty($value['start'])) ? '' :' - '.$value['start'] );
-                                    $str .= ((empty($value['break_start'])) ? '' : ' - '.$value['break_start']);                
-                                    $str .= ' & ';   
-                                    $str .= ((empty($value['break_end'])) ? '' : $value['break_end']);
-                                    $str .= ((empty($value['end'])) ? '' : ' - '.$value['end']);
-                                              
-                                }
-                                $str .='</li>'; 
-                            }           
-                            
-                            
-                            $closedStr = '';
-                            $i = 0;
+                        $str = '';   
+                        
+                        $arrWeek = ((is_array(json_decode($companyLocations['sheddule_array'],true))) ? json_decode($companyLocations['sheddule_array'], true) : []);
 
-                            foreach($arrWeek as $key => $value){                               
-                                if($value['closed'] == 'true'){   
-                                    $comma = ($i == 0) ? '' : ',';                              
-                                    $closedStr .=  $comma.' '.Yii::t('app',$key); 
-                                    $i++;
-                                }       
-                            }   
-                            
-                            if(!empty($closedStr)){
-                                $str .= '<li><i class="far fa-clock top-6"></i> ';                           
-                                $str .= $closedStr.' - Closed</li>';
-                            }  
+                        foreach($arrWeek as $key => $value){
+                            $str .= '<li><i class="far fa-clock top-6"></i> ';
+                            if($value['closed'] == 'false'){
+                                $str .= Yii::t('app',$key);
+                                $str .= ((empty($value['start'])) ? '' :' - '.$value['start'] );
+                                $str .= ((empty($value['break_start'])) ? '' : ' - '.$value['break_start']);                
+                                $str .= ' & ';   
+                                $str .= ((empty($value['break_end'])) ? '' : $value['break_end']);
+                                $str .= ((empty($value['end'])) ? '' : ' - '.$value['end']);
+                                            
+                            }
+                            $str .='</li>'; 
+                        }           
+                        
+                        
+                        $closedStr = '';
+                        $i = 0;
 
-                            echo $str;
-                           
-                            ?>  
+                        foreach($arrWeek as $key => $value){                               
+                            if($value['closed'] == 'true'){   
+                                $comma = ($i == 0) ? '' : ',';                              
+                                $closedStr .=  $comma.' '.Yii::t('app',$key); 
+                                $i++;
+                            }       
+                        }   
+                        
+                        if(!empty($closedStr)){
+                            $str .= '<li><i class="far fa-clock top-6"></i> ';                           
+                            $str .= $closedStr.' - '.Yii::t('app', 'closed').'</li>';
+                        }  
+
+                        echo $str;
+                        
+                        ?>  
 
               
                     </ul>
@@ -394,7 +393,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row   my-5">           
             <div class="col-lg-12">
                 <div class="heading text-primary heading-border">
-                    <h1>Follow Us</h1>
+                    <h1>
+                        <?= Yii::t('app', 'follow_us') ?> 
+                    </h1>
                     <hr class="solid mb-5"> 
                 </div>    
                            

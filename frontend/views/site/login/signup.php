@@ -39,30 +39,30 @@ $path2 = 'sign_up'
                             <h2 class="font-weight-bold text-3 mb-0 pt-3">                                       
                                 <?= Yii::t('app', "signup_block_dados") ?>                
                             </h2>                      
-                            <div class="form-group col-lg-2"> 
+                            <div class="form-group col-lg-4"> 
                                 <?= $form->field($modelSignupForm, 'title')->dropdownList(
                                     Helpers::dropdownTitle(),
-                                    ['prompt'=>'Select Title', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                    ['prompt'=> Yii::t('app', "select_title"), 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
-                            <div class="form-grou col-lg-5">                              
+                            <div class="form-grou col-lg-4">                              
                                 <?= $form->field($modelSignupForm, 'first_name')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_first_name").':') ?>                             
                             </div>
-                            <div class="form-group  col-lg-5">
+                            <div class="form-group  col-lg-4">
                                 <?= $form->field($modelSignupForm, 'last_name')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_last_name").':') ?>
                             </div>                             
                         </div>                   
                         <div class="row pt-5">  
-                            <div class="form-group col-lg-2"> 
+                            <div class="form-group col-lg-4"> 
                                 <?= $form->field($modelSignupForm, 'gender')->dropdownList(
                                     Helpers::dropdownGender(),
-                                    ['prompt'=>'Select Gender', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                    ['prompt'=> Yii::t('app', "select_gender"), 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
-                            <div class="form-group col-lg-5">          
+                            <div class="form-group col-lg-4">          
                                 <?= $form->field($modelSignupForm, 'job_title')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_role").':') ?>                             
                             </div>  
-                            <div class="form-group col-lg-5">          
+                            <div class="form-group col-lg-4">          
                                 <?= $form->field($modelSignupForm, 'company')->textInput(['maxlength' => true, 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_company").':') ?>                             
                             </div>                       
                         </div> 
@@ -138,14 +138,28 @@ $path2 = 'sign_up'
                         </div>
 
                         <div class="row">
-                            <div class="form-group col pt-4">                    
-                                <?= $form->field($modelSignupForm, 'privacy')->checkBox(['privacy' => true,'label' => Yii::t('app', "signup_block_validation_terms"),'data-size'=>'small', 'class'=>'form-control ','id'=>'active']) ?>
+                            <div class="form-group col pt-4">  
+                                <?= $form->field($modelSignupForm, 'privacy')->checkBox(['required' => true,'label' => 
+                                        Yii::t('app', "signup_block_validation_terms").' 
+                                        <a href="'.Url::toRoute('site/privacy-policy').'" class="text-decoration-none">'.Yii::t('app', "footer_category_usefull_links_terms").'</a>',
+                                        'data-size'=>'small', 
+                                        'class'=>'form-control ',
+                                        'id'=>'active']
+                                    ) 
+                                ?>                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col pt-4">                    
-                                <?= $form->field($modelSignupForm, 'terms_and_conditions')->checkBox(['required' => true,'label' => Yii::t('app', "signup_block_validation_privacy").'<a href="'.Url::toRoute('site/privacy-policy').'" class="text-decoration-none">'.Yii::t('app', "signup_block_privacy_link").'</a>','data-size'=>'small', 'class'=>'form-control ','id'=>'active']) ?>
+                                <?= $form->field($modelSignupForm, 'terms_and_conditions')->checkBox(['required' => true,'label' => 
+                                        Yii::t('app', "signup_block_validation_privacy").' 
+                                        <a href="'.Url::toRoute('site/privacy-policy').'" class="text-decoration-none">'.Yii::t('app', "signup_block_privacy_link").'</a>',
+                                        'data-size'=>'small', 
+                                        'class'=>'form-control ',
+                                        'id'=>'active']
+                                    ) 
+                                ?>
                             </div>
                         </div>      
                         

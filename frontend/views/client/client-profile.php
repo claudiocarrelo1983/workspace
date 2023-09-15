@@ -3,6 +3,9 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use kartik\date\DatePicker;
+use common\Helpers\Helpers;
+use yii\widgets\ActiveForm;
 ?>
 
 <?= $this->render('/client/client-booking-header', ['myData' => '', 'logo' => '']); ?>
@@ -10,123 +13,74 @@ use yii\helpers\Url;
     <?= $this->render('/client/client-links'); ?>
  
 
-        <div class="row pt-2">
-            <div class="col-lg-3 mt-4 mt-lg-0">
+        <div class="row pt-2">   
+            <div class="col-lg-12">
 
-                <div class="d-flex justify-content-center mb-4">
-                    <div class="profile-image-outer-container">
-                        <div class="profile-image-inner-container bg-color-primary">
-                            <img src="img/avatars/avatar.jpg">
-                            <span class="profile-image-button bg-color-dark">
-                                <i class="fas fa-camera text-light"></i>
-                            </span>
+                <?php $form = ActiveForm::begin(); ?>  
+                    <?= $form->field($model, 'company_code')->hiddenInput(['value' => 'c42912795124624832670'])->label(false)  ?>
+                    <?= $form->field($model, 'type')->hiddenInput(['value' => 'message'])->label(false) ?>       
+                    <div class="row">
+                        <div class="form-group col-lg-2">                     
+                            <?= $form->field($model, 'title')->dropDownList(Helpers::dropdownTitle(),['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
                         </div>
-                        <input type="file" id="file" class="form-control profile-image-input">
+                        <div class="form-group col-lg-5">                     
+                            <?= $form->field($model, 'first_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                        </div>
+                        <div class="form-group col-lg-5">                     
+                            <?= $form->field($model, 'last_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                        </div>
                     </div>
-                </div>
+                    <div class="row pt-5">
+                        <div class="form-group col-lg-4">
+                            <?= $form->field($model, 'email')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                       </div>
+                        <div class="form-group col-lg-4">
+                            <?= $form->field($model, 'contact_number')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <?= $form->field($model, 'nif')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                        </div>
+                    </div>
+               
+                    <div class="row pt-5">
+                        <div class="form-group col-lg-4">   
+                            <label for="clients-gender">Date of Birth:</label>
+                            <?php                 
+            
+                                echo DatePicker::widget([
+                                    'model' => $model,                                                                                                      
+                                    'name' => 'dob',    
+                                    'id' => 'date-calendar-search', 
+                                    'removeButton' => false,
+                                    'value' => (empty($date) ? '' : date('d-m-Y', strtotime($date))),
+                                    'options' => [
+                                        'placeholder' => 'Select date...',
+                                        'class' => ' form-control text-4 h-auto py-1'
+                                    ],
+                                    'pluginOptions' => [  
+                                        'autoclose' => true,           
+                                        'format' => 'dd-mm-yyyy',
+                                        'todayHighlight' => true
+                                    ]                   
+                                ]);               
+                            ?>  
+                        </div>  
+                    </div>
 
-                <aside class="sidebar mt-2" id="sidebar">
-                    <ul class="nav nav-list flex-column mb-5">
-                        <li class="nav-item"><a class="nav-link text-3 text-dark active" href="#">My Profile</a></li>
-                        <li class="nav-item"><a class="nav-link text-3" href="#">User Preferences</a></li>
-                        <li class="nav-item"><a class="nav-link text-3" href="#">Billing</a></li>
-                        <li class="nav-item"><a class="nav-link text-3" href="#">Invoices</a></li>
-                    </ul>
-                </aside>
-
-            </div>
-            <div class="col-lg-9">
-
-                <form role="form" class="needs-validation">
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">First name</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="firstName" value="John" required>
-                        </div>
+                    <div class="row pt-5">
+                        <div class="form-group col-lg-4">
+                            <?= $form->field($model, 'username')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                       </div>
+                        <div class="form-group col-lg-4">
+                            <?= $form->field($model, 'password')->textInput(['type' => 'password', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true]) ?>
+                        </div>                
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Last name</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="lastName" value="Doe" required>
+                    <div class="row">                 
+                        <div class="form-group pt-3">
+                            <?= Html::submitButton('Save', ['class' => 'btn btn-primary btn-modern']) ?>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Email</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="email" name="email" value="email@gmail.com" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">Company</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="company" value="">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">Website</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="url" name="website" value="">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">Address</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="address" value="" placeholder="Street">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2"></label>
-                        <div class="col-lg-6">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="city" value="" placeholder="City">
-                        </div>
-                        <div class="col-lg-3">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="state" value="" placeholder="State">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">Time Zone</label>
-                        <div class="col-lg-9">
-                            <div class="custom-select-1">
-                                <select id="user_time_zone" class="form-control text-3 h-auto py-2" name="timeZone" size="0">
-                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Username</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="text" name="username" value="" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Password</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="password" name="password" value="" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Confirm password</label>
-                        <div class="col-lg-9">
-                            <input class="form-control text-3 h-auto py-2" type="password" name="confirmPassword" value="" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="form-group col-lg-9">
-
-                        </div>
-                        <div class="form-group col-lg-3">
-                            <input type="submit" value="Save" class="btn btn-primary btn-modern float-end" data-loading-text="Loading...">
-                        </div>
-                    </div>
-                </form>
+                    </div>         
+                <?php ActiveForm::end(); ?>
 
             </div>
         </div>

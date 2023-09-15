@@ -24,7 +24,9 @@ class AdminAsset extends AssetBundle
         'assets/libs/@fullcalendar/core/main.min.css',
         'assets/libs/@fullcalendar/daygrid/main.min.css',
         'assets/libs/@fullcalendar/bootstrap/main.min.css',
-        'assets/libs/@fullcalendar/timegrid/main.min.css'
+        'assets/libs/@fullcalendar/timegrid/main.min.css',
+
+        'css/theme-elements.css',
     ];
 
     public $js = [
@@ -47,7 +49,18 @@ class AdminAsset extends AssetBundle
        // 'assets/libs/@fullcalendar/timegrid/main.min.js',
         //'assets/libs/@fullcalendar/interaction/main.min.js',
         //'js/pages/calendars-full.init.js',
-        'js/app.js',        
+        'js/app.js',     
+        'js/theme.js',
+        
+
+
+        //'vendor/jquery/jquery.min.js',
+
+    
+     
+   
+
+
     ];
 
     public $depends = [

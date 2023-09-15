@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use common\Helpers\Helpers;
 
+
 $this->title = 'My Yii Application';
 
 ?>
@@ -12,16 +13,16 @@ $this->title = 'My Yii Application';
 <div class="header-container container">
 	<div class="header-row">
 			
-			<?= Html::a(
-                    Yii::t('app', Helpers::logoHeader(8)),
-					str_replace('/frontend/web', '', Url::home()),  
-                    [
-                    'class' => 'logo-url',
-                    'data-hash' => '',         
-                    'data-hash-offset' => 0,  
-                    'data-hash-offset-lg' => 130,  
-                    ]      
-			) ?>
+		<?= Html::a(
+				Yii::t('app', Helpers::logoHeader(8)),
+				str_replace('/frontend/web', '', Url::home()),  
+				[
+				'class' => 'logo-url',
+				'data-hash' => '',         
+				'data-hash-offset' => 0,  
+				'data-hash-offset-lg' => 130,  
+				]      
+		) ?>
 
 		<div class="header-column justify-content-end">
 			<div class="header-row">

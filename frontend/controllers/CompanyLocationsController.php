@@ -116,6 +116,7 @@ class CompanyLocationsController extends Controller
             }
         } else {
             $model->loadDefaultValues();
+            Helpers::defaultSheddulle($model);
         }
 
         return $this->render('create', [
@@ -141,7 +142,7 @@ class CompanyLocationsController extends Controller
         
         $model = $this->findModel($id);
 
-        $this->defaultSheddulle($model);
+        Helpers::defaultSheddulle($model);
 
         $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
 
@@ -201,26 +202,6 @@ class CompanyLocationsController extends Controller
         ]);
     }
 
-    public function defaultSheddulle($model)
-    {
-
-        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
-
-        foreach($weekDays as $dayWeek){
-
-            $sh = $dayWeek.'_starting_hour';
-            $eh = $dayWeek.'_end_hour';
-            $bs = $dayWeek.'_starting_break';
-            $be = $dayWeek.'_end_break';                
-
-            $model->$sh = strtotime('9:00');
-            $model->$eh = strtotime('18:00');
-            $model->$bs = strtotime('12:00');
-            $model->$be = strtotime('13:00');          
-   
-        }
-
-    }
 
     /**
      * Deletes an existing CompanyLocations model.

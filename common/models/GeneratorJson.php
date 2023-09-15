@@ -243,8 +243,8 @@ class GeneratorJson extends \yii\db\ActiveRecord
         $blogArr = $blogQuery->select(['t.country_code', 't.page_code', 't.text'])
             ->from(['t' => 'translations'])
             ->innerJoin(['c' => 'countries'], 'c.country_code = t.country_code')
-            ->all();
-              
+            ->all();          
+
         GeneratorJson::saveJson($blogArr, $table);
     }
 
@@ -300,9 +300,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
     public static function updateFaqs($table, $columns){
         
-        $blogQuery = new Query; 
-      
-        $blogQuery = new Query; 
+        $blogQuery = new Query;      
 
         $blogArr = $blogQuery->select(
             $columns
@@ -311,7 +309,6 @@ class GeneratorJson extends \yii\db\ActiveRecord
         ->orderBy([
             'order' => SORT_ASC          
           ])->all();
-
 
         GeneratorJson::saveJson($blogArr, $table);
     }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\Helpers\Helpers;
 
 /** @var yii\web\View $this */
 /** @var app\models\ServicesCategory $model */
@@ -29,16 +30,15 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col">            
             <?= $form->field($model, 'active')->dropdownList(
-                [
-                1 => Yii::t('app', 'yes'),
-                 0 => Yii::t('app', 'no'),
-                ]); 
+                    Helpers::dropdownActive(),
+                    ['prompt'=> Yii::t('app', 'select_active')], 
+                ); 
             ?>
         </div>
     </div>
 
     <div class="form-group pt-3">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'submit_button'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

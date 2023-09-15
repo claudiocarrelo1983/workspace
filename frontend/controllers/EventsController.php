@@ -7,6 +7,7 @@ use common\models\EventsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 use Yii;
 
 /**
@@ -55,12 +56,65 @@ class EventsController extends Controller
         ]);
     }
 
+    
+    public function actionIndex()
+    {
+        $this->layout = 'adminLayout';
+        
+        $modelEvents = new Events();          
+
+        if(isset($this->request->post()['Events']['id']) && $this->request->post()['Events']['id'] > 0){
+            $modelEvents = $this->findModelEvents($this->request->post()['Events']['id']); 
+        }
+      
+
+        if($this->request->isPost && isset($this->request->post()['Events'])){
+            $modelEvents->start = (isset($this->request->post()['start'])) ? $this->request->post()['start'] : '';
+            $modelEvents->end = (isset($this->request->post()['end'])) ? $this->request->post()['end'] : '';       
+            $modelEvents->username = Yii::$app->user->identity->username; 
+        }
+        
+        if ($this->request->isPost && $modelEvents->load($this->request->post())) {
+            
+            $modelEvents->save();
+            return $this->refresh();
+        }        
+
+        $query = new Query;
+        $eventsArr = $query->select('*')
+                    ->from(['events'])
+                    ->where(
+                        [
+                            'username' => Yii::$app->user->identity->username,
+                            'active' => true
+                        ]) 
+                    ->all();
+
+        $myDataArr = [];
+
+        foreach($eventsArr as $event){
+            $myDataArr[] = [                
+                'title' => (Yii::t('app', $event['page_code'])),
+                'className' => $event['color_code'],
+                'start' => $event['start'],
+                'end' => $event['end']                        
+            ];
+        }
+     
+    
+        return $this->render('/calendar/index', [
+            'modelEvents' => $modelEvents,
+            'myData' => json_encode($myDataArr)      
+         
+        ]);
+    }
+
     /**
      * Lists all Events models.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex2()
     {
         $searchModel = new EventsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);

@@ -50,7 +50,7 @@ class m230620_133921_company_locations extends Migration
             'cae' => $this->string(),           
             'contact_number' => $this->string(),  
             'email' => $this->string(),     
-            'sheddule_array' => $this->text(),                    
+            'sheddule_array' => $this->text()->defaultValue('{"monday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"tuesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"wednesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"thursday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"friday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"saturday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"sunday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"true"}}'),                    
             'address_line_1' => $this->string(),    
             'address_line_2' => $this->string(),     
             'city' => $this->string(),  

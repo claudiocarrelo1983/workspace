@@ -15,49 +15,48 @@ use common\Helpers\Helpers;
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <div class="row">
-        <h4 class="mb-sm-0 font-size-18 pb-4 pt-5">           
-            <?= Yii::t('app', ' Dados do Colaborador') ?>
-        </h4>  
+    <div class="row">    
         <div class="col">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">           
             <?= $form->field($model, 'title')->dropdownList(
                 Helpers::dropdownTitle(),
-                ['prompt'=>'Select Title']); 
+                ['prompt'=> Yii::t('app', 'select_title')])->label(Yii::t('app', 'title')); 
             ?> 
         </div>        
         <div class="col">
-            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'first_name')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'last_name')) ?>
         </div>  
         <div class="col">
-            <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true])->label(Yii::t('app', 'contact_number')) ?>
         </div> 
         <div class="col">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true])->label(Yii::t('app', 'email')) ?>
         </div>  
     </div>
     <div class="row">  
         <div class="col-lg-2">           
             <?= $form->field($model, 'gender')->dropdownList(
                 Helpers::dropdownGender(),
-                ['prompt'=>'Select Gender']); 
+                ['prompt'=> Yii::t('app', 'select_gender')],
+                )->label(Yii::t('app', 'gender')); 
             ?> 
         </div>  
         <div class="col-lg-2">           
             <?= $form->field($model, 'level')->dropdownList(
                 Helpers::dropdownLevel(),
-                ['prompt'=>'Select Level']); 
+                ['prompt'=> Yii::t('app', 'select_level')],
+              )->label(Yii::t('app', 'level')); 
             ?> 
         </div>
         <div class="col-lg-2">            
             <?= $form->field($model, 'active')->dropdownList(
-                Helpers::dropdownActive()
-                ); 
+                Helpers::dropdownActive(),                
+                )->label(Yii::t('app', 'active')); 
             ?>
         </div>  
     </div>

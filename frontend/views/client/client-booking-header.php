@@ -72,8 +72,6 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
 <!-- Load jQuery -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
 
-
-
 <header id="header" class="header-dark header-effect-shrink " data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
     <div class="header-body border-top-0 bg-light border overflow-visible">          
         <div class="header-top border">
@@ -230,4 +228,4 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
     </div>
 </header>      
   
-<div class="py-4"></div>  
+<div class="py2-4"></div>  

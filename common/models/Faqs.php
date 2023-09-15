@@ -116,8 +116,7 @@ class Faqs extends \yii\db\ActiveRecord
             'country_code' 
             ])
         ->from('countries')    
-        ->all();
-
+        ->all();     
       
         foreach ($countries as $val) {
 
@@ -128,7 +127,7 @@ class Faqs extends \yii\db\ActiveRecord
             [   
                 'page' => $page,
                 'country_code' => $val['country_code'],               
-                'page_code' => $model->page_code_title                        
+                'page_code' => $model->page_code_question                        
             ])->execute();
      
             $connection->createCommand()->insert('translations', [      
@@ -139,12 +138,12 @@ class Faqs extends \yii\db\ActiveRecord
                 'active' => 1,
             ])->execute();    
             
-            
+        
             $connection->createCommand()->delete('translations',
             [   
                 'page' => $page,
                 'country_code' => $val['country_code'],               
-                'page_code' => $model->page_code_title                        
+                'page_code' => $model->page_code_answer                        
             ])->execute();
      
             $connection->createCommand()->insert('translations', [      

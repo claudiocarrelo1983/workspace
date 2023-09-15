@@ -8,7 +8,7 @@ use yii\helpers\Url;
 $query = new Query;
 
 $sTableArr = $query->select([
-                'service_cat',
+                'service_code',
                 'location_code',
                 'team_username',
                 'date',
@@ -38,9 +38,10 @@ $servicesArr = $query->from(['s' => 'services'])
         ])
     ->where(
         [
-            's.company' => Yii::$app->request->get('code')   
+            's.company_code' => Yii::$app->request->get('code')   
         ]
     )->orderBy(['order'=>SORT_ASC])->all();
+
 
 $company = Yii::$app->request->get('code');
 
@@ -120,8 +121,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-
 <?= $this->render('/client/client-booking-header', ['myData' => $myData, 'code' => $company, 'logo' => ((isset($companyArr[0]['path'])) ? $companyArr[0]['path'].$companyArr[0]['image'] : '')]); ?>
+
+<div class="py-4"></div>  
 
 <div id="examples" class="container  pb-5">
     <?= $this->render('/client/client-links'

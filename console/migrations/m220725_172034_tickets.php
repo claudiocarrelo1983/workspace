@@ -35,7 +35,8 @@ class m220725_172034_tickets extends Migration
 
         $this->createTable('{{%tickets}}', [
             'id' => $this->primaryKey(),  
-            'ticket_number'=> $this->string()->unique(),
+            'ticket_number'=> $this->string(),
+            'ticket_parent'=> $this->string(),
             'company_code'=> $this->string(), 
             'username_code'=> $this->string(), 
             'type'=> $this->string(), 
@@ -44,6 +45,8 @@ class m220725_172034_tickets extends Migration
             'email' => $this->string(),            
             'subject' => $this->string(),            
             'text' => $this->text(),
+            'read'=> $this->boolean()->defaultValue(false),
+            'closed_ticket'=> $this->boolean()->defaultValue(false),
             'created_date' => $this->timestamp()
              
         ], $tableOptions);

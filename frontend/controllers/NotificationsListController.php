@@ -23,7 +23,7 @@ class NotificationsListController extends Controller
         if (Yii::$app->user->isGuest) {    
             return $this->goHome();
         }
-        
+
         if (Yii::$app->user->identity->level != 'admin') {
             return $this->goHome();
         }  
@@ -32,12 +32,13 @@ class NotificationsListController extends Controller
 
         $arrFilter = [
             'company_code'=> Yii::$app->user->identity->company_code,
+            'type'=> 'message',       
             //'active'=> 1,
             //'status'=> 10,
             //'level' => 'client'
             //'type'=> 'trial',
         ];
-
+       
         if(isset($this->request->queryParams['TicketsSearch'])){
             $arrFilter = array_merge($arrFilter, $this->request->queryParams['TicketsSearch']);
         
@@ -56,26 +57,71 @@ class NotificationsListController extends Controller
             'dataProvider' =>  $dataProvider,
         ]);   
     }
+    
 
     public function actionReply($id)
     {
-        $this->layout = 'adminLayout';  
-    
+        $this->layout = 'adminLayout';      
+        $searchModel = new TicketsSearch();
+        
+        $values = Tickets::findOne(['id' => $id]);
+
+
+   
         if (Yii::$app->user->isGuest) {     
             return $this->goHome();
         }
 
+        $arrFilter = [
+            'company_code'=> Yii::$app->user->identity->company_code,
+            'ticket_parent'=> $values->ticket_parent,
+            //'type'=> 'message', 
+            //'status'=> 10,
+            //'level' => 'client'
+            //'type'=> 'trial',
+        ];
+
+        $dataProvider = $searchModel->searchReply([
+            $searchModel->formName()=> $arrFilter
+        ]);
    
-        $model = $this->findModel($id);     
-      
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->render('view', [
-                'model' => $this->findModel(),
-            ]);  
+        $modelUpdate = $this->findModel($id);  
+        
+        $model = new Tickets();
+        
+        if ($this->request->isPost && $modelUpdate->load($this->request->post())){
+            
+            $model->ticket_parent =  $modelUpdate->ticket_number;
+            $model->company_code =  $modelUpdate->company_code;
+            $model->username_code =  $modelUpdate->username_code;
+            $model->type =  'message_reply';             
+            $model->text =  $modelUpdate->text;      
+            $model->closed_ticket =  0;  
+            switch($modelUpdate->closed_ticket){
+                case 'close':                  
+                    $modelUpdate->closed_ticket = 0;
+                    if($modelUpdate->save()) {
+                        $this->refresh();           
+                    }
+                    break;
+                case 'open':                
+                    $modelUpdate->closed_ticket = 1;
+                    if($modelUpdate->save()) {
+                        $this->refresh();           
+                    }
+                    break;
+                default:         
+                    if($model->save()) {
+                        $this->refresh();           
+                    }
+                    break;
+            }   
         }
-     
+
+
         return $this->render('reply', [
-            'model' => $model,
+            'model' => $modelUpdate,
+            'dataProvider' =>  $dataProvider,
         ]);
     }
 

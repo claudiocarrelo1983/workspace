@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ])
         ->where(
             [
-                's.company' => $code,                
+                's.company_code' => $code,                
             ]
         )
         ->orderBy(['s.order'=>SORT_ASC])->all(); 

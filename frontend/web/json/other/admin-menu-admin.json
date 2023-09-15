@@ -16,7 +16,7 @@
        {
           "key":"t-dashboard",
           "title":"Dashboard",
-          "url":"admin/dashboard",
+          "url":"/dashboard",
           "icon":"bx bx-home-circle",         
           "submenu":[
              
@@ -168,7 +168,7 @@
        {
          "key":"t-messages",
          "title":"Mensagens",
-         "url":"admin/notifications-list",
+         "url":"/notifications-list",
          "icon":"bx bx-message",
          "submenu":[
       

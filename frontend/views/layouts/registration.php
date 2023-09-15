@@ -30,9 +30,17 @@ PublicAsset::register($this);
 </head>
 
 <?php $this->beginBody() ?>
-<body data-plugin-page-transition>
+<!-- <body data-plugin-page-transition> -->
+<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 500, 'effect': 'speedingWheel'}">
+<div class="loading-overlay">
+    <div class="bounce-loader">
+        <div class="cssload-speeding-wheel-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+    </div>
+</div>
+<div class="body"> 
 
-<div class="body">
 <!--Top Menu -->    
     <?= $content ?>
     

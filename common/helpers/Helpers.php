@@ -18,7 +18,13 @@ class Helpers{
         return 'blogs';
     }
 
-    
+    public static function getBegginningOfString($text, $nChars = 50)
+    {
+        $result = substr($text, 0, $nChars);
+
+        $dots = (strlen($text) >= $nChars) ? '...' : '';
+        return $result.$dots;
+    }
     public static function getAllTables()
     {
         preg_match("/dbname=([^;]*)/", Yii::$app->db->dsn, $matches);
@@ -1100,22 +1106,24 @@ class Helpers{
             'client' => Yii::t('app', 'client'),
         ];
 
-        $arrTitle = [];
+        $arrLevel = [];
+
         foreach($titleList as  $key => $value){
-            $arrTitle[$key] = $value;
+            $arrLevel[$key] = $value;
         }
 
-        return $arrTitle;
+        return $arrLevel;
     }
     
    public static function dropdownTitle(){
 
         $titleList =    [
-            'mr' => Yii::t('app', 'Mr'),
-            'miss' => Yii::t('app', 'Miss'),
+            'mr' => Yii::t('app', 'mr'),
+            'miss' => Yii::t('app', 'miss'),
         ];
 
         $arrTitle = [];
+
         foreach($titleList as  $key => $value){
             $arrTitle[$key] = $value;
         }
@@ -1137,28 +1145,30 @@ class Helpers{
             '120' => 120,
         ];
     
-        $arrTitle = [];
+        $arrTimeWindow = [];
+
         foreach($titleList as  $key => $value){
-            $arrTitle[$key] = $value;
+            $arrTimeWindow[$key] = $value;
         }
 
-        return $arrTitle;
+        return $arrTimeWindow;
     }
 
 
     public static function dropdownGender(){
 
         $titleList =    [
-            'men' => Yii::t('app', 'Men'),
-            'women' => Yii::t('app', 'Women'),
+            'men' => Yii::t('app', 'men'),
+            'women' => Yii::t('app', 'women'),
         ];
     
-        $arrTitle = [];
+        $arrGender = [];
+
         foreach($titleList as  $key => $value){
-            $arrTitle[$key] = $value;
+            $arrGender[$key] = $value;
         }
 
-        return $arrTitle;
+        return $arrGender;
     }
 
     
@@ -1169,13 +1179,31 @@ class Helpers{
             '0' => Yii::t('app', 'no'),
         ];
     
-        $arrTitle = [];
+        $arrActive = [];
+
         foreach($titleList as  $key => $value){
-            $arrTitle[$key] = $value;
+            $arrActive[$key] = $value;
         }
 
-        return $arrTitle;
+        return $arrActive;
     }
+
+    public static function dropdownTicketStatus(){
+
+        $titleList =    [
+            '1' => Yii::t('app', 'closed'),
+            '0' => Yii::t('app', 'open'),
+        ];
+    
+        $arrTicket = [];
+
+        foreach($titleList as  $key => $value){
+            $arrTicket[$key] = $value;
+        }
+
+        return $arrTicket;
+    }
+
 
 
     public static function dropdownCompanyLocations(){
@@ -1191,7 +1219,7 @@ class Helpers{
         ->where(['company_code' => Yii::$app->user->identity->company_code])
         ->all();
         
-        $arrLocations = array();
+        $arrLocations =  [];
         
         foreach($locationArr as $value){
             $arrLocations[$value['location_code']] = $value['full_name'] . ' ('.$value['location'].')';
@@ -1218,7 +1246,7 @@ class Helpers{
 
         }
 
-        $arrHourDropdown = [];
+        $arrHourDropdown =  [];
 
         foreach($arrServices as $key => $value){   
             $arrHourDropdown[strtotime($key)] = $key; 
@@ -1233,7 +1261,7 @@ class Helpers{
     public static function dropdownTeam(){
 
         $query = new Query;
-        $arrTeam = array();
+      
 
         $teamArr = $query->select([
                 'guid', 
@@ -1247,6 +1275,8 @@ class Helpers{
                 'level' => 'team'
             ])
         ->all();
+
+        $arrTeam = [];
 
         foreach($teamArr as $value){
             $arrTeam[$value['guid']] = $value['first_name'].' '.$value['last_name'];
@@ -1267,7 +1297,7 @@ class Helpers{
         ->where(['company_code' => Yii::$app->user->identity->company_code])
         ->all();
         
-        $arrServiceCat = array();
+        $arrServiceCat =  [];
         
         foreach($serviceArr as $value){
             $arrServiceCat[$value['category_code']] = Yii::t('app',$value['page_code_title']);
@@ -1293,13 +1323,39 @@ class Helpers{
             )
         ->all();
         
-        $arrServiceCat = array();
+        $arrServices = [];
         
         foreach($serviceArr as $value){
-            $arrServiceCat[$value['service_code']] = Yii::t('app',$value['page_code_title']);
+            $arrServices[$value['service_code']] = Yii::t('app',$value['page_code_title']);
         }
 
-        return $arrServiceCat;
+        return $arrServices;
+    }
+
+    public static function dropdownClientContactsUsSubject($company){
+
+        $query = new Query;
+
+        $serviceArr = $query->select([        
+            'page_code',     
+        ])
+        ->from('subjects')    
+        ->where(
+            [
+                'type' => 'client',
+                'company_code' => $company, 
+            ]
+            )
+        ->orderBy('order')
+        ->all();
+        
+        $arrServices = [];
+        
+        foreach($serviceArr as $value){
+            $arrServices[Yii::t('app',$value['page_code'])] = Yii::t('app',$value['page_code']);
+        }
+
+        return $arrServices;
     }
 
     public static function getTeamArr(){
@@ -1322,6 +1378,27 @@ class Helpers{
         ->all();
 
         return $userArr;
+    }
+
+    public static function defaultSheddulle($model)
+    {
+
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        foreach($weekDays as $dayWeek){
+
+            $sh = $dayWeek.'_starting_hour';
+            $eh = $dayWeek.'_end_hour';
+            $bs = $dayWeek.'_starting_break';
+            $be = $dayWeek.'_end_break';                
+
+            $model->$sh = strtotime('9:00');
+            $model->$eh = strtotime('18:00');
+            $model->$bs = strtotime('12:00');
+            $model->$be = strtotime('13:00');          
+   
+        }
+
     }
 
 }

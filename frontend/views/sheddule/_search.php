@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\Helpers\Helpers;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var app\models\ShedduleSearch $model */
@@ -20,50 +21,32 @@ use common\Helpers\Helpers;
         <div class="col">
             <?= $form->field($model, 'team_username')->dropDownList(
                     Helpers::dropdownTeam(),
-                    ['prompt'=>'Select Team']            
-                ); 
+                    ['prompt'=> Yii::t('app', 'select_team')]            
+                )->label(Yii::t('app','team_username')) ; ; 
             ?> 
         </div>
         <div class="col">
             <?= $form->field($model, 'service_code')->dropDownList(
                     Helpers::dropdownServices(),
-                    ['prompt'=>'Select Service']            
-                ); 
+                    ['prompt'=> Yii::t('app', 'select_services')]                 
+                )->label(Yii::t('app','service_code')) ; 
             ?> 
         </div>
         <div class="col">            
-            <?= $form->field($model, 'contact_number') ?>
+            <?= $form->field($model, 'contact_number')->label(Yii::t('app','contact_number'))  ?>
         </div>
         <div class="col">
-            <?php echo $form->field($model, 'nif') ?>
+            <?php echo $form->field($model, 'nif')->label(Yii::t('app','nif')) ?>
         </div>
         <div class="col">
-            <?php echo $form->field($model, 'email') ?>
+            <?php echo $form->field($model, 'email')->label(Yii::t('app','email')) ?>
         </div>
     </div>
-
-
-    <?php // echo $form->field($model, 'service_name') ?>
-
-    <?php // echo $form->field($model, 'available') ?>
-
-    <?php // echo $form->field($model, 'name') ?>
-
-    <?php // echo $form->field($model, 'contact_number') ?>
-
-    <?php // echo $form->field($model, 'email') ?>
-
-    <?php // echo $form->field($model, 'nif') ?>
-
-    <?php // echo $form->field($model, 'date') ?>
-
-    <?php // echo $form->field($model, 'time') ?>
-
-    <?php // echo $form->field($model, 'created_date') ?>
-
     <div class="form-group pb-4">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'search_button'), ['class' => 'btn btn-primary']) ?>
+        <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('sheddule/index'); ?>">
+            <?= Yii::t('app', 'reset_button') ?>
+        </a>
     </div>
 
     <?php ActiveForm::end(); ?>

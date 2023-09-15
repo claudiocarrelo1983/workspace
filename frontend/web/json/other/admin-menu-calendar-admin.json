@@ -4,7 +4,7 @@
        {
           "key":"t-dashboard",
           "title":"menu_admin_dashboard",
-          "url":"admin/dashboard",
+          "url":"/dashboard",
           "icon":"bx bx-home-circle",         
           "submenu":[
              
@@ -15,12 +15,12 @@
           "title":"menu_admin_sheddule",
           "url":"null",
           "icon":"dripicons-clock",
-          "childs" : ["admin/clients"],
+          "childs" : ["/clients"],
           "submenu":[
              {
                 "key":"t-sheddule-list",
                 "title":"menu_admin_sheddule_list",
-                "url":"sheddule/index",
+                "url":"/sheddule",
                 "submenu":[                    
                    
                 ]
@@ -40,12 +40,12 @@
          "title":"menu_admin_clients",
          "url":"null",
          "icon":"dripicons-user-group",
-         "childs" : ["admin/clients", "admin/new-client"],
+         "childs" : ["/clients", "admin/new-client"],
          "submenu":[
             {
                "key":"t-clients-list",
                "title":"menu_admin_clients_list",
-               "url":"clients/index",
+               "url":"clients/",
                "submenu":[                    
                   
                ]
@@ -60,9 +60,7 @@
            }
          ]
       },    
-   
-
-       {
+      {
          "key":"t-organizer",
          "title":"menu_admin_events",
          "url":"null",
@@ -73,7 +71,7 @@
             {
               "key":"t-schedule",
               "title":"menu_admin_agenda_calendar",
-              "url":"admin/calendar",
+              "url":"/events",
               "icon":"bx bx-world",
               "submenu":[
            
@@ -81,18 +79,31 @@
            }
           
          ]
-      },  
-   
-      
-       {
+      },     
+      {
          "key":"t-messages",
          "title":"menu_admin_messages",
-         "url":"admin/notifications-list",
+         "url":"null",
          "icon":"bx bx-message",
          "submenu":[
-      
+            {
+               "key":"t-messages-list",
+               "title":"menu_admin_messages_list",
+               "url":"notifications-list/",
+               "submenu":[
+                  
+               ]
+            },
+            {
+               "key":"t-messages-subject",
+               "title":"menu_admin_messages_subject",
+               "url":"notifications-subject/",
+               "submenu":[
+                  
+               ]
+            }      
          ]
-      },   
+      },  
       {
          "key":"t-services",
          "title":"menu_admin_services",
@@ -102,7 +113,7 @@
             {
                "key":"t-services",
                "title":"menu_admin_services_details",
-               "url":"services/index",
+               "url":"services/",
                "submenu":[
                   
                ]
@@ -110,7 +121,7 @@
             {
                "key":"t-todo-list",
                "title":"menu_admin_services_category",
-               "url":"services-category/index",
+               "url":"services-category/",
                "submenu":[
                   
                ]
@@ -118,7 +129,7 @@
          ]
       },   
       {
-         "key":"t-webadmin",
+         "key":"t-company",
          "title":"menu_admin_company",
          "url":"null",
          "icon":"bx dripicons-web",
@@ -126,7 +137,7 @@
             {
                "key":"t-company-details",
                "title":"menu_admin_company_details",
-               "url":"company/index",
+               "url":"company/",
                "submenu":[
                   
                ]
@@ -134,7 +145,7 @@
             {
                "key":"t-team",
                "title":"menu_admin_company_team",
-               "url":"team/index",
+               "url":"team/",
                "submenu":[
                   
                ]
@@ -142,7 +153,7 @@
             {
                "key":"t-company-locations",
                "title":"menu_admin_company_locations",
-               "url":"company-locations/index",
+               "url":"company-locations/",
                "submenu":[
                   
                ]
@@ -151,15 +162,15 @@
          ]
       },
       {
-         "key":"t-webadmin",
+         "key":"t-campaign",
          "title":"menu_admin_campaign",
          "url":"null",
          "icon":"bx dripicons-rocket",
          "submenu":[
             {
-               "key":"t-company",
+               "key":"t-campaign",
                "title":"menu_admin_campaign_details",
-               "url":"company/index",
+               "url":"company/",
                "submenu":[
                   
                ]
@@ -176,7 +187,7 @@
             {
                "key":"t-social",
                "title":"menu_admin_campaign_social",
-               "url":"social/index",
+               "url":"social/",
                "submenu":[
                   
                ]
@@ -190,23 +201,23 @@
          "icon":"bx bx-cog",
          "submenu":[
             {
-               "key":"t-team",
+               "key":"t-profile",
                "title":"menu_admin_settings_profile",
-               "url":"profile/index",
+               "url":"profile/",
                "submenu":[
                   
                ]
-            },   
+            },  
             {
-               "key":"t-company",
-               "title":"menu_admin_settings_notifications",
-               "url":"notifications/index",
+               "key":"t-settings",
+               "title":"menu_admin_settings",
+               "url":"profile/",
                "submenu":[
                   
                ]
-            },
+            },  
             {
-               "key":"t-team",
+               "key":"t-mywebpage",
                "title":"menu_admin_settings_webpage",
                "url":"admin/webadmin",
                "submenu":[

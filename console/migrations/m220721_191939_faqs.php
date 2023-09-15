@@ -34,8 +34,9 @@ class m220721_191939_faqs extends Migration
         }
 
         $this->createTable('{{%faqs}}', [
-            'id' => $this->primaryKey(),   
-            'position' => $this->string()->notNull(), 
+            'id' => $this->primaryKey(),     
+            'category' => $this->string(),             
+            'position' => $this->string()->notNull(),
             'question' => $this->string(),
             'page_code_question' => $this->string()->notNull()->unique(),  
             'page_code_answer' => $this->string()->notNull()->unique(),  

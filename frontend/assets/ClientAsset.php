@@ -33,8 +33,6 @@ class ClientAsset extends AssetBundle
         'js/form-builder.min.js',
         'js/script.js',
         'assets/libs/dropzone/min/dropzone.min.js',
-
-
         'assets/libs/moment/min/moment.min.js',
         'assets/libs/jquery-ui-dist/jquery-ui.min.js',
         '@fullcalendar/core/main.min.js',
@@ -42,8 +40,7 @@ class ClientAsset extends AssetBundle
         '@fullcalendar/daygrid/main.min.js',
         '@fullcalendar/timegrid/main.min.js',
         '@fullcalendar/interaction/main.min.js',
-        'assets/js/pages/calendars-full.init.js',
-          
+        'assets/js/pages/calendars-full.init.js',          
         'assets/libs/table-edits/build/table-edits.min.js',
         'js/pages/table-editable.int.js',
         'js/app.js',      

@@ -29,8 +29,18 @@ AdminAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body data-sidebar="dark">
+
 <?php $this->beginBody() ?>
+<!-- <body data-plugin-page-transition> -->
+<body data-sidebar="dark" class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 500, 'effect': 'speedingWheel'}">
+<div class="loading-overlay">
+    <div class="bounce-loader">
+        <div class="cssload-speeding-wheel-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+    </div>
+</div>
+<div class="body"> 
 
  <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -65,7 +75,11 @@ AdminAsset::register($this);
             <div class="main-content">
                 <div class="page-content">
                     <div class="container-fluid">
-                         <?= $content ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <?= $content ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

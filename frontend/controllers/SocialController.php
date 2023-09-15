@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Company;
+use common\models\Company;
 use frontend\models\CompanySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

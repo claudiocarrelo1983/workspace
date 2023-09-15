@@ -1,14 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
-
 use common\models\Sheddule;
 use yiier\chartjs\ChartJs;
 use common\Helpers\Helpers;
 use frontend\models\CompanyLocations;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
-$this->title = 'Dashboard';
-$this->params['breadcrumbs'][] = $this->title;
 
 $arrCompanyStats = [];
 $arrTeam = [];
@@ -145,15 +144,9 @@ foreach($userArr as $user){
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18"><?php echo $this->title; ?></h4>
-
-            <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
-                    <li class="breadcrumb-item active">Saas</li>
-                </ol>
-            </div>
-
+            <h4 class="mb-sm-0 font-size-18 pt-4">
+                <?= Yii::t('app', 'menu_admin_dashboard') ?>
+            </h4>
         </div>
     </div>
 </div>
@@ -161,23 +154,27 @@ foreach($userArr as $user){
 
 <div class="row">
     <div class="col-lg-4">
-        <div class="card bg-primary bg-soft" style="height: 120px;">
-            <div >
-                <div class="row" >
-                    <div class="col-7">
-                        <div class="text-primary p-3">                    
-                            <div class="text-primary">
-                                <p class="mb-2">Welcome Back</p>
-                                <h5 class="mb-1"><?= Yii::$app->user->identity->full_name ?></h5>
-                                <p class="mb-0"><?= Yii::$app->user->identity->username  ?></p>
-                            </div>
+        <div class="card bg-primary bg-soft" >          
+            <div class="row" >
+                <div class="col-7">
+                    <div class="text-primary p-3">                    
+                        <div class="text-primary">
+                            <p class="mb-2">
+                                <?= Yii::t('app', 'welcome_back') ?>                             
+                            </p>
+                            <h5 class="mb-1">
+                                <?= Yii::$app->user->identity->full_name ?>
+                            </h5>
+                            <p class="mb-0">
+                                <?= Yii::$app->user->identity->username  ?>
+                            </p>
                         </div>
                     </div>
-                    <div class="col-5 align-self-end">
-                        <img src="assets/images/profile-img.png" alt="" class="img-fluid">
-                    </div>
                 </div>
-            </div>
+                <div class="col-5 align-self-end">
+                    <img src="../assets/images/profile-img.png" class="img-fluid">
+                </div>
+            </div>          
         </div>
     </div>
     <div class="col-lg-8">
@@ -189,19 +186,25 @@ foreach($userArr as $user){
                             <div class="row">                                                    
                                 <div class="col-4">
                                     <div>
-                                        <p class="text-muted text-truncate mb-2">Clients</p>
+                                        <p class="text-muted text-truncate mb-2">
+                                            <?= Yii::t('app', 'clients') ?>
+                                        </p>
                                         <h5 class="mb-0"><?= $countClients ?></h5>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div>
-                                        <p class="text-muted text-truncate mb-2">Team Members</p>
+                                        <p class="text-muted text-truncate mb-2">
+                                            <?= Yii::t('app', 'team_members') ?>
+                                        </p>
                                         <h5 class="mb-0"><?= $countTeam ?></h5>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div>
-                                        <p class="text-muted text-truncate mb-2">Resellers</p>
+                                        <p class="text-muted text-truncate mb-2">
+                                            <?= Yii::t('app', 'resellers') ?>
+                                        </p>
                                         <h5 class="mb-0"><?= $countResellers ?></h5>
                                         
                                     </div>
@@ -213,14 +216,14 @@ foreach($userArr as $user){
                     <div class="col-lg-4 d-none d-lg-block">
                         <div class="clearfix mt-4 mt-lg-0">
                             <div class="dropdown float-end">
-                                <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bx bxs-cog align-middle me-1"></i> Setting
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else</a>
-                                </div>
+                                <?= Html::a(
+                                    '<i class="bx dripicons-web align-middle me-1"></i>'.Yii::t('app','webpage'),                          
+                                    Url::toRoute(['/page', 'code' => Yii::$app->user->identity->company_code]),
+                                    [   
+                                    'class' => 'btn btn-primary',        
+                                    'target' => '_blank'
+                                    ]                             
+                                ) ?>                                                          
                             </div>
                         </div>
                     </div>
@@ -328,7 +331,7 @@ foreach($userArr as $user){
             <div class="card-body">
                 <div class="clearfix">                                    
                     <h4 class="card-title ">
-                        <?= Yii::t('app', 'Past Year Earnings') ?>
+                        <?= Yii::t('app', 'past_earnings') ?>
                     </h4>
                 </div>
                 <!-- Nav tabs -->              
@@ -354,9 +357,7 @@ foreach($userArr as $user){
                 <div class="tab-content border pb-4 px-3 pt-2">
                     <?php 
                          $i = 0;                       
-                         
-                
-                         
+
                         foreach($arrCompanyStats as $key => $companyStats) : 
                     ?>
                         <div class="tab-pane <?= (($i == 0) ? 'active' : '') ?> pt-3" id="<?= $key ?>" role="tabpanel">  
@@ -400,7 +401,9 @@ foreach($userArr as $user){
         <div class="card">
             <div class="card-body">
                 <div class="clearfix pt-3">            
-                    <h4 class="card-title mb-4">Total Annual</h4>
+                    <h4 class="card-title mb-4">
+                        <?= Yii::t('app', 'total_annual') ?>                
+                    </h4>
                 </div>    
                 <ul class="nav nav-tabs " role="tablist">
                     <?php foreach($tabsOptions as $key => $tab): ?>
@@ -419,8 +422,12 @@ foreach($userArr as $user){
                                     <thead>
                                         <tr>
                                             <td>#</td>
-                                            <td class="text-center"> Services </td>          
-                                            <td class="text-center"> Revenue </td>                 
+                                            <td class="text-center">
+                                                <?= Yii::t('app', 'services') ?>                                          
+                                            </td>          
+                                            <td class="text-center">
+                                                <?= Yii::t('app', 'revenue') ?>
+                                            </td>                 
                                         </tr>                           
                                     </thead>
                                     <tbody>
@@ -462,7 +469,7 @@ foreach($userArr as $user){
                                         ?> 
                                           <tr>
                                                 <td >  
-                                                    Total                          
+                                                    <?= Yii::t('app', 'total') ?>                            
                                                 </td> 
                                                 <td class="text-center">                                                
                                                     <?= $totalServices ?>                                                                     

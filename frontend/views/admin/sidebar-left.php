@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Json;
+use common\models\Tickets;
 use yii\helpers\Url;
 use common\models\GeneratorJson;
 use common\Helpers\Helpers;
@@ -68,9 +68,15 @@ $active3 = '';
         $badge = '<span class="badge rounded-pill bg-success float-end">New</span>';
     }
 
-    if(isset($menucategory['key']) && $menucategory['key'] == 't-messages'){
-        $numberMessages = 102;
-        $badge = '<span class="badge rounded-pill bg-danger float-end">'.$numberMessages.'</span>';
+    if(isset($menucategory['key']) && $menucategory['key'] == 't-messages'){ 
+
+        $numberMessages = Tickets::find()->andFilterWhere([
+            'company_code'=> Yii::$app->user->identity->company_code,
+            'type'=> 'message',
+            'closed_ticket'=> '0',
+            'read'=> '0'
+            ])->count(); 
+        $badge = '<span class="badge rounded-pill bg-danger float-end">'.(($numberMessages > 0) ? $numberMessages : '').'</span>';
     } 
  
 ?>

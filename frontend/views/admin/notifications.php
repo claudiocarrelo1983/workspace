@@ -1,42 +1,18 @@
 <?php
 
 /* @var $this yii\web\View */
-
-use yii\helpers\Html;
+use common\Helpers\Helpers;
 use yii\helpers\Url;
+use common\models\Tickets;
+use yii\helpers\Html;
 
-$notifications =  array(
-    array(
-        'username' => ' TW_Ccarrelo',
-        'title' => ' Portuguese',
-        'message' => ' If several languages coalesce the grammar',
-        'time' => '3 min ago',
-        'img' => 'images/flags/portugal.png'
-    ),
-    array(
-        'username' => ' TW_Eurico',
-        'title' => ' Portuguese',
-        'message' => ' If several languages coalesce the grammar',
-        'time' => '3 min ago',
-        'img' => 'images/users/avatar-4.jpg'
-    ),
 
-    array(
-        'username' => ' TW_Eurico',
-        'title' => ' Portuguese',
-        'message' => ' If several languages coalesce the grammar',
-        'time' => '3 min ago',
-        'img' => 'images/users/avatar-4.jpg'
-    ),
-    array(
-        'username' => ' TW_Eurico',
-        'title' => ' Portuguese',
-        'message' => ' If several languages coalesce the grammar',
-        'time' => '3 min ago',
-        'img' => 'images/users/avatar-4.jpg'
-    ),
-);
-
+$notifications = Tickets::find()->where(
+    [
+        'company_code' => Yii::$app->user->identity->company_code,
+        'type' => 'message',
+        'read' => '0'
+    ])->asArray()->all();
 
 $rows = count($notifications);
 
@@ -46,7 +22,13 @@ $rows = count($notifications);
 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="bx bx-bell bx-tada"></i>
-        <span class="badge bg-danger rounded-pill"><?= $rows ?></span>
+        <?php
+            if($rows > 0){
+        ?>
+            <span class="badge bg-danger rounded-pill"><?= $rows ?></span>
+        <?php
+            }
+        ?>
     </button>
 
 
@@ -55,40 +37,65 @@ $rows = count($notifications);
     <div class="p-3">
         <div class="row align-items-center">
             <div class="col">
-                <h6 class="m-0" key="t-notifications"> Notifications </h6>
+                <h6 class="m-0" key="t-notifications">                      
+                     <?= Yii::t('app', 'menu_admin_settings_notifications') ?>
+                </h6>
             </div>
             <div class="col-auto">
-                <a href="<?= Url::toRoute('site/notifications-list') ?>" class="small" key="t-view-all"> View All</a>
+                <a href="<?= Url::toRoute('/notifications-list') ?>" class="small" key="t-view-all">
+                    <?= Yii::t('app', 'view_all') ?> 
+                </a>
             </div>
         </div>
     </div>
     <div data-simplebar style="max-height: 230px;">
+    <?php
+            if($rows > 0){
+                 foreach ($notifications as $key => $value): ?>            
 
-        <?php foreach ($notifications as $key => $message): ?>   
-                
-
-                <a href="javascript: void(0);" class="text-reset notification-item">
-                    <div class="d-flex">                        
-                        <img src="<?= $message['img'] ?>"
-                            class="me-3 rounded-circle avatar-xs" alt="user-pic">                              
-
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1" key="t-your-order"><?= $message['title'] ?></h6>
-                            <div class="font-size-12 text-muted">
-                                <p class="mb-1" key="t-grammer"><?= $message['message'] ?></p>
-                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago"><?= $message['time'] ?></span></p>
+                    <a href="<?= Url::toRoute(['/notifications-list/reply', 'id' => $value['id']]) ?>" class="text-reset notification-item">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1" key="t-your-order">
+                                    <?= $value['full_name'] ?>
+                                </h6>
+                                <div class="font-size-12 text-muted">
+                                    <p class="mb-1" key="t-grammer">                             
+                                        <?= Helpers::getBegginningOfString($value['text'], 120) ?>
+                                    </p>
+                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 
+                                        <span key="t-min-ago">
+                                            <?= $value['created_date'] ?>
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
     
 
-        <?php endforeach; ?>
+        <?php endforeach; 
+        
+            }else{
+        ?>
+                <a href="javascript: void(0);" class="text-reset notification-item">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <?= Yii::t('app', 'nothing_to_show') ?>                   
+                        </div>
+                    </div>
+                </a>   
+           
+        <?php
+            }
+        ?>
 
     </div>
     <div class="p-2 border-top d-grid">
-        <a class="btn btn-sm btn-link font-size-14 text-center" href="<?= Url::toRoute('site/notifications-list') ?>">
-            <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">View More..</span> 
+        <a class="btn btn-sm btn-link font-size-14 text-center" href="<?= Url::toRoute('/notifications-list') ?>">
+            <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">
+                <?= Yii::t('app', 'view_more') ?>
+            </span> 
         </a>
     </div>
 </div>

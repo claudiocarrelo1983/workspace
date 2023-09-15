@@ -8,7 +8,8 @@ use yii\helpers\Url;
 <nav class="header-nav-top">							         
 	<?php
  
-	    if (!Yii::$app->user->isGuest && Yii::$app->user->identity->first_name == 'admin') { ?>                                
+ 	//&& Yii::$app->user->identity->first_name == 'admin'
+	    if (!Yii::$app->user->isGuest ) { ?>                                
 		<span class="white-text  text-center">
 			<div class="d-block d-lg-none">
 				<i class="fas fa-user ms-1"> </i>
@@ -37,7 +38,7 @@ use yii\helpers\Url;
 			<?= Html::a(
 				'<div class="d-block d-lg-none">'.Yii::t('app', 'cpanel_small').'</div>'.
 				'<div class="d-none d-lg-block">'.Yii::t('app', 'cpanel_big').'</div>',
-				Url::toRoute('admin/dashboard'),
+				Url::toRoute('/dashboard'),
 				[
 					'class' => 'white-text text-center',
 					'data-hash' => '',

@@ -15,12 +15,31 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="services-index">
 
-    <h4 class="mb-sm-0 font-size-18 pb-4">
-        <?= Html::encode($this->title) ?>
-    </h4>
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18 pb-4">
+                    <?= Html::encode(Yii::t('app', 'menu_admin_services')) ?>
+                </h4>  
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">
+                                <?= Yii::t('app', 'menu_admin_services') ?> 
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <?= Yii::t('app', 'menu_admin_services_list') ?>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <p>
-        <?= Html::a('Create Services', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'create_services_button'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,25 +49,42 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'company_code',
-            'username',
-            'service_code',
-            'category_code',
-            //'page_code_title',
-            //'page_code_text',
-            //'title',
-            //'text:ntext',
-            //'subtitle:ntext',
-            //'title_pt',
-            //'text_pt:ntext',
-            //'title_en',
-            //'text_en:ntext',
-            //'price',
-            'order',
-            'active',
-            //'created_date',
+            [     
+                'label' => Yii::t('app', 'id') ,                        
+                'value' => function (Services $model) {
+                    return $model->id;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'company_code') ,                        
+                'value' => function (Services $model) {
+                    return $model->company_code;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'username') ,                        
+                'value' => function (Services $model) {
+                    return $model->username;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'service_code') ,                        
+                'value' => function (Services $model) {
+                    return $model->service_code;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'order') ,                        
+                'value' => function (Services $model) {
+                    return $model->order;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'active') ,                        
+                'value' => function (Services $model) {
+                    return $model->active;
+                },
+            ],     
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Services $model, $key, $index, $column) {

@@ -8,6 +8,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\GeneratorJson;
+use common\Helpers\Helpers;
+use frontend\models\SignupForm;
+use yii\db\Query;
+use common\models\LoginForm;
+
 use Yii;
 
 /**
@@ -96,6 +101,184 @@ class TeamController extends Controller
      */
     public function actionCreate()
     {
+
+
+        $model = new SignupForm();
+        $this->layout = 'adminLayout'; 
+        
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        $connection = new Query;
+
+        $request = Yii::$app->request;
+
+        $level = $connection->select([
+            'level' 
+            ])
+        ->from('user')   
+        ->where(['username' => $request->post('username')]) 
+        ->one();
+   
+   
+        if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+        $submitEmail = '';
+
+        $model->guid = Helpers::GUID();
+      
+      
+        if ($model->load(Yii::$app->request->post())) {     
+       
+
+            $title = 'team_title_1'; 
+            $text = 'team_text_1'; 
+            $username = 'username_1';
+
+            $count = User::find('id')->orderBy("id desc")->limit(1)->one();
+    
+            if(!empty($count->id)){
+             $title = 'team_title_'.bcadd($count->id, 1);  
+             $text = 'team_text_'.bcadd($count->id, 1);  
+             $username = 'username_'.bcadd($count->id, 1);           
+            }                
+
+            $model->company_code = Yii::$app->user->identity->company_code;   
+            $model->company = Yii::$app->user->identity->company;   
+            $model->newsletter = Yii::$app->user->identity->newsletter;     
+            $model->privacy = Yii::$app->user->identity->newsletter;     
+            $model->terms_and_conditions = Yii::$app->user->identity->terms_and_conditions;          
+            $model->page_code_title = $title;
+            $model->page_code_text = $text;
+            $model->username = $username;
+            $model->voucher = 'null';     
+            $model->password = Helpers::generateRandowHumber();
+         
+
+            if($model->validate()){               
+         
+                    $model->signup();    
+                   
+                    $result = User::findOne(['username' => $model->username]);  
+              
+                    //GeneratorJson::updateTablesGeneric('translations');  
+                    //GeneratorJson::updateTranslationsGeneric('translations');  
+                    return $this->redirect(['view', 'id' => $result->id]);
+
+            }         
+        }
+     
+        //$this->layout = 'publicDark';
+
+        $serviceTimeMin = (empty($model->time_window) ? '60' : $model->time_window);
+        //$this->layout = 'publicDark';
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        return $this->render('create', [
+            'model' => $model,
+            'weekDays' => $weekDays,
+            'serviceTimeMin' => $serviceTimeMin
+        ]);
+
+
+
+
+
+
+
+
+        $model = new SignupForm();
+        
+        $this->layout = 'adminLayout'; 
+
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        $connection = new Query;
+
+        $request = Yii::$app->request;
+
+        $level = $connection->select([
+            'level' 
+            ])
+        ->from('user')   
+        ->where(['username' => $request->post('username')]) 
+        ->one();
+   
+   
+        if (Yii::$app->user->isGuest && $maintenance == true && $level !== 'admin') {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+        $submitEmail = '';
+
+        $model->guid = Helpers::GUID();
+      
+      
+        if ($model->load(Yii::$app->request->post())) {     
+
+        
+            $title = 'team_title_1'; 
+            $text = 'team_text_1'; 
+            $username = 'username_1';
+
+            $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
+    
+            if(!empty($count->id)){
+             $title = 'team_title_'.bcadd($count->id, 1);  
+             $text = 'team_text_'.bcadd($count->id, 1);  
+             $username = 'username_'.bcadd($count->id, 1);           
+            }                
+
+            $model->company_code = Yii::$app->user->identity->company_code;         
+            $model->page_code_title = $title;
+            $model->page_code_text = $text;
+            $model->username = $username;
+
+            $model->voucher = 'null';
+
+            if($model->validate()){
+
+                $model->signup();         
+            
+                $submitEmail = 'success';
+
+                $modelLogin = new LoginForm();
+
+                GeneratorJson::updateTablesGeneric('translations');  
+                GeneratorJson::updateTranslationsGeneric('translations');  
+                return $this->redirect(['view', 'id' => $model->id]);
+
+            }         
+        }
+        $serviceTimeMin = (empty($model->time_window) ? '60' : $model->time_window);
+        //$this->layout = 'publicDark';
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+
+        return $this->render('create', [
+            'model' => $model,
+            'weekDays' => $weekDays,
+            'serviceTimeMin' => $serviceTimeMin
+        ]);
+
+
+
+
+
+
+
         if (Yii::$app->user->isGuest) {    
             return $this->goHome();
         }       
@@ -108,7 +291,6 @@ class TeamController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-
 
                 $title = 'team_title_1'; 
                 $text = 'team_text_1'; 
@@ -125,7 +307,7 @@ class TeamController extends Controller
                 $model->company_code = Yii::$app->user->identity->company_code;         
                 $model->page_code_title = $title;
                 $model->page_code_text = $text;
-                $model->username_code = $username;
+                $model->username = $username;
                 
               
 
@@ -138,8 +320,10 @@ class TeamController extends Controller
             }
         } else {
             $model->loadDefaultValues();
+            Helpers::defaultSheddulle($model);
         }
-
+    
+  
         $serviceTimeMin = (empty($model->time_window) ? '60' : $model->time_window);
 
         return $this->render('create', [
@@ -166,8 +350,7 @@ class TeamController extends Controller
         
         $model = $this->findModel($id);
 
-
-        $model->defaultSheddulle($model);
+        Helpers::defaultSheddulle($model);
 
         $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
 

@@ -18,7 +18,8 @@ class ServicesSearch extends Services
     {
         return [
             [['id', 'price', 'order', 'active'], 'integer'],
-            [['company', 'username', 'service_code', 'category_code', 'page_code_title', 'page_code_text', 'title', 'text','title_pt', 'text_pt', 'title_en', 'text_en', 'created_date'], 'safe'],
+            [['company_code'], 'string'],
+            [['username', 'service_code', 'category_code', 'page_code_title', 'page_code_text', 'title', 'text','title_pt', 'text_pt', 'title_en', 'text_en', 'created_date'], 'safe'],
         ];
     }
 
@@ -65,7 +66,7 @@ class ServicesSearch extends Services
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'company', $this->company])
+        $query->andFilterWhere(['like', 'company_code', $this->company_code])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'service_code', $this->service_code])
             ->andFilterWhere(['like', 'category_code', $this->category_code])
