@@ -84,13 +84,7 @@ class AdminController extends Controller
 
         return $this->render('recipes');
     }
-
-    public function actionQuestionList()
-    {
-        $this->layout = 'adminLayout';
-
-        return $this->render('question-list');
-    }
+ 
 
     public function actionPricing()
     {
@@ -120,34 +114,7 @@ class AdminController extends Controller
         return $this->render('notifications');
     }
 
-    public function actionFaqs()
-    {
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-             
-        $this->layout = 'adminLayout';
 
-        $query = new Query;
-
-        //->where(['username' => Yii::$app->user->identity->username]) 
-
-        $faqs = $query->select('*')
-                            ->from(['faqs'])                     
-                            ->all();
-
-        return $this->render('faqs', [
-            'faqs' => $faqs,
-        ]);
-
-        return $this->render('faqs');
-    }
-
-    public function actionSetForms()
-    {
-        $this->layout = 'adminLayout';
-        return $this->render('set-forms');
-    }
 
 
     public function actionCreateTask()
@@ -264,18 +231,6 @@ class AdminController extends Controller
         return $this->render('goals');
     } 
     
-    public function actionWebadmin()
-    {
-        $this->layout = 'adminLayout';
-
-        
-        if (Yii::$app->user->identity->level != 'admin') {
-            return $this->goHome();
-        }  
-        
-        return $this->render('website');
-    }
- 
     public function actionNewClient()
     {
         $this->layout = 'adminLayout';

@@ -32,7 +32,8 @@ class ClientProfileController extends Controller
         $model =  $this->findModel(Yii::$app->user->identity->id);
         
         return $this->render('/client/client-profile', [    
-            'model' => $model  
+            'model' => $model,
+            'publish' => Helpers::checkPublish(Yii::$app->request->get('code'), $this) 
         ]);
     
     }

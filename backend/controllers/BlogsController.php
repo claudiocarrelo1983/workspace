@@ -119,6 +119,10 @@ class BlogsController extends Controller
        if ($this->request->isPost && $model->load($this->request->post())){       
 
            
+            print"<pre>";
+            print_r($model->imageFile);
+            die();
+
             if(isset($model->imageFile->name)){
 
                 $fileName = $model->imageFile->baseName;

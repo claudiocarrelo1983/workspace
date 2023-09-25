@@ -33,14 +33,14 @@ use common\Helpers\Helpers;
         <div class="col-lg-4">           
             <?= $form->field($model, 'title')->dropdownList(
                 Helpers::dropdownTitle(),
-                ['prompt'=> Yii::t('app', 'select_title')])->label(Yii::t('app', 'title')); 
+                ['class'=> 'form-control', 'prompt'=> Yii::t('app', 'select_title')])->label(Yii::t('app', 'title')); 
             ?> 
         </div>        
         <div class="col-lg-4">
             <?= $form->field($model, 'first_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'first_name')) ?>
         </div>
         <div class="col-lg-4">
-            <?= $form->field($model, 'surname')->textInput(['maxlength' => true])->label(Yii::t('app', 'surname')) ?>
+            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'surname')) ?>
         </div>  
         <div class="col-lg-4">
             <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true])->label(Yii::t('app', 'contact_number')) ?>

@@ -11,7 +11,7 @@ use yii\grid\GridView;
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0 font-size-18 pb-4 pt-4">
-                <?= Html::encode(Yii::t('app', 'menu_admin_messages')) ?>
+                <?= Html::encode(Yii::t('app', 'menu_admin_messages_list')) ?>
             </h4>  
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">

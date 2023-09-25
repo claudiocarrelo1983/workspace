@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 
-Yii::$app->language = 'en-EN';
+//Yii::$app->language = 'en-EN';
 
 /**
  * BlogsController implements the CRUD actions for Blogs model.

@@ -79,7 +79,8 @@ class ClientAppointmentsController extends Controller
         return $this->render('/client/client-appointments/index', [             
             'model' => $model,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider    
+            'dataProvider' => $dataProvider,
+            'publish' => Helpers::checkPublish(Yii::$app->request->get('code'), $this)
         ]);
 
     } 

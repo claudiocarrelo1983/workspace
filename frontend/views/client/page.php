@@ -82,9 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <span id="anchor-about-us"></span>
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'code' => $company, 'logo' => $companyArr[0]['path'].$companyArr[0]['image']]); ?>
-
-<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu','code' => $company,'path2' => '']); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData,'publish' => $publish, 'code' => $company, 'logo' => $companyArr[0]['path'].$companyArr[0]['image']]); ?>
 
 
 <div role="main" class="main">  

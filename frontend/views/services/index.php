@@ -14,13 +14,11 @@ $this->title = 'Services';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="services-index">
-
-    <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18 pb-4">
-                    <?= Html::encode(Yii::t('app', 'menu_admin_services')) ?>
+                <h4 class="mb-sm-0 font-size-18 pb-4 pt-4">
+                    <?= Html::encode(Yii::t('app', 'menu_admin_services_list')) ?>
                 </h4>  
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -30,14 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <?= Yii::t('app', 'menu_admin_services_list') ?>
+                            <?= Yii::t('app', 'menu_admin_services_list') ?> 
                         </li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <p>
         <?= Html::a(Yii::t('app', 'create_services_button'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>

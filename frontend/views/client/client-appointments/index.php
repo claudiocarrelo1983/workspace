@@ -13,7 +13,7 @@ use yii\grid\GridView;
 $this->title = 'Sheddules';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= $this->render('/client/client-booking-header', ['myData' => '', 'logo' => '']); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => '', 'publish' => $publish, 'logo' => '']); ?>
 
 <div id="examples" class="container  pb-5">
     <?= $this->render('/client/client-links'); ?>

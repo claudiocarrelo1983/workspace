@@ -69,14 +69,61 @@ $this->params['breadcrumbs'][] = $this->title;
 $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $company);
 ?>
 
+
 <!-- Load jQuery -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
 
+
+
+
 <header id="header" class="header-dark header-effect-shrink " data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
-    <div class="header-body border-top-0 bg-light border overflow-visible">          
+    <div class="header-body border-top-0 bg-light border overflow-visible">    
+        <?php if (!Yii::$app->user->isGuest) { ?>    
+            <div class="container-full">
+                <?php if ($publish == 1) { ?>  
+                    <div class="header-column justify-content-center bg-success text-white py-1 text-1"> 
+                        <span class="mr-2">                        
+                            <?= Yii::t('app', 'page_header_text_show') ?>                          
+                        </span> 
+                        <?= Html::a(                      
+                                Yii::t('app', 'click_show'),                                           
+                                Url::toRoute('/webadmin/index'),
+                                [     
+                                    'class' => 'text-white',                                                  
+                                    'data-hash' => '',
+                                    'data-hash-offset' => 0,
+                                    'data-hash-offset-lg' => 130,
+                                ]
+                            ) 
+                        ?>
+                    </div>
+                <?php } else { ?> 
+                    <div class="header-column justify-content-center bg-danger text-white py-1 text-1">  
+                        <span class="mr-2">                          
+                            <?= Yii::t('app', 'page_header_text_hide') ?>
+                         </span>
+                        <?= Html::a(                  
+                                Yii::t('app', 'click_hide'),                                               
+                                Url::toRoute('/webadmin/index'),
+                                [     
+                                    'class' => 'text-white',                                                  
+                                    'data-hash' => '',
+                                    'data-hash-offset' => 0,
+                                    'data-hash-offset-lg' => 130,
+                                ]
+                            ) 
+                        ?>
+                    </div>          
+                <?php } ?> 
+              
+            </div>    
+        <?php } ?>    
         <div class="header-top border">
+         
             <div class="container">
-                <div class="header-row py-2 ">	  
+           
+                <div class="header-row py-2 ">	 
+                
                     <div class="header-column justify-content-start px-2">
                         <div class="header-row">                           
                                 |
@@ -110,7 +157,6 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
                                                         'data-hash-offset-lg' => 130,
                                                     ]
                                                 ) ?>
-
                                             </span>	
                                         </span> 
                                   
@@ -229,3 +275,4 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
 </header>      
   
 <div class="py2-4"></div>  
+<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu', 'code' => $code, 'path2' => '']); ?>

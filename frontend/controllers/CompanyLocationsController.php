@@ -165,9 +165,7 @@ class CompanyLocationsController extends Controller
         }
 
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-
-          
+        if ($this->request->isPost && $model->load($this->request->post())) {     
 
             $arrWeek = [];
 

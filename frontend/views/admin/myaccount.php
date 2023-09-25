@@ -20,13 +20,13 @@ use yii\helpers\Url;
             <?= Yii::t('app','menu_admin_settings_profile') ?>            
         </span>
     </a>
-    <a class="dropdown-item d-block" href="<?= Url::toRoute('admin/settings') ?>">
+    <a class="dropdown-item d-block" href="<?= Url::toRoute('/definitions/index') ?>">
         <i class="bx bx-cog  font-size-16 align-middle me-1"></i> 
         <span key="t-settings">
         <?= Yii::t('app','menu_admin_settings_definitions') ?>   
     </span>
     </a>
-    <a class="dropdown-item" href="<?= Url::toRoute('admin/faqs') ?>">
+    <a class="dropdown-item" href="<?= Url::toRoute('/faqs/index') ?>">
         <i class="bx bx-question-mark font-size-16 align-middle me-1"></i> 
         <span key="t-profile">
             <?= Yii::t('app','menu_faqs') ?>              

@@ -42,6 +42,11 @@ use Yii;
  */
 class Company extends \yii\db\ActiveRecord
 {
+    
+    public $bannerimage;
+
+    public $logoimage;
+
     /**
      * {@inheritdoc}
      */
@@ -56,12 +61,12 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_code_text'], 'required'],
-            [['active'], 'integer'],
+            [['page_code_text','color'], 'required'],
+            [['active','publish'], 'integer'],
             [['created_date'], 'safe'],
-            [['company_code',  'page_code_text', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postal_code'], 'string', 'max' => 255],
+            [['company_code', 'company_code_url', 'page_code_text', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
             [['page_code_text'], 'unique'],       
-            [['company_code'], 'unique'],
+            [['company_code','company_code_url'], 'unique'],
         ];
     }
 
@@ -98,10 +103,48 @@ class Company extends \yii\db\ActiveRecord
             'postcode' => 'Postcode',
             'location' => 'Location',
             'country' => 'Country',
-            'postal_code' => 'Postal Code',
             'active' => 'Active',
+            'color' => 'Color',
             'created_date' => 'Created Date',
         ];
+    }
+
+    
+    public function upload()
+    {      
+        $model = new Model();
+  
+        if ($model->validate()) {   
+         
+            if(isset($this->imageFile)){
+
+                Helpers::upload(
+                    '@frontend/web/images/blog/'.$this->imageFile->baseName, 
+                    900, 
+                    500, 
+                    'center', 
+                    70, 
+                    $this->imageFile->baseName
+                );
+
+               
+                /*
+                $fileName = $this->imageFile->baseName. date('YmdHis');;      
+
+                $this->image = $this->imgUrl() .$fileName.'.'.$this->imageFile->extension;                
+
+                $this->imageFile->saveAs('@frontend/web/images/blog/' . $fileName . '.' . $this->imageFile->extension, false);
+                */
+                $this->created_date = date('Y-m-d H:i:s');
+                
+                return true;
+            }else{
+                return false;
+            }       
+
+        } else {
+            return false;
+        }
     }
 
     public function updateCompany($page, $model){

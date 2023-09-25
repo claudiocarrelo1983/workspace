@@ -1188,6 +1188,45 @@ class Helpers{
         return $arrActive;
     }
 
+    public static function dropdownDaysHours(){
+
+        $daysHoursList =    [
+            'days' => Yii::t('app', 'days'),
+            'hours' => Yii::t('app', 'hours'),
+        ];
+    
+        $arrDaysHours = [];
+
+        foreach($daysHoursList as  $key => $value){
+            $arrDaysHours[$key] = $value;
+        }
+
+        return $arrDaysHours;
+    }
+
+    
+    public static function dropdownCampaignTypes(){
+
+        $typesList =    [
+            'onetime_campaign' => Yii::t('app', 'onetime_campaign'),
+            'birthday_campaign' => Yii::t('app', 'birthday_campaign'),
+            'reminder_campaign' => Yii::t('app', 'reminder_campaign'),
+            'every_day_campaign' => Yii::t('app', 'every_day_campaign'),
+            'every_week_campaign' => Yii::t('app', 'every_week_campaign'),
+            'every_month_campaign' => Yii::t('app', 'every_month_campaign'),
+            'every_year_campaign' => Yii::t('app', 'every_year_campaign'),
+                 
+        ];
+    
+        $arrTypes= [];
+
+        foreach($typesList as  $key => $value){
+            $arrTypes[$key] = $value;
+        }
+
+        return $arrTypes;
+    }
+
     public static function dropdownTicketStatus(){
 
         $titleList =    [
@@ -1204,6 +1243,26 @@ class Helpers{
         return $arrTicket;
     }
 
+    public static function dropdownLanguage(){
+
+        $query = new Query;
+     
+        $locationArr = $query->select([
+            'country_code', 
+            'full_title',  
+        ])
+        ->from('countries')
+        ->all();
+        
+        $arrLocations =  [];
+        
+        foreach($locationArr as $value){
+            $arrLocations[$value['country_code']] = Yii::t('app', $value['country_code']);
+        }
+        
+
+        return $arrLocations;
+    }
 
 
     public static function dropdownCompanyLocations(){
@@ -1214,6 +1273,7 @@ class Helpers{
             'location_code', 
             'full_name',
             'location',
+            'city',
         ])
         ->from('company_locations')    
         ->where(['company_code' => Yii::$app->user->identity->company_code])
@@ -1222,7 +1282,7 @@ class Helpers{
         $arrLocations =  [];
         
         foreach($locationArr as $value){
-            $arrLocations[$value['location_code']] = $value['full_name'] . ' ('.$value['location'].')';
+            $arrLocations[$value['location_code']] = $value['full_name'] . ' ('.$value['city'].')';
         }
         
 
@@ -1357,6 +1417,30 @@ class Helpers{
 
         return $arrServices;
     }
+
+    public static function checkPublish($code, $model){
+
+        $query = new Query();
+
+        $user = $query->select('*')
+            ->from(['company'])
+            ->where(['company_code_url' => $code]) 
+            ->one();  
+
+        $publish = 0;
+
+        if(isset($user['publish'])){
+            $publish = $user['publish'];
+       
+        }
+
+        if (Yii::$app->user->isGuest && $publish ==  '0') {    
+            return $model->goHome();
+        }
+
+        return $publish;
+    }
+
 
     public static function getTeamArr(){
 

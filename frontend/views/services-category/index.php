@@ -15,12 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="services-category-index">
 
-    <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18 pb-4">
-                    <?= Html::encode(Yii::t('app', 'menu_admin_services_category')) ?>
+                <h4 class="mb-sm-0 font-size-18 pb-4 pt-4">
+                    <?= Html::encode(Yii::t('app', 'menu_admin_services_category_create')) ?>
                 </h4>  
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -30,15 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <?= Yii::t('app', 'menu_admin_services_category_create') ?>
+                            <?= Yii::t('app', 'menu_admin_services_category_create') ?> 
                         </li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- start page title -->
     <p>
-        <?= Html::a(Yii::t('app', 'create_services_category'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'create_services_category_button'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -55,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [     
-                'label' => Yii::t('app', 'category_code') ,                        
+                'label' => Yii::t('app', 'service_cat') ,                        
                 'value' => function (ServicesCategory $model) {
                     return $model->category_code;
                 },

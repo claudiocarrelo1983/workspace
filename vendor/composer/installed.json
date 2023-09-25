@@ -1649,6 +1649,56 @@
             "install-path": "../doctrine/lexer"
         },
         {
+            "name": "dpodium/yii2-twilio",
+            "version": "1.5",
+            "version_normalized": "1.5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dpodium/yii2-twilio.git",
+                "reference": "7b4bc75973ee82949e1b5dd968c31a1d71ace089"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dpodium/yii2-twilio/zipball/7b4bc75973ee82949e1b5dd968c31a1d71ace089",
+                "reference": "7b4bc75973ee82949e1b5dd968c31a1d71ace089",
+                "shasum": ""
+            },
+            "require": {
+                "twilio/sdk": "~5.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "time": "2017-08-10T00:56:22+00:00",
+            "type": "yii2-extension",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "dpodium\\yii2\\Twilio\\": "components/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Sionghuat Chng",
+                    "email": "sionghuat.chng@dpodium.com",
+                    "homepage": "http://www.dpodium.com"
+                }
+            ],
+            "description": "Yii2 twilio is a wrapper for the Twilio PHP library. Allow yii2 application to use twilio services.",
+            "keywords": [
+                "sms",
+                "twilio",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/dpodium/yii2-twilio/issues",
+                "source": "https://github.com/dpodium/yii2-twilio"
+            },
+            "install-path": "../dpodium/yii2-twilio"
+        },
+        {
             "name": "edofre/yii2-fullcalendar",
             "version": "V1.0.11",
             "version_normalized": "1.0.11.0",
@@ -9559,6 +9609,63 @@
                 "wysiwyg"
             ],
             "install-path": "../tinymce/tinymce"
+        },
+        {
+            "name": "twilio/sdk",
+            "version": "5.42.2",
+            "version_normalized": "5.42.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twilio/twilio-php.git",
+                "reference": "0cfcb871b18a9c427dd9e8f0ed7458d43009b48a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/0cfcb871b18a9c427dd9e8f0ed7458d43009b48a",
+                "reference": "0cfcb871b18a9c427dd9e8f0ed7458d43009b48a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "apigen/apigen": "^4.1",
+                "guzzlehttp/guzzle": "^6.3",
+                "phpunit/phpunit": ">=4.5"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "time": "2020-02-05T19:55:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "http://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "support": {
+                "issues": "https://github.com/twilio/twilio-php/issues",
+                "source": "https://github.com/twilio/twilio-php/tree/5.42.2"
+            },
+            "install-path": "../twilio/sdk"
         },
         {
             "name": "wbraganca/yii2-dynamicform",

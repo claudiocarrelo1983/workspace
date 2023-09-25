@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'code' => $company, 'logo' => ((isset($companyArr[0]['path'])) ? $companyArr[0]['path'].$companyArr[0]['image'] : '')]); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'publish' => $publish, 'code' => $company, 'logo' => ((isset($companyArr[0]['path'])) ? $companyArr[0]['path'].$companyArr[0]['image'] : '')]); ?>
 
 <div class="py-4"></div>  
 
@@ -161,10 +161,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!--End Localização -->                                                      
                 </div>     
                 <div class="px-3">                   
-                    <?= $this->render('/client/client-booking-marcacao', ['date' => $date,  'teamArr' => $teamArr, 'companyArr' => $companyArr,'code' => $company, 'companyLocations' => $companyLocations]); ?>  
+                    <?= $this->render('/client/client-booking-marcacao', ['date' => $date,   'publish' => $publish,'teamArr' => $teamArr, 'companyArr' => $companyArr,'code' => $company, 'companyLocations' => $companyLocations]); ?>  
                 </div>           
                 <div>
-                    <?= $this->render('/client/client-booking-services', ['date' => $date, 'model' => $model, 'teamArr' => $teamArr, 'companyArr' => $companyArr, 'code' => $company, 'companyLocations' => $companyLocations, 'shedduleTableArr' => $shedduleTableArr,  'servicesArr' => $servicesArr]); ?>                          
+                    <?= $this->render('/client/client-booking-services', ['date' => $date,  'publish' => $publish,'model' => $model, 'teamArr' => $teamArr, 'companyArr' => $companyArr, 'code' => $company, 'companyLocations' => $companyLocations, 'shedduleTableArr' => $shedduleTableArr,  'servicesArr' => $servicesArr]); ?>                          
                 </div>                              
             </div>    
         </div>

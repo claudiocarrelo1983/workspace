@@ -26,7 +26,7 @@ use common\Helpers\Helpers;
             <?php  echo $form->field($model, 'service_code')->label(Yii::t('app', 'service_code')) ?>
         </div>       
         <div class="col">  
-            <?= $form->field($model, 'category_code')->dropdownList(Helpers::dropdownServiceCategory())->label(Yii::t('app', 'category_code')); ?> 
+            <?= $form->field($model, 'category_code')->dropdownList(Helpers::dropdownServiceCategory())->label(Yii::t('app', 'service_cat')); ?> 
         </div>
         <div class="col">
             <?php  echo $form->field($model, 'title')->label(Yii::t('app', 'title')); ?>

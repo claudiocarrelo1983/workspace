@@ -10,45 +10,6 @@ use common\Helpers\Helpers;
 
 $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
 
-/*
-foreach($weekDays as $value){
-    echo 'public $'.$value.'_open_checkbox;</br>';
-    echo 'public $'.$value.'_starting_hour;</br>';
-    echo 'public $'.$value.'_end_hour;</br>';
-    echo 'public $'.$value.'_starting_break;</br>';
-    echo 'public $'.$value.'_end_break;</br>';
-}
-die('___');
-*/
-$start = strtotime('00:00'); //9:00
-$end = strtotime('24:00'); //18:00
-$serviceTimeMin = '60';
-
-while ($start < $end) {
-  
-    $hour = $start;         
-
-    $sum = (60*$serviceTimeMin);
-
-    $arrServices[date('H:i',$hour)] = [
-        'category' => 'cat_2',
-        'canceled' => '1',
-        'confirm' => 0,
-        'full_name' => 'Cláudio Carrelo',
-        'contact_number' => '967235820',
-        'email' => 'claudio@gmail.com',
-        'nif' => '224076736',
-        'date' => date('Y-m-d'), 
-    ];
-
-    $start += $sum;
-
-}
-
-
-foreach($arrServices as $key => $value){   
-    $arrHourDropdown[strtotime($key)] = $key; 
-}
 
 ?>
 
@@ -58,27 +19,27 @@ foreach($arrServices as $key => $value){
 
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'full_name')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'description')->textarea(['rows' => 6])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'description_pt')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'description_en')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'description_en')->textarea(['rows' => 6])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'cae')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'cae')->textInput(['maxlength' => true])->label(Yii::t('app', 'username')) ?>
         </div>
         <div class="col">
             <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true]) ?>
@@ -152,28 +113,28 @@ foreach($arrServices as $key => $value){
                             <td>
                                 <?=  
                                     $form->field($model, $value.'_starting_hour')->dropdownList(
-                                        $arrHourDropdown,
+                                        Helpers::dropdownSheddulleHours(),
                                         ['class' => 'form-select form-control h-auto py-2','prompt'=>'Select Time'])->label(false)
                                 ?>
                             </td>
                             <td>
                                 <?=  
                                     $form->field($model, $value.'_end_hour')->dropdownList(
-                                        $arrHourDropdown,
+                                        Helpers::dropdownSheddulleHours(),
                                         ['class' => 'form-select form-control h-auto py-2','prompt'=>'Select Time'])->label(false)
                                 ?>
                             </td>
                             <td>
                                 <?=  
                                     $form->field($model, $value.'_starting_break')->dropdownList(
-                                        $arrHourDropdown,
+                                        Helpers::dropdownSheddulleHours(),
                                         ['class' => 'form-select form-control h-auto py-2','prompt'=>'Select Time'])->label(false)
                                 ?>
                             </td>
                             <td>
                                 <?=  
                                     $form->field($model, $value.'_end_break')->dropdownList(
-                                        $arrHourDropdown,
+                                        Helpers::dropdownSheddulleHours(),
                                         ['class' => 'form-select form-control h-auto py-2','prompt'=>'Select Time'])->label(false)
                                 ?>
                             </td>

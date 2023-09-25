@@ -347,4 +347,13 @@ return array (
       '@nickcv/encrypter' => $vendorDir . '/nickcv/yii2-encrypter',
     ),
   ),
+  'dpodium/yii2-twilio' => 
+  array (
+    'name' => 'dpodium/yii2-twilio',
+    'version' => '1.5.0.0',
+    'alias' => 
+    array (
+      '@dpodium/yii2/Twilio' => $vendorDir . '/dpodium/yii2-twilio/components',
+    ),
+  ),
 );

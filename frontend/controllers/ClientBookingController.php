@@ -115,7 +115,7 @@ class ClientBookingController extends Controller
     {    
 
         $this->layout = 'registration';
-
+   
         $query2 = new Query;
         $request = Yii::$app->request;
 
@@ -220,7 +220,8 @@ class ClientBookingController extends Controller
         return $this->render('../client/client-booking', [   
             'date' => $date,   
             'model' => $modelSheddule,
-            'companyArr' => $companyArr
+            'companyArr' => $companyArr, 
+            'publish' => Helpers::checkPublish($request->get('code'), $this)
         ]);
   
 

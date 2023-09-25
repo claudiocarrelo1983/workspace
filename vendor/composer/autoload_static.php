@@ -117,6 +117,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         'd' => 
         array (
+            'dpodium\\yii2\\Twilio\\' => 20,
             'dosamigos\\tinymce\\' => 18,
             'dosamigos\\datetimepicker\\' => 25,
             'dosamigos\\datepicker\\' => 21,
@@ -133,6 +134,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Z' => 
         array (
             'ZipStream\\' => 10,
+        ),
+        'T' => 
+        array (
+            'Twilio\\' => 7,
         ),
         'S' => 
         array (
@@ -403,6 +408,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/edofre/yii2-fullcalendar/src',
         ),
+        'dpodium\\yii2\\Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dpodium/yii2-twilio/components',
+        ),
         'dosamigos\\tinymce\\' => 
         array (
             0 => __DIR__ . '/..' . '/2amigos/yii2-tinymce-widget/src',
@@ -430,6 +439,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (

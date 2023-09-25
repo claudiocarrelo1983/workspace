@@ -15,24 +15,29 @@ use common\Helpers\Helpers;
 
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title')->dropdownList(
+                Helpers::dropdownTitle(),
+                ['prompt'=> Yii::t('app', 'select_title')]
+                )->label(Yii::t('app', 'title')); 
+            ?> 
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label(Yii::t('app', 'title'));  ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_pt'));  ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_en'));  ?>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'order')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'order')->textInput(['maxlength' => true])->label(Yii::t('app', 'order'));  ?>
         </div>
         <div class="col">            
             <?= $form->field($model, 'active')->dropdownList(
                     Helpers::dropdownActive(),
                     ['prompt'=> Yii::t('app', 'select_active')], 
-                ); 
+                )->label(Yii::t('app', 'active')); 
             ?>
         </div>
     </div>

@@ -15,7 +15,7 @@ $this->title = 'Company Details';
     </h4>  
 
     <p>
-        <?= Html::a('Edit', ['update'], ['class' => 'btn btn-primary']) ?>  
+        <?= Html::a(Yii::t('app', 'edit_button'), ['update'], ['class' => 'btn btn-primary']) ?>  
     </p>
 
     <?= DetailView::widget([

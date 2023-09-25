@@ -9,8 +9,6 @@ use common\models\Tickets;
 use yii\web\Controller;
 use common\models\LoginForm;
 use yii\db\Query;
-use yii\helpers\Url;
-use common\models\Clients;
 use common\models\User;
 use common\Helpers\Helpers;
 use common\models\Events;
@@ -655,10 +653,13 @@ class PageController extends Controller
 
     
     public function actionIndex($code)
-    {        
+    {              
+      
+        $publish = Helpers::checkPublish($code, $this);
+    
 
         $this->layout = 'registration';
-
+        
         $query2 = new Query;
         $model = new Tickets;
 
@@ -759,7 +760,7 @@ class PageController extends Controller
                 'title' => (Yii::t('app', $event['page_code'])),
                 'className' => $event['color_code'],
                 'start' => $event['start'],
-                'end' => $event['end']                        
+                'end' => $event['end']                      
             ];
         }
      
@@ -768,13 +769,15 @@ class PageController extends Controller
         if (empty($company)) {    
             return $this->goHome();
         }
+        
     
         return $this->render('../client/page', [
             'modelEvents' => $modelEvents,
             'companyArr' =>  $companyArr,
             'company' =>  $company,
             'model' =>  $model,
-            'myData' => json_encode($myDataArr)      
+            'myData' => json_encode($myDataArr),
+            'publish' => $publish   
          
         ]);
 
@@ -854,6 +857,15 @@ class PageController extends Controller
             return $this->render('home/maintenance');
         }
 
+    }
+
+    protected function findModelByCode($company_code_url)
+    {
+        if (($model = Company::findOne(['company_code_url' => $company_code_url])) !== null) {      
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
 }

@@ -4,6 +4,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use common\Helpers\Helpers;
 
 
 ?>
@@ -44,3 +46,48 @@ use yii\helpers\Url;
         ) ?>    
     </h5>
 </div>
+
+<?php $form = ActiveForm::begin(); ?>
+
+<div class="row">
+    <div class="col-lg-4">
+        <?= $form->field($model, 'company_code_url')->textInput(['maxlength' => true])->label(Yii::t('app', 'company_code_url')) ?>
+    </div>
+    <div class="col-lg-4">
+        <?= $form->field($model, 'publish')->dropdownList(
+            [
+                1 => Yii::t('app', 'yes'),
+                0 => Yii::t('app', 'no'),
+            ]); 
+        ?>
+    </div>
+
+    <div class="col-lg-4">
+        <?= $form->field($model, 'color')->textInput(
+            [
+                'class' => 'form-control spectrum with-add-on',
+                'id' => 'colorpicker-default',
+                'value' => $model->color,
+                'maxlength' => true
+            ]
+            )->label(Yii::t('app', 'color')) ?>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-lg-4">
+        <?= $form->field($model, 'bannerimage')->fileInput(
+            ['class' => 'form-control']
+        )->hint(Yii::t('app', 'hint_banner'))->label(Yii::t('app','banner_image')) ?>
+    </div>
+
+    <div class="col-lg-4">
+        <?= $form->field($model, 'logoimage')->fileInput(
+            ['class' => 'form-control']
+        )->hint(Yii::t('app', 'hint_image'))->label(Yii::t('app','logo_image')) ?>
+    </div>
+
+    <div class="form-group mt-3">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+<?php ActiveForm::end(); ?>
