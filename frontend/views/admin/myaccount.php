@@ -7,8 +7,14 @@ use yii\helpers\Url;
 
 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
-    <span class="d-none d-xl-inline-block ms-1">       
-        <?= Yii::t('app','menu_admin_my_application') ?>   
+    <?= Html::img(
+        '/images/team/user_icon.png',
+        [
+            'class' => 'rounded-circle header-profile-user'
+        ]);
+    ?>
+    <span class="d-none d-xl-inline-block ms-1">    
+        <?= Yii::$app->user->identity->full_name ?> 
     </span>
     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
 </button>

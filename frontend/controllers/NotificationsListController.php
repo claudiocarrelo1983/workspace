@@ -32,7 +32,7 @@ class NotificationsListController extends Controller
 
         $arrFilter = [
             'company_code'=> Yii::$app->user->identity->company_code,
-            'type'=> 'message',       
+            'type'=> 'client_message',       
             //'active'=> 1,
             //'status'=> 10,
             //'level' => 'client'
@@ -91,22 +91,26 @@ class NotificationsListController extends Controller
         
         if ($this->request->isPost && $modelUpdate->load($this->request->post())){
             
+      
             $model->ticket_parent =  $modelUpdate->ticket_number;
             $model->company_code =  $modelUpdate->company_code;
             $model->username_code =  $modelUpdate->username_code;
-            $model->type =  'message_reply';             
+            $model->type =  'client_message_reply';             
             $model->text =  $modelUpdate->text;      
             $model->closed_ticket =  0;  
+
+          
+
             switch($modelUpdate->closed_ticket){
                 case 'close':                  
                     $modelUpdate->closed_ticket = 0;
-                    if($modelUpdate->save()) {
+                    if($model->save()) {
                         $this->refresh();           
                     }
                     break;
                 case 'open':                
                     $modelUpdate->closed_ticket = 1;
-                    if($modelUpdate->save()) {
+                    if($model->save()) {
                         $this->refresh();           
                     }
                     break;

@@ -1,6 +1,7 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
+use yii\db\Query;
 
 use Yii;
 
@@ -148,4 +149,105 @@ class CompanyLocations extends \yii\db\ActiveRecord
             'created_date' => 'Created Date',
         ];
     }
+
+    
+    public function saveCompanyLocations($page, $model){        
+
+        $connection = new Query;
+
+        $countries = $connection->select([
+            'country_code' 
+            ])
+        ->from('countries')    
+        ->all();
+      
+        foreach($countries as $val){
+
+            $title = 'title_' . $val['country_code'];   
+            $description = 'description_' . $val['country_code'];   
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                        
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => '1',
+            ])->execute();
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_description                        
+            ])->execute();
+            
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_description,
+                'text' => $model->$description,
+                'active' => '1',
+            ])->execute();
+        }
+
+        return true;    
+    }
+
+
+    
+    public function updateCompanyLocations($page, $model){
+      
+        $connection = new Query;
+
+        $countries = $connection->select([
+            'country_code' 
+            ])
+        ->from('countries')    
+        ->all();     
+      
+        foreach ($countries as $val) {    
+
+            $title = 'title_' . $val['country_code'];   
+            $description = 'description_' . $val['country_code'];  
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_title                        
+            ])->execute();
+     
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_title,
+                'text' => $model->$title,
+                'active' => 1,
+            ])->execute();    
+            
+        
+            $connection->createCommand()->delete('translations',
+            [   
+                'page' => $page,
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_description                        
+            ])->execute();
+     
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_description,
+                'text' => $model->$description,
+                'active' => 1,
+            ])->execute(); 
+         
+        }    
+    }   
 }

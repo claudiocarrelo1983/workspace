@@ -6,13 +6,7 @@ use yii\helpers\Url;
 use common\models\Tickets;
 use yii\helpers\Html;
 
-
-$notifications = Tickets::find()->where(
-    [
-        'company_code' => Yii::$app->user->identity->company_code,
-        'type' => 'message',
-        'read' => '0'
-    ])->asArray()->all();
+$notifications = Helpers::countTickets();
 
 $rows = count($notifications);
 

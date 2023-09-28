@@ -21,8 +21,9 @@ use common\Helpers\Helpers;
     <div class="row pb-5">        
         <div class="col">  
             <?= $form->field($model, 'category_code')->dropdownList(
-                Helpers::dropdownServiceCategory()
-                )->label(Yii::t('app', 'category_code'));
+                Helpers::dropdownServiceCategory(),
+                ['prompt'=> Yii::t('app', 'select_service_category')], 
+                )->label(Yii::t('app', 'service_cat'));
             ?>        
         </div>
         <div class="col">
@@ -30,7 +31,8 @@ use common\Helpers\Helpers;
         </div>
         <div class="col">
             <?= $form->field($model, 'active')->dropdownList(
-                Helpers::dropdownActive()
+                Helpers::dropdownActive(),
+                ['class' => 'form-control', 'prompt'=> Yii::t('app', 'select_active')]    
                 )->label(Yii::t('app', 'active'));
             ?>
         </div>

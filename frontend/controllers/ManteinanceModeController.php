@@ -20,10 +20,22 @@ class ManteinanceModeController extends Controller
     {
         $this->layout = 'adminLayout';
      
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+             
+        if (Yii::$app->user->identity->level != 'admin') {
+            return $this->goHome();
+        }  
+        
         $model = new Company();
         $searchModel = new UserSearch();
 
         $model = $this->findModel(Yii::$app->user->identity->id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {           
+            return $this->refresh();
+        }     
 
         $arrFilter = [
             'company_code'=> Yii::$app->user->identity->company_code,

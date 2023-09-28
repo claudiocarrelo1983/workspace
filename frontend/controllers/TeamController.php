@@ -52,26 +52,33 @@ class TeamController extends Controller
         $this->layout = 'adminLayout';  
 
         $searchModel = new UserSearch();
-   
-        $dataProvider = $searchModel->search([
-            $searchModel->formName()=>
-            [
-                'company_code'=> Yii::$app->user->identity->company_code,
-                'active'=> 1,
-                'status'=> 10,
-                'level' => 'team'
-                //'type'=> 'trial',
-            ]
-        ]);
 
-        /*
+        $arrFilter = [
+            'company_code'=> Yii::$app->user->identity->company_code,
+            //'active'=> 1,
+            //'status'=> 10,
+            //'level' => 'client'
+            //'type'=> 'trial',
+            'level' => 'team'
+        ];
+
+        if(isset($this->request->queryParams['UserSearch'])){
+            $arrFilter = array_merge($arrFilter, $this->request->queryParams['UserSearch']);
         
-        echo Yii::$app->user->identity->company_code;
-        die();
-        */
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }else{
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+         
         ]);
     }
 

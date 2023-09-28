@@ -2,7 +2,14 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Html;
-use yii\base\Event;
+use common\models\Newsletter;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use common\Helpers\Helpers;
+
+$company = Yii::$app->user->identity->company_code;
 
 $inc = 0;
 $arrFaqs = [];
@@ -91,19 +98,72 @@ endforeach;
                             </div>
                         <?php endforeach; ?>  
                         
-                        <div class="tab-pane fade" id="v-pills-support" role="tabpanel" aria-labelledby="v-pills-support-tab">
+                        <div class="tab-pane fade <?= ((count($arrFaqs) == 0) ? 'active show' : '') ?>" id="v-pills-support" role="tabpanel" aria-labelledby="v-pills-support-tab">
                             <h4 class="card-title mb-5">
                                 <?= Yii::t('app', 'support') ?>
                             </h4>
                         
-                            <div class="faq-box d-flex mb-4">
-                                <div class="flex-shrink-0 me-3 faq-icon">
-                                    <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h5 class="font-size-15">Email:</h5>
-                                    <p class="text-muted">jelpdesk@mycalendar.com</p>
-                                </div>
+                            <div class="">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">                                        
+                                            <div class="flex-grow-1">                                        
+                                                <h5 class="font-size-15">
+                                                    <i class="bx bx-help-circle font-size-16 text-success"></i>
+                                                    <span class="pl-1">Helpdesk:</span>
+                                                </h5>
+                                                <p class="text-muted">helpdesk@mycalendar.com</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">                                       
+                                            <div class="flex-grow-1">
+                                                <h5 class="font-size-15">
+                                                    <i class="bx bx-help-circle font-size-16 text-success"></i>
+                                                    <span class="pl-1">Business Issues:</span>
+                                                </h5>                                       
+                                                <p class="text-muted">admin@mycalendar.com</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <hr class="my-4"></hr>
+                                    <div>     
+                                        
+                                        <?php $form = ActiveForm::begin(); ?>                                                                            
+                                            <div class="row">
+                                                <div class="form-group col-lg-6">                     
+                                                    <?= $form->field($model, 'full_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'full_name')) ?>
+                                                </div>
+                                                <div class="form-group col-lg-3">
+                                                    <?= $form->field($model, 'email')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'email')) ?>
+                                            </div>
+                                                <div class="form-group col-lg-3">
+                                                    <?= $form->field($model, 'contact_number')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'contact_number')) ?>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-lg-6">                     
+                                                    <?= $form->field($model, 'subject')->dropdownList(  
+                                                        Helpers::dropdownClientContactsUsSubject('support', $company),
+                                                        ['prompt'=> Yii::t('app', 'select_subject'),
+                                                        'class' => 'form-control text-3 h-auto py-2','maxlength' => true]
+                                                        )->label(Yii::t('app', 'subject'));
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col pt-4">                     
+                                                    <?= $form->field($model, 'text')->textarea(['rows' => '5', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'text')) ?></div>
+                                            </div>
+                                            <div class="row">                 
+                                                <div class="form-group pt-3">
+                                                    <?= Html::submitButton(Yii::t('app', 'send_button'), ['class' => 'btn btn-primary btn-modern']) ?>
+                                                </div>
+                                            </div>         
+                                        <?php ActiveForm::end(); ?>
+                                                                          
+                                    </div>                           
+                                </div>   
                             </div>                           
                         </div>
                     </div>

@@ -105,10 +105,10 @@ $this->params['breadcrumbs'][] = 'Update';
               [     
                 'label' => Yii::t('app', 'type'),                         
                 'value' => function (Tickets $model) {
-                  if($model->type == 'message'){
+                  if($model->type == 'client_message'){
                     return Yii::t('app', 'question') .':';
                   }
-                  if($model->type == 'message_reply'){
+                  if($model->type == 'client_message_reply'){
                     return Yii::t('app', 'answer') .':';
                   }
  

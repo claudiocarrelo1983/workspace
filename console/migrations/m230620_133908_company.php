@@ -79,6 +79,7 @@ class m230620_133908_company extends Migration
             'opt_email' => $this->boolean()->defaultValue(0),  
             'publish' => $this->boolean()->defaultValue(0),   
             'manteinance' => $this->boolean()->defaultValue(0), 
+            'manteinance_text' => $this->text()->defaultValue('manteinance_default_text'), 
             'active' => $this->boolean()->defaultValue(1), 
             'created_date' => $this->timestamp()
              

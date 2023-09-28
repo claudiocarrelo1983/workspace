@@ -41,47 +41,48 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = ActiveForm::begin(); ?>
         <div class="row">
             <div class="col">  
-                <div class="mb-4">   
-                    <h4 class="mb-sm-0 font-size-15  py-3">
-                        <?= Html::encode(Yii::t('app', 'menu_admin_campaign_manteinance_title')) ?>
-                    </h4> 
+                <div class="mb-4"> 
                     <div class="pb-4">
                         <?= Html::encode(Yii::t('app', 'menu_admin_campaign_manteinance_text')) ?>
                     </div>               
                 </div>      
-                <div class="d-flex flex-wrap gap-3">
-                <div class="btn-group" role="group" >     
+                <div class="row">     
                     <?php $checked = $model->publish ?>
-                    <?= $form
-                        ->field($model, 'publish')
-                        ->radioList(
-                            [true => 'Yes', false => 'No'],
-                            ['type' => 'radio','item' => static function ($index, $label, $name, $checked, $value) use ($model) {
-                                if ($label === 'Yes') {
-                                    $id = 'btnradio4';
-                                    $label = '<label class="btn btn-outline-primary" for="btnradio4">On</label> ';
-                                
-                                } else {
-                                    $id = 'btnradio5';
-                                    $label = '<label class="btn btn-outline-primary" for="btnradio5">Off</label> ';
-                                
-                                }
-                                return Html::radio(
-                                    $name,
-                                    $checked,
-                                    [
-                                        'class' => 'btn-check',
-                                        'value' => $value,
-                                        'label' => $label,
-                                        'id' => $id,
-                                        
-                                        'autocomplete' => 'off'
-                                    ]
-                                );
-                            }]
-                        )
-                        ->label(false); 
-                    ?>
+                    <div>
+                        <?= $form
+                            ->field($model, 'manteinance')
+                            ->radioList(
+                                [true => 'Yes', false => 'No'],
+                                ['type' => 'radio','item' => static function ($index, $label, $name, $checked, $value) use ($model) {
+                                    if ($label === 'Yes') {
+                                        $id = 'btnradio4';
+                                        $label = '<label class="btn btn-outline-primary" for="btnradio4">On</label> ';
+                                    
+                                    } else {
+                                        $id = 'btnradio5';
+                                        $label = '<label class="btn btn-outline-primary" for="btnradio5">Off</label> ';
+                                    
+                                    }
+                                    return Html::radio(
+                                        $name,
+                                        $checked,
+                                        [
+                                            'class' => 'btn-check',
+                                            'value' => $value,
+                                            'label' => $label,
+                                            'id' => $id,
+                                            
+                                            'autocomplete' => 'off'
+                                        ]
+                                    );
+                                }]
+                            )
+                            ->label(false); 
+                        ?>
+                    </div>
+                    <div>                     
+                        <?= $form->field($model, 'manteinance_text')->textarea(['value' => Yii::t('app', $model->manteinance_text),'rows' => '5', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'text')) ?></div>
+                    </div>               
                 </div>
             </div>  
         </div>

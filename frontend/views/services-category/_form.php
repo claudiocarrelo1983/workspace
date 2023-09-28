@@ -14,13 +14,8 @@ use common\Helpers\Helpers;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col">
-            <?= $form->field($model, 'title')->dropdownList(
-                Helpers::dropdownTitle(),
-                ['prompt'=> Yii::t('app', 'select_title')]
-                )->label(Yii::t('app', 'title')); 
-            ?> 
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label(Yii::t('app', 'title'));  ?>
+        <div class="col">        
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label(Yii::t('app', 'description'));  ?>
         </div>
         <div class="col">
             <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_pt'));  ?>

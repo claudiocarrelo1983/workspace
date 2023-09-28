@@ -2,12 +2,13 @@
 
 namespace frontend\controllers;
 
-use frontend\models\CompanyLocations;
-use frontend\models\CompanyLocationsSearch;
+use common\models\CompanyLocations;
+use common\models\CompanyLocationsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\Helpers\Helpers;
+use common\models\GeneratorJson;
 use Yii;
 
 /**
@@ -50,6 +51,32 @@ class CompanyLocationsController extends Controller
         $searchModel = new CompanyLocationsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+
+
+
+        $searchModel = new CompanyLocationsSearch();
+
+        $arrFilter = [
+            'company_code'=> Yii::$app->user->identity->company_code,
+            //'active'=> 1,
+            //'status'=> 10,
+            //'level' => 'client'
+            //'type'=> 'trial',
+            //'level' => 'team'
+        ];
+
+        if(isset($this->request->queryParams['UserSearch'])){
+            $arrFilter = array_merge($arrFilter, $this->request->queryParams['UserSearch']);
+        
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }else{
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -84,6 +111,7 @@ class CompanyLocationsController extends Controller
     public function actionCreate()
     {
         
+
         if (Yii::$app->user->isGuest) {     
             return $this->goHome();
         }
@@ -109,7 +137,10 @@ class CompanyLocationsController extends Controller
                 $model->page_code_title = $title;
                 $model->page_code_description = $description;
 
-                if($model->save()){
+                if($model->save()){      
+                    $model->saveCompanyLocations('company_locations',$model);
+                    GeneratorJson::updateTablesGeneric('translations');  
+                    GeneratorJson::updateTranslationsGeneric('translations');  
                     return $this->redirect(['view', 'id' => $model->id]);
                 }   
            
@@ -190,6 +221,9 @@ class CompanyLocationsController extends Controller
             $model->sheddule_array = json_encode($arrWeek);
             
             if($model->save()){
+                $model->saveCompanyLocations('company_locations',$model);
+                GeneratorJson::updateTablesGeneric('translations');  
+                GeneratorJson::updateTranslationsGeneric('translations');  
                 return $this->redirect(['view', 'id' => $model->id]);
             }
    

@@ -1,8 +1,11 @@
 <?php
 
-use common\models\Tickets;
+use common\models\Subjects;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
+
 
 ?>
 
@@ -32,8 +35,15 @@ use yii\grid\GridView;
 <div class="row">
     <div class="col-12">
         <div class="clients-index">              
-            <div>
-        
+            <p>
+                <?= Html::a(
+                        Yii::t('app', 'create_notification_subject'),
+                        ['create'], 
+                        ['class' => 'btn btn-success']
+                     ) 
+                ?>
+            </p>
+                
             <?= $this->render('_search', ['model' => $searchModel]); ?>
 
                 <?= GridView::widget([
@@ -42,62 +52,36 @@ use yii\grid\GridView;
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],                                                       
                         [     
-                            'label' => Yii::t('app', 'ticket_number') ,                        
-                            'value' => function (Tickets $model) {
-                                return $model->ticket_number;
-                            },
-                        ], 
-                        [     
-                            'label' => Yii::t('app', 'full_name') ,                        
-                            'value' => function (Tickets $model) {
-                                return $model->full_name;
-                            },
-                        ], 
-                        [     
                             'label' => Yii::t('app', 'subject') ,                        
-                            'value' => function (Tickets $model) {
+                            'value' => function (Subjects $model) {
                                 return $model->subject;
                             },
                         ], 
                         [     
-                            'label' => Yii::t('app', 'text') ,                        
-                            'value' => function (Tickets $model) {
-                                return $model->text;
+                            'label' => Yii::t('app', 'text_pt') ,                        
+                            'value' => function (Subjects $model) {
+                                return $model->text_pt;
                             },
                         ], 
                         [     
-                            'label' => Yii::t('app', 'contact_number') ,                        
-                            'value' => function (Tickets $model) {
-                                return $model->contact_number;
+                            'label' => Yii::t('app', 'text_en') ,                        
+                            'value' => function (Subjects $model) {
+                                return $model->text_en;
+                            },
+                        ],                                             
+                        [     
+                            'label' => Yii::t('app', 'active') ,                        
+                            'value' => function (Subjects $model) {
+                                return $model->active;
                             },
                         ], 
-                        [     
-                            'label' => Yii::t('app', 'email'),                        
-                            'value' => function (Tickets $model) {
-                                return $model->email;
-                            },
-                        ],                               
-                        [     
-                            'label' => Yii::t('app', 'reply'),                         
-                            'format' => 'raw',
-                            'value' => function (Tickets $model) {
-                                return $model->closed_ticket == 1 ? 
-                                '<span class="btn btn-danger btn-sm btn-rounded">'.Yii::t('app', 'closed').'</span>' :  '<span class="btn btn-success btn-sm btn-rounded">'.Yii::t('app', 'open').'</span>';
-                            },
-                        ],                    
-                        [                         
-                            'format' => 'raw',
-                            'value' => function (Tickets $model) {
-                                return Html::a(
-                                    Html::encode("View"),
-                                    [
-                                        '/notifications-list/reply',
-                                        'id' => $model->id
-                                    ],
-                                    ['class'=>'btn btn-primary btn-sm btn-rounded waves-effect waves-light']
-                                    );
-                            },
-                            ]
+                        [
+                            'class' => ActionColumn::className(),
+                            'urlCreator' => function ($action, Subjects $model, $key, $index, $column) {
+                                return Url::toRoute([$action, 'id' => $model->id]);
+                            }
+                        ],            
+                 
                                                 
                     ],
                 ]); ?>

@@ -56,17 +56,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [     
-                'label' => Yii::t('app', 'service_cat') ,                        
+                'label' => Yii::t('app', 'title_pt') ,                        
                 'value' => function (ServicesCategory $model) {
-                    return $model->category_code;
+                    return $model->title_pt;
                 },
             ],
             [     
-                'label' => Yii::t('app', 'title') ,                        
+                'label' => Yii::t('app', 'title_en') ,                        
                 'value' => function (ServicesCategory $model) {
-                    return $model->title;
+                    return $model->title_en;
                 },
-            ],
+            ],         
             [     
                 'label' => Yii::t('app', 'active') ,                        
                 'value' => function (ServicesCategory $model) {

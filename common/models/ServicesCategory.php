@@ -94,7 +94,7 @@ class ServicesCategory extends \yii\db\ActiveRecord
                 'text' => $model->$title,
                 'active' => 1,
             ])->execute();             
-         
+     
         }    
     }   
 }

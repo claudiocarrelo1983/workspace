@@ -4,7 +4,7 @@
 use common\models\Sheddule;
 use yiier\chartjs\ChartJs;
 use common\Helpers\Helpers;
-use frontend\models\CompanyLocations;
+use common\models\CompanyLocations;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

@@ -70,12 +70,9 @@ $active3 = '';
 
     if(isset($menucategory['key']) && $menucategory['key'] == 't-messages'){ 
 
-        $numberMessages = Tickets::find()->andFilterWhere([
-            'company_code'=> Yii::$app->user->identity->company_code,
-            'type'=> 'message',
-            'closed_ticket'=> '0',
-            'read'=> '0'
-            ])->count(); 
+        $notifications = Helpers::countTickets();
+        $numberMessages = count($notifications);
+
         $badge = '<span class="badge rounded-pill bg-danger float-end">'.(($numberMessages > 0) ? $numberMessages : '').'</span>';
     } 
  

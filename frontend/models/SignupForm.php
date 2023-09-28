@@ -5,6 +5,8 @@ namespace frontend\models;
 use common\Helpers\Helpers;
 use common\models\Company;
 use common\models\Team;
+use common\models\CompanyLocations;
+
 
 use Yii;
 use yii\base\Model;
@@ -420,6 +422,28 @@ class SignupForm extends Model
                 $teamText = 'company_team_text_'.bcadd($count->id, 1);    
             }
 
+            $arrTeam = [
+
+            ];
+
+            $arrTeam = [
+                'company_code' => $code,
+                'username_code' => $user->guid,
+                'username' => $this->username,
+                'page_code_title' => $teamTitle,
+                'page_code_text' => $teamText,
+                'title' => $this->title,
+                'first_name' => $this->first_name,
+                'surname' => $this->last_name,       
+                'contact_number' => $this->contact_number,  
+                'email' => $this->email,   
+                'location' => $this->location,  
+                'job_title' => $this->job_title, 
+                'active' => $this->job_title,           
+
+            ];
+
+            $this->createTeam($arrTeam);
 
             $arrCompany = [
                 'company_code' => $code,
@@ -442,6 +466,8 @@ class SignupForm extends Model
                 'location' => $this->location,
                 'country' => $this->country,
             ];
+
+      
 
             $this->createCompany($arrCompany);
 
@@ -483,21 +509,19 @@ class SignupForm extends Model
 
         $title = 'team_title_1';   
         $description = 'team_description_1';
-        $username = 'username_1';
+        //$username = 'c'.Helpers::generateRandowHumber(20);
 
         $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
 
        if(!empty($count->id)){
          $title = 'team_title_'.bcadd($count->id, 1); 
-         $description = 'team_description_'.bcadd($count->id, 1);      
-         $username = 'username_'.bcadd($count->id, 1);
+         $description = 'team_description_'.bcadd($count->id, 1);     
        }
 
        
        $arrValues = [
             'page_code_title' => $title,
-            'page_code_text' => $description,
-            'username_code' => $username,          
+            'page_code_text' => $description,                  
         ];
 
        $arrTeam = array_merge($arrTeam, $arrValues);

@@ -78,7 +78,7 @@ use yii\grid\GridView;
                             },
                         ],                               
                         [     
-                            'label' => Yii::t('app', 'reply'),                         
+                            'label' => Yii::t('app', 'status'),                         
                             'format' => 'raw',
                             'value' => function (Tickets $model) {
                                 return $model->closed_ticket == 1 ? 

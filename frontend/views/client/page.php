@@ -64,8 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
         }
 
         .btn-primary{
-            background-color: <?= $companyArr[0]['color'] ?> !important;
-            border-color: <?= $companyArr[0]['color'] ?> !important;
+            border: 1px solid white  !important;    
+            background-color: <?= $companyArr[0]['color'] ?> !important;          
         }
 
         .list.list-icons.list-icons-style-3 li > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li a:first-child > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li > .icons:first-child, .list.list-icons.list-icons-style-3 li a:first-child > .icons:first-child{
@@ -115,9 +115,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             Yii::t('app', Yii::t('app', 'book_now_button')),                      
                             Url::to(['/client-booking', 'code' => $company]),
                             [
-                            'class' => 'btn btn-primary btn-xl mb-2 text-5 py-3 px-5',                                                  
-                            'data-hash-offset' => 0,  
-                            'data-hash-offset-lg' => 130,  
+                                'class' => 'btn btn-primary btn-xl mb-2 text-5 py-3 px-5',                                                  
+                                'data-hash-offset' => 0,  
+                                'data-hash-offset-lg' => 130,  
                             ] 
                         ) 
                         ?> 
@@ -262,7 +262,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>        
                 <?php $form = ActiveForm::begin(); ?>  
                     <?= $form->field($model, 'company_code')->hiddenInput(['value' => $company])->label(false)  ?>
-                    <?= $form->field($model, 'type')->hiddenInput(['value' => 'message'])->label(false) ?>       
+                    <?= $form->field($model, 'type')->hiddenInput(['value' => 'client_message'])->label(false) ?>       
                     <div class="row">
                         <div class="form-group col-lg-6">                     
                             <?= $form->field($model, 'full_name')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'full_name')) ?>
@@ -277,7 +277,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="form-group col-lg-6">                     
                             <?= $form->field($model, 'subject')->dropdownList(  
-                                Helpers::dropdownClientContactsUsSubject($company),
+                                Helpers::dropdownClientContactsUsSubject('client', $company),
                                 ['prompt'=> Yii::t('app', 'select_subject'),
                                 'class' => 'form-control text-3 h-auto py-2','maxlength' => true]
                                 )->label(Yii::t('app', 'subject'));
@@ -310,7 +310,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php foreach($companyArr as $keyt => $companyLocations):?>     
             <div class="col-lg-4 py-3">
                 <h4>
-                    <?= $companyLocations['company_name'] ?> (<?= $companyLocations['location'] ?>)
+                    <?= $companyLocations['company_name'] ?> (<?= $companyLocations['city'] ?>)
                 </h4>
                 <h4 >
                     <?= Yii::t('app', 'our_address_title') ?>
@@ -326,7 +326,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <i class="fas fa-phone top-6"></i><?= $companyLocations['contact_number'] ?> 
                     </li>
                     <li>
-                        <i class="fas fa-envelope top-6"></i> <a href="mailto:'<?= $companyLocations['email'] ?> .'"><?= $companyLocations['email'] ?></a> 
+                        <i class="fas fa-envelope top-6"></i> <a class="btn-link" href="mailto:'<?= $companyLocations['email'] ?> .'"><?= $companyLocations['email'] ?></a> 
                     </li>
                             
                 </ul>    

@@ -34,7 +34,7 @@ class Subjects extends \yii\db\ActiveRecord
             [['order','page_code','subject','text_pt', 'text_en'], 'required'],
             [['order'], 'integer'],
             [['created_date'], 'safe'],
-            [['subject', 'text_pt','text_en'], 'string', 'max' => 255],
+            [['subject', 'text_pt','text_en','company_code','position'], 'string', 'max' => 255],
         ];
     }
 
@@ -101,21 +101,22 @@ class Subjects extends \yii\db\ActiveRecord
 
         foreach ($countries as $val) {
 
-            $text = 'text_'.$val['country_code'];            
-           
-            Yii::$app->db->createCommand("UPDATE translations SET             
-                text=:text,
-                page=:page,  
-                page_code=:page_code            
-                WHERE  page_code=:page_code 
-                AND country_code=:country_code"
-            )          
-           
-            ->bindValue(':text', $model->$text)
-            ->bindValue(':page', $page)
-            ->bindValue(':country_code', $val['country_code'])
-            ->bindValue(':page_code', $model->page_code)
-            ->execute();         
+            $text = 'text_'.$val['country_code'];               
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code                       
+            ])->execute();
+            
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code,
+                'text' => $model->$text,
+                'active' => '1',
+            ])->execute();       
+  
 
         }
     } 

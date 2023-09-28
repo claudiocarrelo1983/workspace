@@ -21,10 +21,10 @@ use yii\helpers\Url;
     </div>    
     <div class="form-group pt-3">
         <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#replyModal">
-            <?=  Yii::t('app', 'confirm_reply_button') ?>
+            <?=  Yii::t('app', 'send_button') ?>
         </button>
         <a class= "btn btn-outline-secondary" href="<?= Url::toRoute('/notifications-list/index'); ?>">
-            <?=  Yii::t('app', 'go_back') ?>
+            <?=  Yii::t('app', 'go_back_button') ?>
         </a>
 
         <!-- sample modal content -->
@@ -45,9 +45,9 @@ use yii\helpers\Url;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
-                            <?=  Yii::t('app', 'button_close') ?>
+                            <?=  Yii::t('app', 'close_button') ?>
                         </button>
-                        <?= Html::submitButton(Yii::t('app', 'button_send'), ['class' => 'btn btn-success']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'send_button'), ['class' => 'btn btn-success']) ?>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

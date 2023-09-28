@@ -43,7 +43,7 @@ class m230615_080116_services_category extends Migration
             'title_pt' => $this->string()->notNull(),
             'title_en' => $this->string()->notNull(),        
             'order' => $this->integer(), 
-            'active' => $this->boolean(),
+            'active' => $this->boolean(1),
             'created_date' => $this->timestamp(), 
         ], $tableOptions);
     }

@@ -62,9 +62,9 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['page_code_text','color'], 'required'],
-            [['active','publish'], 'integer'],
+            [['active','publish','manteinance'], 'integer'],
             [['created_date'], 'safe'],
-            [['company_code', 'company_code_url', 'page_code_text', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
+            [['company_code', 'manteinance_text','company_code_url', 'page_code_text', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
             [['page_code_text'], 'unique'],       
             [['company_code','company_code_url'], 'unique'],
         ];

@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Email;
+use common\models\Newsletter;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18 pb-4 pt-4">
-                    <?= Html::encode(Yii::t('app', 'menu_admin_campaign_email')) ?>
+                    <?= Html::encode(Yii::t('app', 'menu_admin_campaign_newsletter')) ?>
                 </h4>  
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -29,32 +29,43 @@ $this->params['breadcrumbs'][] = $this->title;
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                        <?= Yii::t('app', 'menu_admin_campaign_email') ?> 
+                        <?= Yii::t('app', 'menu_admin_campaign_newsletter') ?> 
                         </li>
                     </ol>
                 </div>
             </div>
         </div>
-    </div>  
-
+    </div>      
     <p>
-        <?= Html::a('Create Email', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'create_newsletter_button'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'company_code',
-            'company_code_location_array',
-            'username',
-            'subject',
-            'from_schedule_date',
+            [     
+                'label' => Yii::t('app', 'company_code') ,                        
+                'value' => function (Newsletter $model) {
+                    return $model->company_code;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'username') ,                        
+                'value' => function (Newsletter $model) {
+                    return $model->username;
+                },
+            ], 
+            [     
+                'label' => Yii::t('app', 'subject') ,                        
+                'value' => function (Newsletter $model) {
+                    return $model->subjects;
+                },
+            ], 
+          
             //'text:ntext',
             //'users:ntext',
             //'language',

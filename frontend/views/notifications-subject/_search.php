@@ -19,23 +19,23 @@ use common\Helpers\Helpers;
 
     <div class="row pb-3">  
         <div class="col">
-            <?php  echo $form->field($model, 'ticket_number')->label(Yii::t('app', 'ticket_number'))  ?>
+            <?php  echo $form->field($model, 'subject')->label(Yii::t('app', 'subject'))  ?>
         </div>  
         <div class="col">
-            <?php  echo $form->field($model, 'full_name')->label(Yii::t('app', 'full_name')) ?>
+            <?php  echo $form->field($model, 'text_pt')->label(Yii::t('app', 'subject_pt')) ?>
         </div>  
         <div class="col">
-            <?php  echo $form->field($model, 'contact_number')->label(Yii::t('app', 'contact_number')) ?>
-        </div>   
+            <?php  echo $form->field($model, 'text_en')->label(Yii::t('app', 'subject_en')) ?>
+        </div>  
         <div class="col">
-            <?php  echo $form->field($model, 'email')->label(Yii::t('app', 'email')) ?>
-        </div>     
-        <div class="col">  
-            <?= $form->field($model, 'closed_ticket')->dropdownList(
-                Helpers::dropdownTicketStatus(),
-                ['prompt'=> Yii::t('app', 'select_ticket_status')]
-                )->label(Yii::t('app', 'closed_ticket')); ?> 
+            <?php  echo $form->field($model, 'active')->label(Yii::t('app', 'active')) ?>
         </div>
+        <div class="col">            
+            <?= $form->field($model, 'active')->dropdownList(
+                Helpers::dropdownActive(),                
+                )->label(Yii::t('app', 'active')); 
+            ?>
+        </div>  
     </div>
     <div class="form-group pb-3">
         <?= Html::submitButton(Yii::t('app', 'search_button'), ['class' => 'btn btn-primary']) ?>

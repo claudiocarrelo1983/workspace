@@ -46,7 +46,7 @@ $bgImg = '../../images/generic/painting-mountain-lake-with-mountain-background.j
                                     Url::to(['/client-booking', 'code' => $code]),
                                     [
                                         'style' => 'border: 1px solid white;',
-                                        'class' => 'btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3',                                                  
+                                        'class' => 'btn btn-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3',                                                  
                                         'data-hash-offset' => 0,  
                                         'data-hash-offset-lg' => 130,  
                                     ] 

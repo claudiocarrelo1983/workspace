@@ -37,11 +37,13 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'pricing_specs':
                     //case 'translations':
                     case 'blogs':
-                   case 'blogs_category':
+                    case 'blogs_category':
+                    case 'company_locations':
                     case 'configurations':
                     case 'company':
                     case 'faqs':
                     case 'subjects': 
+                    case 'services_category': 
                     case 'texts':    
                     case 'recipes':     
                     case 'recipes_category': 

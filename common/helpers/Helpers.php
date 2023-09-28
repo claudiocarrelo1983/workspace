@@ -1392,7 +1392,7 @@ class Helpers{
         return $arrServices;
     }
 
-    public static function dropdownClientContactsUsSubject($company){
+    public static function dropdownClientContactsUsSubject($type, $company){
 
         $query = new Query;
 
@@ -1402,8 +1402,9 @@ class Helpers{
         ->from('subjects')    
         ->where(
             [
-                'type' => 'client',
-                'company_code' => $company, 
+                'type' => $type,
+                'position' => 'contact_us',
+                //'company_code' => $company, 
             ]
             )
         ->orderBy('order')
@@ -1441,6 +1442,23 @@ class Helpers{
         return $publish;
     }
 
+    public static function countTickets(){
+  
+        $query = new Query;
+
+        $notifications = $query->select('*')
+            ->from('tickets')    
+            ->where(
+                [
+                    'company_code' => Yii::$app->user->identity->company_code,
+                    'type' => 'client_message',
+                    'read' => '0'
+                ]
+                )
+            ->all();       
+
+        return $notifications;
+    }
 
     public static function getTeamArr(){
 
