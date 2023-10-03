@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'publish' => $publish, 'code' => $company, 'logo' => ((isset($companyArr[0]['path'])) ? $companyArr[0]['path'].$companyArr[0]['image'] : '')]); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'publish' => $publish, 'code' => $company, 'logo' => ((isset($companyArr[0]['path_logo'])) ? $companyArr[0]['path_logo'].$companyArr[0]['image_logo'] : '')]); ?>
 
 <div class="py-4"></div>  
 

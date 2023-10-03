@@ -31,8 +31,7 @@ $companyCode = $companyArr[0]['company_code'];
                 <h2 class="font-weight-bold text-8 mb-0 text-center">
                     <?= Yii::t('app', "signup_block_register") ?>
                 </h2>
-                <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?> 
-                <?= $form->field($modelSignupForm, 'company_code')->hiddenInput(['value'=> $companyCode])->label(false) ?> 
+                <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>              
                     <div class="row">
                         <h2 class="font-weight-bold text-3 mb-0 pt-3">                                       
                             <?= Yii::t('app', "signup_block_dados") ?>                

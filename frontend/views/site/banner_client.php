@@ -9,6 +9,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $bgImg = '../../images/generic/header_bg-calendar.jpg';
 $bgImg = '../../images/generic/painting-mountain-lake-with-mountain-background.jpg';
 
+
+
 ?>
 
 <style>
@@ -31,7 +33,7 @@ $bgImg = '../../images/generic/painting-mountain-lake-with-mountain-background.j
 
 <span class="thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-centered-info thumb-info-no-zoom thumb-info-slide-info-hover mb-5" style="height:380px">
     <span class="thumb-info-wrapper">
-        <img src="<?= $bgImg ?>" class="img-fluid" alt=""  > 
+        <img src="<?= $banner ?>" class="img-fluid" alt=""  > 
         <span class="thumb-info-title">
             <div class="container pt-lg-5" style="margin: auto;">
                 <div class="row pt-3 pb-lg-0 pb-xl-0">

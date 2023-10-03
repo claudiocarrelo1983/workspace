@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use common\Helpers\Helpers;
 
 /**
  * Site controller
@@ -69,9 +70,15 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    {         
-    
+    {             
+        $active = Helpers::accessAccountSuperAdmin($this);
+  
+        if(!$active){   
+            return $this->redirect(['site/login']);
+        }   
+        
         return $this->render('index');
+   
     }
 
     /**
@@ -80,7 +87,9 @@ class SiteController extends Controller
      * @return string|Response
      */
     public function actionLogin()
-    {
+    {     
+
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -88,6 +97,9 @@ class SiteController extends Controller
         $this->layout = 'blank';
 
         $model = new LoginForm();
+
+        $model->field = Helpers::encrypt('backend', '10');
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }

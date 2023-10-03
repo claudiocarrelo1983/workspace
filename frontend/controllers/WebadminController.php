@@ -7,23 +7,31 @@ use common\models\Company;
 use Yii;
 use yii\imagine\Image;
 use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
+use common\Helpers\Helpers;
 
-use common\models\User;
-use common\models\UserSearch;
-use common\models\LoginForm;
-use common\models\CompanySearch;
-use common\models\Events;
-use yii\db\Query;
 
 //Yii::$app->language = 'en-EN';
 
 class WebadminController extends Controller
-{
-
-    
-    public $bannerimage;
-
-    public $logoImage;
+{    
+   /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
+    }
 
     public function actionIndex()
     {
@@ -42,44 +50,47 @@ class WebadminController extends Controller
 
        // $model = new Company();  
 
-        if ($this->request->isPost && $model->load($this->request->post())) { 
+        if ($this->request->isPost && $model->load($this->request->post())) {                       
+
+            $model->path = $model->imgUrl();
+
+            $model->bannerimage = UploadedFile::getInstance($model, 'bannerimage');
             
-            /*
-            print"<pre>";
-            print_r($this->request->post());
-            die();
+            $model->logoimage = UploadedFile::getInstance($model, 'logoimage');   
+
+            $rejectArr = [
+                'generic-background.jpg',
+                'generic-logo.jpg',
+                'cl-'
+            ];
+
+            if(isset($model->logoimage->name)){
+
+                $model->logoimage = UploadedFile::getInstance($model, 'logoimage');           
+                $fileNameLogo = 'cl-'.Yii::$app->user->identity->guid;
+                $model->image_logo = $fileNameLogo.'.'.$model->logoimage->extension;  
+
+                if($model->validate()){    
+                    Helpers::deleteOldImages($model->path, $rejectArr);            
+                    $model->logoimage->saveAs('@frontend/web/'.$model->path. $fileNameLogo . '.' . $model->logoimage->extension, false);  
+                }
+     
+            }            
 
             if(isset($model->bannerimage->name)){
 
-                $fileName = $model->bannerimage->baseName;
-                $model->image = $model->imgUrl() .$fileName.'.'.$model->bannerimage->extension; 
-       
-                //if ($model->imageFile && $model->validate()) {
-                $model->bannerimage->saveAs('@frontend/web/'.$model->imgUrl(). $fileName . '.' . $model->imageFile->extension, false);  
-                //}  
+                $model->bannerimage = UploadedFile::getInstance($model, 'bannerimage');           
+                $fileName = 'cb-'.Yii::$app->user->identity->guid;
+                $model->image_banner = $fileName.'.'.$model->bannerimage->extension;  
 
-          
-                $model->bannerimage = UploadedFile::getInstance($model, 'bannerimage');
-
-                $path = '@frontend/web' . $model->imgUrl();
-                $model->image = $model->bannerimage->name;
-                $model->path = $model->imgUrl();
-    
-                $filePath = $path.$model->bannerimage->baseName . '.' . $model->bannerimage->extension;
-                
-                //creates small images 90x50
-                Image::thumbnail($filePath, 90, 50)
-                    ->save(Yii::getAlias('@frontend/web/images/blog/90x50/'.$model->bannerimage->baseName .'.'. $model->bannerimage->extension), ['quality' => 80]);
-
+                if($model->validate()){          
+                    Helpers::deleteOldImages($model->path, $rejectArr);   
+                    $model->bannerimage->saveAs('@frontend/web/'.$model->path. $fileName . '.' . $model->bannerimage->extension, false);  
+                }      
             }
 
-            print"<pre>";
-            print_r($model);
-            die();
-            */
-
-            if($model->save()){
-
+            if($model->save()){     
+        
                 Yii::$app->db->createCommand("UPDATE user SET 
                     company_code_url=:company_code_url            
                     WHERE id=:id")

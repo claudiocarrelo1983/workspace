@@ -64,9 +64,26 @@ class Company extends \yii\db\ActiveRecord
             [['page_code_text','color'], 'required'],
             [['active','publish','manteinance'], 'integer'],
             [['created_date'], 'safe'],
-            [['company_code', 'manteinance_text','company_code_url', 'page_code_text', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
+            [['company_code', 'image_logo', 'image_banner', 'manteinance_pt','manteinance_en','company_code_url', 'page_code_text', 'page_code_manteinance', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
             [['page_code_text'], 'unique'],       
             [['company_code','company_code_url'], 'unique'],
+            [
+                'bannerimage', 
+                'image', 
+                //'minWidth' => 1800, 
+                //'maxWidth' => 2500,
+                //'minHeight' => 2500, 
+                //'maxHeight' => 2500, 
+                'extensions' => 'jpg, gif, png', 
+                'maxSize' => 1024 * 1024 * 2
+           ],
+           [
+                'logoimage', 
+                'image',       
+                //'maxHeight' => 500, 
+                'extensions' => 'jpg, gif, png', 
+                'maxSize' => 1024 * 1024 * 2
+            ],
         ];
     }
 
@@ -109,6 +126,9 @@ class Company extends \yii\db\ActiveRecord
         ];
     }
 
+    public function imgUrl(){
+        return '/images/company/';
+    }
     
     public function upload()
     {      
@@ -116,15 +136,15 @@ class Company extends \yii\db\ActiveRecord
   
         if ($model->validate()) {   
          
-            if(isset($this->imageFile)){
+            if(isset($this->bannerimage)){
 
                 Helpers::upload(
-                    '@frontend/web/images/blog/'.$this->imageFile->baseName, 
+                    '@frontend/web/images/company/'.$this->bannerimage->baseName, 
                     900, 
                     500, 
                     'center', 
                     70, 
-                    $this->imageFile->baseName
+                    $this->bannerimage->baseName
                 );
 
                
@@ -163,7 +183,24 @@ class Company extends \yii\db\ActiveRecord
    
             $text = 'text_'. $val['country_code'];   
             $teamTitle = 'team_title_'. $val['country_code'];
-            $teamText = 'team_text_'. $val['country_code'];              
+            $teamText = 'team_text_'. $val['country_code'];     
+            $teamManteinance = 'manteinance_'. $val['country_code'];             
+            
+
+            $connection->createCommand()->delete('translations',
+            [   
+                'country_code' => $val['country_code'],               
+                'page_code' => $model->page_code_team_manteinance                       
+            ])->execute();
+
+            $connection->createCommand()->insert('translations', [      
+                'country_code' => $val['country_code'],  
+                'page' => $page,
+                'page_code' => $model->page_code_team_manteinance,
+                'text' => $model->$teamManteinance,
+                'active' => 1,
+            ])->execute();     
+                       
 
             $connection->createCommand()->delete('translations',
             [   

@@ -959,8 +959,8 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'type','Tipo',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'type','Type',1);
 
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'hint_banner','The image needs to be 900 x 500',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'hint_banner','The image needs to be 900 x 500',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'hint_banner','A imagem precisa ter largura mínima de 1800px e altura mínima de 380px.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'hint_banner','The image needs to be minimum 1800px width and minimum height of 380px.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'hint_image','The image needs to be 900 x 500',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'hint_image','The image needs to be 900 x 500',1);
 
@@ -1054,6 +1054,11 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','boolean', 'no','Não',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','boolean', 'no','No',1);
 
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'no_permission','Você não tem permissão.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'no_permission','You don´t have no permission.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'no_permission_trial','O seu pack trial terminou.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'no_permission_trial','You ended the 30 days trial.',1);
 
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','manteinance', 'menu_admin_campaign_manteinance_text','O modo de manutenção é essencial quando você precisa fazer alterações em seu site sem causar interrupções para seus visitantes. Isso permite que você exiba uma mensagem amigável para informar seu público de que seu site está temporariamente indisponível, mas voltará em breve. Basta clicar no botão ligar/desligar abaixo para iniciar o processo.',1);

@@ -848,6 +848,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
  
+        $model->field = Helpers::encrypt('client', '10');
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
      
@@ -896,11 +898,14 @@ class SiteController extends Controller
         }      
 
         $model = new LoginForm();
- 
+
+        $model->field = Helpers::encrypt('frontend', '10');
+
         if ($model->load(Yii::$app->request->post())) {           
           
             $userModel =  new User();
-            //Yii::$app->security->decryptByKey(utf8_decode($encrypted), $key);
+         
+  
             
             $userResult = $userModel::find('id')->orderBy("id desc")->where(['username' => $model->username, 'active' => 1])->limit(1)->one();
 

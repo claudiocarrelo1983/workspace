@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 require __DIR__ . '/../../web/ajax/loadCalendar.ajax.php';
 
@@ -29,6 +30,7 @@ use edofre\fullcalendar\Fullcalendar;
 use yii\web\JsExpression;
 use yii\helpers\Url;
 use kartik\datetime\DateTimePicker;
+use common\Helpers\Helpers;
 
 use yii\db\Query;
 
@@ -43,7 +45,7 @@ if(isset(Yii::$app->user->identity->company)){
     $eventsArr = [];
 }
 
-
+$companyDetails =  Helpers::myCompanyArr();
 
 
 
@@ -67,6 +69,7 @@ $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 
 $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $company);
+
 ?>
 
 
@@ -215,10 +218,10 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
         <div class="header-container container" style="height: 100px; min-height: 0px;">
             <div class="header-row">
                 <div class="header-column flex-grow-0">
-                    <div class="header-row pe-4">
-                        <div class="header-logo" style="width: 100px; height: 48px;">
+                    <div class="header-row pe-4 mt-5">
+                        <div class="header-logo" style="width: 100%; height: 95px;">
                             <a href="index.html">                              
-                                <?= Html::img($logo, ['class' => 'img-fluid', 'style' => 'top: 0px;  height: 62px;']);?>
+                                <?= Html::img($companyDetails['path'].$companyDetails['image_logo'], ['class' => 'img-fluid border img-thumbnail p-1 mt-3', 'style' => 'top: 0px;  height: 150px;']);?>
                             </a>
 						
                         </div>
@@ -275,4 +278,4 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
 </header>      
   
 <div class="py2-4"></div>  
-<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu', 'code' => $code, 'path2' => '']); ?>
+<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu', 'code' => $company, 'path2' => '', 'banner' => $companyDetails['path'].$companyDetails['image_banner']]); ?>

@@ -21,8 +21,7 @@ $users = $tagQueryUser->select([
     'guid', 
     'first_name',
     'last_name',
-    'username', 
-    'name'
+    'username'  
     ])
 ->from('user')    
 ->where(['active' => '1'])   
@@ -65,7 +64,7 @@ foreach($users as $user){
                         ['prompt'=>'Select User']); ?> 
                     </div>
                     <div class="col-3">
-                        <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
                     </div>
 
                     <div class="col-3">

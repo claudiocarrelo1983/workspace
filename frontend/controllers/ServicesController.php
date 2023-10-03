@@ -94,7 +94,6 @@ class ServicesController extends Controller
         }      
 
         $this->layout = 'adminLayout';  
-
     
         $model = new Services();
         $modelCat = new ServicesCategory();

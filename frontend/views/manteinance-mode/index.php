@@ -80,11 +80,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             ->label(false); 
                         ?>
                     </div>
-                    <div>                     
-                        <?= $form->field($model, 'manteinance_text')->textarea(['value' => Yii::t('app', $model->manteinance_text),'rows' => '5', 'class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app', 'text')) ?></div>
-                    </div>               
-                </div>
-            </div>  
+                </div>        
+            </div>          
+        </div>
+        <div class="row">
+            <div class="col-lg-6">           
+                <?= $form->field($model, 'manteinance_pt')->textarea(['value' => Yii::t('app', $model->manteinance_pt, [], 'pt'),'rows' => '5', 'class' => 'form-control text-3 h-auto ','maxlength' => true])->label(Yii::t('app', 'text_pt')) ?>
+            </div>          
+            <div class="col-lg-6">                       
+                <?= $form->field($model, 'manteinance_en')->textarea(['value' => Yii::t('app', $model->manteinance_en, [], 'en'),'rows' => '5', 'class' => 'form-control text-3 h-auto ','maxlength' => true])->label(Yii::t('app', 'text_en')) ?>
+            </div>              
         </div>
     </div> 
 

@@ -74,7 +74,7 @@ use common\Helpers\Helpers;
     </div>
 </div>
 <div class="row mt-3">
-    <div class="col-lg-4">
+    <div class="col-lg-4">   
         <?= $form->field($model, 'bannerimage')->fileInput(
             ['class' => 'form-control']
         )->hint(Yii::t('app', 'hint_banner'))->label(Yii::t('app','banner_image')) ?>

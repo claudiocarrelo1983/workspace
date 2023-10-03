@@ -96,6 +96,10 @@ class TeamController extends Controller
 
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
+            print"<pre>";
+            print_r($model->imageFile);
+            die();
+
             if(isset($model->imageFile->name)){
 
                 $fileName = $model->imageFile->baseName;

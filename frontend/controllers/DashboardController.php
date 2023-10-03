@@ -5,25 +5,21 @@ namespace frontend\controllers;
 use yii\web\Controller;
 use common\models\User;
 use common\models\Sheddule;
-use common\models\LoginForm;
-use common\models\TicketsSearch;
-use common\models\Tickets;
+use common\Helpers\Helpers;
 use Yii;
-use common\models\Events;
-use yii\db\Query;
+
 
 //Yii::$app->language = 'en-EN';
 
 class DashboardController extends Controller
 {
-    public function actionIndex(){
-        if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    public function actionIndex(){      
+
+        $error = Helpers::accessAccountAdmin(Yii::$app->user->identity);  
         
-        if (Yii::$app->user->identity->level != 'admin') {
-            return $this->goHome();
-        }  
+        if($error > 0){   
+            return $this->redirect(['site/login']);
+        }   
 
         $this->layout = 'adminLayout';
 

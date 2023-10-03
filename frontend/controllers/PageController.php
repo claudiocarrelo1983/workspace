@@ -135,7 +135,10 @@ class PageController extends Controller
             'c.page_code_team_title',
             'c.page_code_team_text',
             'c.color',
-            'c.path' ,
+            'c.path_logo' ,
+            'c.image_logo' ,
+            'c.path_banner' ,
+            'c.image_banner' ,
             'c.coin' ,
             'c.image' ,
             'c.company_code' ,
@@ -520,7 +523,7 @@ class PageController extends Controller
             
         return $this->render('/client/login/login_client', [
             'model' => $model,
-            //'companyArr' => $companyArr
+            'company' => Yii::$app->request->get('code'),
         ]);
     }     
 
@@ -546,8 +549,10 @@ class PageController extends Controller
             'c.page_code_team_text',
             'c.color',
             'c.coin' ,
-            'c.path' ,
-            'c.image' ,
+            'c.path_logo' ,
+            'c.image_logo' ,
+            'c.path_banner' ,
+            'c.image_banner' ,
             'c.company_code' ,
             'c.company_code_url' ,
             'c.company_name' ,
@@ -655,62 +660,16 @@ class PageController extends Controller
     public function actionIndex($code)
     {              
       
-        $publish = Helpers::checkPublish($code, $this);
-    
+        $publish = Helpers::checkPublish($code, $this);    
 
-        $this->layout = 'registration';
-        
-        $query2 = new Query;
+        $this->layout = 'registration';       
+   
         $model = new Tickets;
 
-        $companyArr = $query2->select([
-            'c.page_code_team_title',
-            'c.page_code_team_text',
-            'c.color',
-            'c.path' ,
-            'c.coin' ,
-            'c.image' ,
-            'c.company_code' ,
-            'c.company_code_url' ,
-            'c.company_name' ,
-            'c.page_code_text',
-            'l.address_line_1',
-            'l.address_line_2',
-            'l.city',
-            'l.postcode',
-            'l.country',
-            'c.website',
-            'c.facebook',
-            'c.pinterest',
-            'c.instagram',
-            'c.twitter',
-            'c.tiktok',   
-            'c.linkedin',
-            'c.youtube',
-            'l.google_location',
-            'l.contact_number',   
-            'l.email',   
-            'l.location_code',
-            'l.location',
-            'l.sheddule_array'
-        ])
-        ->from(['c' => 'company'])
-        ->leftJoin(['l' => 'company_locations'], 'c.company_code = l.company_code')
-        ->where(
-            [
-            'c.company_code_url' => Yii::$app->request->get('code')           
-            ])
-        ->all();
-     
+        $companyArr = Helpers::myCompanyDetailsArr();
  
-        /*
-        print"<pre>";
-        print_r($companyArr);
-        die();
-        */
-
         if(empty($companyArr)){
-            //return $this->goHome();
+            return $this->goHome();
         }    
 
         $modelEvents = new Events();          
@@ -769,8 +728,7 @@ class PageController extends Controller
     
         if (empty($company)) {    
             return $this->goHome();
-        }
-        
+        }        
     
         return $this->render('../client/page', [
             'modelEvents' => $modelEvents,

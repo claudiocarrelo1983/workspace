@@ -52,7 +52,6 @@ foreach($servicesCatArr as $serviceCat){
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 
-
 ?>
 
 
@@ -82,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <span id="anchor-about-us"></span>
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData,'publish' => $publish, 'code' => $company, 'logo' => $companyArr[0]['path'].$companyArr[0]['image']]); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData,'publish' => $publish, 'code' => $company]); ?>
 
 
 <div role="main" class="main">  

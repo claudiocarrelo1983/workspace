@@ -53,8 +53,69 @@ class LoginForm extends Model
     {
         $user = $this->getUser();  
         
-        $page = Helpers::decrypt($this->field,10);
+        $page = Helpers::decrypt($this->field,10);     
 
+        switch ($page) {
+            case 'backend':
+                    $active = Helpers::accessAccountSuperAdmin($user);
+    
+                    if(!$active){   
+                        $this->addError($attribute, Yii::t('app', 'no_permission')); 
+                    }           
+                break;
+            case 'frontend':
+
+                $error = Helpers::accessAccountAdmin($user);
+    
+                switch($error){
+                    case '1' : 
+                        $this->addError($attribute, 'no_permission'); 
+                        break;
+                    case '2' : 
+                        $this->addError($attribute, 'no_permission_trial'); 
+                        break;
+                }            
+
+                /*
+                if(isset($user->level)){   
+                    if ($user->level != 'admin' && $user->level != 'reseller') {   
+                        $this->addError($attribute, 'You have no permission'); 
+                    }    
+                }
+
+                if(isset($user->subscription_startingdate) && $user->subscription == 'trial'){ 
+
+                    $dateNow = time(); //current timestamp
+                    $dateSubscription = strtotime($user->subscription_startingdate); 
+                
+                    $dateDiference = $dateNow - $dateSubscription;
+                    $days =  round($dateDiference / (60 * 60 * 24));
+            
+                    if ($days >= 30) {   
+                        $this->addError($attribute, 'You ended the 30 days trial.'); 
+                    } 
+                } 
+                */
+
+                break;
+            case 'client': 
+                $error = Helpers::accessAccountClient($user);
+    
+                switch($error){
+                    case '1' : 
+                        $this->addError($attribute, 'no_permission'); 
+                        break;
+                    case '2' : 
+                        $this->addError($attribute, 'no_permission_trial'); 
+                        break;
+                }     
+
+                break;    
+        }
+
+     
+      
+    
         /*
         if(!empty($user->voucher_parent)){
             $userFound = User::findOne(['voucher' => $user->voucher_parent]);
@@ -75,6 +136,10 @@ class LoginForm extends Model
             if($page == 'frontend' && $user->level == 'client'){                       
                 $this->addError($attribute, 'You have no permission'); 
             }    
+
+            if($page == 'client' && $user->level == 'admin'){                       
+                $this->addError($attribute, 'You have no permission'); 
+            }
 
             if($page == 'client' && $user->level == 'admin'){                       
                 $this->addError($attribute, 'You have no permission'); 

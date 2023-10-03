@@ -414,12 +414,14 @@ class SignupForm extends Model
             $text = 'company_text_1';     
             $teamTitle = 'company_team_title_1'; 
             $teamText = 'company_team_text_1'; 
+            $teamManteinance = 'company_manteinance_text_1';    
             $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
 
             if(!empty($count->id)){
                 $text = 'company_text_'.bcadd($count->id, 1);   
                 $teamTitle = 'company_team_title_'.bcadd($count->id, 1);  
                 $teamText = 'company_team_text_'.bcadd($count->id, 1);    
+                $teamManteinance = 'company_manteinance_text_'.bcadd($count->id, 1);   
             }
 
             $arrTeam = [
@@ -431,7 +433,7 @@ class SignupForm extends Model
                 'username_code' => $user->guid,
                 'username' => $this->username,
                 'page_code_title' => $teamTitle,
-                'page_code_text' => $teamText,
+                'page_code_text' => $teamText,         
                 'title' => $this->title,
                 'first_name' => $this->first_name,
                 'surname' => $this->last_name,       
@@ -453,6 +455,7 @@ class SignupForm extends Model
                 'page_code_text' => $text,
                 'page_code_team_title' => $teamTitle,
                 'page_code_team_text' => $teamText,
+                'page_code_manteinance' => $teamManteinance,
                 'team_title_pt' => 'Conheça a equipa',
                 'team_title_en' => 'Meet Our Team',    
                 'team_text_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget urna odio. Proin mollis placerat massa feugiat dapibus. Curabitur sit amet ante vel odio auctor sollicitudin. Proin consequat velit vel fringilla viverra. Vestibulum tellus eros, faucibus et tellus non, accumsan ornare mauris. Etiam varius, turpis ac laoreet vehicula, odio diam fringilla magna.',

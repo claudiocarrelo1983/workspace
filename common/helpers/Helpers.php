@@ -1,17 +1,257 @@
 <?php
 namespace common\Helpers;
-use yii\bootstrap\Dropdown;
-use yii\imagine\Image;  
-use Imagine\Image\Box;
+use common\models\LoginForm;
 use yiier\chartjs\ChartJs;
 use Yii;
 use frontend\assets\PublicAsset;
+use yii\helpers\Url;
 //use frontend\assets\CalendarAsset;
 
 
 use yii\db\Query;
 
-class Helpers{       
+class Helpers{   
+    
+    
+    
+    public static function myCompanyArr(){
+
+        $query = new Query;      
+
+        $companyArr = $query->select([
+            'path',         
+            'image_logo',
+            'image_banner',
+        ])
+        ->from(['company'])
+        ->where(
+            [
+            'company_code_url' => Yii::$app->request->get('code')           
+            ])
+        ->one(); 
+
+        $arrResult = [
+            'path' => (empty($companyArr['path']) ? '/images/company/' : $companyArr['path']),
+            'image_logo' => (empty($companyArr['image_logo']) ? 'generic-logo.jpg' : $companyArr['image_logo']),
+            'image_banner' => (empty($companyArr['image_banner']) ? 'generic-background.jpg' : $companyArr['image_banner']),
+        ];
+
+        return  $arrResult;
+    }
+
+
+    public static function myCompanyDetailsArr(){
+
+        $query = new Query;
+     
+        $companyArr = $query->select([
+            'c.page_code_team_title',
+            'c.page_code_team_text',
+            'c.color',
+            'c.path' ,
+            'c.image_logo' ,  
+            'c.image_banner' ,
+            'c.coin' ,         
+            'c.company_code' ,
+            'c.company_code_url' ,
+            'c.company_name' ,
+            'c.page_code_text',
+            'l.address_line_1',
+            'l.address_line_2',
+            'l.city',
+            'l.postcode',
+            'l.country',
+            'c.website',
+            'c.facebook',
+            'c.pinterest',
+            'c.instagram',
+            'c.twitter',
+            'c.tiktok',   
+            'c.linkedin',
+            'c.youtube',
+            'l.google_location',
+            'l.contact_number',   
+            'l.email',   
+            'l.location_code',
+            'l.location',
+            'l.sheddule_array'
+        ])
+        ->from(['c' => 'company'])
+        ->leftJoin(['l' => 'company_locations'], 'c.company_code = l.company_code')
+        ->where(
+            [
+            'c.company_code_url' => Yii::$app->request->get('code')           
+            ])
+        ->all(); 
+
+        return  $companyArr;
+    }
+    
+    public static function accessAccountAdmin($model){
+
+        $error = 0;
+
+        print"<pre>";
+        print_r($model);
+        die();
+
+        if(isset($model->subscription_startingdate)){          
+
+            $dateNow = time(); //current timestamp
+            $dateSubscription = strtotime($model->subscription_startingdate); 
+        
+            $dateDiference = $dateNow - $dateSubscription;
+            $days =  round($dateDiference / (60 * 60 * 24));   
+           
+          
+            if ($days >= 30  && $model->subscription == 'trial') {                
+                Yii::$app->user->logout();              
+                $error = 2;
+            }  
+        }       
+    
+
+        if(isset($model->level)){      
+            if ($model->level != 'admin') {  
+                Yii::$app->user->logout();      
+                $error = 1;
+            }  
+        }   
+   
+       
+        return $error;
+ 
+    }
+
+
+    public static function accessAccountSuperAdmin($model){        
+        
+        $active = 1;
+
+        if(isset($model->level)){      
+            if ($model->level != 'superadmin') {  
+                Yii::$app->user->logout();      
+                $active = 0;
+            }  
+        }   
+
+        return $active;
+ 
+    }
+
+    public static function accessAccountClient($model){
+              
+        $active = 1;
+
+        if(isset($model->level)){      
+            if ($model->level != 'superadmin') {  
+                Yii::$app->user->logout();      
+                $active = 0;
+            }  
+        }   
+
+        return $active; 
+ 
+    }
+
+
+    public static function accessAccountTeam($model){
+
+        $dateNow = time(); //current timestamp
+        $dateSubscription = strtotime(Yii::$app->user->identity->subscription_startingdate); 
+    
+        $dateDiference = $dateNow - $dateSubscription;
+        $days =  round($dateDiference / (60 * 60 * 24));
+
+        if ($days >= 30) {     
+            return $model->goHome();
+        }  
+      
+        switch (Yii::$app->user->identity->level){
+            case 'admin':
+
+                if (Yii::$app->user->isGuest) {
+                    return $model->goHome();
+                }        
+
+                break;
+            case 'superadmin':
+                    
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+
+                break;
+            case 'client':
+
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+
+                break;
+            case 'team':
+
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+                    
+                break;
+            default:
+                    return $model->goHome();
+                break;
+        }    
+ 
+    }
+
+    public static function accessAccountResseller($model){
+
+        $dateNow = time(); //current timestamp
+        $dateSubscription = strtotime(Yii::$app->user->identity->subscription_startingdate); 
+    
+        $dateDiference = $dateNow - $dateSubscription;
+        $days =  round($dateDiference / (60 * 60 * 24));
+
+        if ($days >= 30) {     
+            return $model->goHome();
+        }  
+      
+        switch (Yii::$app->user->identity->level){
+            case 'admin':
+
+                if (Yii::$app->user->isGuest) {
+                    return $model->goHome();
+                }        
+
+                break;
+            case 'superadmin':
+                    
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+
+                break;
+            case 'client':
+
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+
+                break;
+            case 'team':
+
+                    if (Yii::$app->user->identity->level != 'admin') {
+                        return $model->goHome();
+                    }  
+                    
+                break;
+            default:
+                    return $model->goHome();
+                break;
+        }    
+ 
+    }
+
+
     
     public static function tableName()
     {
@@ -118,6 +358,31 @@ class Helpers{
 
         file_put_contents($directory.$fileName.'.json', json_encode($valuesArr));  
 
+    }
+
+    public static function deleteOldImages($dir, $rejectArr = []){
+
+        $directory = Yii::getAlias('@frontend/web/'.$dir.'/');
+        $rrFiles = scandir( $directory, 1);
+
+     
+        foreach($rrFiles as $key => $doc){  
+
+            $found = 0;
+
+            foreach($rejectArr as $file){             
+                if (str_contains($doc, $file)) {              
+                    $found = 1;
+                    break;
+                }
+            }   
+
+            if(!$found){         
+                if($doc != '..' && $doc != '.'){
+                    unlink($directory.$doc);
+                }             
+            }               
+        }       
     }
 
     public static function deleteOldJson($dir){

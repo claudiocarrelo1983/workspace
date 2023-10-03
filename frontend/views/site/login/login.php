@@ -35,10 +35,7 @@ $path2 = 'login';
                 <div class="col-md-6 col-lg-5 mb-5 mb-lg-0 ">
                     <div class="m-2 pb-2 pt-2">        
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>                   
-                        <div class="row">    
-                            <div class="form-group col-12">                                     
-                                <?= $form->field($model, 'field')->hiddenInput(['value' => Helpers::encrypt('frontend', '10')])->label(false)?>
-                            </div>
+                        <div class="row">                           
                             <div class="form-group col-12">                                     
                                 <?= $form->field($model, 'username')->textInput(['class' => 'form-control form-control-lg text-4',  'autofocus' => true])->label(Yii::t('app', "login_label_username_2"))?>
                             </div>
