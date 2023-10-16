@@ -50,7 +50,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
                     case 'comments':       
                     case 'team':       
                     case 'translations':        
-
+                      
                         if(method_exists(__CLASS__, $method)){                        
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{

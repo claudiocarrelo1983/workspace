@@ -53,7 +53,8 @@
         "2amigos/yii2-date-time-picker-widget": "^1.0",
         "simialbi/yii2-widget-datetimepicker": "^2.6",
         "nickcv/yii2-encrypter": "^1.1",
-        "dpodium/yii2-twilio": "^1.5"
+        "dpodium/yii2-twilio": "^1.5",
+        "kartik-v/yii2-widget-colorinput": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

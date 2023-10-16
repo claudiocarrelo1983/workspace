@@ -20,7 +20,7 @@ use common\Helpers\Helpers;
                 ?>  
             </div>
             <div class="col-lg-3">  
-                <?= $form->field($model, 'client_username')->textInput(['maxlength' => true])->label(Yii::t('app', 'client_username')) ?>
+                <?= $form->field($model, 'client_username')->textInput(['maxlength' => true])->label(Yii::t('app', 'client_usernames')) ?>
             </div>
             <div class="col-lg-3"> 
                 <?= $form->field($model, 'service_code')->radioList(
@@ -42,10 +42,35 @@ use common\Helpers\Helpers;
                 <?= $form->field($model, 'nif')->textInput(['maxlength' => true])->label(Yii::t('app', 'nif')) ?>
             </div>
             <div class="col-lg-3"> 
-                <?= $form->field($model, 'date')->textInput(['maxlength' => true])->label(Yii::t('app', 'date')) ?>
+                <label>
+                    <?= Yii::t('app', 'date') ?>
+                </label>
+                <div class="input-group"  id="from_schedule_date">
+                <div class="input-group-prepend">
+                        <span class="input-group-text" id="validationTooltipUsernamePrepend">
+                            <i class="fas fa-calendar-alt kv-dp-icon"></i>
+                        </span>                  
+                    </div>
+                    <?= $form->field($model, 'date')->textInput(           
+                        [
+                            'inputOptions' => [ 'class' => 'newsletter-cta-mail' ],
+                            'class' => 'form-control',
+                            'data-date-format' => 'yyyy-m-dd',
+                            'data-date-container' => '#from_schedule_date',
+                            'data-provide' => 'datepicker',
+                            'style' => ' height: 38px; ',    
+                            'options' => ['tag' => false]        
+                        ]
+                        )->label(false); 
+                    ?>  
+                </div>	       
             </div>
             <div class="col-lg-3"> 
-                <?= $form->field($model, 'time')->textInput(['maxlength' => true])->label(Yii::t('app', 'time')) ?>
+                <?= $form->field($model, 'time')->dropDownList(
+                        Helpers::dropdownSheddulleHours(),
+                        ['prompt'=> Yii::t('app', 'select_time')]            
+                    )->label(Yii::t('app', 'time')); 
+                ?>           
             </div>
         </div>
         <div class="form-group pt-3">

@@ -40,10 +40,10 @@ class m220722_223505_texts extends Migration
             'page_code_text' => $this->string()->unique(),
             'title' => $this->string(),            
             'text' => $this->text(),
-            'title_pt' => $this->string()->notNull(),
+            'title_pt' => $this->string(),
             'text_pt' =>  $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 
-            'title_en' => $this->string()->notNull(),
-            'text_en' => $this->text()->notNull(),         
+            'title_en' => $this->string(),
+            'text_en' => $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'),         
             'created_date' => $this->timestamp()
              
         ], $tableOptions);

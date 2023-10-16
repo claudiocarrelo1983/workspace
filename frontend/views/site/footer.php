@@ -19,9 +19,9 @@ switch($base_url){
     case 'localhost:100':
     case 'specialcalendar.com':
         $menu = $model->getLastFileUploaded('other','calendar-menu');     
-		$facebook = '';
-		$linkedin = '';
-		$instagram = '';              
+		$facebook = 'https://www.facebook.com/specialcalendar2022';
+		$linkedin = 'https://www.linkedin.com/company/specialcalendar';
+		$instagram = 'https://www.instagram.com/specialcalendar/';                 
         break;
   
     case 'localhost':
@@ -87,12 +87,12 @@ $structure = $model->getLastFileUploaded('other','footer');
 			<div class="col-md-6 col-lg-3 mb-5 mb-lg-0 align-items-center">
 				<h5 class="text-4 text-color-light mb-3"><?= Yii::t('app', 'footer_category_usefull_links') ?></h5>
 				<ul class="list list-unstyled mb-0">
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/sitemap')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_sitemap') ?></a></li>
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/faqs')) ?>"><?= Yii::t('app', "footer_category_usefull_links_faqs") ?></a></li>
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/privacy-policy')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_privacy_policy') ?></a></li>
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/coockies')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_coockies') ?></a></li>
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/gdpr')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_gdpr') ?></a></li>		
-					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/terms-and-conditions')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_terms') ?></a></li>		
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/sitemap')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_sitemap') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/faqs')) ?>"><?= Yii::t('app', "footer_category_usefull_links_faqs") ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/privacy-policy')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_privacy_policy') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/coockies')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_coockies') ?></a></li>
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/gdpr')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_gdpr') ?></a></li>		
+					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/terms-and-conditions')) ?>"><?= Yii::t('app', 'footer_category_usefull_links_terms') ?></a></li>		
 					<li class="mb-0"><a href="<?= str_replace('/frontend/web', '',Url::toRoute('/site/signup-reseller')) ?>"><?= Yii::t('app', 'footer_category_usefull_affiliate_program') ?></a></li>
 				</ul>
 			</div>	

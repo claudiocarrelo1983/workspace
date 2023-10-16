@@ -60,11 +60,14 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'company_code' => $this->company_code,
+            //'company_code' => $this->company_code,
+            'username' => $this->username,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);    
+        ])
+        ->andWhere("level = 'team' OR level = 'admin'")
+        ->andWhere("company_code_parent = '".$this->company_code."' OR company_code = '".$this->company_code."'")  ;    
 
 
 
@@ -78,7 +81,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'voucher_parent', $this->voucher_parent])  
             ->andFilterWhere(['like', 'last_name', $this->last_name])       
             ->andFilterWhere(['like', 'company', $this->company])
-            ->andFilterWhere(['=', 'company_code', $this->company_code])
+            //->andFilterWhere(['=', 'company_code', $this->company_code])
             ->andFilterWhere(['like', 'level', $this->level])
             ->andFilterWhere(['like', 'sublevel', $this->sublevel])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])

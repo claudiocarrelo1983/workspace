@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use common\models\Team;
-use common\models\TeamSearch;
+use common\models\User;
+use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -81,7 +81,7 @@ class TeamController extends Controller
             return $this->goHome();
         }
 
-        $model = new Team();
+        $model = new User();
         $title = 'team_title_1';
         $text = 'team_text_1';
 

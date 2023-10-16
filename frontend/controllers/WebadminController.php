@@ -103,7 +103,7 @@ class WebadminController extends Controller
    
         }
 
-        return $this->render('/admin/website', [
+        return $this->render('/webadmin/index', [
             'model' => $model,
         ]);
 

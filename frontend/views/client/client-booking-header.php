@@ -17,7 +17,7 @@ $eventsArr = $query->select('*')
 
 
 */
-$company = Yii::$app->request->get('code');
+
 
 //use talma\widgets\FullCalendar;
 
@@ -25,12 +25,11 @@ $company = Yii::$app->request->get('code');
 
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use edofre\fullcalendar\Fullcalendar;
-use yii\web\JsExpression;
 use yii\helpers\Url;
-use kartik\datetime\DateTimePicker;
 use common\Helpers\Helpers;
+
+$company = Yii::$app->request->get('code');
+$publish = Helpers::checkPublish($company, $model);
 
 use yii\db\Query;
 
@@ -70,7 +69,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $company);
 
+$companyArr = Helpers::myCompanyArr();
+
 ?>
+
+
+<?php if(isset($companyArr['color']) && !empty($companyArr['color'])){ ?>
+    <style>
+        .featured-primary-custom, .featured-box-primary, .box-content{
+            border-top-color: <?= $companyArr['color'] ?> !important;
+            border-top: 3px solid <?= $companyArr['color'] ?> !important;
+        }
+
+        .btn-primary{
+            border: 1px solid white  !important;    
+            background-color: <?= $companyArr['color'] ?> !important;          
+        }
+
+        .list.list-icons.list-icons-style-3 li > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li a:first-child > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li > .icons:first-child, .list.list-icons.list-icons-style-3 li a:first-child > .icons:first-child{
+            background-color: <?= $companyArr['color'] ?> !important;
+        }
+        .btn-link{
+            color: <?= $companyArr['color'] ?> !important;
+        }
+        .dropdown-reverse:hover > a{
+            color: <?= $companyArr['color'] ?> !important;
+        }
+
+    </style>
+<?php } ?>
 
 
 <!-- Load jQuery -->
@@ -220,10 +247,14 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
                 <div class="header-column flex-grow-0">
                     <div class="header-row pe-4 mt-5">
                         <div class="header-logo" style="width: 100%; height: 95px;">
-                            <a href="index.html">                              
-                                <?= Html::img($companyDetails['path'].$companyDetails['image_logo'], ['class' => 'img-fluid border img-thumbnail p-1 mt-3', 'style' => 'top: 0px;  height: 150px;']);?>
-                            </a>
-						
+                            <?= 
+                                Html::a(
+                                    Html::img(
+                                        $companyDetails['path'].$companyDetails['image_logo'], 
+                                        ['class' => 'img-fluid border img-thumbnail p-1 mt-3', 'style' => 'top: 0px;  height: 150px;']),                      
+                                    Url::toRoute(['/page', 'code' => $company])
+                                ) 
+                            ?>                       
                         </div>
                     </div>
                 </div>
@@ -243,7 +274,7 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
                                             <?= 
                                             Html::a(
                                                 Yii::t('app', 'menu_about_us'),                      
-                                                Url::toRoute(['page/index', 'code' => $company,'#' => 'anchor-about-us'])
+                                                Url::toRoute(['/page', 'code' => $company,'#' => 'anchor-about-us'])
                                             ) 
                                             ?>                                 
                                         </li>         
@@ -251,7 +282,7 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
                                             <?= 
                                                 Html::a(
                                                     Yii::t('app', 'menu_services'),                      
-                                                    Url::toRoute(['page/index', 'code' => $company, '#' => 'anchor-services'])
+                                                    Url::toRoute(['/page', 'code' => $company, '#' => 'anchor-services'])
                                                 ) 
                                             ?>                                 
                                         </li>                                           
@@ -260,7 +291,7 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
                                             <?= 
                                                 Html::a(
                                                     Yii::t('app', 'menu_contacts'),                      
-                                                    Url::toRoute(['page/index', 'code' => $company, '#' => 'anchor-contact-us'])
+                                                    Url::toRoute(['/page', 'code' => $company, '#' => 'anchor-contact-us'])
                                                 ) 
                                             ?>                                  
                                         </li>
@@ -278,4 +309,4 @@ $company = ((empty($company)) ? Yii::$app->user->identity->company_code : $compa
 </header>      
   
 <div class="py2-4"></div>  
-<?= $this->render('@frontend/views/site/banner_client',['path1' => 'Menu', 'code' => $company, 'path2' => '', 'banner' => $companyDetails['path'].$companyDetails['image_banner']]); ?>
+<?= $this->render('@frontend/views/site/banner_client',['code' => $company, 'companyDetails' => $companyDetails]); ?>

@@ -18,6 +18,7 @@ use common\models\Services;
 use common\models\GeneratorJson;
 use frontend\models\SignupClientForm;
 
+
 use Yii;
 //Yii::$app->language = 'en-EN';
 
@@ -116,44 +117,9 @@ class ClientBookingController extends Controller
 
         $this->layout = 'registration';
    
-        $query2 = new Query;
         $request = Yii::$app->request;
 
-        $companyArr = $query2->select([
-            'c.page_code_team_title',
-            'c.page_code_team_text',
-            'c.color',
-            'c.coin' ,
-            'c.path' ,
-            'c.image' ,
-            'c.company_code' ,
-            'c.company_code_url' ,
-            'c.company_name' ,
-            'c.page_code_text',
-            'l.address_line_1',
-            'l.address_line_2',
-            'l.city',
-            'l.postcode',
-            'l.country',
-            'c.website',
-            'c.facebook',
-            'c.pinterest',
-            'c.instagram',
-            'c.twitter',
-            'c.tiktok',   
-            'c.linkedin',
-            'c.youtube',
-            'l.google_location',
-            'l.contact_number',   
-            'l.email',   
-            'l.location_code',
-            'l.location',
-            'l.sheddule_array'
-        ])
-        ->from(['c' => 'company'])
-        ->leftJoin(['l' => 'company_locations'], 'c.company_code = l.company_code')
-        ->where(['c.company_code_url' => Yii::$app->request->get('code')])
-        ->all();
+        $companyArr = Helpers::myCompanyArr();
         
         if (empty($companyArr)) {
             //return $this->goHome();
@@ -216,7 +182,7 @@ class ClientBookingController extends Controller
 
         }  
       
-       
+
         return $this->render('../client/client-booking', [   
             'date' => $date,   
             'model' => $modelSheddule,

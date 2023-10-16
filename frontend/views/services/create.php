@@ -32,12 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div class="row">
-    <p>
-        <?= Yii::t('app','create_services_category_first') ?>
-    </p>  
+<div class="row">   
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model,    
         'modelCat' => $modelCat,
         'countCat' => $countCat
     ]) ?>

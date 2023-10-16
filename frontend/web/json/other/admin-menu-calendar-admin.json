@@ -4,7 +4,7 @@
       {
          "key":"t-dashboard",
          "title":"menu_admin_dashboard",
-         "url":"/dashboard",
+         "url":"../dashboard",
          "icon":"bx bx-home-circle",         
          "submenu":[
             
@@ -129,32 +129,7 @@
            }       
         ]
      },   
-     {
-        "key":"t-goals",
-        "title":"menu_admin_forms",
-        "url":"null",
-        "icon":"bx dripicons-question",
-        "open" : "true",
-        "childs" : ["admin/set-forms", "admin/question-list"],
-        "submenu":[
-           {
-              "key":"t-set-forms",        
-              "title":"menu_admin_create_forms",
-              "url":"/set-forms",
-              "submenu":[
-                 
-              ]
-           },
-           {
-              "key":"t-question-list",
-              "title":"menu_admin_list_forms",          
-              "url":"/question-list",
-              "submenu":[
-                 
-              ]
-           }
-        ]
-     },
+   
      {
         "key":"t-company",
         "title":"menu_admin_company",
@@ -193,7 +168,15 @@
               "submenu":[
                  
               ]
-           }   
+           },
+           {
+               "key":"t-manteinance_mode",
+               "title":"menu_admin_maintenance_mode",
+               "url":"manteinance-mode/",
+               "submenu":[
+                  
+               ]
+            }   
           
         ]
      },
@@ -236,16 +219,8 @@
               "submenu":[
                  
               ]
-           },
+           },    
            {
-              "key":"t-manteinance_mode",
-              "title":"menu_admin_maintenance_mode",
-              "url":"manteinance-mode/",
-              "submenu":[
-                 
-              ]
-           }, 
-        {
               "key":"t-configurations",
               "title":"menu_admin_settings_definitions",
               "url":"definitions/",
@@ -256,7 +231,7 @@
            {
               "key":"t-faqs",
               "title":"menu_faqs",
-              "url":"faqs/",
+              "url":"faqs-admin/",
               "submenu":[
                  
               ]

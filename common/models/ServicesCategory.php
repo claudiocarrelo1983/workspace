@@ -37,8 +37,23 @@ class ServicesCategory extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
+        $arrRequired = ['company_code', 'category_code', 'page_code_title', 'title'];
+        
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        $arrMerge = [];
+
+        foreach($activeLanguagesArr as $lang => $value){
+            if($value == 1){
+                $arrMerge[] = 'title_'.$lang;
+            }
+        }
+
+        $arrRequired = array_merge($arrRequired,$arrMerge);
+
         return [
-            [['company_code', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'required'],
+            [$arrRequired, 'required'],
             [['order', 'active'], 'integer'],
             [['created_date'], 'safe'],
             [['company_code', 'category_code', 'page_code_title', 'title', 'title_pt', 'title_en'], 'string', 'max' => 255],
@@ -53,15 +68,15 @@ class ServicesCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'company_code' => 'Company',
-            'category_code' => 'Category Code',
-            'page_code_title' => 'Page Code Title',
-            'title' => 'Title',
-            'title_pt' => 'Title Pt',
-            'title_en' => 'Title En',
-            'order' => 'Order',
-            'active' => 'Active',
-            'created_date' => 'Created Date',
+            'company_code' => Yii::t('app','company_code'),
+            'category_code' => Yii::t('app','category_code'),
+            'page_code_title' => Yii::t('app','page_code_title'),
+            'title' => Yii::t('app','title'),
+            'title_pt' => Yii::t('app','title_pt'),
+            'title_en' => Yii::t('app','title_en'),
+            'order' => Yii::t('app','order'),
+            'active' => Yii::t('app','active'),
+            'created_date' => Yii::t('app','created_date'),
         ];
     }
 

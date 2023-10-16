@@ -2,7 +2,7 @@
 
 namespace common\models;
 use yii\db\Query;
-
+use common\helpers\Helpers;
 use Yii;
 
 /**
@@ -30,8 +30,22 @@ class Subjects extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+        $arrRequired = ['order','page_code','subject'];
+        
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        $arrMerge = [];
+
+        foreach($activeLanguagesArr as $lang => $value){
+            if($value == 1){
+                $arrMerge[] = 'text_'.$lang;
+            }
+        }
+
+        $arrRequired = array_merge($arrRequired,$arrMerge);
+
         return [
-            [['order','page_code','subject','text_pt', 'text_en'], 'required'],
+            [$arrRequired, 'required'],
             [['order'], 'integer'],
             [['created_date'], 'safe'],
             [['subject', 'text_pt','text_en','company_code','position'], 'string', 'max' => 255],

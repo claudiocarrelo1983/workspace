@@ -86,7 +86,7 @@ class Team extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_code', 'username', 'page_code_title', 'page_code_text', 'title', 'first_name', 'surname', 'location', 'job_title'], 'required'],
+            [['company_code', 'username', 'page_code_title', 'page_code_text', 'title', 'first_name', 'surname', 'location', 'job_title', 'password'], 'required'],
             [['text', 'text_pt', 'text_en','time_window'], 'string'],
             [['order', 'active'], 'integer'],
             [['created_date'], 'safe'],

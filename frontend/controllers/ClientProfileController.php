@@ -28,7 +28,12 @@ class ClientProfileController extends Controller
     {        
         $this->layout = 'registration';
 
-        
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/page', 
+                'code' => Yii::$app->request->get('code')]
+            );           
+        }   
+      
         $model =  $this->findModel(Yii::$app->user->identity->id);
         
         return $this->render('/client/client-profile', [    

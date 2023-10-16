@@ -15,8 +15,7 @@ use common\Helpers\Helpers;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <h5 class="pt-3">Company Information</h5>    
+    <div class="row">     
         <div class="col-lg-3">
             <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
         </div>

@@ -3,8 +3,9 @@
 namespace frontend\controllers;
 
 
-use common\models\ShedduleSearch;
-
+use frontend\models\ResendVerificationEmailForm;
+use frontend\models\VerifyEmailForm;
+use frontend\models\PasswordResetRequestForm;
 use common\models\Tickets;
 use yii\web\Controller;
 use common\models\LoginForm;
@@ -465,6 +466,8 @@ class PageController extends Controller
     
         $model = new LoginForm();
         $this->layout = 'registration';
+      
+        Helpers::accessAccountClient($model);
     
         if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/page', 
@@ -520,10 +523,14 @@ class PageController extends Controller
                 'model' => $model,
             ]);
         }
-            
+        
+        $myDataArr = [];
+  
         return $this->render('/client/login/login_client', [
             'model' => $model,
             'company' => Yii::$app->request->get('code'),
+            'myData' =>  $myDataArr
+
         ]);
     }     
 
@@ -541,46 +548,8 @@ class PageController extends Controller
         $this->layout = 'registration';
 
         $this->loginValidation();
-
-        $query2 = new Query();
-
-        $companyArr = $query2->select([
-            'c.page_code_team_title',
-            'c.page_code_team_text',
-            'c.color',
-            'c.coin' ,
-            'c.path_logo' ,
-            'c.image_logo' ,
-            'c.path_banner' ,
-            'c.image_banner' ,
-            'c.company_code' ,
-            'c.company_code_url' ,
-            'c.company_name' ,
-            'c.page_code_text',
-            'l.address_line_1',
-            'l.address_line_2',
-            'l.city',
-            'l.postcode',
-            'l.country',
-            'c.website',
-            'c.facebook',
-            'c.pinterest',
-            'c.instagram',
-            'c.twitter',
-            'c.tiktok',   
-            'c.linkedin',
-            'c.youtube',
-            'l.google_location',
-            'l.contact_number',   
-            'l.email',   
-            'l.location_code',
-            'l.location',
-            'l.sheddule_array'
-        ])
-        ->from(['c' => 'company'])
-        ->leftJoin(['l' => 'company_locations'], 'c.company_code = l.company_code')
-        ->where(['c.company_code_url' => Yii::$app->request->get('code')])
-        ->all();
+      
+  
      
         //$submitEmail = '';
         $date = '';
@@ -595,7 +564,7 @@ class PageController extends Controller
             $model->role = 'Client';
             $model->coin = 'EUR';
             $model->voucher = 'null';
-            $date = (empty(Yii::$app->request->post()['dob']) ? '' : date('Y-m-d', strtotime(Yii::$app->request->post()['dob']))); 
+            //$date = (empty(Yii::$app->request->post()['dob']) ? '' : date('Y-m-d', strtotime(Yii::$app->request->post()['dob']))); 
             $model->dob = $date;         
 
             if($model->validate()){
@@ -614,9 +583,9 @@ class PageController extends Controller
                     );
                 }
 
-                return $this->redirect(['/page/login', 
-                'code' => Yii::$app->request->get('code')]
-            );
+                return $this->render('/page/login', [                 
+                    'company' => Yii::$app->request->get('code'),
+                ]);           
            
             }     
       
@@ -625,11 +594,71 @@ class PageController extends Controller
         //$this->layout = 'publicDark';
 
         return $this->render('/client/login/signup', [
-            'modelSignupForm' => $model,           
-            'date' =>  $date,
-            'companyArr' => $companyArr
+            'model' => $model,           
+            //'date' =>  $date,
+            'company' => Yii::$app->request->get('code'),
         ]);
     }
+
+
+    /**
+     * Requests password reset.
+     *
+     * @return mixed
+     */
+    public function actionRequestPasswordReset()
+    {     
+
+        $this->layout = 'registration';
+
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+
+               // return $this->goHome();
+            }
+
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+        }
+
+        return $this->render('@frontend/views/client/login/requestPasswordResetToken', [
+            'model' => $model
+        ]);
+      
+    }
+
+
+    /**
+     * Resend verification email
+     *
+     * @return mixed
+     */
+    public function actionResendVerificationEmail()
+    {
+
+        $this->layout = 'registration';
+
+        $model = new ResendVerificationEmailForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                //return $this->goHome();
+              
+                return $this->render('@frontend/views/client/login/resendVerificationEmail', [
+                    'model' => $model
+                ]);
+            }
+            die('___');
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
+        }
+ 
+        return $this->render('@frontend/views/client/login/resendVerificationEmail', [
+            'model' => $model
+        ]);
+        
+    }
+
 
 
     public function actionLogout()
@@ -659,20 +688,33 @@ class PageController extends Controller
     
     public function actionIndex($code)
     {              
+
+        $companyArr = Helpers::myCompanyArr();
+
+        if(empty($companyArr)){
+            return $this->goHome();
+        } 
+
+        $model = new Tickets;
+        $modelEvents = new Events();     
+
+        $this->layout = 'maintenance_client';
+
+        $maintenanceArr = [
+            'logo' => $companyArr['path'].$companyArr['image_logo'],
+            'text' => $companyArr['page_code_manteinance'],
+        ];
+  
+        if($companyArr['manteinance']){
+            return $this->render('@frontend/views/site/home/maintenance_client',[
+                'maintenanceArr' => $maintenanceArr
+            ]);
+        }
       
+    
         $publish = Helpers::checkPublish($code, $this);    
 
         $this->layout = 'registration';       
-   
-        $model = new Tickets;
-
-        $companyArr = Helpers::myCompanyDetailsArr();
- 
-        if(empty($companyArr)){
-            return $this->goHome();
-        }    
-
-        $modelEvents = new Events();          
 
         if(isset($this->request->post()['Events']['id']) && $this->request->post()['Events']['id'] > 0){
             $modelEvents = $this->findModelEvents($this->request->post()['Events']['id']); 
@@ -696,7 +738,7 @@ class PageController extends Controller
                 return $this->refresh();
             }            
         }
-     
+  
 
         $query = new Query;
         $eventsArr = [];
@@ -723,13 +765,16 @@ class PageController extends Controller
                 'end' => $event['end']                      
             ];
         }
+
+        $companyArr = Helpers::myCompanyDetailsArr($code);
      
         $company = (isset($companyArr[0]) ? $companyArr[0]['company_code'] : '');
-    
+      
         if (empty($company)) {    
-            return $this->goHome();
+            //return $this->goHome();
         }        
-    
+       
+
         return $this->render('../client/page', [
             'modelEvents' => $modelEvents,
             'companyArr' =>  $companyArr,

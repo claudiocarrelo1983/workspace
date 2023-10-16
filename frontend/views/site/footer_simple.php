@@ -11,13 +11,16 @@ use common\Helpers\Helpers;
 	<div class="footer-copyright">
 		<div class="container py-5">
 			<div class="row py-6">				
-				<div class="col-lg-12  text-center">Developed by<div>		
+				<div class="col-lg-12  text-center">
+					<?= Yii::t('app', 'developed_by') ?> 				
+				<div>		
 				<div class="col-lg-12 text-center">
 					<a  href="<?= str_replace('/frontend/web', '', Url::home())  ?>" >
 						<?= Helpers::logoHeader(6) ?>
 					</a>
-
-					<p><?= Yii::t('app', '© Copyright 2021. All Rights Reserved.') ?> </p>
+					<p>
+						<?= Yii::t('app', 'footer_copywrite') ?> 
+					</p>
 				</div>
 			</div>
 		</div>

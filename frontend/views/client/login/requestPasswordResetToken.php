@@ -11,28 +11,43 @@ $this->title = 'Request password reset';
 $this->params['breadcrumbs'][] = $this->title;
 
 $path2 = 'reset_token';
+
 ?>
 
 <!-- Banner -->
-<?= $this->render('@frontend/views/site/banner',['path1' => 'Menu','path2' => $path2]); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => [], 'model' => $model]); ?>
 
 
-<div class="site-request-password-reset">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out your email. A link to reset password will be sent there.</p>
-
+<div class="container py-4">
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+                <div class="site-resend-verification-email ">
+                    <div class=" text-center">
+                        <h4 class="font-weight-bold text-4 mb-0">
+                            <?= Yii::t('app','resend_request_password_reset_email_title') ?>
+                        </h4>
+                    </div>
+                    <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
 
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'email')->textInput(['class'=> 'form-control form-control-lg text-4 is-invalid','autofocus' => true])->label(Yii::t('app','email')) ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                    <?php if (Yii::$app->session->hasFlash('success')): ?>                   
+                        <div class="alert alert-success alert-dismissible mt-3" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>                        
+                            <?= Yii::t('app','resend_request_password_reset_email_success_message') ?>
+                        </div>
+                    <?php endif; ?>
+                  
+           
+                    <div class="form-group mt-4">
+                        <?= Html::submitButton(Yii::t('app','submit_button'), ['class' => 'btn btn-primary  w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3']) ?>
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
+            
                 </div>
-
-            <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
 </div>

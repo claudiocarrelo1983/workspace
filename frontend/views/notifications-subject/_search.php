@@ -10,7 +10,7 @@ use common\Helpers\Helpers;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="clients-search">
+<div class="clients-search my-4">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -26,10 +26,7 @@ use common\Helpers\Helpers;
         </div>  
         <div class="col">
             <?php  echo $form->field($model, 'text_en')->label(Yii::t('app', 'subject_en')) ?>
-        </div>  
-        <div class="col">
-            <?php  echo $form->field($model, 'active')->label(Yii::t('app', 'active')) ?>
-        </div>
+        </div>        
         <div class="col">            
             <?= $form->field($model, 'active')->dropdownList(
                 Helpers::dropdownActive(),                

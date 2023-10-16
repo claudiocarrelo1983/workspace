@@ -356,4 +356,13 @@ return array (
       '@dpodium/yii2/Twilio' => $vendorDir . '/dpodium/yii2-twilio/components',
     ),
   ),
+  'kartik-v/yii2-widget-colorinput' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-colorinput',
+    'version' => '1.0.6.0',
+    'alias' => 
+    array (
+      '@kartik/color' => $vendorDir . '/kartik-v/yii2-widget-colorinput/src',
+    ),
+  ),
 );

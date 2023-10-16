@@ -41,10 +41,10 @@ class m220721_191939_faqs extends Migration
             'page_code_question' => $this->string()->notNull()->unique(),  
             'page_code_answer' => $this->string()->notNull()->unique(),  
             'answer' => $this->text(),
-            'question_pt' => $this->string()->notNull(), 
-            'answer_pt' => $this->text()->notNull(), 
-            'question_en' => $this->string()->notNull(), 
-            'answer_en' => $this->text()->notNull(), 
+            'question_pt' => $this->string(), 
+            'answer_pt' => $this->text(), 
+            'question_en' => $this->string(), 
+            'answer_en' => $this->text(), 
             'order' => $this->integer()->notNull(),
             'created_date' => $this->timestamp()       
         ], $tableOptions);

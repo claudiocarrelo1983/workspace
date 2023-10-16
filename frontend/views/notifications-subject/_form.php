@@ -3,17 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\db\Query;
+use common\Helpers\Helpers;
 
-$tagQueryUser = new Query;
+$activeLanguagesArr = Helpers::activeLanguages();
 
-$countries = $tagQueryUser->select([
-    'country_code',
-    'full_title' 
-    ])
-->from('countries')    
-->all();
-
-$arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Subjects */
@@ -26,18 +19,20 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
             <div class="col">
                 <?= $form->field($model, 'subject')->textInput(['maxlength' => true])->label(Yii::t('app', 'subject')) ?>
             </div>
-            <div class="col">
-                <?= $form->field($model, 'text_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'subject_pt')) ?>
-            </div>
-            <div class="col">
-                <?= $form->field($model, 'text_en')->textInput(['maxlength' => true])->label(Yii::t('app', 'subject_en')) ?>
-            </div>   
+            <?php foreach($activeLanguagesArr as $language => $value): ?>
+                <?php if($value == 1){ ?>
+                    <div class="col"> 
+                        <?= $form->field($model, 'text_'.$language)->textInput(['rows' => 6])->label(Yii::t('app', 'subject_'.$language)); ?>
+                    </div>     
+                <?php } ?>   
+            <?php endforeach; ?>          
             <div class="col">
                 <?= $form->field($model, 'order')->textInput(['maxlength' => true])->label(Yii::t('app', 'order')) ?>
             </div>  
         </div>  
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Yii::t('app', 'back_button'), ['index'], ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>

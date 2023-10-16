@@ -37,6 +37,7 @@ return array(
     'kartik\\datetime\\' => array($vendorDir . '/kartik-v/yii2-widget-datetimepicker/src'),
     'kartik\\daterange\\' => array($vendorDir . '/kartik-v/yii2-date-range/src'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker/src'),
+    'kartik\\color\\' => array($vendorDir . '/kartik-v/yii2-widget-colorinput/src'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base/src'),
     'huijiewei\\jsonViewer\\' => array($vendorDir . '/huijiewei/yii2-json-viewer/src'),
     'grptx\\tests\\' => array($vendorDir . '/grptx/yii2-firebase/tests/tests'),

@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\Helpers\Helpers;
 
+$activeLanguagesArr = Helpers::activeLanguages();
+
 /** @var yii\web\View $this */
 /** @var app\models\ServicesCategory $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -17,12 +19,13 @@ use common\Helpers\Helpers;
         <div class="col">        
             <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label(Yii::t('app', 'description'));  ?>
         </div>
-        <div class="col">
-            <?= $form->field($model, 'title_pt')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_pt'));  ?>
-        </div>
-        <div class="col">
-            <?= $form->field($model, 'title_en')->textInput(['maxlength' => true])->label(Yii::t('app', 'title_en'));  ?>
-        </div>
+        <?php foreach($activeLanguagesArr as $language => $value): ?>
+            <?php if($value == 1){ ?>
+                <div class="col"> 
+                    <?= $form->field($model, 'title_'.$language)->textInput(['maxlength' => true])->label(Yii::t('app', 'title_'.$language)); ?>
+                </div>
+            <?php } ?>  
+        <?php endforeach; ?>  
     </div>
     <div class="row">
         <div class="col">
@@ -30,8 +33,7 @@ use common\Helpers\Helpers;
         </div>
         <div class="col">            
             <?= $form->field($model, 'active')->dropdownList(
-                    Helpers::dropdownActive(),
-                    ['prompt'=> Yii::t('app', 'select_active')], 
+                    Helpers::dropdownActive(),              
                 )->label(Yii::t('app', 'active')); 
             ?>
         </div>
@@ -39,7 +41,9 @@ use common\Helpers\Helpers;
 
     <div class="form-group pt-3">
         <?= Html::submitButton(Yii::t('app', 'submit_button'), ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'back_button'), ['index'], ['class' => 'btn btn-primary']) ?>
     </div>
+    
 
     <?php ActiveForm::end(); ?>
 

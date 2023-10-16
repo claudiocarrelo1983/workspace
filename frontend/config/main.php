@@ -7,10 +7,12 @@ $params = array_merge(
 );
 
 return [
+    /*
     'controllerNamespace' => [
         'frontend\controllers',
         'frontend\web\ajax', // add the AJAX namespace here
     ],
+    */
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],

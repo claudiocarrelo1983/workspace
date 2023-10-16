@@ -8,9 +8,7 @@ use common\Helpers\Helpers;
 use yii\widgets\ActiveForm;
 ?>
 
-<?= $this->render('/client/client-booking-header', ['myData' => '', 'publish' => $publish, 'logo' => '']); ?>
-
-
+<?= $this->render('/client/client-booking-header', ['myData' => [], 'model' => $model]); ?>
 
 <div id="examples" class="container  pb-5">
     <?= $this->render('/client/client-links'); ?>

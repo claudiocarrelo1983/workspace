@@ -37,7 +37,7 @@ use yii\helpers\Url;
         <div class="clients-index">              
             <p>
                 <?= Html::a(
-                        Yii::t('app', 'create_notification_subject'),
+                        Yii::t('app', 'create_notification_subject_button'),
                         ['create'], 
                         ['class' => 'btn btn-success']
                      ) 
@@ -58,13 +58,13 @@ use yii\helpers\Url;
                             },
                         ], 
                         [     
-                            'label' => Yii::t('app', 'text_pt') ,                        
+                            'label' => Yii::t('app', 'subject_pt') ,                        
                             'value' => function (Subjects $model) {
                                 return $model->text_pt;
                             },
                         ], 
                         [     
-                            'label' => Yii::t('app', 'text_en') ,                        
+                            'label' => Yii::t('app', 'subject_en') ,                        
                             'value' => function (Subjects $model) {
                                 return $model->text_en;
                             },

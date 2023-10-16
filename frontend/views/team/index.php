@@ -1,5 +1,6 @@
 <?php
 
+use common\models\CompanyLocations;
 use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -20,17 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18 pb-4">
-                    <?= Html::encode(Yii::t('app', 'menu_admin_company_team')) ?>
+                    <?= Html::encode(Yii::t('app', 'menu_admin_company')) ?>
                 </h4>  
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="javascript: void(0);">
-                                <?= Yii::t('app', 'menu_admin_company_team') ?> 
+                                <?= Yii::t('app', 'menu_admin_company') ?> 
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <?= Yii::t('app', 'menu_admin_teams_list') ?>
+                            <?= Yii::t('app', 'menu_admin_company_team') ?>
                         </li>
                     </ol>
                 </div>
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div> 
 
     <p>
-        <?= Html::a('Create Team', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'create_team'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -49,20 +50,66 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [     
+                'label' => Yii::t('app', 'id') ,                        
+                'value' => function (User $model) {
+                    return $model->id;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'username') ,                        
+                'value' => function (User $model) {
+                    return $model->username;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'title') ,                        
+                'value' => function (User $model) {
+                    return $model->title;
+                },
+            ],        
+            [     
+                'label' => Yii::t('app', 'first_name') ,                        
+                'value' => function (User $model) {
+                    return $model->first_name;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'last_name') ,                        
+                'value' => function (User $model) {
+                    return $model->last_name;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'username') ,                        
+                'value' => function (User $model) {
+                    return $model->username;
+                },
+            ],
+            [     
+                'label' => Yii::t('app', 'email') ,                        
+                'value' => function (User $model) {
+                    return $model->email;
+                },
+            ],          
+            [     
+                'label' => Yii::t('app', 'company_code_location'),                         
+                'format' => 'raw',
+                'value' => function (User $model) {
+                    $test = CompanyLocations::find('location_code')->orderBy("id desc")->where(['location_code' => $model->location_code])->limit(1)->one();
+                    return (isset($test->full_name) ? $test->full_name : '');
+                },
+            ],            
+            [     
+                'label' => Yii::t('app', 'contact_number') ,                        
+                'value' => function (User $model) {
+                    return $model->contact_number;
+                },
+            ],
 
-            'id',
-            //'company',
-            'username',
-            //'page_code_title',
-            //'page_code_text',
-            'email',
-            'first_name', 
-            'surname',      
-            //'path',
-            //'image',
-            'location',
-            'title',
-            'text:ntext',
+
+          
+            //'text:ntext',
             //email
             //'title_pt',
             //'text_pt:ntext',
@@ -76,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'tiktok',
             //'linkedin',
             //'youtube',
-            'contact_number',
+       
             //'color',
             //'active',
             //'created_date',

@@ -36,8 +36,24 @@ PublicAsset::register($this);
 <div class="body header-body border-top-0 bg-dark box-shadow-none overflow-visible  mb-5">    
     <header id="header" class=" header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
         <div class="header-body border-top-0 bg-dark box-shadow-none overflow-visible">
-            <div class="header-top ">
+            <div class="container-fluid header-top">
+                <div class="container">
+                    <div class="header-row  py-2 ">	
+                                    |
+                        <div class="header-column justify-content-start">	
+                            <div class="header-row">
+                                <nav class="header-nav-top">	
+                                <?php foreach (Yii::$app->params['languages'] as $key => $language): ?>
+                                <span class="px-2 language" data-url ='<?= Url::base(true); ?>' data-csrf= <?= (Yii::$app->request->getCsrfToken()) ?>   id=<?= $key ?>><?= Yii::t('app', $language ) ?></span> |								
+                                <?php endforeach; ?>  
+                            </div>
+                        </div>                       
+                    </div> 
+                </div> 
+            </div> 
+            <div class="">
                 <div class="container">             
+                         
                     <div class="header-row py-2">	                         
                         <div class="header-column justify-content-start">	
                             <div class="header-row">

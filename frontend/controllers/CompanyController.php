@@ -45,8 +45,7 @@ class CompanyController extends Controller
 
         $this->layout = 'adminLayout';  
         
-
-        return $this->render('view', [
+        return $this->render('update', [
             'model' => $this->findModel(),
         ]);    
     }

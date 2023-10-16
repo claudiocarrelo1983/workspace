@@ -96,8 +96,8 @@ class ServicesController extends Controller
         $this->layout = 'adminLayout';  
     
         $model = new Services();
-        $modelCat = new ServicesCategory();
-        
+        $modelCat = new ServicesCategory();     
+
         $countCat = $modelCat::find('id')->orderBy("id desc")->limit(1)->one();    
  
         if ($this->request->isPost) {            
@@ -126,8 +126,8 @@ class ServicesController extends Controller
                     $text = 'service_text_'.bcadd($count->id, 1);              
                 }
               
-                $model->company = Yii::$app->user->identity->company_code;
-                $model->service_code = 'service_'.Helpers::generateRandowHumber(); 
+                $model->company_code = Yii::$app->user->identity->company_code;
+                $model->service_code = 's_'.Helpers::generateRandowHumber(); 
                 $model->page_code_title = $title;    
                 $model->page_code_text = $text;     
 
@@ -149,7 +149,7 @@ class ServicesController extends Controller
         $model->locationCodeArr = explode(',', $model->location_code);
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model,         
             'modelCat' => $modelCat,
             'countCat' => $countCat,
         ]);

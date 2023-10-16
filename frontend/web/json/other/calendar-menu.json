@@ -16,7 +16,7 @@
       {
          "key":"t-home",
          "title":"menu_home_calendar",
-         "url":"site/home",           
+         "url":"../",           
          "submenu":[
             
          ]
@@ -24,21 +24,21 @@
       {
          "key":"t-schedule-calendar",
          "title":"menu_schedule_calendar",
-         "url":"site/schedule-calendar",       
+         "url":"../schedule-calendar",       
          "submenu":[            
          ]
       },
       {
          "key":"t-pricing",
          "title":"menu_pricing",
-         "url":"site/pricing",       
+         "url":"../pricing",       
          "submenu":[            
          ]
       },        
       {
          "key":"t-contact-us",
          "title":"menu_contacts",
-         "url":"site/contact-us",       
+         "url":"../contact-us",       
          "submenu":[            
          ]
       }   

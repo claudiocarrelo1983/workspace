@@ -5,6 +5,7 @@ use yiier\chartjs\ChartJs;
 use Yii;
 use frontend\assets\PublicAsset;
 use yii\helpers\Url;
+
 //use frontend\assets\CalendarAsset;
 
 
@@ -19,9 +20,14 @@ class Helpers{
         $query = new Query;      
 
         $companyArr = $query->select([
+          
+            'color', 
             'path',         
             'image_logo',
             'image_banner',
+            'page_code_manteinance',
+            'page_code_banner',
+            'manteinance',
         ])
         ->from(['company'])
         ->where(
@@ -31,9 +37,12 @@ class Helpers{
         ->one(); 
 
         $arrResult = [
+            'color' => (empty($companyArr['color']) ? '' : $companyArr['color']),
             'path' => (empty($companyArr['path']) ? '/images/company/' : $companyArr['path']),
             'image_logo' => (empty($companyArr['image_logo']) ? 'generic-logo.jpg' : $companyArr['image_logo']),
             'image_banner' => (empty($companyArr['image_banner']) ? 'generic-background.jpg' : $companyArr['image_banner']),
+            'page_code_manteinance' => (empty($companyArr['page_code_manteinance']) ? 'menu_admin_campaign_manteinance_text' : $companyArr['page_code_manteinance']),
+            'manteinance' => (empty($companyArr['manteinance']) ? 0 : $companyArr['manteinance']),
         ];
 
         return  $arrResult;
@@ -91,10 +100,6 @@ class Helpers{
 
         $error = 0;
 
-        print"<pre>";
-        print_r($model);
-        die();
-
         if(isset($model->subscription_startingdate)){          
 
             $dateNow = time(); //current timestamp
@@ -116,8 +121,7 @@ class Helpers{
                 Yii::$app->user->logout();      
                 $error = 1;
             }  
-        }   
-   
+        }      
        
         return $error;
  
@@ -126,7 +130,7 @@ class Helpers{
 
     public static function accessAccountSuperAdmin($model){        
         
-        $active = 1;
+        $active = 1;       
 
         if(isset($model->level)){      
             if ($model->level != 'superadmin') {  
@@ -143,8 +147,13 @@ class Helpers{
               
         $active = 1;
 
+        /*
+        print_r(Helpers::checkClientManteinance());
+        die();
+
+        */
         if(isset($model->level)){      
-            if ($model->level != 'superadmin') {  
+            if ($model->level != 'client' || $model->level != 'team' ) {  
                 Yii::$app->user->logout();      
                 $active = 0;
             }  
@@ -152,6 +161,20 @@ class Helpers{
 
         return $active; 
  
+    }
+
+    public static function checkClientManteinance(){
+
+        $query = new Query;
+     
+        $valueCompany = $query->select('manteinance')
+            ->from('company')
+            ->where(['company_code_url' => Yii::$app->request->get('code')])
+            ->one();        
+  
+
+        return $valueCompany;
+
     }
 
 
@@ -548,7 +571,7 @@ class Helpers{
         {
             return trim(com_create_guid(), '{}');
         }
-
+      
         return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
 
@@ -563,11 +586,12 @@ class Helpers{
         return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
 
-    public static function generateRandowHumber($keyLength = 8)
+    public static function generateRandowHumber($keyLength = 3)
     {
         // Set a blank variable to store the key in
-        $key = "";
-        for ($x = 1; $x <= $keyLength; $x++) {
+        $key = date('YmdHis');
+
+        for ($x = 1; $x <= 3; $x++) {
             // Set each digit
             $key .= random_int(0, 9);
         }
@@ -1379,6 +1403,47 @@ class Helpers{
 
         return $arrLevel;
     }
+
+    public static function dropdownSubjects($position){
+        $query = new Query;
+
+        $language = null;
+
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        if(count($activeLanguagesArr) > 1){
+            foreach($activeLanguagesArr as $lang => $value){
+                if($value == 1){
+                    $language = $lang;
+                }
+            }          
+        }
+        
+        $serviceArr = $query->select([        
+            'page_code',     
+        ])
+        ->from('subjects')    
+        ->where(
+            [
+                //'type' => $type,
+                'position' => $position,
+                //'company_code' => $company, 
+            ]
+            )
+        ->orderBy('order')
+        ->all();
+        
+        $arrServices = [];
+        
+        foreach($serviceArr as $value){
+            $arrServices[Yii::t('app',$value['page_code'])] = Yii::t('app',$value['page_code'], [], $language);
+        }
+
+        return $arrServices;
+    }
+
+
+
     
    public static function dropdownTitle(){
 
@@ -1583,23 +1648,9 @@ class Helpers{
 
     
 
-    public static function dropdownTeam(){
+    public static function dropdownTeam(){       
 
-        $query = new Query;
-      
-
-        $teamArr = $query->select([
-                'guid', 
-                'first_name',     
-                'last_name',  
-            ])
-        ->from('user')    
-        ->where(
-            [
-                'company_code' => Yii::$app->user->identity->company_code,
-                'level' => 'team'
-            ])
-        ->all();
+        $teamArr = Helpers::getTeamArr();
 
         $arrTeam = [];
 
@@ -1610,10 +1661,131 @@ class Helpers{
         return $arrTeam;
     }
 
-    public static function dropdownServiceCategory(){
+    public static function getTeamArr(){
 
         $query = new Query;
 
+        $userArr = $query->select([
+                'guid', 
+                'username', 
+                'location_code',
+                'first_name',     
+                'last_name', 
+                'full_name',    
+                'color',       
+                'path',
+                'image',
+                'page_code_title'
+
+            ])
+        ->from('user')    
+        ->where("company_code_parent = '".Yii::$app->user->identity->company_code."' OR company_code = '".Yii::$app->user->identity->company_code."'")  
+        ->andWhere("level = 'team' OR level = 'admin'")   
+        ->all();
+
+        return $userArr;
+    }
+    
+    public static function getServicesArr(){
+
+        $arrServices = [];
+        $query = new Query;
+
+        $servicesCatArr = Helpers::getServicesCatArr();
+
+        foreach($servicesCatArr as $serviceCat){
+
+            $servicesArr = $query->from(['s' => 'services'])
+                ->select([                     
+                    's.category_code',
+                    's.price',    
+                    's.text_pt', 
+                    's.time',
+                    's.text_en', 
+                    's.price_range',       
+                    'services_title'  => 's.page_code_title',        
+                    'services_text'  => 's.page_code_text',
+                    ])
+                ->where(
+                    [
+                        's.company_code' => Yii::$app->user->identity->company_code,
+                        's.category_code' => $serviceCat['category_code']
+                    ]
+                )->orderBy(['order'=>SORT_ASC])->all();
+        
+            $arrServices[$serviceCat['page_code_sc_title']] = $servicesArr;
+        }
+
+        return $arrServices;
+
+    }
+
+    public static function activeLanguages(){
+
+        $languagesArr = [
+                'en' => '0',
+                'pt' => '0',
+            ];
+
+        $arrValuesLang = explode(',', Yii::$app->user->identity->language);
+
+        if(empty($arrValuesLang[0])){
+            $arrValuesLang = ['en', 'pt'];
+        }
+
+        foreach($arrValuesLang as $languages){
+            $valueMerge[$languages] = 1;        
+        }
+
+        $languagesArr = array_merge($languagesArr,  $valueMerge);
+
+        return $languagesArr;
+    }
+
+    public static function getServicesCatArr(){
+        
+        $query = new Query;
+
+        $servicesCatArr = $query->from(['sc' => 'services_category'])
+            ->select([
+                'sc.category_code',
+                'page_code_sc_title'  => 'sc.page_code_title',
+                'services_category_title' => 'sc.page_code_title',
+                ])
+            ->where(['sc.company_code' => Yii::$app->user->identity->company_code])
+            ->orderBy(['order'=>SORT_ASC])
+            ->all();
+
+        return $servicesCatArr;
+    }
+
+    public static function dropdownServiceCategory(){
+
+        $query = new Query;
+        $language = null;
+
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        $count = 0;
+
+        foreach($activeLanguagesArr as $lang => $value){
+            if($value == 1){
+                $count++;    
+                           
+            }
+        }  
+
+        if($count == 1){
+            foreach($activeLanguagesArr as $lang => $value){
+                if($count == 1){
+                    if($value == 1){
+                        $language = $lang;            
+                    }
+                }
+            }  
+        }
+
+    
         $serviceArr = $query->select([
             'category_code', 
             'page_code_title',     
@@ -1625,7 +1797,7 @@ class Helpers{
         $arrServiceCat =  [];
         
         foreach($serviceArr as $value){
-            $arrServiceCat[$value['category_code']] = Yii::t('app',$value['page_code_title']);
+            $arrServiceCat[$value['category_code']] = Yii::t('app',$value['page_code_title'], [], $language);
         }
 
         return $arrServiceCat;
@@ -1634,6 +1806,18 @@ class Helpers{
     public static function dropdownServices(){
 
         $query = new Query;
+
+        $language = null;
+
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        if(count($activeLanguagesArr) > 1){
+            foreach($activeLanguagesArr as $lang => $value){
+                if($value == 1){
+                    $language = $lang;
+                }
+            }          
+        }
 
         $serviceArr = $query->select([
             'service_code', 
@@ -1651,16 +1835,29 @@ class Helpers{
         $arrServices = [];
         
         foreach($serviceArr as $value){
-            $arrServices[$value['service_code']] = Yii::t('app',$value['page_code_title']);
+            $arrServices[$value['service_code']] = Yii::t('app',$value['page_code_title'], [], $language);
         }
 
         return $arrServices;
     }
 
+    /*
     public static function dropdownClientContactsUsSubject($type, $company){
 
         $query = new Query;
 
+        $language = null;
+
+        $activeLanguagesArr = Helpers::activeLanguages();
+
+        if(count($activeLanguagesArr) > 1){
+            foreach($activeLanguagesArr as $lang => $value){
+                if($value == 1){
+                    $language = $lang;
+                }
+            }          
+        }
+        
         $serviceArr = $query->select([        
             'page_code',     
         ])
@@ -1678,11 +1875,13 @@ class Helpers{
         $arrServices = [];
         
         foreach($serviceArr as $value){
-            $arrServices[Yii::t('app',$value['page_code'])] = Yii::t('app',$value['page_code']);
+            $arrServices[Yii::t('app',$value['page_code'])] = Yii::t('app',$value['page_code'], [], $language);
         }
 
         return $arrServices;
     }
+
+    */
 
     public static function checkPublish($code, $model){
 
@@ -1700,8 +1899,8 @@ class Helpers{
        
         }
 
-        if (Yii::$app->user->isGuest && $publish ==  '0') {    
-            return $model->goHome();
+        if (Yii::$app->user->isGuest && $publish ==  '0') {        
+            //return $this->refresh();
         }
 
         return $publish;
@@ -1725,27 +1924,7 @@ class Helpers{
         return $notifications;
     }
 
-    public static function getTeamArr(){
 
-        $query = new Query;
-
-        $userArr = $query->select([
-                'guid', 
-                'username', 
-                'location_code',
-                'full_name',    
-                'color',       
-            ])
-        ->from('user')    
-        ->where(
-            [
-                'company_code' => Yii::$app->user->identity->company_code,
-                'level' => 'team'
-            ])
-        ->all();
-
-        return $userArr;
-    }
 
     public static function defaultSheddulle($model)
     {

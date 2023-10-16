@@ -59,8 +59,10 @@ class TeamController extends Controller
             //'status'=> 10,
             //'level' => 'client'
             //'type'=> 'trial',
-            'level' => 'team'
+            //'level' => 'team'
         ];
+
+
 
         if(isset($this->request->queryParams['UserSearch'])){
             $arrFilter = array_merge($arrFilter, $this->request->queryParams['UserSearch']);
@@ -73,7 +75,6 @@ class TeamController extends Controller
                 $searchModel->formName()=> $arrFilter
             ]);
         }
-
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -109,7 +110,6 @@ class TeamController extends Controller
     public function actionCreate()
     {
 
-
         $model = new SignupForm();
         $this->layout = 'adminLayout'; 
         
@@ -135,49 +135,42 @@ class TeamController extends Controller
             $this->layout = 'maintenance';
 
             return $this->render('home/maintenance');
-        }
-
-        $submitEmail = '';
+        }   
 
         $model->guid = Helpers::GUID();
       
       
-        if ($model->load(Yii::$app->request->post())) {     
-       
+        if ($model->load(Yii::$app->request->post())) {           
 
             $title = 'team_title_1'; 
-            $text = 'team_text_1'; 
-            $username = 'username_1';
+            $text = 'team_text_1';           
 
             $count = User::find('id')->orderBy("id desc")->limit(1)->one();
     
             if(!empty($count->id)){
-             $title = 'team_title_'.bcadd($count->id, 1);  
-             $text = 'team_text_'.bcadd($count->id, 1);  
-             $username = 'username_'.bcadd($count->id, 1);           
-            }                
-
-            $model->company_code = Yii::$app->user->identity->company_code;   
+                $title = 'team_title_'.bcadd($count->id, 1);  
+                $text = 'team_text_'.bcadd($count->id, 1);                       
+            }               
+             
+            $model->company_code = Yii::$app->user->identity->company_name;     
+            $model->company_code_parent = Yii::$app->user->identity->company_code;  
             $model->company = Yii::$app->user->identity->company;   
             $model->newsletter = Yii::$app->user->identity->newsletter;     
             $model->privacy = Yii::$app->user->identity->newsletter;     
             $model->terms_and_conditions = Yii::$app->user->identity->terms_and_conditions;          
             $model->page_code_title = $title;
-            $model->page_code_text = $text;
-            $model->username = $username;
-            $model->voucher = 'null';     
-            $model->password = Helpers::generateRandowHumber();
-         
+            $model->page_code_text = $text;        
+            $model->voucher = 'null';   
 
-            if($model->validate()){               
-         
-                    $model->signup();    
-                   
-                    $result = User::findOne(['username' => $model->username]);  
-              
-                    //GeneratorJson::updateTablesGeneric('translations');  
-                    //GeneratorJson::updateTranslationsGeneric('translations');  
-                    return $this->redirect(['view', 'id' => $result->id]);
+            if($model->validate()){    
+
+                $model->signUpTeam();    
+
+                $result = User::findOne(['username' => $model->username]);  
+            
+                //GeneratorJson::updateTablesGeneric('translations');  
+                //GeneratorJson::updateTranslationsGeneric('translations');  
+                return $this->redirect(['view', 'id' => $result->id]);
 
             }         
         }
@@ -193,12 +186,6 @@ class TeamController extends Controller
             'weekDays' => $weekDays,
             'serviceTimeMin' => $serviceTimeMin
         ]);
-
-
-
-
-
-
 
 
         $model = new SignupForm();
@@ -357,9 +344,12 @@ class TeamController extends Controller
         
         $model = $this->findModel($id);
 
+        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+        /*
         Helpers::defaultSheddulle($model);
 
-        $weekDays = array('monday', 'tuesday', 'wednesday','thursday','friday', 'saturday','sunday');
+       
+    
 
         $arrShedulle = (empty($model->sheddule_array) ? [] : json_decode($model->sheddule_array));
 
@@ -378,9 +368,13 @@ class TeamController extends Controller
             $model->$oc = ($arrValues->closed == 'false') ? '1' : '0';
    
         }
+        */
 
         if ($this->request->isPost && $model->load($this->request->post())) {  
                         
+            $model->full_name = $model->first_name.' '.$model->last_name;
+            /*
+        
             $arrWeek = [];
         
             $str = '';
@@ -403,8 +397,10 @@ class TeamController extends Controller
             }
 
             $model->sheddule_array = json_encode($arrWeek);
-     
-            if($model->save()){
+
+            */
+       
+            if($model->save()){             
                 //$model->updateTeam('team', $model);
                 GeneratorJson::updateTablesGeneric('translations');  
                 GeneratorJson::updateTranslationsGeneric('translations'); 

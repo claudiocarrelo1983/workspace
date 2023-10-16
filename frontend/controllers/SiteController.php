@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
+use frontend\models\PasswordResetRequestForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -11,7 +12,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
+
 use frontend\models\ResetPasswordForm;
 use common\models\User;
 use frontend\models\ContactForm;
@@ -23,6 +24,7 @@ use sammaye\mailchimp\Mailchimp;
 use common\models\Comments;
 use common\Helpers\Helpers;
 use yii\db\Query;
+
 
 
 /**
@@ -62,13 +64,56 @@ class SiteController extends Controller
         ];
     }
 
+
+
+    public function actionContactsUs()
+    {
+
+        $this->layout = 'public';
+    
+        $modelGeneratorjson = new GeneratorJson(); 
+        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+
+        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
+
+        if (Yii::$app->user->isGuest && $maintenance == true) {
+
+            $this->layout = 'maintenance';
+
+            return $this->render('home/maintenance');
+        }
+
+          
+        $model = new GeneratorJson(); 
+        $subject = $model->getLastFileUploaded('subjects');  
+
+        $model = new ContactForm();
+        $request = Yii::$app->getRequest();
+
+        if ($request->isPost && $model->load($request->post())) {
+            $model->saveTicket($model);         
+            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            } else {
+                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+            }
+
+            return $this->refresh();
+        }
+
+        return $this->render('/site/contact-us/index', [
+            'model' => $model,
+            'subject' =>  $subject
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function actions()
-    {
-        $this->layout = 'public';
-
+    {        
+        $this->layout = 'public';         
+             
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -80,6 +125,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * Displays homepage.
      *
@@ -88,7 +134,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-     
         $this->layout = 'public';
 
         $modelGeneratorjson = new GeneratorJson(); 
@@ -123,30 +168,11 @@ class SiteController extends Controller
             return $this->render('home/maintenance');
         }
 
+        
 
         return $this->render('home/index');
     }
 
- 
-    public function actionSitemap()
-    {
-        $this->layout = 'public';
-       
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-
-        return $this->render('texts/sitemap');
-    }
 
     public function actionMobileApp()
     {
@@ -427,81 +453,7 @@ class SiteController extends Controller
 
         return $this->render('about/about');
     } 
-
-    public function actionPricing()
-    {
-
-        $this->layout = 'public';     
-
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-        
-        $model = new GeneratorJson(); 
-        $pricing = $model->getLastFileUploaded('pricing');  
-
-        $pricingSpecs = $model->getLastFileUploaded('pricing_specs');
-
-       
-        return $this->render('services/pricing', [
-            'pricing' => $pricing,
-            'pricingSpecs' => $pricingSpecs
-        ]);
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
-    public function actionContactUs()
-    {
-        $this->layout = 'public';
-       
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-          
-        $model = new GeneratorJson(); 
-        $subject = $model->getLastFileUploaded('subjects');  
-
-        $model = new ContactForm();
-        $request = Yii::$app->getRequest();
-
-        if ($request->isPost && $model->load($request->post())) {
-            $model->saveTicket($model);         
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
-
-            return $this->refresh();
-        }
-
-        return $this->render('contact/contact-us', [
-            'model' => $model,
-            'subject' =>  $subject
-        ]);
-    }
+    
 
     public function actionCalculators()
     {
@@ -653,49 +605,8 @@ class SiteController extends Controller
             'urlParams' => $urlParams,
             'username' => $username
         ]);
-    }
-  
-    public function actionCoockies()
-    {
-        $this->layout = 'public';
-        
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
+    } 
 
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-
-        return $this->render('texts/coockies');
-    
-    }
-
-    public function actionPrivacyPolicy()
-    {
-        $this->layout = 'public';   
-        
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-
-        return $this->render('texts/privacy-policy'); 
-    }
-    
     public function actionBlogCategory()
     {
         $this->layout = 'public';
@@ -743,46 +654,6 @@ class SiteController extends Controller
     }
 
     
-    public function actionTermsAndConditions()
-    {
-        $this->layout = 'public';
-       
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-
-        return $this->render('texts/terms-and-conditions');     
-    } 
-
-    public function actionGdpr()
-    {
-        $this->layout = 'public';
-       
-        $modelGeneratorjson = new GeneratorJson(); 
-        $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
-
-        $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
-
-        if (Yii::$app->user->isGuest && $maintenance == true) {
-
-            $this->layout = 'maintenance';
-
-            return $this->render('home/maintenance');
-        }
-
-   
-        return $this->render('texts/gdpr');  
-
-    }
   
     /**
      * Requests password reset.
@@ -828,7 +699,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('resetPassword', [
+        return $this->render('login/resetPassword', [
             'model' => $model,
         ]);
     }
@@ -1020,8 +891,7 @@ class SiteController extends Controller
     {
        
         $model = new SignupForm();
-
-        
+      
         $modelGeneratorjson = new GeneratorJson(); 
         $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
 
@@ -1052,13 +922,11 @@ class SiteController extends Controller
       
       
         if ($model->load(Yii::$app->request->post())) {     
-
         
-
             $model->voucher = 'null';
 
             if($model->validate()){
-
+            
                     $model->signup();         
                 
                     $submitEmail = 'success';
@@ -1141,7 +1009,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-                return $this->goHome();
+                //return $this->goHome();
             }
             Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
         }

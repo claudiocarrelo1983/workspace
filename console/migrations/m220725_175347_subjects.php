@@ -35,13 +35,13 @@ class m220725_175347_subjects extends Migration
 
         $this->createTable('{{%subjects}}', [
             'id' => $this->primaryKey(),  
-            'type' => $this->string()->notNull(),  
+            //'type' => $this->string()->notNull(),  
             'company_code' => $this->string()->notNull(),    
             'position' => $this->string()->notNull(),           
             'page_code' => $this->string()->notNull(),  
-            'subject' => $this->string()->notNull(),  
-            'text_pt' => $this->string()->notNull(),       
-            'text_en' => $this->string()->notNull(),   
+            'subject' => $this->string(),  
+            'text_pt' => $this->string(),       
+            'text_en' => $this->string(),   
             'order' => $this->integer()->notNull(),
             'active' => $this->integer()->defaultValue(1),  
             'created_date' => $this->timestamp()

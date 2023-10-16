@@ -42,6 +42,10 @@ class ServicesCategoryController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
         $this->layout = 'adminLayout';  
 
         $searchModel = new ServicesCategorySearch();
@@ -61,6 +65,10 @@ class ServicesCategoryController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
         $this->layout = 'adminLayout';  
 
         return $this->render('view', [
@@ -75,6 +83,10 @@ class ServicesCategoryController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
         $this->layout = 'adminLayout';  
 
         $model = new ServicesCategory(); 
@@ -93,12 +105,14 @@ class ServicesCategoryController extends Controller
                }
 
                 $model->company_code = Yii::$app->user->identity->company_code;
-                $model->category_code = 'service_category_'.Helpers::generateRandowHumber();  
+                $model->category_code = 'sc_'.Helpers::generateRandowHumber();  
                 $model->page_code_title = $title;
 
                 if($model->save()){
                     $model->updateServicesCategory('services_category', $model);
-                    GeneratorJson::generatejson();   
+                    //GeneratorJson::generatejson();  
+                    GeneratorJson::updateTablesGeneric('translations');  
+                    GeneratorJson::updateTranslationsGeneric('translations');   
                     return $this->redirect(['view', 'id' => $model->id]);
                 }         
             }
@@ -120,13 +134,19 @@ class ServicesCategoryController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
         $this->layout = 'adminLayout';  
         
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             $model->updateServicesCategory('services_category', $model);
-            GeneratorJson::generatejson();          
+            //GeneratorJson::generatejson();          
+            GeneratorJson::updateTablesGeneric('translations');  
+            GeneratorJson::updateTranslationsGeneric('translations'); 
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -144,6 +164,10 @@ class ServicesCategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+        
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

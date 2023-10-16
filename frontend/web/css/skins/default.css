@@ -24,6 +24,11 @@
     animation-fill-mode: forwards;
     min-height: 600px;
 }
+.field-signupform-dob , .field-sheddule-date{
+    width: 80%;
+}
+
+
 
 a {
 	color: #0088CC;
@@ -7038,8 +7043,4 @@ select#events-color_code > option:nth-child(8){
 
 .form-group {
     margin-bottom: 0px;
-}
-
-label{
-	margin-top: 5px;
 }

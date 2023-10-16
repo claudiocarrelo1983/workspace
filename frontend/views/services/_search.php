@@ -18,18 +18,24 @@ use common\Helpers\Helpers;
         'method' => 'get',
     ]); ?>
 
-    <div class="row pb-5">   
-        <div class="col">
-            <?= $form->field($model, 'username')->label(Yii::t('app', 'username')) ?>
-        </div>
-        <div class="col">            
-            <?php  echo $form->field($model, 'service_code')->label(Yii::t('app', 'service_code')) ?>
+    <div class="row pb-5">        
+        <div class="col">  
+            <?= $form->field($model, 'category_code')->dropdownList(
+                Helpers::dropdownServices(),
+                ['prompt'=> Yii::t('app', 'select_services')], 
+                )->label(Yii::t('app', 'services')); ?> 
         </div>       
         <div class="col">  
-            <?= $form->field($model, 'category_code')->dropdownList(Helpers::dropdownServiceCategory())->label(Yii::t('app', 'service_cat')); ?> 
+            <?= $form->field($model, 'category_code')->dropdownList(
+                Helpers::dropdownServiceCategory(),
+                ['prompt'=> Yii::t('app', 'select_services_category')], 
+                )->label(Yii::t('app', 'service_cat')); ?> 
         </div>
-        <div class="col">
-            <?php  echo $form->field($model, 'title')->label(Yii::t('app', 'title')); ?>
+        <div class="col">  
+            <?= $form->field($model, 'location_code')->dropdownList(
+                Helpers::dropdownCompanyLocations(),
+                ['prompt'=> Yii::t('app', 'select_company_code_location')], 
+                )->label(Yii::t('app', 'company_code_location')); ?> 
         </div>
     </div>   
     <div class="form-group pb-4">

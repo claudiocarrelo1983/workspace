@@ -56,6 +56,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [     
+                'label' => Yii::t('app', 'description') ,                        
+                'value' => function (ServicesCategory $model) {
+                    return $model->title;
+                },
+            ],
+            [     
                 'label' => Yii::t('app', 'title_pt') ,                        
                 'value' => function (ServicesCategory $model) {
                     return $model->title_pt;

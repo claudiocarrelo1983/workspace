@@ -2,51 +2,11 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\db\Query;
 use common\Helpers\Helpers;
 use yii\widgets\ActiveForm;
 
-$query = new Query;
-
-$teamArr = $query->select('*')
-    ->from(['team'])
-    ->where(
-        [
-           'company_code' => $company             
-        ]) 
-    ->all();
-
-
-$arrServices = [];
-
-$servicesCatArr = $query->from(['sc' => 'services_category'])
-    ->select([
-        'sc.category_code',
-        'page_code_sc_title'  => 'sc.page_code_title',
-        'services_category_title' => 'sc.page_code_title',
-        ])
-    ->where(['sc.company_code' => $company])
-    ->orderBy(['order'=>SORT_ASC])
-    ->all();
-
-
-foreach($servicesCatArr as $serviceCat){
-    $servicesArr = $query->from(['s' => 'services'])
-        ->select([   
-            's.category_code',
-            's.price',         
-            'services_title'  => 's.page_code_title',        
-            'services_text'  => 's.page_code_text',
-            ])
-        ->where(
-            [
-                's.company_code' => $company,
-                's.category_code' => $serviceCat['category_code']
-            ]
-        )->orderBy(['order'=>SORT_ASC])->all();
-
-    $arrServices[$serviceCat['page_code_sc_title']] = $servicesArr;
-}
+$teamArr = Helpers::getTeamArr();
+$arrServices = Helpers::getServicesArr();
 
 
 $this->title = 'About';
@@ -54,34 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
-<?php if(isset($companyArr[0]['color']) && !empty($companyArr[0]['color'])){ ?>
-    <style>
-        .featured-primary-custom{
-            border-top-color: <?= $companyArr[0]['color'] ?> !important;
-            border-top: 3px solid <?= $companyArr[0]['color'] ?> !important;
-        }
-
-        .btn-primary{
-            border: 1px solid white  !important;    
-            background-color: <?= $companyArr[0]['color'] ?> !important;          
-        }
-
-        .list.list-icons.list-icons-style-3 li > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li a:first-child > [class*="fa-"]:first-child, .list.list-icons.list-icons-style-3 li > .icons:first-child, .list.list-icons.list-icons-style-3 li a:first-child > .icons:first-child{
-            background-color: <?= $companyArr[0]['color'] ?> !important;
-        }
-        .btn-link{
-            color: <?= $companyArr[0]['color'] ?> !important;
-        }
-        .dropdown-reverse:hover > a{
-            color: <?= $companyArr[0]['color'] ?> !important;
-        }
-    </style>
-<?php } ?>
-
 <span id="anchor-about-us"></span>
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData,'publish' => $publish, 'code' => $company]); ?>
+
+<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'model' => $model]); ?>
 
 
 <div role="main" class="main">  
@@ -218,27 +154,33 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="price-menu-item">
                             <div class="price-menu-item-details">
                                 <div class="price-menu-item-title">
-                                    <h5 class="custom-secondary-font text-transform-none font-weight-semibold text-4 mb-0">                             
-                                        <?=  Yii::t('app', $service['services_title']) ?>
+                                    <h5 class="custom-secondary-font text-transform-none font-weight-semibold text-3 mb-0">                             
+                                        <?=  Yii::t('app', $service['services_title']) ?>   <?=  '('.$service['time'].'min)' ?>
                                     </h5>
                                 </div>
                                 <div class="price-menu-item-line opacity-4"></div>
                                 <div class="price-menu-item-price">
-                                    <strong class="custom-font-secondary text-color-dark text-4 positive-ls-3">
-                                        <span class="text-2-5">
-                                            <?php                                            
-                                                if(isset($companyArr[0]['coin'])){
-                                                    echo Yii::t('app',Helpers::getCurrencyName($companyArr[0]['coin']));
-                                                }                                             
-                                            ?>
-                                        </span>
-                                        <?= $service['price'] ?>
+                                    <strong class="custom-font-secondary text-color-dark text-3 positive-ls-3">
+                                        <?php                                            
+                                            if(isset($companyArr[0]['coin'])){
+                                                $coin = Yii::t('app',Helpers::getCurrencyName($companyArr[0]['coin']));
+                                            } 
+                                        ?>
+
+                                        <?php if(empty($service['price_range'])){ ?>
+                                            <?=  $coin.$service['price'] ?>
+                                        <?php  }else{ ?>
+                                            <?= $coin.$service['price'] ?>/<?= $coin.$service['price_range'] ?>
+                                        <?php  } ?>
+                                       
                                     </strong>
                                 </div>
                             </div>
                             <div class="price-menu-item-desc">
-                                <p class="text-2-5 line-height-4">
-                                    <?=  Yii::t('app', $service['services_text']) ?>                                  
+                                <p class="text-3 line-height-4">  
+                                    <?php if(!empty($service['text_pt']) || !empty($service['text_en']))  { ?>
+                                        <?=  Yii::t('app', $service['services_text']) ?>   
+                                    <?php }  ?>                                            
                                 </p>
                             </div>
                         </div>
@@ -276,7 +218,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="form-group col-lg-6">                     
                             <?= $form->field($model, 'subject')->dropdownList(  
-                                Helpers::dropdownClientContactsUsSubject('client', $company),
+                                Helpers::dropdownSubjects('client'),
                                 ['prompt'=> Yii::t('app', 'select_subject'),
                                 'class' => 'form-control text-3 h-auto py-2','maxlength' => true]
                                 )->label(Yii::t('app', 'subject'));

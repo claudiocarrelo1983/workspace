@@ -58,7 +58,7 @@
             {
                "key":"t-set-forms",
                "title":"Criar Formularios",
-               "url":"admin/set-forms",
+               "url":"/set-forms",
                "submenu":[
                   
                ]

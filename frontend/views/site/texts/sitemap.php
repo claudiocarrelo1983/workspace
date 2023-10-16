@@ -13,7 +13,7 @@ use common\models\GeneratorJson;
 $urlParamsVal = array();
 
 $model = new GeneratorJson(); 
-$menu = $model->getLastFileUploaded('other','public-menu');
+$menu = $model->getLastFileUploaded('other','calendar-menu');
 
 $blogCategory = $model->getLastFileUploaded('blogs_category');
 
@@ -40,7 +40,7 @@ $path2 = 'sitemap';
             <p class="lead"><?= Yii::t('app','sitemap_text') ?></p>
             <hr class="solid my-5">
             <div class="row">
-                <div class="col-sm-3">       
+                <div class="col">       
                     <h3 class="font-weight-bold text-4 mb-2"><?= Yii::t('app','sitemap_menu') ?></h3>
                     <ul class="list list-icons list-icons-sm mb-4">
                         <li>
@@ -60,36 +60,38 @@ $path2 = 'sitemap';
             
                 
                 </div>
-                <div class="col-sm-3">
-                    <h3 class="font-weight-bold text-4 mb-2"><?= Yii::t('app','sitemap_blog_categories') ?></h3>
-                    <ul class="list list-icons list-icons-sm mb-4">
-                        <li>             
-                            <ul class="list list-icons list-icons-sm mb-3 text-2">
-                                <?php foreach ($blogCategory as $key => $subcategory): ?> 
-                            
-                                    <li>
-                                        <a href="<?= Url::toRoute(['site/blog','tag' => $subcategory['tag']]); ?>">
-                                            <i class="far fa-file"></i><?= $subcategory['description'] ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>  
-                            </ul>
-                        </li>            
-                    </ul>
-                </div>
-                <div class="col-sm-3">
+                <!--
+                    <div class="col-sm-3">
+                        <h3 class="font-weight-bold text-4 mb-2"><?= Yii::t('app','sitemap_blog_categories') ?></h3>
+                        <ul class="list list-icons list-icons-sm mb-4">
+                            <li>             
+                                <ul class="list list-icons list-icons-sm mb-3 text-2">
+                                    <?php foreach ($blogCategory as $key => $subcategory): ?> 
+                                
+                                        <li>
+                                            <a href="<?= Url::toRoute(['site/blog','tag' => $subcategory['tag']]); ?>">
+                                                <i class="far fa-file"></i><?= $subcategory['description'] ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>  
+                                </ul>
+                            </li>            
+                        </ul>
+                    </div>
+                -->
+                <div class="col">
                     <h3 class="font-weight-bold text-4 mb-2"><?= Yii::t('app','sitemap_login_pages') ?></h3>
                     <ul class="list list-icons list-icons-sm mb-4">
                         <li>                     
                             <ul class="list list-icons list-icons-sm mb-3 text-2">
                                 <li><a href="<?= Url::toRoute('site/login') ?>"><i class="far fa-file"></i><?= Yii::t('app','login') ?></a></li>
                                 <li><a href="<?= Url::toRoute('site/signup') ?>"><i class="far fa-file"></i><?= Yii::t('app','register') ?></a></li>             
-                                <li><a href="<?= Url::toRoute('site/recover-password') ?>"><i class="far fa-file"></i><?= Yii::t('app','recover_password') ?></a></li>                          
+                                <li><a href="<?= Url::toRoute('site/request-password-reset') ?>"><i class="far fa-file"></i><?= Yii::t('app','recover_password') ?></a></li>                          
                             </ul>
                         </li>
                     </ul>      
                 </div>   
-                <div class="col-sm-3">
+                <div class="col">
                     <h3 class="font-weight-bold text-4 mb-2"><?= Yii::t('app','sitemap_other_pages') ?></h3>
                     <ul class="list list-icons list-icons-sm mb-4">
                         <li>

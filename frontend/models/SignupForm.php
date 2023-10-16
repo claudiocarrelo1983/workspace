@@ -41,7 +41,11 @@ class SignupForm extends Model
 
     public $company;
 
+    public $company_code_parent;
+    
+
     public $terms_and_conditions;
+
 
     public $newsletter;
 
@@ -86,6 +90,8 @@ class SignupForm extends Model
     public $coin;
 
     public $gender;
+
+    public $company_name;
 
     public $dob;
 
@@ -188,7 +194,7 @@ class SignupForm extends Model
             ['voucher', 'validateVoucher'],   
             ['voucher_parent', 'validateVoucherParent'],  
             //['voucher', 'required'],
-            [['nif','dob','voucher','username','adress_line_1','adress_line_2','city','location','country','postcode','contact_number', 'title', 'role','coin','gender','voucher_parent','job_title'], 'string', 'min' => 2, 'max' => 255],
+            [['nif','dob','voucher','company_code_parent','location_code','username','adress_line_1','adress_line_2','city','location','country','postcode','contact_number', 'title', 'role','coin','gender','voucher_parent','job_title'], 'string', 'min' => 2, 'max' => 255],
              ['email', 'trim'],
             [['email','contact_number','gender', 'title'], 'required'],
             ['email', 'email'],
@@ -262,8 +268,7 @@ class SignupForm extends Model
         $user->contact_number = $this->contact_number;   
         $user->email = $this->email;
         $user->nif = $this->nif;
-        $user->voucher = ((empty($this->voucher)) ? 'v'.strtotime(date('Y-m-d H:m:s')) : $this->voucher);
-
+        $user->voucher = ((empty($this->voucher)) ? 'v'.strtotime(date('Y-m-d H:m:s')) : $this->voucher);   
         
         $user->terms_and_conditions = $this->terms_and_conditions;
         $user->newsletter = $this->newsletter;
@@ -282,8 +287,68 @@ class SignupForm extends Model
         return $user->save() && $this->sendEmail($model);
     }
 
+    /**
+     * Signs user up.
+     *
+     * @return bool whether the creating new account was successful and email was sent
+     */
+    public function signUpTeam()
+    {        
+         
+        if (!$this->validate()) {
+            return null;
+        }   
 
-         /**
+        $user = new User();       
+      
+        $title = 'company_location_title_1';   
+        $description = 'company_location_description_1';
+
+        $count = $user::find('id')->orderBy("id desc")->limit(1)->one();
+
+       if(!empty($count->id)){
+         $title = 'company_location_title_'.bcadd($count->id, 1); 
+         $description = 'company_location_description_'.bcadd($count->id, 1);            
+       }    
+
+        $user->level = 'team';
+        $user->guid = Helpers::GUID();
+        $user->company_code = $this->company_code;
+        $user->company_code_parent = $this->company_code_parent;      
+        $user->company_code_url = Yii::$app->request->get('code');
+        $user->username = $this->username;      
+        $user->email = $this->email;
+        $user->gender = $this->gender;      
+        $user->title = $this->title;
+        $user->location_code = $this->location_code;
+        $user->nif = $this->nif;
+        $user->contact_number = $this->contact_number;   
+        $user->voucher = $this->voucher;
+        $user->page_code_title = $title;
+        $user->dob = $this->dob;
+        $user->page_code_title = $title;
+        $user->page_code_text = $description;
+        $user->company_name =$this->company_name;
+        $user->terms_and_conditions = $this->terms_and_conditions;
+      
+        $user->newsletter = $this->newsletter;
+        $user->privacy = $this->privacy;        
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->full_name =  $this->first_name.' '.$this->last_name;
+        $user->active = true;        
+    
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken(); 
+
+        //return $this->sendEmail($model);
+        //return $user->save() && $this->sendEmail($this);
+        return $user->save() && $this->sendEmail($user);
+    }
+
+
+   /**
      * Signs user up.
      *
      * @return bool whether the creating new account was successful and email was sent
@@ -306,6 +371,8 @@ class SignupForm extends Model
 
         $title = 'company_location_title_1';   
         $description = 'company_location_description_1';
+
+        
 
         $count = $user::find('id')->orderBy("id desc")->limit(1)->one();
 
@@ -359,8 +426,8 @@ class SignupForm extends Model
             return null;
         }    
   
-        $code = 'c'.Helpers::generateRandowHumber(20);
-        $companyLocationRandom = 'cl'.Helpers::generateRandowHumber(20);
+        $code = 'c'.Helpers::generateRandowHumber(4);
+        $companyLocationRandom = 'cl'.$code;
 
         $user = new User();  
 
@@ -378,6 +445,8 @@ class SignupForm extends Model
         $user->guid = Helpers::GUID();
         $user->company_code = $code;
         $user->job_title = $this->job_title;
+        $user->title = $this->title;
+        $user->gender = $this->gender;
         $user->company_code_url = $code;
         $user->username = $this->username;      
         $user->email = $this->email;
@@ -414,7 +483,9 @@ class SignupForm extends Model
             $text = 'company_text_1';     
             $teamTitle = 'company_team_title_1'; 
             $teamText = 'company_team_text_1'; 
-            $teamManteinance = 'company_manteinance_text_1';    
+            $teamManteinance = 'company_manteinance_text_1'; 
+            $teamBanner = 'company_banner_text_1';           
+            
             $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
 
             if(!empty($count->id)){
@@ -422,8 +493,10 @@ class SignupForm extends Model
                 $teamTitle = 'company_team_title_'.bcadd($count->id, 1);  
                 $teamText = 'company_team_text_'.bcadd($count->id, 1);    
                 $teamManteinance = 'company_manteinance_text_'.bcadd($count->id, 1);   
+                $teamBanner = 'company_banner_text_'.bcadd($count->id, 1);  
             }
 
+            /*
             $arrTeam = [
 
             ];
@@ -446,7 +519,7 @@ class SignupForm extends Model
             ];
 
             $this->createTeam($arrTeam);
-
+          */
             $arrCompany = [
                 'company_code' => $code,
                 'coin' => $this->coin,
@@ -456,6 +529,7 @@ class SignupForm extends Model
                 'page_code_team_title' => $teamTitle,
                 'page_code_team_text' => $teamText,
                 'page_code_manteinance' => $teamManteinance,
+                'page_code_banner' => $teamBanner,
                 'team_title_pt' => 'Conheça a equipa',
                 'team_title_en' => 'Meet Our Team',    
                 'team_text_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget urna odio. Proin mollis placerat massa feugiat dapibus. Curabitur sit amet ante vel odio auctor sollicitudin. Proin consequat velit vel fringilla viverra. Vestibulum tellus eros, faucibus et tellus non, accumsan ornare mauris. Etiam varius, turpis ac laoreet vehicula, odio diam fringilla magna.',
@@ -470,8 +544,8 @@ class SignupForm extends Model
                 'country' => $this->country,
             ];
 
+    
       
-
             $this->createCompany($arrCompany);
 
             $arrCompanyLocation = [
@@ -491,7 +565,7 @@ class SignupForm extends Model
 
             $this->createCompanyLocation($arrCompanyLocation);
         }
-        
+    
         return $user->save() && $this->sendEmail($user);
     }
 

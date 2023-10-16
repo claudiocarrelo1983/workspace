@@ -64,7 +64,7 @@ class Company extends \yii\db\ActiveRecord
             [['page_code_text','color'], 'required'],
             [['active','publish','manteinance'], 'integer'],
             [['created_date'], 'safe'],
-            [['company_code', 'image_logo', 'image_banner', 'manteinance_pt','manteinance_en','company_code_url', 'page_code_text', 'page_code_manteinance', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
+            [['company_code', 'image_logo', 'page_code_banner', 'image_banner', 'manteinance_pt','manteinance_en','company_code_url', 'page_code_text', 'page_code_manteinance', 'company_name', 'nif', 'cae', 'email_1', 'email_2', 'contact_number_1', 'contact_number_2', 'contact_number_3', 'address_line_1', 'address_line_2', 'website', 'facebook', 'pinterest', 'instagram', 'twitter', 'tiktok', 'linkedin', 'youtube', 'city', 'postcode', 'location', 'country', 'postcode','color'], 'string', 'max' => 255],
             [['page_code_text'], 'unique'],       
             [['company_code','company_code_url'], 'unique'],
             [
@@ -179,6 +179,8 @@ class Company extends \yii\db\ActiveRecord
 
         //team_title_pt
 
+       
+
         foreach ($countries as $val) {
    
             $text = 'text_'. $val['country_code'];   
@@ -190,18 +192,19 @@ class Company extends \yii\db\ActiveRecord
             $connection->createCommand()->delete('translations',
             [   
                 'country_code' => $val['country_code'],               
-                'page_code' => $model->page_code_team_manteinance                       
+                'page_code' => $model->page_code_manteinance                       
             ])->execute();
+         
 
             $connection->createCommand()->insert('translations', [      
                 'country_code' => $val['country_code'],  
                 'page' => $page,
-                'page_code' => $model->page_code_team_manteinance,
+                'page_code' => $model->page_code_manteinance,
                 'text' => $model->$teamManteinance,
                 'active' => 1,
             ])->execute();     
-                       
 
+         
             $connection->createCommand()->delete('translations',
             [   
                 'country_code' => $val['country_code'],               
@@ -214,9 +217,9 @@ class Company extends \yii\db\ActiveRecord
                 'page_code' => $model->page_code_text,
                 'text' => $model->$text,
                 'active' => 1,
-            ])->execute();     
-                       
-            
+            ])->execute();                            
+        
+        
             $connection->createCommand()->delete('translations',
             [   
                 'country_code' => $val['country_code'],               
@@ -231,6 +234,7 @@ class Company extends \yii\db\ActiveRecord
                 'active' => 1,
             ])->execute();  
 
+        
             $connection->createCommand()->delete('translations',
             [   
                 'country_code' => $val['country_code'],               
@@ -246,5 +250,6 @@ class Company extends \yii\db\ActiveRecord
             ])->execute(); 
 
         }
+   
     }   
 }

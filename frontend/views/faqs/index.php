@@ -144,7 +144,7 @@ endforeach;
                                             <div class="row">
                                                 <div class="form-group col-lg-6">                     
                                                     <?= $form->field($model, 'subject')->dropdownList(  
-                                                        Helpers::dropdownClientContactsUsSubject('support', $company),
+                                                        Helpers::dropdownSubjects('admin'),
                                                         ['prompt'=> Yii::t('app', 'select_subject'),
                                                         'class' => 'form-control text-3 h-auto py-2','maxlength' => true]
                                                         )->label(Yii::t('app', 'subject'));

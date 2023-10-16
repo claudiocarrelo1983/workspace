@@ -7,9 +7,10 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use common\Helpers\Helpers;
+use yii\helpers\Url;
 
 ?>
-<?= $this->render('/client/client-booking-header', ['myData' => '', 'logo' => '']); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'model' => $model]); ?>
 
 <div role="main" class="main  pb-5">
     <div class="container py-5">  
@@ -36,30 +37,33 @@ use common\Helpers\Helpers;
                                 <?= $form->field($model, 'rememberMe', ['template'=>'<div class="control-group">
                                         <label class="control control--checkbox checkbox-small-text">  
                                             {input} '.Yii::t('app', "login_block_remember_me_1").'                                    
-                                        <div class="control__indicator"></div>
+                                        <div class="control_indicator"></div>
                                     </label>
                                 </div>'])->textInput(['class'=>"",'type'=>'checkbox'])?>                                
                             </div> 
                             <div class="form-group col-md-auto">                        
                                 <?= Html::a(
                                     Yii::t('app', 'login_block_forgot_password_2'), 
-                                    ['site/request-password-reset'],     
+                                    Url::to(['page/request-password-reset', 'code' => $company]),                                   
                                     [
                                     'class' => 'text-decoration-none text-color-dark text-color-hover-primary font-weight-semibold text-2',
                                     'data-hash' => '',         
                                     'data-hash-offset' => 0,  
                                     'data-hash-offset-lg' => 130,  
-                                    ]      
+                                    ]    
                                 ) ?>
                             </div>
                             <div style="color:#999;margin:1em 0">                          
-                                <?=  Yii::t('app', 'login_block_verification_email_2')  ?> <?= Html::a(Yii::t('app', 'login_block_resend_2'), ['site/resend-verification-email']) ?>
+                                <?=  Yii::t('app', 'login_block_verification_email_2')  ?> 
+                                    <?= Html::a(Yii::t('app', 'login_block_resend_2'),                          
+                                        Url::to(['page/resend-verification-email', 'code' => $company]))
+                                    ?>
                             </div>                     
                         </div>                         
                         <div class="row">
                             <div class="form-group col">
-                                <?= Html::submitButton(Yii::t('app', "login_button_2"), [
-                                        'class' => 'btn btn-primary btn-outline  w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3', 
+                                <?= Html::submitButton(Yii::t('app', "login_button"), [
+                                        'class' => 'btn   btn-success   w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3', 
                                         'name' => 'login-button'
                                     ]) ?>
                             </div>
@@ -68,10 +72,10 @@ use common\Helpers\Helpers;
                         <div class="row">
                             <div class="form-group col">
                                 <?= Html::a(
-                                    Yii::t('app', 'Sign Up'), 
+                                    Yii::t('app', 'sign_up_button'), 
                                     ['/page/signup', 'code' => Yii::$app->request->get('code')],     
                                     [
-                                        'class' => 'btn btn-success btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3'                              
+                                        'class' => 'btn btn-dark btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3'                              
                                     ]      
                                 ) ?>
                             </div>

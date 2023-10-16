@@ -22,13 +22,10 @@ use common\Helpers\Helpers;
         <div class="col">  
             <?= $form->field($model, 'category_code')->dropdownList(
                 Helpers::dropdownServiceCategory(),
-                ['prompt'=> Yii::t('app', 'select_service_category')], 
+                ['prompt'=> Yii::t('app', 'select_services_category')], 
                 )->label(Yii::t('app', 'service_cat'));
             ?>        
-        </div>
-        <div class="col">
-            <?= $form->field($model, 'title')->label(Yii::t('app', 'title')); ?>
-        </div>
+        </div>    
         <div class="col">
             <?= $form->field($model, 'active')->dropdownList(
                 Helpers::dropdownActive(),

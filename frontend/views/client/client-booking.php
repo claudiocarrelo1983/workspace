@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'publish' => $publish, 'code' => $company, 'logo' => ((isset($companyArr[0]['path_logo'])) ? $companyArr[0]['path_logo'].$companyArr[0]['image_logo'] : '')]); ?>
+<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'model' => $model]); ?>
 
 <div class="py-4"></div>  
 
@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <div class="row ">
         <div class="col  text-center"> 
-            <div class="featured-box featured-box-primary text-start mt-0">
+            <div class="featured-box  text-start mt-0">
                 <div class="box-content px-3 pt-4">
                     <h4 class="color-primary font-weight-semibold text-6 text-uppercase mb-0 pb-4">
                         Book a new Appointment

@@ -15,6 +15,11 @@ class DashboardController extends Controller
 {
     public function actionIndex(){      
 
+        if (Yii::$app->user->isGuest) {    
+            return $this->goHome();
+        }
+
+     
         $error = Helpers::accessAccountAdmin(Yii::$app->user->identity);  
         
         if($error > 0){   
@@ -55,8 +60,8 @@ class DashboardController extends Controller
             'company_code' => $company,
             'level' => 'resseler'
         ])->count();         
-
-        return $this->render('/admin/dashboard',
+     
+        return $this->render('/dashboard/index',
         [
             'model' => $model,
             'countClients' => $countClients,

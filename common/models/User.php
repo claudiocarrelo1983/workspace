@@ -43,6 +43,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $postcode;
 
+    public $company_name;
+    
     public $location;
 
     public $imageFile;
@@ -108,8 +110,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['surname','text'],'string'],
+            [['gender','title','contact_number','email','text','first_name','last_name', 'full_name'],'string'],
             [['email'],'required'],
+            //[['surname','text','location_code'],'string'],
+            //[['email','username', 'password'],'required'],
             [
                 
                 ['sheddule_array',
