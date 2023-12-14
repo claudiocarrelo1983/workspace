@@ -34,8 +34,9 @@ class m221109_161608_translations extends Migration
         }
 
         $this->createTable('{{%translations}}', [
-            'id' => $this->primaryKey(),              
-            'country_code' => $this->string(), 
+            'id' => $this->primaryKey(),   
+            'company_code' => $this->string(),            
+            'country_code' => $this->string(),           
             'page' => $this->string(), 
             'page_code' => $this->string(),            
             'text' => $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'), 

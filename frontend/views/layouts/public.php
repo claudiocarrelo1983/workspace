@@ -18,8 +18,6 @@ use yii\caching\Cache;
             <?= $content ?>
     </div>
 
-    <?= $this->render('/site/footer'); ?>			
-
 </div>
 
 

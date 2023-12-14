@@ -42,7 +42,7 @@ $path2 = 'sign_up'
                             <div class="form-group col-lg-4"> 
                                 <?= $form->field($modelSignupForm, 'title')->dropdownList(
                                     Helpers::dropdownTitle(),
-                                    ['prompt'=> Yii::t('app', "select_title"), 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                    ['prompt'=> Yii::t('app', "select_title"), 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
                             <div class="form-grou col-lg-4">                              
@@ -56,7 +56,7 @@ $path2 = 'sign_up'
                             <div class="form-group col-lg-4"> 
                                 <?= $form->field($modelSignupForm, 'gender')->dropdownList(
                                     Helpers::dropdownGender(),
-                                    ['prompt'=> Yii::t('app', "select_gender"), 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                    ['prompt'=> Yii::t('app', "select_gender"), 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
                             <div class="form-group col-lg-4">          
@@ -179,3 +179,5 @@ $path2 = 'sign_up'
 <!-- Sub Footer -->
 <?= $this->render('@frontend/views/site/subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

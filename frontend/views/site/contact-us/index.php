@@ -118,6 +118,7 @@ $path2 = 'contacts';
 <!-- Sub Footer -->
 			
 
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>
 
 
 

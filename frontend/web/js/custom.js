@@ -1,19 +1,93 @@
 
 
 setPricing();
-getTeamByLocation();
+//displayTeam();
 
-function getTeamByLocation(){
+jQuery('input[id^="choice-team-"]').ready(function(key,val) { // Select the radio input group
 
-    if(jQuery('#location-dropdown-select').val()){   
-        displayTeam('#location-dropdown-select');
-    }
+    jQuery('input[id^="choice-team-"]').each(function(key,val){
+        if (jQuery('#' + val.id).prop('checked')) {         
+            jQuery('div[id^="tick-"]').hide();
+            jQuery('#tick-' + val.id).show();           
+            //jQuery(this).closest("form").submit();
+        
+        }
+      });
+});
+
+
+jQuery('input[id^="choice-location-"]').ready(function(key,val) { // Select the radio input group
+
+    jQuery('input[id^="choice-location-"]').each(function(key,val){
+        if (jQuery('#' + val.id).prop('checked')) {                
+            jQuery('div[id^="tick-"]').hide();
+            jQuery('#tick-' + val.id).show();           
+            //jQuery(this).closest("form").submit();
+        
+        }
+      });
+});
+
+
+jQuery('input[id^="choice-service-"]').ready(function(key,val) { // Select the radio input group
+
+    jQuery('input[id^="choice-service-"]').each(function(key,val){    
+    
+        if (jQuery('#' + val.id).prop('checked')) {     
+                    
+            jQuery('div[id^="tick-"]').hide();
+            jQuery('#tick-' + val.id).show();         
+            jQuery('div[id^="text-"]').removeClass('text-choice-service');
+            jQuery('div[id^="text-"]').removeClass('text-color-hover-primary');
+            jQuery('#text-' + val.id).addClass("text-choice-service");  
+            //jQuery(this).closest("form").submit();
+        
+        }
+      });
+});
+
+
+jQuery('input[id^="choice-schedule-"]').ready(function(key,val) { // Select the radio input group
+
+    jQuery('input[id^="choice-schedule-"]').each(function(key,val){    
+    
+        if (jQuery('#' + val.id).prop('checked')) {     
+            
+            jQuery('label[id^="choice-schedule-"]').removeClass('btn-success-dark');   
+            jQuery('label[id^="choice-schedule-"]').addClass('btn-success'); 
+            jQuery('label#' + val.id).removeClass("btn-success");  
+            jQuery('label#' + val.id).addClass("btn-success-dark");  
+            //jQuery(this).closest("form").submit();
+        
+        }
+      });
+});
+
+
+function checkScheduleTick(attr) { 
+
+ 
+    jQuery('label[id^="choice-schedule-"]').removeClass('btn-success-dark');   
+    jQuery('label[id^="choice-schedule-"]').addClass('btn-success');  
+    jQuery('label#' + attr.id).removeClass("btn-success");  
+    jQuery('label#' + attr.id).addClass("btn-success-dark");  
+
 }
 
-function BlogToogle(id){    
-    jQuery("#dropdown-menu" + id).toggle();
-}
+function checkTeamTick(attr) {    
 
+    jQuery('div[id^="tick-"]').hide();
+    jQuery('span[id^="tick-"]').hide(); 
+    jQuery('#tick-' + attr.id).show();   
+
+    jQuery("input[id='choice-service-'").prop('checked', false);
+    jQuery('#radio-' + attr.id).prop('checked', true);
+
+    jQuery('div[id^="text-"]').removeClass('text-choice-service');
+    jQuery('div[id^="text-"]').removeClass('text-color-hover-primary');
+    jQuery('#text-' + attr.id).addClass("text-choice-service");
+    
+}
 
 function setPricing(){  
     var standard = jQuery('#price-change').find(':selected').data('standard');
@@ -36,7 +110,7 @@ function closeAlert(){
     jQuery('.alert ').hide();
 }
 
-function displayTeam(attr) {    
+function displayTeam2(attr) {    
 
     var value = jQuery(attr).val();   
     

@@ -1,8 +1,11 @@
 <?php
 
 namespace common\models;
+use common\Helpers\Helpers;
 
 use Yii;
+
+
 
 /**
  * This is the model class for table "sheddule".
@@ -28,7 +31,9 @@ class Sheddule extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
 
- 
+     public $type;
+     public $datetime;
+
     public static function tableName()
     {
         return 'sheddule';
@@ -40,11 +45,27 @@ class Sheddule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['service_code', 'service_name', 'full_name', 'contact_number'], 'required'],
-            [['canceled','confirm'], 'integer'],
-            [['date','time', 'created_date','team_username'], 'safe'],
-            [['id','location_code', 'client_username', 'company_code', 'service_code', 'service_name', 'full_name', 'contact_number', 'email', 'nif'], 'string', 'max' => 255],
+            [['service_code',  'full_name', 'contact_number'], 'required'],
+            [['canceled','confirm', 'price_advanced','type'], 'integer'],
+            [['time', 'created_date','team_username'], 'safe'],
+            [['datetime'], 'validateIfShedduleExist'],
+            [['id','date','location_code', 'client_username', 'company_code', 'service_code', 'service_name', 'full_name', 'contact_number', 'email', 'nif'], 'string', 'max' => 255],
         ];
+    }
+
+    public function validateIfShedduleExist($attribute, $params){
+
+        $error = Helpers::checkIfBookingExists(
+            $this->date, 
+            $this->time, 
+            $this->team_username,
+            $this->company_code
+        );            
+        
+        if ($error) {                  
+            $this->addError('datetime');
+        }
+        //Helpers::checkIfBookingExists($modelSheddule);
     }
 
     /**

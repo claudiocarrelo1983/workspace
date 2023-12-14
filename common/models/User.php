@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * User model
@@ -46,6 +47,7 @@ class User extends ActiveRecord implements IdentityInterface
     public $company_name;
     
     public $location;
+
 
     public $imageFile;
     public $monday_open_checkbox;
@@ -98,7 +100,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ]
+           
         ];
     }
 
@@ -110,8 +119,12 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['gender','title','contact_number','email','text','first_name','last_name', 'full_name'],'string'],
-            [['email'],'required'],
+            [['gender','title','contact_number','email','text','first_name','last_name', 'full_name','dob','location_code'],'string'],
+            [['time_window'],'integer'],
+            [['email','job_title'],'required'],
+            [['username'],'unique'],
+            //[['created_at','updated_at'],'integer'],
+     
             //[['surname','text','location_code'],'string'],
             //[['email','username', 'password'],'required'],
             [

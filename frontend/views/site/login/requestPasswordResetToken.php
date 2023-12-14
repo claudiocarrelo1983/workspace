@@ -50,3 +50,5 @@ $path2 = 'reset_token';
         </div>
     </div>
 </div>
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

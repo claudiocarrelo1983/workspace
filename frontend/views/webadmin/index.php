@@ -9,6 +9,7 @@ use common\Helpers\Helpers;
 
 
 
+
 ?>
 
  <!-- start page title -->
@@ -59,7 +60,8 @@ use common\Helpers\Helpers;
             [
                 1 => Yii::t('app', 'yes'),
                 0 => Yii::t('app', 'no'),
-            ]); 
+            ]
+        ); 
         ?>
     </div>
     <div class="col-lg-4">

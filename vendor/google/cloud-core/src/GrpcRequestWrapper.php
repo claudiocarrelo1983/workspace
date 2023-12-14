@@ -74,7 +74,7 @@ class GrpcRequestWrapper
     /**
      * @param array $config [optional] {
      *     Configuration options. Please see
-     *     {@see Google\Cloud\Core\RequestWrapperTrait::setCommonDefaults()} for
+     *     {@see \Google\Cloud\Core\RequestWrapperTrait::setCommonDefaults()} for
      *     the other available options.
      *
      *     @type callable $authHttpHandler A handler used to deliver Psr7
@@ -121,15 +121,14 @@ class GrpcRequestWrapper
      */
     public function send(callable $request, array $args, array $options = [])
     {
-        $retries = isset($options['retries']) ? $options['retries'] : $this->retries;
-        $retryFunction = isset($options['grpcRetryFunction'])
-            ? $options['grpcRetryFunction']
-            : function (\Exception $ex) {
+        $retries = $options['retries'] ?? $this->retries;
+        $retryFunction = $options['grpcRetryFunction']
+            ?? function (\Exception $ex) {
                 $statusCode = $ex->getCode();
                 return in_array($statusCode, $this->grpcRetryCodes);
             };
-        $grpcOptions = isset($options['grpcOptions']) ? $options['grpcOptions'] : $this->grpcOptions;
-        $timeout = isset($options['requestTimeout']) ? $options['requestTimeout'] : $this->requestTimeout;
+        $grpcOptions = $options['grpcOptions'] ?? $this->grpcOptions;
+        $timeout = $options['requestTimeout'] ?? $this->requestTimeout;
         $backoff = new ExponentialBackoff($retries, $retryFunction);
 
         if (!isset($grpcOptions['retrySettings'])) {

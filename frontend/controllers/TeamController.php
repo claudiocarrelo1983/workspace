@@ -56,12 +56,10 @@ class TeamController extends Controller
         $arrFilter = [
             'company_code'=> Yii::$app->user->identity->company_code,
             //'active'=> 1,
-            //'status'=> 10,
-            //'level' => 'client'
+            //'status'=> 10,         
             //'type'=> 'trial',
-            //'level' => 'team'
+            'level' => 'team'
         ];
-
 
 
         if(isset($this->request->queryParams['UserSearch'])){
@@ -371,7 +369,8 @@ class TeamController extends Controller
         */
 
         if ($this->request->isPost && $model->load($this->request->post())) {  
-                        
+                     
+       
             $model->full_name = $model->first_name.' '.$model->last_name;
             /*
         

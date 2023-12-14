@@ -20,7 +20,7 @@ use yii\helpers\Url;
 use frontend\models\SignupForm;
 use yii\helpers\Json;
 use common\models\GeneratorJson;
-use sammaye\mailchimp\Mailchimp;
+use common\models\Subscribers;
 use common\models\Comments;
 use common\Helpers\Helpers;
 use yii\db\Query;
@@ -134,6 +134,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         $this->layout = 'public';
 
         $modelGeneratorjson = new GeneratorJson(); 
@@ -148,10 +160,13 @@ class SiteController extends Controller
             return $this->render('home/maintenance');
         }
 
-        return $this->render('home/index');
+        return $this->render('home/index', 
+            ['modelSubscriber' => $modelSubscriber]
+        );
     }
 
-    public function actionHome()
+    /*
+    public function actionHome222()
     {
 
         $this->layout = 'public';      
@@ -400,6 +415,7 @@ class SiteController extends Controller
         return $this->render('download-app');
     }
 
+    */
 
 
     /**
@@ -425,7 +441,7 @@ class SiteController extends Controller
             return $this->render('home/maintenance');
         }
 
-        return $this->render('home/index');
+        return $this->redirect('/');
     }
 
     
@@ -436,6 +452,18 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
 
         $this->layout = 'public';
        
@@ -451,10 +479,12 @@ class SiteController extends Controller
         }
 
 
-        return $this->render('about/about');
+        return $this->render('about/about',
+            ['modelSubscriber' => $modelSubscriber]
+        );
     } 
     
-
+  /*
     public function actionCalculators()
     {
 
@@ -477,8 +507,22 @@ class SiteController extends Controller
         return $this->render('@frontend/views/site/calculator/index');
     }
 
+  
     public function actionFaqs()
     {
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         $this->layout = 'public';
        
         $modelGeneratorjson = new GeneratorJson(); 
@@ -490,7 +534,9 @@ class SiteController extends Controller
 
             $this->layout = 'maintenance';
 
-            return $this->render('home/maintenance');
+            return $this->render('home/maintenance',
+                ['modelSubscriber' => $modelSubscriber]
+            );
         }
 
       
@@ -501,9 +547,23 @@ class SiteController extends Controller
             'faqs' => $faqs
         ]);
     }
+    */
 
     public function actionFeatures()
     {
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         $this->layout = 'public';
 
         $modelGeneratorjson = new GeneratorJson(); 
@@ -515,7 +575,9 @@ class SiteController extends Controller
 
             $this->layout = 'maintenance';
 
-            return $this->render('home/maintenance');
+            return $this->render('home/maintenance',
+                ['modelSubscriber' => $modelSubscriber]
+            );
         }
 
 
@@ -713,6 +775,19 @@ class SiteController extends Controller
     public function actionClientLogin()
     {
 
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
+
         if (!Yii::$app->user->isGuest) {
             return $this->render('home/index');
         }      
@@ -725,6 +800,7 @@ class SiteController extends Controller
 
      
             return $this->render('home/index', [
+                'modelSubscriber' => $modelSubscriber,
                 'model' => $model,
             ]);
         }
@@ -747,6 +823,7 @@ class SiteController extends Controller
 
             return $this->render('login/login_maintenance', [
                 'model' => $model,
+                'modelSubscriber' => $modelSubscriber,
             ]);
         }
 
@@ -754,6 +831,7 @@ class SiteController extends Controller
      
         return $this->render('../site/login/login_client', [
             'model' => $model,
+            'modelSubscriber' => $modelSubscriber,
         ]);
     }
 
@@ -764,6 +842,19 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity->first_name == 'admin') {
             return $this->render('home/index');
         }      
@@ -812,6 +903,7 @@ class SiteController extends Controller
      
         return $this->render('login/login', [
             'model' => $model,
+            'modelSubscriber' => $modelSubscriber,
         ]);
     }
 
@@ -824,6 +916,19 @@ class SiteController extends Controller
 
      public function actionSignupReseller()
      {        
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
        
          $model = new SignupForm(); 
          
@@ -878,6 +983,7 @@ class SiteController extends Controller
          return $this->render('login/signup-resseller', [
              'modelSignupForm' => $model,
              'submitEmail' => $submitEmail,
+             'modelSubscriber' => $modelSubscriber,
          ]);
      }
 
@@ -890,6 +996,18 @@ class SiteController extends Controller
     public function actionSignupClient()
     {
        
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         $model = new SignupForm();
       
         $modelGeneratorjson = new GeneratorJson(); 
@@ -945,6 +1063,7 @@ class SiteController extends Controller
         return $this->render('login/signup', [
             'modelSignupForm' => $model,
             'submitEmail' => $submitEmail,
+            'modelSubscriber' => $modelSubscriber,
         ]);
     }
 
@@ -1003,6 +1122,18 @@ class SiteController extends Controller
     public function actionResendVerificationEmail()
     {
 
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
+
         $this->layout = 'public';
 
         $model = new ResendVerificationEmailForm();
@@ -1015,7 +1146,8 @@ class SiteController extends Controller
         }
 
         return $this->render('login/resendVerificationEmail', [
-            'model' => $model
+            'model' => $model,
+            'modelSubscriber' => $modelSubscriber,
         ]);
     }
 
@@ -1083,10 +1215,8 @@ class SiteController extends Controller
     }
 
     public function actionLanguage()
-    {           
+    {          
 
-   
-        
         Yii::$app->language = 'en';  
         $cookies = new \yii\web\Cookie([
             'name' => 'lang',

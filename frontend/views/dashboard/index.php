@@ -15,7 +15,7 @@ $tabArrValues = [];
 $tabsOptions = ['day','yesterday','week','month','year'];
 $countRevenue = 0;
 
-$userArr = Helpers::getTeamArr();
+$userArr = Helpers::arrayTeam();
 
 foreach($userArr as $user){
 
@@ -141,11 +141,11 @@ foreach($userArr as $user){
 
 
 <!-- start page title -->
-<div class="row">
+<div class="row mb-3">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0 font-size-18 pt-4">
-                <?= Yii::t('app', 'menu_admin_dashboard') ?>
+                <?= Yii::t('app', 'dashboard') ?>
             </h4>
         </div>
     </div>
@@ -218,7 +218,7 @@ foreach($userArr as $user){
                             <div class="dropdown float-end">
                                 <?= Html::a(
                                     '<i class="bx dripicons-web align-middle me-1"></i>'.Yii::t('app','webpage'),                          
-                                    Url::toRoute(['/page', 'code' => Yii::$app->user->identity->company_code]),
+                                    Url::toRoute(['/page', 'code' => Yii::$app->user->identity->company_code_url]),
                                     [   
                                     'class' => 'btn btn-primary',        
                                     'target' => '_blank'

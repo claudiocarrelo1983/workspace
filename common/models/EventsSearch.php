@@ -1,6 +1,6 @@
 <?php
 
-namespace common\Models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,8 +17,8 @@ class EventsSearch extends Events
     public function rules()
     {
         return [
-            [['id', 'allDay'], 'integer'],
-            [['username', 'event_code', 'page_code', 'title', 'title_pt', 'title_en', 'color_code', 'frequency', 'start', 'end', 'url', 'className', 'created_date'], 'safe'],
+            [['id', 'number_or_hours', 'cost', 'max_num_people', 'login_required', 'active'], 'integer'],
+            [['username', 'company_code', 'event_code', 'company_code_location', 'template_code', 'path', 'image', 'title', 'page_code_title', 'page_code_text', 'title_pt', 'text_pt', 'title_en', 'text_en', 'frequency', 'start_day', 'end_day', 'start_hour', 'end_hour', 'url', 'created_date'], 'safe'],
         ];
     }
 
@@ -59,22 +59,34 @@ class EventsSearch extends Events
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'start' => $this->start,
-            'end' => $this->end,
-            'allDay' => $this->allDay,
+            'start_day' => $this->start_day,
+            'end_day' => $this->end_day,
+            'start_hour' => $this->start_hour,
+            'end_hour' => $this->end_hour,
+            'number_or_hours' => $this->number_or_hours,
+            'cost' => $this->cost,
+            'max_num_people' => $this->max_num_people,
+            'login_required' => $this->login_required,
+            'active' => $this->active,
             'created_date' => $this->created_date,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'company_code', $this->company_code])
             ->andFilterWhere(['like', 'event_code', $this->event_code])
-            ->andFilterWhere(['like', 'page_code', $this->page_code])
+            ->andFilterWhere(['like', 'company_code_location', $this->company_code_location])
+            ->andFilterWhere(['like', 'template_code', $this->template_code])
+            ->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'page_code_title', $this->page_code_title])
+            ->andFilterWhere(['like', 'page_code_text', $this->page_code_text])
             ->andFilterWhere(['like', 'title_pt', $this->title_pt])
+            ->andFilterWhere(['like', 'text_pt', $this->text_pt])
             ->andFilterWhere(['like', 'title_en', $this->title_en])
-            ->andFilterWhere(['like', 'color_code', $this->color_code])
+            ->andFilterWhere(['like', 'text_en', $this->text_en])
             ->andFilterWhere(['like', 'frequency', $this->frequency])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'className', $this->className]);
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

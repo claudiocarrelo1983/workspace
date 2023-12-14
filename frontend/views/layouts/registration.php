@@ -12,6 +12,7 @@ use frontend\assets\PublicAsset;
 use yii\helpers\Url;
 
 
+
 PublicAsset::register($this);
 
 ?>
@@ -43,7 +44,7 @@ PublicAsset::register($this);
 
 <!--Top Menu -->    
     <?= $content ?>
-    
+    <!--
     <section class=" call-to-action call-to-action-default with-button-arrow content-align-center call-to-action-in-footer">
         <div class="container">
             <div class="row">
@@ -60,6 +61,7 @@ PublicAsset::register($this);
             </div>
         </div>
     </section>
+-->
     
     <?= $this->render('/site/footer_simple'); ?>			
 

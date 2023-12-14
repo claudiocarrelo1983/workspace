@@ -6,6 +6,7 @@ $model = new GeneratorJson();
 $arrLanguages = $model->getCountries();
 
 $params =[
+    'bsDependencyEnabled' => false,
     'bsVersion' => '4.x',
     'adminEmail' => 'info@myspecialgym.com',
     'supportEmail' => 'info@myspecialgym.com',

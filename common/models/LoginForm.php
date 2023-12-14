@@ -99,8 +99,8 @@ class LoginForm extends Model
 
                 break;
             case 'client': 
-                $error = Helpers::accessAccountClient($user);
-    
+                $error = Helpers::accessAccountClient($user);    
+              
                 switch($error){
                     case '1' : 
                         $this->addError($attribute, 'no_permission'); 

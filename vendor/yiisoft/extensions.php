@@ -3,15 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'yiisoft/yii2-bootstrap4' => 
-  array (
-    'name' => 'yiisoft/yii2-bootstrap4',
-    'version' => '2.0.10.0',
-    'alias' => 
-    array (
-      '@yii/bootstrap4' => $vendorDir . '/yiisoft/yii2-bootstrap4/src',
-    ),
-  ),
   'yiisoft/yii2-faker' => 
   array (
     'name' => 'yiisoft/yii2-faker',
@@ -121,15 +112,6 @@ return array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker/src',
     ),
   ),
-  '2amigos/yii2-tinymce-widget' => 
-  array (
-    'name' => '2amigos/yii2-tinymce-widget',
-    'version' => '1.1.3.0',
-    'alias' => 
-    array (
-      '@dosamigos/tinymce' => $vendorDir . '/2amigos/yii2-tinymce-widget/src',
-    ),
-  ),
   'sammaye/yii2-mailchimp' => 
   array (
     'name' => 'sammaye/yii2-mailchimp',
@@ -137,15 +119,6 @@ return array (
     'alias' => 
     array (
       '@sammaye/mailchimp' => $vendorDir . '/sammaye/yii2-mailchimp',
-    ),
-  ),
-  'yiisoft/yii2-httpclient' => 
-  array (
-    'name' => 'yiisoft/yii2-httpclient',
-    'version' => '2.0.14.0',
-    'alias' => 
-    array (
-      '@yii/httpclient' => $vendorDir . '/yiisoft/yii2-httpclient/src',
     ),
   ),
   'yiisoft/yii2-authclient' => 
@@ -176,24 +149,6 @@ return array (
       '@wbraganca/dynamicform' => $vendorDir . '/wbraganca/yii2-dynamicform/src',
     ),
   ),
-  'yiisoft/yii2-debug' => 
-  array (
-    'name' => 'yiisoft/yii2-debug',
-    'version' => '2.1.22.0',
-    'alias' => 
-    array (
-      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
-    ),
-  ),
-  'yiisoft/yii2-gii' => 
-  array (
-    'name' => 'yiisoft/yii2-gii',
-    'version' => '2.2.5.0',
-    'alias' => 
-    array (
-      '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
-    ),
-  ),
   'yiier/yii2-chartjs-widget' => 
   array (
     'name' => 'yiier/yii2-chartjs-widget',
@@ -210,15 +165,6 @@ return array (
     'alias' => 
     array (
       '@bsadnu/googlecharts' => $vendorDir . '/bsadnu/yii2-googlecharts',
-    ),
-  ),
-  '2amigos/yii2-chartjs-widget' => 
-  array (
-    'name' => '2amigos/yii2-chartjs-widget',
-    'version' => '3.0.1.0',
-    'alias' => 
-    array (
-      '@dosamigos/chartjs' => $vendorDir . '/2amigos/yii2-chartjs-widget/src',
     ),
   ),
   'yiisoft/yii2-imagine' => 
@@ -284,15 +230,6 @@ return array (
       '@kartik/datetime' => $vendorDir . '/kartik-v/yii2-widget-datetimepicker/src',
     ),
   ),
-  'kartik-v/yii2-widget-select2' => 
-  array (
-    'name' => 'kartik-v/yii2-widget-select2',
-    'version' => '2.2.4.0',
-    'alias' => 
-    array (
-      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2/src',
-    ),
-  ),
   'kartik-v/yii2-date-range' => 
   array (
     'name' => 'kartik-v/yii2-date-range',
@@ -300,33 +237,6 @@ return array (
     'alias' => 
     array (
       '@kartik/daterange' => $vendorDir . '/kartik-v/yii2-date-range/src',
-    ),
-  ),
-  '2amigos/yii2-date-picker-widget' => 
-  array (
-    'name' => '2amigos/yii2-date-picker-widget',
-    'version' => '1.0.7.0',
-    'alias' => 
-    array (
-      '@dosamigos/datepicker' => $vendorDir . '/2amigos/yii2-date-picker-widget/src',
-    ),
-  ),
-  '2amigos/yii2-date-time-picker-widget' => 
-  array (
-    'name' => '2amigos/yii2-date-time-picker-widget',
-    'version' => '1.0.4.0',
-    'alias' => 
-    array (
-      '@dosamigos/datetimepicker' => $vendorDir . '/2amigos/yii2-date-time-picker-widget/src',
-    ),
-  ),
-  'simialbi/yii2-simialbi-base' => 
-  array (
-    'name' => 'simialbi/yii2-simialbi-base',
-    'version' => '0.13.1.0',
-    'alias' => 
-    array (
-      '@simialbi/yii2' => $vendorDir . '/simialbi/yii2-simialbi-base/src',
     ),
   ),
   'simialbi/yii2-widget-datetimepicker' => 
@@ -363,6 +273,69 @@ return array (
     'alias' => 
     array (
       '@kartik/color' => $vendorDir . '/kartik-v/yii2-widget-colorinput/src',
+    ),
+  ),
+  'yiisoft/yii2-bootstrap4' => 
+  array (
+    'name' => 'yiisoft/yii2-bootstrap4',
+    'version' => '2.0.11.0',
+    'alias' => 
+    array (
+      '@yii/bootstrap4' => $vendorDir . '/yiisoft/yii2-bootstrap4/src',
+    ),
+  ),
+  'kartik-v/yii2-icons' => 
+  array (
+    'name' => 'kartik-v/yii2-icons',
+    'version' => '1.4.8.0',
+    'alias' => 
+    array (
+      '@kartik/icons' => $vendorDir . '/kartik-v/yii2-icons/src',
+    ),
+  ),
+  'kartik-v/yii2-widget-select2' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-select2',
+    'version' => '2.2.5.0',
+    'alias' => 
+    array (
+      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2/src',
+    ),
+  ),
+  'simialbi/yii2-simialbi-base' => 
+  array (
+    'name' => 'simialbi/yii2-simialbi-base',
+    'version' => '0.13.4.0',
+    'alias' => 
+    array (
+      '@simialbi/yii2' => $vendorDir . '/simialbi/yii2-simialbi-base/src',
+    ),
+  ),
+  'yiisoft/yii2-httpclient' => 
+  array (
+    'name' => 'yiisoft/yii2-httpclient',
+    'version' => '2.0.15.0',
+    'alias' => 
+    array (
+      '@yii/httpclient' => $vendorDir . '/yiisoft/yii2-httpclient/src',
+    ),
+  ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '2.1.25.0',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
+    ),
+  ),
+  'yiisoft/yii2-gii' => 
+  array (
+    'name' => 'yiisoft/yii2-gii',
+    'version' => '2.2.6.0',
+    'alias' => 
+    array (
+      '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
     ),
   ),
 );

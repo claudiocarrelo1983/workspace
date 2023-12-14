@@ -1378,7 +1378,13 @@ html #header.header-transparent .header-body:not(.header-border-bottom) {
 }
 
 html:not(.sticky-header-active) #header.header-transparent:not(.header-semi-transparent) .header-body {
+
 	background-color: transparent !important;
+	
+	/*
+		background-color: transparent !important;
+		background-color: rgba(0, 0, 0, 0.4) !important;
+		*/
 }
 
 html:not(.sticky-header-active) #header.header-dark:not(.header-semi-transparent) .header-body-dark {
@@ -9882,7 +9888,7 @@ a.text-light:focus, a.text-light:hover {
 	background: #212529;
 	border-top: 4px solid #212529;
 	font-size: 0.9em;
-	margin-top: 50px; 
+	/* margin-top: 50px; */
 	padding: 0;
 	position: relative;
 	clear: both;

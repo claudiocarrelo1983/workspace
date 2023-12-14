@@ -39,7 +39,7 @@ $path2 = 'sign_up'
                             </h2>                      
                             <div class="form-group col-lg-2"> 
                                 <?= $form->field($modelSignupForm, 'title')->dropdownList(
-                                    Helpers::titleDropdownArr(),
+                                    Helpers::dropdownTitle(),
                                     ['prompt'=>'Select Title', 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                                 ?>                              
                             </div>
@@ -125,3 +125,5 @@ $path2 = 'sign_up'
 <!-- Sub Footer -->
 <?= $this->render('@frontend/views/site/subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

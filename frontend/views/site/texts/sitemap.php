@@ -113,3 +113,5 @@ $path2 = 'sitemap';
 <!-- Sub Footer -->
     <?= $this->render('@frontend/views/site/subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

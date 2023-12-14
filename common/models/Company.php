@@ -75,14 +75,14 @@ class Company extends \yii\db\ActiveRecord
                 //'minHeight' => 2500, 
                 //'maxHeight' => 2500, 
                 'extensions' => 'jpg, gif, png', 
-                'maxSize' => 1024 * 1024 * 2
+                'maxSize' => 1024 * 1024 * 4
            ],
            [
                 'logoimage', 
                 'image',       
                 //'maxHeight' => 500, 
                 'extensions' => 'jpg, gif, png', 
-                'maxSize' => 1024 * 1024 * 2
+                'maxSize' => 1024 * 1024 * 4
             ],
         ];
     }

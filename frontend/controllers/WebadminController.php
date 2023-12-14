@@ -9,6 +9,7 @@ use yii\imagine\Image;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use common\Helpers\Helpers;
+use yii\web\NotFoundHttpException;
 
 
 //Yii::$app->language = 'en-EN';
@@ -42,13 +43,14 @@ class WebadminController extends Controller
         
         $this->layout = 'adminLayout';       
   
-        $model = $this->findModel(Yii::$app->user->identity->id);
-        
+        $model = $this->findModel(Yii::$app->user->identity->company_code);
+
+      
         if (Yii::$app->user->identity->level != 'admin') {
             return $this->goHome();
         }  
 
-       // $model = new Company();  
+        //$model = new Company();  
 
         if ($this->request->isPost && $model->load($this->request->post())) {                       
 
@@ -109,9 +111,9 @@ class WebadminController extends Controller
 
     }
 
-    protected function findModel($id)
+    protected function findModel($companyCode)
     {
-        if (($model = Company::findOne(['id' => $id])) !== null) {      
+        if (($model = Company::findOne(['company_code' => $companyCode])) !== null) {      
             return $model;
         }
 

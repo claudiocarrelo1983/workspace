@@ -5,6 +5,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use common\Helpers\Helpers;
+
+$companyArr = Helpers::myCompanyArr();
 
 /** @var yii\web\View $this */
 /** @var app\models\ShedduleSearch $searchModel */
@@ -13,10 +16,12 @@ use yii\grid\GridView;
 $this->title = 'Sheddules';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= $this->render('/client/client-booking-header', ['myData' => [], 'model' => $model]); ?>
+<?= $this->render('@frontend/views/client/page/header', ['myData' => '', 'model' => $model, 'companyArr' => $companyArr]); ?>
+
+<?= $this->render('@frontend/views/client/page/banner',['code' => Yii::$app->request->get('code'), 'companyArr' => $companyArr]); ?>
 
 <div id="examples" class="container  pb-5">
-    <?= $this->render('/client/client-links'); ?>
+    <?= $this->render('@frontend/views/client/client-booking/links'); ?>   
 </div>
 
 <div class="container pb-5">

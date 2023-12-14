@@ -2,28 +2,12 @@
 
 namespace frontend\controllers;
 
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
-use frontend\models\PasswordResetRequestForm;
-use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
 
-use frontend\models\ResetPasswordForm;
-use common\models\User;
+use Yii;
+use yii\web\Controller;
 use frontend\models\ContactForm;
-use yii\helpers\Url;
-use frontend\models\SignupForm;
-use yii\helpers\Json;
 use common\models\GeneratorJson;
-use sammaye\mailchimp\Mailchimp;
-use common\models\Comments;
-use common\Helpers\Helpers;
-use yii\db\Query;
+use common\models\Subscribers;
 
 
 /**
@@ -39,6 +23,18 @@ class ContactUsController extends Controller
      */
     public function actionIndex()
     {
+
+        $modelSubscriber = new Subscribers();  
+
+        if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
+    
+            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+                $this->refresh();
+            } else{             
+                Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
+                Yii::$app->getSession()->setFlash('show', 'show');
+            }        
+        }
 
         $this->layout = 'public';
     
@@ -74,7 +70,8 @@ class ContactUsController extends Controller
 
         return $this->render('/site/contact-us/index', [
             'model' => $model,
-            'subject' =>  $subject
+            'subject' =>  $subject,
+            'modelSubscriber' => $modelSubscriber
         ]);
     }
 

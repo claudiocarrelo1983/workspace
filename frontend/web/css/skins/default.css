@@ -16,7 +16,7 @@
 }
 
 .banner-header{
-	background-image: url(../../images/generic/header_bg.jpg);
+	background-image: url(/../../images/generic/header_bg.jpg);
     background-size: cover;
     background-position: center;
     animation-duration: 750ms;
@@ -54,6 +54,76 @@ html .text-primary {
 html .text-color-hover-primary:hover,
 html .text-hover-primary:hover {
 	color: #0088CC !important;
+}
+
+.process .process-step-circle-primary {
+    display: flex;
+    justify-content: center;
+    height: 90px;
+    text-align: center;
+    width: 90px;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+	color: #0088CC !important;
+	border-color: #0088CC;
+}
+
+.process .process-step-circle-grey {
+    display: flex;
+    justify-content: center;
+    height: 90px;
+    text-align: center;
+    width: 90px;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+	color: #c2b6b6 !important;
+	border-color: #c2b6b6;
+}
+
+.process .process-step-circle-primary-mobile {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    text-align: center;
+    width: 50px;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+	color: #0088CC !important;
+	border-color: #0088CC;
+}
+
+.process .process-step-circle-grey-mobile {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    text-align: center;
+    width: 45px;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+	color: #c2b6b6 !important;
+	border-color: #c2b6b6;
+}
+
+
+html .text-color-grey,
+html .text-grey {
+	color: #c2b6b6 !important;
 }
 
 html .text-color-secondary,
@@ -1650,7 +1720,7 @@ html .btn-check:focus + .btn-light {
 }
 
 html .btn-outline.btn-primary {
-	color: #0088CC;
+	color: #ffffff;
 	background-color: transparent;
 	background-image: none;
 	border-color: #0088CC;
@@ -2643,6 +2713,10 @@ section.section.section-overlay-opacity-gradient:before {
 	background: linear-gradient(135deg, #0088CC 0%, #e36159 80%);
 }
 
+html .bg-color-light-scale-0 {
+	background-color: #ffffff !important;
+}
+
 html .bg-color-light-scale-1 {
 	background-color: #f7f7f7 !important;
 }
@@ -3097,7 +3171,7 @@ html .toggle-light.toggle-minimal .toggle.active > .toggle-title {
 .img-thumbnail .zoom,
 .thumb-info-ribbon {
 	background-color: #0088CC;
-	padding: 6px;
+	/* padding: 6px; */
 }
 
 html .thumb-info .thumb-info-action-icon-primary {
@@ -7043,4 +7117,9 @@ select#events-color_code > option:nth-child(8){
 
 .form-group {
     margin-bottom: 0px;
+}
+
+
+.bg-dark-opacity{
+	background-color: rgba(0, 0, 0, 0.8) !important;
 }

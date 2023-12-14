@@ -352,7 +352,7 @@ $path2 = 'home';
 <?= $this->render('../subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
        		
-
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>
 
 
 

@@ -9,8 +9,14 @@ use yii\bootstrap4\ActiveForm;
 use common\Helpers\Helpers;
 use yii\helpers\Url;
 
+$companyArr2 = Helpers::myCompanyArr();
+$code = Helpers::findCompanyCode();
+
 ?>
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'model' => $model]); ?>
+<?= $this->render('@frontend/views/client/page/header', [ 'model' => $model, 'companyArr' => $companyArr2]); ?>
+
+<?= $this->render('/client/page/banner',['code' => $code, 'companyArr' => $companyArr2]); ?>
+
 
 <div role="main" class="main  pb-5">
     <div class="container py-5">  

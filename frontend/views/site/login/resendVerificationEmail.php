@@ -49,3 +49,5 @@ $path2 = 'resend';
     </div>
 </div>
 
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

@@ -42,6 +42,7 @@ class m230719_193913_sheddule extends Migration
             'service_code' => $this->string()->notNull(), 
             'service_name' => $this->string()->notNull(), 
             'canceled' => $this->boolean()->defaultValue(0), 
+            'missed' => $this->boolean()->defaultValue(0), 
             'confirm' => $this->boolean()->defaultValue(0), 
             'full_name' => $this->string()->notNull(),   
             'contact_number' => $this->string()->notNull(),  
@@ -50,7 +51,10 @@ class m230719_193913_sheddule extends Migration
             'date' => $this->date(),
             'time' => $this->time(),
             'paid' => $this->boolean(), 
-            'cost' => $this->integer(), 
+            'price_advanced' => $this->integer()->defaultValue(0), 
+            'price' => $this->integer()->defaultValue(0), 
+            'price_range' => $this->integer(),   
+            'currency' => $this->string(),  
             'username_guid' => $this->string(),  
             'created_date' => $this->timestamp()
              

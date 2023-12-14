@@ -4,7 +4,7 @@ jQuery(function(){
     jQuery(document).on('click','.language',function(data) {
       var url = jQuery(this).data('url');
 		  var language = jQuery(this).attr('id');
-      var csrfToken = jQuery(this).data('csrf');    
+      var csrfToken = jQuery(this).data('csrf');  
 
         jQuery.ajax({
                url: url + "/index.php/site/language",

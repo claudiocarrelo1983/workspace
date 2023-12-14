@@ -38,7 +38,7 @@ html,body{
 }
 .tick_container {
     transition: .5s ease;
-    opacity: 0;
+   /* opacity: 0; */
     position: absolute;
     top: 48%;
     left: 54px;
@@ -16657,7 +16657,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 /* Testimonials */
 .testimonial {
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 
 .testimonial blockquote {
@@ -16700,7 +16700,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .testimonial .testimonial-author {
 	display: flex;
-	margin: 12px 0 0 0;
+	/* margin: 5px 0 5px 0; */
 }
 
 .testimonial .testimonial-author .testimonial-author-thumbnail {
@@ -20083,4 +20083,17 @@ ul.team-list .team-item .thumb-info-social-icons {
     .display-values-for-desktop{
         display:none;
     }
+}
+
+.input-group-text{
+	padding: 18px 5px !important;
+
+}
+
+
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
 }

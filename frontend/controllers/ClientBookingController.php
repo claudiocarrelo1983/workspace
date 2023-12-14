@@ -115,6 +115,7 @@ class ClientBookingController extends Controller
     public function actionIndex()
     {    
 
+
         $this->layout = 'registration';
    
         $request = Yii::$app->request;
@@ -183,7 +184,7 @@ class ClientBookingController extends Controller
         }  
       
 
-        return $this->render('../client/client-booking', [   
+        return $this->render('@frontend/views/client/client-booking/index', [   
             'date' => $date,   
             'model' => $modelSheddule,
             'companyArr' => $companyArr, 
@@ -464,7 +465,7 @@ class ClientBookingController extends Controller
                 $modelSheddule->client_username = 'client_username_'.Helpers::generateRandowHumber();
                 $modelSheddule->team_username = Yii::$app->user->identity->username;
                 $modelSheddule->company_code = Yii::$app->user->identity->company_code;     
-                $modelServices = Services::find()->select(['page_code_title'])->where(['service_code' => $modelSheddule->service_cat])->one();
+                $modelServices = Services::find()->select(['page_code_title'])->where(['service_code' => $modelSheddule->service_code])->one();
                 $modelSheddule->service_name = $modelServices->page_code_title;                         
                 $modelSheddule->date = date('Y-m-d',$modelSheddule->date);       
                 $modelSheddule->time = date('H:i',strtotime($modelSheddule->time));  

@@ -10,16 +10,20 @@ use yii\helpers\Url;
 use common\Helpers\Helpers;
 use kartik\date\DatePicker;
 
+$companyArr2 = Helpers::myCompanyArr();
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
+$code = Helpers::findCompanyCode();
 
 $path2 = 'sign_up';
 $myData = '';
 
 ?>
 
-<?= $this->render('/client/client-booking-header', ['myData' => $myData, 'model' => $model]); ?>
+<?= $this->render('@frontend/views/client/page/header', [ 'model' => $model, 'companyArr' => $companyArr2]); ?>
+
+<?= $this->render('/client/page/banner',['code' => $code, 'companyArr' => $companyArr2]); ?>
 
 <div role="main" class="main pb-4">
     <div class="container">  
@@ -33,10 +37,10 @@ $myData = '';
                         <h2 class="font-weight-bold text-3 mb-0 pt-3">                                       
                             <?= Yii::t('app', 'signup_block_dados') ?>               
                         </h2>                      
-                        <div class="form-group col-lg-2"> 
+                        <div class="form-group col-lg-2 "> 
                             <?= $form->field($model, 'title')->dropdownList(
                                 Helpers::dropdownTitle(),
-                                ['prompt'=>'Select Title', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
+                                ['prompt'=>'Select Title', 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "signup_block_title").':'); 
                             ?>                              
                         </div>
                         <div class="form-grou col-lg-5">                              
@@ -51,7 +55,7 @@ $myData = '';
                         <div class="form-group col-lg-2"> 
                             <?= $form->field($model, 'gender')->dropdownList(
                                 Helpers::dropdownGender(),
-                                ['prompt'=>'Select Gender', 'class' => 'form-control text-2 h-auto py-2'])->label(Yii::t('app', "gender").':'); 
+                                ['prompt'=>'Select Gender', 'class' => 'form-control text-3 h-auto py-2'])->label(Yii::t('app', "gender").':'); 
                             ?>                              
                         </div>                
                         <div class="form-group col-lg-5">          
@@ -71,21 +75,25 @@ $myData = '';
                             <label for="clients-gender">
                                 <?= Yii::t('app', "date_of_birth") ?>                       
                             </label>
-                        <?php                 
+
+                   
+                        <?php         
+                        
+                      
         
                             echo DatePicker::widget([
                                 'model' => $model,                                                                                                      
                                 'name' => 'dob',    
                                 'id' => 'date-calendar-search', 
                                 'removeButton' => false,
-                                'value' => (empty($date) ? '' : date('d-m-Y', strtotime($date))),
+                                'value' => (empty($date) ? '' : date('Y-m-d', strtotime($date))),
                                 'options' => [
                                     'placeholder' => 'Select date...',
                                     'class' => ' form-control text-4 h-auto py-1'
                                 ],
                                 'pluginOptions' => [  
                                     'autoclose' => true,           
-                                    'format' => 'dd-mm-yyyy',
+                                    'format' => 'yyyy-mm-dd',
                                     'todayHighlight' => true
                                 ]                   
                             ]);               

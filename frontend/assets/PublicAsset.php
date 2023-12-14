@@ -15,7 +15,7 @@ class PublicAsset extends AssetBundle
     public $css = [
         'vendor/bootstrap/css/bootstrap.min.css',
         'vendor/fontawesome-free/css/all.min.css',
-        //'vendor/animate/animate.compat.cs',
+        'vendor/animate/animate.compat.cs',
         'vendor/animate/animate.compat.css',
         'vendor/simple-line-icons/css/simple-line-icons.min.css',
         'vendor/owl.carousel/assets/owl.carousel.min.css',
@@ -30,7 +30,7 @@ class PublicAsset extends AssetBundle
         'css/custom.css',
         'vendor/circle-flip-slideshow/css/component.css',
         'css/skins/default.css',
-        //'css/skins/custom.css',            
+        'css/skins/custom.css',            
         'css/icons.min.css',
         'css/site.css',
         'css/demos/demo-app-landing.css',
@@ -40,7 +40,10 @@ class PublicAsset extends AssetBundle
         'assets/libs/@fullcalendar/core/main.min.css',
         'assets/libs/@fullcalendar/daygrid/main.min.css',
         'assets/libs/@fullcalendar/bootstrap/main.min.css',
-        'assets/libs/@fullcalendar/timegrid/main.min.css'
+        'assets/libs/@fullcalendar/timegrid/main.min.css',
+        'css/demos/demo-barber.css',
+        //'css/skins/skin-barber.css',
+        //'css/demos/demo-band.css'
 
     ]; 
 
@@ -72,6 +75,8 @@ class PublicAsset extends AssetBundle
         //'assets/libs/apexcharts/apexcharts.min.js',
         //'js/pages/dashboard.init.js',
         //'js/app.js'
+        'assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
+        
         'vendor/bootstrap-star-rating/js/star-rating.min.js',
         'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js',
         //'assets/libs/@fullcalendar/core/main.min.js',

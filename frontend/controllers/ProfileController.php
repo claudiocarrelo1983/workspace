@@ -7,6 +7,7 @@ use common\Helpers\Helpers;
 use common\models\User;
 use Yii;
 use yii\db\Query;
+use common\models\GeneratorJson;
 
 //Yii::$app->language = 'en-EN';
 

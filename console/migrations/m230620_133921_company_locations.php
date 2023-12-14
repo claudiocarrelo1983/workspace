@@ -37,7 +37,7 @@ class m230620_133921_company_locations extends Migration
         $this->createTable('{{%company_locations}}', [
             'id' => $this->primaryKey(),      
             'company_code' => $this->string(), 
-            'username_array' => $this->text(),     
+            //'username_array' => $this->text(),     
             'location_code' => $this->string()->unique(),
             'page_code_title' => $this->string()->notNull()->unique(),  
             'page_code_description' => $this->string()->notNull()->unique(),  

@@ -30,9 +30,8 @@ $activeLanguagesArr = Helpers::activeLanguages();
                 <?= $form->field($model, 'order')->textInput(['maxlength' => true])->label(Yii::t('app', 'order')) ?>
             </div>  
         </div>  
-        <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <?= Html::a(Yii::t('app', 'back_button'), ['index'], ['class' => 'btn btn-primary']) ?>
+        <div class="form-group pt-3">
+            <?=  Helpers::displaySaveButtonsView($model); ?> 
         </div>
     <?php ActiveForm::end(); ?>
 </div>

@@ -23,6 +23,7 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
     public static function generatejson()
     {    
+     
         $tables = Helpers::getAllTables();        
 
         foreach($tables as $table){
@@ -34,21 +35,23 @@ class GeneratorJson extends \yii\db\ActiveRecord
                 switch ($table['TABLE_NAME']){
                   
                     case 'pricing':
-                    case 'pricing_specs':
-                    //case 'translations':
-                    case 'blogs':
-                    case 'blogs_category':
-                    case 'company_locations':
-                    case 'configurations':
-                    case 'company':
+                    case 'pricing_specs':  
+                    case 'configurations': 
+                    case 'texts': 
                     case 'faqs':
                     case 'subjects': 
-                    case 'services_category': 
-                    case 'texts':    
+                    /*            
+                    case 'blogs':
+                    case 'blogs_category':
+                    case 'company_locations':  
+                    case 'company':                  
+                    case 'services': 
+                    case 'services_category':             
                     case 'recipes':     
                     case 'recipes_category': 
                     case 'comments':       
-                    case 'team':       
+                    case 'team':   
+                     */    
                     case 'translations':        
                       
                         if(method_exists(__CLASS__, $method)){                        
@@ -707,19 +710,163 @@ class GeneratorJson extends \yii\db\ActiveRecord
     public static function getTranslations($language){
         
         $model = new GeneratorJson(); 
-        $translations = $model->getLastFileUploaded('translations');  
+        $companyCode = Helpers::findCompanyCode();
+        $translations = $model->getLastFileUploaded('translations'); 
 
-        $result = array(); 
+        $resultTranslations = array(); 
 
         foreach($translations as $value){
             if($language ==  $value['country_code']){
-                $result[trim($value['page_code'])] = trim($value['text']);
+                $resultTranslations[trim($value['page_code'])] = trim($value['text']);
             }            
         }
+
+        $result = array_merge($resultTranslations, $model->getTableTranslation($language, $companyCode));
 
         return  $result;  
     }
 
+    public function getTableTranslation($language, $companyCode){
+
+        $tables = ['user','company','services', 'services_category'];
+        $result = [];
+
+        foreach($tables as $table){
+
+            $method = Helpers::methodTitleSimple($table, 'getTableTranslation');
+
+            if(method_exists(__CLASS__, $method)){                  
+                $result = array_merge($result, $this->$method($table, $language, $companyCode));
+            }
+
+        }
+
+        return $result;
+
+    }
+
+    public function getTableTranslationUser($table, $language, $companyCode){
+
+        $query = new Query; 
+
+        $tableArr = $query->select(
+            [
+                'page_code_title',
+                'page_code_text', 
+                'title_'.$language,
+                'text_'.$language
+
+            ])->from($table)  
+        ->where([
+            'company_code' => $companyCode
+        ])    
+        ->all(); 
+
+        $result = array(); 
+
+        foreach($tableArr as $value){       
+            $result[trim($value['page_code_text'])] = trim($value['text_'.$language]);   
+            $result[trim($value['page_code_title'])] = trim($value['title_'.$language]);              
+        }
+
+        return $result;
+
+    }
+
+    public function getTableTranslationCompany($table, $language, $companyCode){
+
+        $query = new Query; 
+
+        $tableArr = $query->select(
+            [
+                'page_code_text',
+                'page_code_team_title',
+                'page_code_team_text',
+                'page_code_manteinance',
+                'page_code_subtitle',
+                'page_code_banner',
+                'text_'.$language,
+                'subtitle_'.$language,
+                'team_title_'.$language,
+                'team_text_'.$language,
+                'banner_'.$language,
+                'manteinance_'.$language,
+
+            ])->from($table)  
+        ->where([
+            'company_code' => $companyCode
+        ])    
+        ->all(); 
+
+        $result = array(); 
+
+        foreach($tableArr as $value){       
+            $result[trim($value['page_code_text'])] = trim($value['text_'.$language]);   
+            $result[trim($value['page_code_team_title'])] = trim($value['team_title_'.$language]);   
+            $result[trim($value['page_code_team_text'])] = trim($value['team_text_'.$language]);    
+            $result[trim($value['page_code_banner'])] = trim($value['banner_'.$language]);  
+            $result[trim($value['page_code_manteinance'])] = trim($value['manteinance_'.$language]);  
+            $result[trim($value['page_code_subtitle'])] = trim($value['subtitle_'.$language]); 
+           
+        }
+
+        return $result;
+
+    }
+
+    public function getTableTranslationServices($table, $language, $companyCode){
+
+        $query = new Query; 
+
+        $tableArr = $query->select(
+            [
+                'page_code_title',
+                'page_code_text', 
+                'title_'.$language,
+                'text_'.$language
+
+            ])->from($table)  
+        ->where([
+            'company_code' => $companyCode
+        ])    
+        ->all(); 
+
+        $result = array(); 
+
+        foreach($tableArr as $value){       
+            $result[trim($value['page_code_text'])] = trim($value['text_'.$language]);   
+            $result[trim($value['page_code_title'])] = trim($value['title_'.$language]);              
+        }
+
+        return $result;
+
+    }
+
+    public function getTableTranslationServicesCategory($table, $language, $companyCode){
+
+        $query = new Query; 
+
+        $tableArr = $query->select(
+            [
+                'page_code_title',              
+                'title_'.$language,
+              
+
+            ])->from($table)  
+        ->where([
+            'company_code' => $companyCode
+        ])    
+        ->all(); 
+
+        $result = array(); 
+
+        foreach($tableArr as $value){      
+            $result[trim($value['page_code_title'])] = trim($value['title_'.$language]);              
+        }
+
+        return $result;
+
+    }
     public function deploy(){
       
         /*

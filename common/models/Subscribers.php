@@ -33,6 +33,7 @@ class Subscribers extends \yii\db\ActiveRecord
         return [    
             [['first_name', 'last_name', 'opt_in'], 'string'],
             // email has to be a valid email address
+            ['email', 'unique'],
             ['email', 'required'],
             ['email', 'email'],
         ];

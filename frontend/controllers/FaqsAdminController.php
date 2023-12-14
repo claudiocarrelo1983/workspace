@@ -62,7 +62,7 @@ class FaqsAdminController extends Controller
             }            
         }
 
-        return $this->render('/faqs/index', [
+        return $this->render('/faqs-admin/index', [
             'faqs' => $faqs,
             'model' => $model,
         ]);

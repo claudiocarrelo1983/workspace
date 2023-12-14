@@ -46,7 +46,7 @@ class CalculatorBmiKg extends \yii\base\Model
     {
         return [
             'id' => 'ID',
-            'height' => Yii::t('app', "heighta"),
+            'height' => Yii::t('app', "height"),
             'age' => Yii::t('app', "age"),
             'sex' => Yii::t('app', "sex"),
             'weight' => Yii::t('app', "weight"),

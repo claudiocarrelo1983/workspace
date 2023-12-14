@@ -20,13 +20,14 @@ use frontend\models\SignupForm;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+
 use Yii;
 //Yii::$app->language = 'en-EN';
 
 class PageController extends Controller
 {
 
-    public function behaviors()
+   public function behaviors()
     {   
         
         return [
@@ -465,15 +466,18 @@ class PageController extends Controller
     {           
     
         $model = new LoginForm();
+        $modelSheddule = new Sheddule();  
         $this->layout = 'registration';
       
         Helpers::accessAccountClient($model);
-    
+        
+        /*
         if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/page', 
                 'code' => Yii::$app->request->get('code')]
             );           
         }          
+        */
 
 
         if ($model->load(Yii::$app->request->post())) {
@@ -481,15 +485,20 @@ class PageController extends Controller
             $userModel = new User();   
             $userResult = $userModel::find('id')->orderBy("id desc")->where(['username' => $model->username, 'active' => 1])->limit(1)->one();
 
-            if($model->login() && $userResult->level == 'client'){
-               
-                return $this->redirect(['/client-booking', 
-                    'code' => Yii::$app->request->get('code')]
-                );
+            //$model->login() && 
+            if($model->login() && $userResult->level == 'client'){                                
+
+                $companyCode = Yii::$app->request->get('code');
+                     
+                return $this->redirect(['/'.$companyCode.'/choose-location/%2A/%2A/%2A/%2A/%2A']);   
             }
 
             if($model->login() && $userResult->level == 'team'){
-               
+
+                $this->refresh();
+
+                /*
+                               
                 $dateGet = Yii::$app->request->get('day');
                 $date = ((empty($dateGet)) ? strtotime(date('Y-m-d')) : $dateGet);
 
@@ -498,6 +507,7 @@ class PageController extends Controller
                     'day' => $date
                 ]
                 );
+                */
             }
             
         }
@@ -506,9 +516,7 @@ class PageController extends Controller
        //$model->password = '';
   
       
-
-        
-        $modelGeneratorjson = new GeneratorJson(); 
+         $modelGeneratorjson = new GeneratorJson(); 
         $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
 
         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);
@@ -523,7 +531,7 @@ class PageController extends Controller
                 'model' => $model,
             ]);
         }
-        
+  
         $myDataArr = [];
   
         return $this->render('/client/login/login_client', [
@@ -549,42 +557,49 @@ class PageController extends Controller
 
         $this->loginValidation();
       
-  
-     
         //$submitEmail = '';
         $date = '';
 
-        $model->guid = Helpers::GUID();           
-
         if ($model->load(Yii::$app->request->post())) {             
    
+            $companyCode = Helpers::findCompanyCode();            
+            $model->company =  'Client';
+            $model->company_code = $companyCode;    
+            $model->privacy =  $model->terms_and_conditions;     
+            $model->dob = (empty(Yii::$app->request->post()['dob']) ? '' : date('Y-m-d', strtotime(Yii::$app->request->post()['dob']))); 
+         
+
+            /*
+
             $model->company =  'Client';
             $model->company_code = Yii::$app->request->get('code');
             $model->privacy =  $model->terms_and_conditions;
             $model->role = 'Client';
             $model->coin = 'EUR';
             $model->voucher = 'null';
-            //$date = (empty(Yii::$app->request->post()['dob']) ? '' : date('Y-m-d', strtotime(Yii::$app->request->post()['dob']))); 
-            $model->dob = $date;         
+            $date = (empty(Yii::$app->request->post()['dob']) ? '' : date('Y-m-d', strtotime(Yii::$app->request->post()['dob']))); 
+            $model->dob = $date;            
+          
+            */
 
             if($model->validate()){
-                
-                $model->signUpClient($model);            
+       
+                $model->signUpClient();            
   
-                //$submitEmail = 'success';
-    
+                //$submitEmail = 'success';    
                 //$modelLogin = new LoginForm();
-                $request = Yii::$app->request;
-    
+          
                 $modelLogin = new LoginForm();
-                if ($modelLogin->load(Yii::$app->request->post()) && $modelLogin->login()) {
+                
+                if ($modelLogin->load(Yii::$app->request->post()) && $modelLogin->login()) {                 
                     return $this->redirect(['/client-booking', 
                         'code' => Yii::$app->request->get('code')]
                     );
                 }
 
-                return $this->render('/page/login', [                 
-                    'company' => Yii::$app->request->get('code'),
+            
+                return $this->redirect(['page/login',                 
+                    'code' => Yii::$app->request->get('code')
                 ]);           
            
             }     
@@ -687,14 +702,15 @@ class PageController extends Controller
 
     
     public function actionIndex($code)
-    {              
-
+    {            
+   
         $companyArr = Helpers::myCompanyArr();
 
         if(empty($companyArr)){
             return $this->goHome();
         } 
 
+   
         $model = new Tickets;
         $modelEvents = new Events();     
 
@@ -713,6 +729,10 @@ class PageController extends Controller
       
     
         $publish = Helpers::checkPublish($code, $this);    
+
+        if(empty($publish) && Yii::$app->user->isGuest == true){     
+            return $this->goHome();
+        } 
 
         $this->layout = 'registration';       
 
@@ -733,12 +753,14 @@ class PageController extends Controller
         
         if ($this->request->isPost && $model->load($this->request->post()) && $model->validate()) {
 
+            $model->company_code = Yii::$app->user->identity->company_code; 
             $model->ticket_number = 'tk'.date('YdmHis').Helpers::generateRandowHumber(3);
             if($model->save() && $model->sendEmail($model)){
                 return $this->refresh();
             }            
         }
   
+     
 
         $query = new Query;
         $eventsArr = [];
@@ -766,16 +788,16 @@ class PageController extends Controller
             ];
         }
 
-        $companyArr = Helpers::myCompanyDetailsArr($code);
-     
-        $company = (isset($companyArr[0]) ? $companyArr[0]['company_code'] : '');
-      
-        if (empty($company)) {    
-            //return $this->goHome();
-        }        
-       
+        $company = Helpers::findCompanyCode();   
 
-        return $this->render('../client/page', [
+        $companyArr = Helpers::myCompanyDetailsArr($company);    
+       
+        if (empty($company)) {    
+            return $this->goHome();
+        }       
+
+
+        return $this->render('@frontend/views/client/page/index', [
             'modelEvents' => $modelEvents,
             'companyArr' =>  $companyArr,
             'company' =>  $company,

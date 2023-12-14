@@ -42,10 +42,10 @@ use yii\helpers\Url;
             </div> 
         </div> 
         <div class="row pt-3">  
-            <div class="col-lg-4">          
+            <div class="col-lg-3">          
                 <?= $form->field($model, 'nif')->textInput()->label(Yii::t('app', "nif")) ?>                             
             </div>                                        
-            <div class="col-lg-4">          
+            <div class="col-lg-3">          
                 <?= $form->field($model, 'location_code')->dropDownList(
                         Helpers::dropdownCompanyLocations(),
                         ['prompt'=> Yii::t('app', 'select_company_code_location')], 
@@ -57,7 +57,7 @@ use yii\helpers\Url;
                     
                 </a>         
             </div>
-            <div class="col-lg-4">  
+            <div class="col-lg-3">  
                 <?= $form->field($model, 'time_window')->dropDownList(
                         Helpers::dropdownTimeWindow(),   
                         ['prompt'=> Yii::t('app', 'select_time_window')],                   
@@ -65,6 +65,9 @@ use yii\helpers\Url;
                     )->label(Yii::t('app', 'time_window')); 
                 ?>                           
             </div>
+            <div class="col-lg-3">
+                <?= $form->field($model, 'job_title')->textInput()->label(Yii::t('app', "job_title"))?>
+            </div> 
         </div>
         <div class="row pt-3">     
             <div class="col-lg-4"> 
@@ -90,8 +93,8 @@ use yii\helpers\Url;
                         )->label(false); 
                     ?>  
                 </div>	        
-            </div> 
-                       
+            </div>       
+           
         </div>    
         <div class="row pt-3">                    
             <div class="form-group col-lg-6">

@@ -40,8 +40,7 @@ $activeLanguagesArr = Helpers::activeLanguages();
     </div>
 
     <div class="form-group pt-3">
-        <?= Html::submitButton(Yii::t('app', 'submit_button'), ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'back_button'), ['index'], ['class' => 'btn btn-primary']) ?>
+        <?=  Helpers::displaySaveButtonsView($model); ?> 
     </div>
     
 

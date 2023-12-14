@@ -49,8 +49,28 @@ class ServicesCategoryController extends Controller
         $this->layout = 'adminLayout';  
 
         $searchModel = new ServicesCategorySearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $arrFilter = [
+            'company_code'=> Yii::$app->user->identity->company_code,
+            //'active'=> 1,
+            //'status'=> 10,         
+            //'type'=> 'trial',
+            //'level' => 'team'
+        ];
+
+
+        if(isset($this->request->queryParams['UserSearch'])){
+            $arrFilter = array_merge($arrFilter, $this->request->queryParams['UserSearch']);
+        
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }else{
+            $dataProvider = $searchModel->search([
+                $searchModel->formName()=> $arrFilter
+            ]);
+        }
+  
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -95,17 +115,12 @@ class ServicesCategoryController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-
-                $title = 'service_category_title_1';         
+                
+                $count = bcadd(1,$model::find()->count());
         
-                $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
-        
-               if(!empty($count->id)){
-                 $title = 'service_category_title_'.bcadd($count->id, 1);             
-               }
-
+                $title = 'sc_'.$count;  
                 $model->company_code = Yii::$app->user->identity->company_code;
-                $model->category_code = 'sc_'.Helpers::generateRandowHumber();  
+                $model->category_code = 'sc'.Helpers::generateRandowHumber();  
                 $model->page_code_title = $title;
 
                 if($model->save()){

@@ -38,22 +38,69 @@ html,body{
 }
 .tick_container {
     transition: .5s ease;
-    opacity: 0;
+   /* opacity: 0; */
     position: absolute;
     top: 48%;
-    left: 54px;
+    left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     cursor: pointer;
     text-align: center;
 }
+
+.tick_container-location {
+    transition: .5s ease;
+   /* opacity: 0; */
+    position: absolute;
+    top: 48%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-align: center;
+}
+
+.tick_container-service {
+	transition: .5s ease;
+    /* opacity: 0; */
+    top: 34%;
+    left: 157px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-align: center;
+}
+
 .tick {
     background-color: #4CAF50;
     color: white;
-    font-size: 16px;
-    padding: 6px 12px;
-    height: 40px;
-    width: 40px;
+    font-size: 51px;
+    padding: 14px 2px;
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+
+.tick-service {
+    background-color: #4CAF50;
+    color: white;
+	font-size: 14px;
+    padding: 5px 6px;
+    border-radius: 100%;
+}
+
+.text-choice-service{
+	color: green;
+}
+
+
+.tick-location {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 56px;
+    padding: 13px 6px;
+    height: 80px;
+    width: 80px;
     border-radius: 100%;
 }
 
@@ -2446,6 +2493,18 @@ html body.body .btn:active {
 	color: #FFF;
 }
 
+.btn-success-dark {
+	background-color: #0c4519;
+	border-color: #0c4519 #0c4519 #0c4519;
+	color: #FFF;
+}
+
+.btn-success-dark:hover {
+	background-color: #041308;
+	border-color: #041308 #041308 #041308;
+	color: #FFF;
+}
+
 .btn-success:hover, .btn-success.hover {
 	background-color: #2fc652;
 	border-color: #34ce57 #34ce57 #28a745;
@@ -3453,8 +3512,9 @@ html.ie9 .call-to-action.button-centered .container > .row > [class*="col-"], ht
 }
 
 .card-body {
-	padding: 32px;
+	/* padding: 32px;
 	padding: 2rem;
+	 */
 	position: relative;
 	z-index: 1;
 }
@@ -13862,7 +13922,6 @@ html.boxed .nav-secondary.sticky-active {
 
 .price-menu-item .price-menu-item-details .price-menu-item-price {
 	position: relative;
-	top: -5px;
 }
 
 .price-menu-item .price-menu-item-details .price-menu-item-price strong {
@@ -13911,6 +13970,20 @@ html.boxed .nav-secondary.sticky-active {
 
 
 .process .process-step-circle {
+	display: flex;
+	justify-content: center;
+	height: 90px;
+	text-align: center;
+	width: 90px;
+	border: 2px solid #CCC;
+	border-radius: 50%;
+	align-items: center;
+	position: relative;
+	background-color: transparent;
+	transition: all 0.2s ease-in-out;
+}
+
+.process .process-step-circle-mobile {
 	display: flex;
 	justify-content: center;
 	height: 90px;
@@ -14363,10 +14436,15 @@ html.ie11 .scroll-to-top {
 
 /* Section Featured */
 section.section {
-	/* background: #f7f7f7; */
+	background: #f7f7f7;
 	border-top: 5px solid #f1f1f1;
-	margin: 30px 0;
+	/* margin: 30px 0; */
 	padding: 50px 0;
+}
+
+/* Section Featured */
+.separator-bgcolor {
+	background: #f7f7f7;	
 }
 
 section.section > .container {
@@ -14390,7 +14468,7 @@ section.section.section-height-3 {
 
 section.section.section-height-4 {
 	padding: 110.769px 0;
-	padding: 6.9230769231rem 0;
+	padding: 9.2307692308rem 0 3rem 0
 }
 
 section.section.section-height-5 {
@@ -16943,7 +17021,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 /* Testimonials */
 .testimonial {
-	margin-bottom: 20px;
+		/* margin-bottom: 20px; */
 }
 
 .testimonial blockquote {
@@ -16986,7 +17064,7 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .testimonial .testimonial-author {
 	display: flex;
-	margin: 12px 0 0 0;
+/* margin: 5px 0 5px 0; */
 }
 
 .testimonial .testimonial-author .testimonial-author-thumbnail {
@@ -17550,17 +17628,17 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info .thumb-info-title {
 	transition: all 0.3s;
-	background: rgba(33, 37, 41, 0.8);
-	color: #FFF;
-	font-weight: 600;
-	left: 0;
-	letter-spacing: -.05em;
-	position: absolute;
-	z-index: 2;
-	max-width: 90%;
-	font-size: 17px;
-	padding: 13px 21px 2px;
-	bottom: 8%;
+    background: rgba(33, 37, 41, 0.8);
+    color: #FFF;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: -.05em;
+    position: absolute;
+    z-index: 2;
+    max-width: 90%;
+    font-size: 17px;
+    padding: 13px 21px 2px;
+    bottom: 13%;
 }
 
 .thumb-info .thumb-info-title.thumb-info-title-vert-align {
@@ -17576,17 +17654,17 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info .thumb-info-type {
 	background-color: #CCC;
-	border-radius: 2px;
-	display: inline-block;
-	float: left;
-	font-size: 0.6em;
-	font-weight: 600;
-	letter-spacing: 0;
-	margin: 8px -2px -15px 0px;
-	padding: 2px 12px;
-	text-transform: uppercase;
-	z-index: 2;
-	line-height: 2.3;
+    border-radius: 2px;
+    display: inline-block;
+    float: left;
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin: 8px -2px -15px 0px;
+    padding: 2px 12px;
+    text-transform: uppercase;
+    z-index: 2;
+    line-height: 2.3;
 }
 
 .thumb-info .owl-carousel {
@@ -18115,13 +18193,13 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 }
 
 .thumb-info-social-icons a {
-	background: #CCC;
-	border-radius: 8px;
-	display: inline-block;
-	height: 40px;
-	line-height: 30px;
-	text-align: center;
-	width: 40px;
+    background: #CCC;
+    border-radius: 25px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
 }
 
 .thumb-info-social-icons a:hover {
@@ -18134,8 +18212,8 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 
 .thumb-info-social-icons a i {
 	color: #FFF;
-	font-size: 2em;
-	font-weight: normal;
+    font-size: 0.9em;
+    font-weight: normal;
 
 }
 
@@ -20372,4 +20450,31 @@ ul.team-list .team-item .thumb-info-social-icons {
     }
 }
 
+.input-group-text {
+	justify-content: center;
+  
+}
 
+/* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+	.responsive-font-images-full-name {
+	  font-size: 17px;
+	}
+
+  }
+  /* If the screen size is smaller than 1200px, set the font-size to 80px */
+  @media (max-width: 1199.98px) {
+	.responsive-font-images-full-name {
+	  font-size: 12px;
+	}
+
+  }
+
+/*
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+}
+*/

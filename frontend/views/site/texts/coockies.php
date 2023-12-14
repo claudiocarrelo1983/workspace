@@ -42,3 +42,5 @@ $path2 = 'coockies';
 <!-- Sub Footer -->
 <?= $this->render('@frontend/views/site/subfooter',['path2' => $path2]); ?>
 <!-- Sub Footer -->
+
+<?= $this->render('/site/footer', ['modelSubscriber' => $modelSubscriber]); ?>

@@ -96,8 +96,8 @@ use common\Helpers\Helpers;
         </div>
     </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group pt-3">
+        <?=  Helpers::displaySaveButtonsView($model); ?>         
     </div>
 
     <?php ActiveForm::end(); ?>

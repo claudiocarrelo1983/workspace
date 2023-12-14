@@ -3,7 +3,7 @@
    "left-menu":[
       {
          "key":"t-dashboard",
-         "title":"menu_admin_dashboard",
+         "title":"dashboard",
          "url":"../dashboard",
          "icon":"bx bx-home-circle",         
          "submenu":[
@@ -12,23 +12,23 @@
       },
       {
          "key":"t-clients",
-         "title":"menu_admin_sheddule",
+         "title":"sheddule",
          "url":"null",
          "icon":"dripicons-clock",
-         "childs" : ["/clients"],
+         "childs" : ["/sheddule"],
          "submenu":[
             {
                "key":"t-sheddule-list",
-               "title":"menu_admin_sheddule_list",
-               "url":"/sheddule",
+               "title":"sheddule_list",
+               "url":"/sheddule-list",
                "submenu":[                    
                   
                ]
             },
             {
               "key":"t-sheddule-list",
-              "title":"menu_admin_sheddule_create",
-              "url":"sheddule/create",
+              "title":"sheddule_create",
+              "url":"sheddule-list/create",
               "submenu":[                    
                  
               ]
@@ -37,14 +37,14 @@
       },  
       {
         "key":"t-clients",
-        "title":"menu_admin_clients",
+        "title":"clients",
         "url":"null",
         "icon":"dripicons-user-group",
-        "childs" : ["/clients", "admin/new-client"],
+        "childs" : ["/clients_list", "admin/new-client"],
         "submenu":[
            {
               "key":"t-clients-list",
-              "title":"menu_admin_clients_list",
+              "title":"clients_list",
               "url":"clients/",
               "submenu":[                    
                  
@@ -52,7 +52,7 @@
            },
            {
              "key":"t-new-client",
-             "title":"menu_admin_clients_add_client",
+             "title":"clients_create",
              "url":"clients/create",
              "submenu":[
                 
@@ -61,34 +61,46 @@
         ]
      },    
      {
-        "key":"t-organizer",
-        "title":"menu_admin_events",
+        "key":"t-events",
+        "title":"events",
         "url":"null",
         "icon":"bx bx bx-calendar",
         "open" : "true",
-        "childs" : ["admin/goals", "admin/todolist","admin/calendar"],
+        "childs" : [],
         "submenu":[       
            {
              "key":"t-schedule",
-             "title":"menu_admin_agenda_calendar",
-             "url":"/events",
+             "title":"events_list",
+             "url":"/events-list",
              "icon":"bx bx-world",
              "submenu":[
           
              ]
-          }
+          },
+          {
+            "key":"t-schedule",
+            "title":"events_create",
+            "url":"/events-list/create",
+            "icon":"bx bx-world",
+            "submenu":[
+         
+            ]
+         }
+
+
+          
          
         ]
      },     
      {
-        "key":"t-messages",
-        "title":"menu_admin_messages",
+        "key":"t-notifications",
+        "title":"notifications",
         "url":"null",
         "icon":"bx bx-message",
         "submenu":[
            {
-              "key":"t-messages-list",
-              "title":"menu_admin_messages_list",
+              "key":"t-notifications-list",
+              "title":"notifications_list",
               "url":"notifications-list/",
               "submenu":[
                  
@@ -96,7 +108,7 @@
            },
            {
               "key":"t-messages-subject",
-              "title":"menu_admin_messages_subject",
+              "title":"notifications_subject",
               "url":"notifications-subject/",
               "submenu":[
                  
@@ -106,47 +118,55 @@
      },  
      {
         "key":"t-services",
-        "title":"menu_admin_services",
+        "title":"services",
         "url":"null",
         "icon":"bx dripicons-blog",
         "submenu":[
            {
-              "key":"t-services",
-              "title":"menu_admin_services_list",
-              "url":"services/",
+              "key":"t-services-list",
+              "title":"services_list",
+              "url":"services-list/",
               "submenu":[
                  
               ]
            },
      
            {
-              "key":"t-todo-list",
-              "title":"menu_admin_services_category",
+              "key":"t-services-category",
+              "title":"services_category",
               "url":"services-category/",
               "submenu":[
                  
               ]
-           }       
+           },
+           {
+            "key":"t-services-packages",
+            "title":"services_packages",
+            "url":"services-packages/",
+            "submenu":[
+               
+            ]
+         }     
         ]
      },   
    
      {
         "key":"t-company",
-        "title":"menu_admin_company",
+        "title":"company",
         "url":"null",
         "icon":"bx dripicons-web",
         "submenu":[
            {
               "key":"t-company-details",
-              "title":"menu_admin_company_details",
-              "url":"company/",
+              "title":"company_details",
+              "url":"company-details/",
               "submenu":[
                  
               ]
            },
            {
               "key":"t-team",
-              "title":"menu_admin_company_team",
+              "title":"team",
               "url":"team/",
               "submenu":[
                  
@@ -154,7 +174,7 @@
            },            
            {
               "key":"t-company-locations",
-              "title":"menu_admin_company_locations",
+              "title":"company_locations",
               "url":"company-locations/",
               "submenu":[
                  
@@ -162,16 +182,16 @@
            },
                  
            {
-              "key":"t-mywebpage",
-              "title":"menu_admin_settings_webpage",
-              "url":"webadmin/",
+              "key":"t-page-appearance",
+              "title":"page_appearance",
+              "url":"page-appearance/",
               "submenu":[
                  
               ]
            },
            {
-               "key":"t-manteinance_mode",
-               "title":"menu_admin_maintenance_mode",
+               "key":"t-manteinance-mode",
+               "title":"manteinance_mode",
                "url":"manteinance-mode/",
                "submenu":[
                   
@@ -181,56 +201,63 @@
         ]
      },
      {
-        "key":"t-campaign",
-        "title":"menu_admin_campaign",
+        "key":"t-messages",
+        "title":"messages",
         "url":"null",
         "icon":"bx dripicons-rocket",
         "submenu":[
         
            {
-              "key":"t-webpage",
-              "title":"menu_admin_campaign_sms",
+              "key":"t-sms",
+              "title":"sms",
               "url":"sms/",
               "submenu":[
                  
               ]
-           },            
-         
-           {
-              "key":"t-newsletter",
-              "title":"menu_admin_campaign_newsletter",
-              "url":"newsletter/",
-              "submenu":[
-                 
-              ]
-           }             
+           },           
+            {
+               "key":"t-whatsapp",
+               "title":"whatsapp",
+               "url":"whatsapp/",
+               "submenu":[
+                  
+               ]
+            },   
+            {
+               "key":"t-messages-template",
+               "title":"message_templates",
+               "url":"message-templates/",
+               "submenu":[
+                  
+               ]
+            }             
         ]
      },
      {
-        "key":"t-settings",
-        "title":"menu_admin_settings",
+        "key":"t-configurations",
+        "title":"configurations",
         "url":"null",
         "icon":"bx bx-cog",
         "submenu":[
            {
               "key":"t-profile",
-              "title":"menu_admin_settings_profile",
+              "title":"profile",
               "url":"profile/",
               "submenu":[
                  
               ]
            },    
            {
-              "key":"t-configurations",
-              "title":"menu_admin_settings_definitions",
+              "key":"t-definitions",
+              "title":"definitions",
               "url":"definitions/",
               "submenu":[
                  
               ]
            }, 
            {
-              "key":"t-faqs",
-              "title":"menu_faqs",
+              "key":"t-faqs-admin",
+              "title":"faqs_admin",
               "url":"faqs-admin/",
               "submenu":[
                  

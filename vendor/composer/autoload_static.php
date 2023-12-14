@@ -9,24 +9,25 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         'e3b2795a8a512b6083af088fb53afe6c' => __DIR__ . '/..' . '/codeception/codeception/functions.php',
         '27592325262b385204a263c2ab632d6e' => __DIR__ . '/..' . '/kreait/clock/src/Clock.php',
         '256c1545158fc915c75e51a931bdba60' => __DIR__ . '/..' . '/lcobucci/jwt/compat/class-aliases.php',
         '0d273777b2b0d96e49fb3d800c6b0e81' => __DIR__ . '/..' . '/lcobucci/jwt/compat/json-exception-polyfill.php',
         'd6b246ac924292702635bb2349f4a64b' => __DIR__ . '/..' . '/lcobucci/jwt/compat/lcobucci-clock-polyfill.php',
-        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         'f7c6080b46f9fe41a46a657439674576' => __DIR__ . '/..' . '/kreait/firebase-php/src/Firebase.php',
@@ -90,6 +91,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'k' => 
         array (
             'kartik\\select2\\' => 15,
+            'kartik\\icons\\' => 13,
             'kartik\\editors\\' => 15,
             'kartik\\datetime\\' => 16,
             'kartik\\daterange\\' => 17,
@@ -119,10 +121,6 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'd' => 
         array (
             'dpodium\\yii2\\Twilio\\' => 20,
-            'dosamigos\\tinymce\\' => 18,
-            'dosamigos\\datetimepicker\\' => 25,
-            'dosamigos\\datepicker\\' => 21,
-            'dosamigos\\chartjs\\' => 18,
         ),
         'c' => 
         array (
@@ -142,6 +140,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
             'Symfony\\Polyfill\\Php72\\' => 23,
@@ -155,6 +154,8 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\String\\' => 25,
+            'Symfony\\Component\\Mime\\' => 23,
+            'Symfony\\Component\\Mailer\\' => 25,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\DomCrawler\\' => 29,
@@ -169,6 +170,8 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             'Rize\\' => 5,
             'Riverline\\MultiPartParser\\' => 26,
+            'Ramsey\\Uuid\\' => 12,
+            'Ramsey\\Collection\\' => 18,
         ),
         'P' => 
         array (
@@ -188,6 +191,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'MyCLabs\\Enum\\' => 13,
             'Monolog\\' => 8,
             'Matrix\\' => 7,
+            'MailchimpMarketing\\' => 19,
         ),
         'L' => 
         array (
@@ -217,7 +221,6 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'GuzzleHttp\\' => 11,
             'Google\\Cloud\\Storage\\' => 21,
             'Google\\Cloud\\Core\\' => 18,
-            'Google\\CRC32\\' => 13,
             'Google\\Auth\\' => 12,
             'Giggsey\\Locale\\' => 15,
         ),
@@ -245,6 +248,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'Codeception\\PHPUnit\\' => 20,
             'Codeception\\Extension\\' => 22,
             'Codeception\\' => 12,
+        ),
+        'B' => 
+        array (
+            'Brick\\Math\\' => 11,
         ),
         'A' => 
         array (
@@ -361,6 +368,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
         ),
+        'kartik\\icons\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
+        ),
         'kartik\\editors\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-editors/src',
@@ -417,22 +428,6 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/dpodium/yii2-twilio/components',
         ),
-        'dosamigos\\tinymce\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-tinymce-widget/src',
-        ),
-        'dosamigos\\datetimepicker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-date-time-picker-widget/src',
-        ),
-        'dosamigos\\datepicker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-date-picker-widget/src',
-        ),
-        'dosamigos\\chartjs\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-chartjs-widget/src',
-        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
@@ -448,6 +443,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Twilio\\' => 
         array (
             0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'Symfony\\Polyfill\\Php81\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -501,6 +500,14 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
+        'Symfony\\Component\\Mime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/mime',
+        ),
+        'Symfony\\Component\\Mailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/mailer',
+        ),
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
@@ -544,6 +551,14 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Riverline\\MultiPartParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/riverline/multipart-parser/src',
+        ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Ramsey\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -597,6 +612,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'MailchimpMarketing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mailchimp/marketing/lib',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -653,10 +672,6 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Google\\Cloud\\Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-core/src',
-        ),
-        'Google\\CRC32\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/crc32/src',
         ),
         'Google\\Auth\\' => 
         array (
@@ -720,6 +735,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             1 => __DIR__ . '/..' . '/codeception/stub/src',
             2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
         'Adcuz\\FatSecret\\' => 
         array (
             0 => __DIR__ . '/..' . '/adcuz/fat-secret-php/src',
@@ -766,6 +785,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'Codeception\\Exception\\ExternalUrlException' => __DIR__ . '/..' . '/codeception/lib-innerbrowser/src/Codeception/Exception/ExternalUrlException.php',
         'Codeception\\Lib\\Connector\\Yii2' => __DIR__ . '/..' . '/codeception/module-yii2/src/Codeception/Lib/Connector/Yii2.php',
         'Codeception\\Lib\\Connector\\Yii2\\ConnectionWatcher' => __DIR__ . '/..' . '/codeception/module-yii2/src/Codeception/Lib/Connector/Yii2/ConnectionWatcher.php',
@@ -1253,6 +1273,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
+        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
