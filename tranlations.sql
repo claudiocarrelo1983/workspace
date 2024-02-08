@@ -1,18 +1,7 @@
-DELETE FROM `translations`; 
- WHERE page nOT IN (
-    'recipes_text', 
-    'subjects_text',
-    'faqs_text',
-    'pricing_specs_text',
-    'blogs_text', 
-    'blogs_category_text',
-    'recipes_category_text',
-    'team_text',
-    'texts_text'
-);
+
 
 DELETE FROM `user` WHERE `username` in ('tw_ccarrelo');
-INSERT INTO `user` (`guid`, `username`, `voucher`, `voucher_parent`, `first_name`, `last_name`, `full_name`, `gender`, `title`, `page_code_title`, `page_code_text`, `title_pt`, `text_pt`, `title_en`, `text_en`, `job_title`, `path`, `image`, `dob`, `company_dob`, `company_code_parent`, `company_code_url`, `company_code`, `company`, `service`, `starting_date`, `payment_month_fee`, `payment_year_fee`, `role`, `level`, `sublevel`, `status`, `language`, `email`, `type`, `summary`, `description`, `adress_line_1`, `adress_line_2`, `city`, `postcode`, `location_code`, `location`, `country`, `nif`, `logo`, `sheddule_array`, `time_window`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `code`, `terms_and_conditions`, `gdpr`, `privacy`, `newsletter`, `auth_key`, `password_hash`, `password_reset_token`, `created_at`, `updated_at`, `subscription`, `subscription_startingdate`, `color`, `order`, `active`, `created_date`, `verification_token`) VALUES ('A247E032-99D3-46CD-A941-36145D49BC012', 'tw_ccarrelo', 'null', 'null', 'Claudio', 'Carrelo', 'Claudio Carrelo', 'men', 'mr', 'team_title_2', 'team_description_2', NULL, NULL, NULL, NULL, 'Barbeiro', NULL, NULL, NULL, NULL, NULL, 'c20231025112035791', 'c20231025112035791', 'Bubu Fade - Barbeiro de homens', NULL, NULL, NULL, NULL, NULL, 'superadmin', NULL, 10, NULL, 'claudio@gmai.com', NULL, NULL, NULL, 'Rua Rio Douro nº42', 'Nº43', NULL, NULL, 'clc20231025112035791', NULL, 'PT', '224076736', NULL, '{"monday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"tuesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"wednesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"thursday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"friday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"saturday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"sunday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"true"}}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '967235820', NULL, 1, NULL, 1, 1, 'A2jdP_Cc1eeMhM2ms4z7rSMmwALkzX6B', '$2y$13$7dSt60aKEvQOEZk1KYVFduExkU0LS4.SdR5GVblkXgDu/4IEFLgwe', NULL, 1698229236, 1698229236, NULL, NULL, NULL, NULL, 1, '2023-10-25 11:54:42', '1WXfTisnfnqvQAqcp-0yyG-oGA1Yj6lo_1698229236');
+INSERT INTO `user` (`guid`, `username`, `first_name`, `last_name`, `full_name`, `gender`, `title`, `page_code_title`, `page_code_text`, `title_pt`, `text_pt`, `title_en`, `text_en`, `job_title`, `path`, `image`, `dob`, `company_dob`, `company_code_parent`, `company_code_url`, `company_code`, `company`, `service`, `starting_date`, `payment_month_fee`, `payment_year_fee`, `role`, `level`, `sublevel`, `status`, `language`, `email`, `type`, `summary`, `description`, `adress_line_1`, `adress_line_2`, `city`, `postcode`, `location_code`, `location`, `country`, `nif`, `logo`, `sheddule_array`, `time_window`, `website`, `facebook`, `pinterest`, `instagram`, `twitter`, `tiktok`, `linkedin`, `youtube`, `contact_number`, `code`, `terms_and_conditions`, `gdpr`, `privacy`, `newsletter`, `auth_key`, `password_hash`, `password_reset_token`, `created_at`, `updated_at`, `subscription`, `subscription_startingdate`, `color`, `order`, `active`, `created_date`, `verification_token`) VALUES ('A247E032-99D3-46CD-A941-36145D49BC012', 'tw_ccarrelo',  'Claudio', 'Carrelo', 'Claudio Carrelo', 'men', 'mr', 'team_title_2', 'team_description_2', NULL, NULL, NULL, NULL, 'Barbeiro', NULL, NULL, NULL, NULL, NULL, 'c20231025112035791', 'c20231025112035791', 'Bubu Fade - Barbeiro de homens', NULL, NULL, NULL, NULL, NULL, 'superadmin', NULL, 10, NULL, 'claudio@gmai.com', NULL, NULL, NULL, 'Rua Rio Douro nº42', 'Nº43', NULL, NULL, 'clc20231025112035791', NULL, 'PT', '224076736', NULL, '{"monday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"tuesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"wednesday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"thursday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"friday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"saturday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"false"},"sunday":{"start":"09:00","end":"18:00","break_start":"12:00","break_end":"13:00","closed":"true"}}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '967235820', NULL, 1, NULL, 1, 1, 'A2jdP_Cc1eeMhM2ms4z7rSMmwALkzX6B', '$2y$13$7dSt60aKEvQOEZk1KYVFduExkU0LS4.SdR5GVblkXgDu/4IEFLgwe', NULL, 1698229236, 1698229236, NULL, NULL, NULL, NULL, 1, '2023-10-25 11:54:42', '1WXfTisnfnqvQAqcp-0yyG-oGA1Yj6lo_1698229236');
 
 
 DELETE FROM `translations`; 
@@ -641,6 +630,9 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'choose_location', 'Escolha a Localização', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'choose_location', 'Choose Location', 1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'choose_services', 'Escolha o Serviço',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'choose_services', 'Choose Services', 1);
+
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'booking_new_appointment', 'Marcação', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'booking_new_appointment', 'Booking', 1);
@@ -651,6 +643,7 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'booking_complete', 'Marcação Completa', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'booking_complete', 'Booking Completed', 1);
+
 
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'company_locations', 'Localização', 1);
@@ -677,6 +670,14 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'configurations', 'Settings', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'profile', 'Perfil do User', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'profile', 'User Profile', 1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'scheduling_history', 'Histórico de Agendamento', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'scheduling_history', 'Appointment History', 1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'no_more_booking_available_for_today', 'Não há mais reservas disponíveis para este dia.', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'no_more_booking_available_for_today', 'No more bookings available for this day.', 1);
+
+
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'definitions', 'Definições', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'definitions', 'Definitions', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'faqs_admin', 'Faq´s', 1);
@@ -694,12 +695,18 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active
 
 
 
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'account', 'Minha Conta', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'account', '
+', 1);
+
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'menu_admin_my_application', 'Minha Conta', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'menu_admin_my_application', 'My Account', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'menu_admin_settings_definitions', 'Definições', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'menu_admin_settings_definitions', 'Definitions', 1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'login_logout', 'Terminar Sessão', 1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'login_logout', 'Log Out', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'login_logout', 'Logout', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'login_logout', 'Logout', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'admin_leftside', 'your_registration_url', ' URL da sua página', 1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'admin_leftside', 'your_registration_url', ' Your registration Url', 1);
 
@@ -713,7 +720,13 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'clients','Clientes',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'clients','Clients',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'team_members','Equipa',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'team_members','Team Members',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'team_members','Team',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'team_member','Profissional',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'team_member','Professional',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'team_username','Membros da Equipa',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'team_username','Team Members',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'booking_code','Referência',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'booking_code','Booking Code',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'resellers','Revendedores',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','admin_text', 'resellers','Resellers',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','admin_text', 'webpage','Página Web',1);
@@ -767,6 +780,9 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'create_events_button','Create Event',1);
 
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'book_again','Agendar Novamente',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'book_again','Book Again',1);
+
 
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'login_button','Login',1);
@@ -777,6 +793,15 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'edit_button','Editar',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'edit_button','Edit',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'missed_button','Faltou',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'missed_button','Missed',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'check_button','Compareceu',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'check_button','Attended',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'cancel_button','Cancelar',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'cancel_button','Cancel',1);
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','buttons', 'edit_button','Editar',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','buttons', 'edit_button','Edit',1);
@@ -906,7 +931,11 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','select_options', 'every_year_campaign','Todos os Anos',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','select_options', 'every_year_campaign','Every Year',1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','select_options', 'any_location','Todos os Anos',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','select_options', 'any_location','Every Year',1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','select_options', 'any_teammember','Sem Preferência',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','select_options', 'any_teammember','No Preference',1);
 
 
 
@@ -923,6 +952,9 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','select_options', 'hours','Horas',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','select_options', 'hours','Hours',1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'choose_all','Selecionar Tudo',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'choose_all','Choose All',1);
+
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'template_code','Template',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'template_code','Template',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'price','Preço',1);
@@ -933,6 +965,12 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'username','Username',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'date_of_birth','Data de Nascimento',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'date_of_birth','Date of Birth',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'location_code','Localização',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'location_code','Location',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'category_code','Categoria',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'category_code','Category',1);
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'full_name','Nome Completo',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'full_name','Full Name',1);
@@ -984,12 +1022,29 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'company_code_location','Company Location',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'service_cat','Categoria de Serviço',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'service_cat','Service Category',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'team_username','Membros da Equipa',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'team_username','Team Members',1);
+
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'client_username','Resposta',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'client_username','Answer',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'service_code','Serviço',1);
-INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'service_code','Service',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'schedule_date','Data Marcada',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'schedule_date','Scheduled Date',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'service_code','Codigo Serviço',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'service_code','Service Code',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'service_name','Serviço',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'service_name','Service',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'service','Serviço',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'service','Service',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'view_more','Veja Mais',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'view_more','View More',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'personal_details','Dados Pessoais',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'personal_details','Personal details',1);
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'details','Detalhes',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'details','Details',1);
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','table_name', 'code','Código',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','table_name', 'code','Code',1);
@@ -1136,6 +1191,10 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','placeholders', 'placeholder_dob','Data de Nascimen',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','placeholders', 'placeholder_dob','Date of Birth',1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'booking', 'your_booking', 'A Sua Reserva', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'booking', 'your_booking', 'Your Booking', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'booking', 'booking_message', 'A sua marcação foi efetuada com sucesso e foi-lhe enviado um email com a confirmação.', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'booking', 'booking_message', 'Your appointment was successful and an email was sent to you with confirmation.', 1);
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','week_days', 'monday','Segunda-feira',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','week_days', 'monday','Monday',1);
@@ -1169,6 +1228,16 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'no_permission_trial','O seu pack trial terminou.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'no_permission_trial','You ended the 30 days trial.',1);
 
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'schedule_invalid','Horário inválido.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'schedule_invalid','Invalid time',1);
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'sure_delete_appointment','Tem a certeza de que deseja eliminar este compromisso?',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'sure_delete_appointment','Are you sure you want to delete this appointment?',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','validation_message', 'cannot_cancel_timeframe','Já não é possivel cancelar, contacte o seu Profissional que lhe vai atender.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','validation_message', 'cannot_cancel_timeframe','It is no longer possible to cancel, please contact your the Professional that you have the appointment.',1);
+
 
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','manteinance', 'menu_admin_campaign_manteinance_text','O modo de manutenção é essencial quando você precisa fazer alterações em seu site sem causar interrupções para seus visitantes. Isso permite que você exiba uma mensagem amigável para informar seu público de que seu site está temporariamente indisponível, mas voltará em breve. Basta clicar no botão ligar/desligar abaixo para iniciar o processo.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','manteinance', 'menu_admin_campaign_manteinance_text','Maintenance mode is essential when you need to perform changes on your website without causing disruptions to your visitors. It allows you to display a user-friendly message to inform your audience that your website is temporarily unavailable but will be back shortly. Simply click the on/off button below to initiate the process. translate portuguese',1);
@@ -1183,7 +1252,78 @@ INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`
 
 
 
+
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','menu', 'page_booking_title'  ,'Reservas',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','menu', 'page_booking_title'  ,'Reservation',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','menu', 'page_booking_text'  ,'Faz a tua reserva geral e garante a sua vaga.',1);
 INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','menu', 'page_booking_text'  ,'Make your general reservation and guarantee your spot.',1);
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'create_booking'  ,'Criar Marcação',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'create_booking'  ,'Create Booking',1);
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'edit_booking'  ,'Editar Marcação',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'edit_booking'  ,'Edit Booking',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'cancel_booking'  ,'Cancelar Marcação',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'cancel_booking'  ,'Cancel booking',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'question_cancel'  ,'Pretende Cancelar?',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'question_cancel'  ,'Are you sure you want to cancel?',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'confirm_booking'  ,'Confirmar Marcação',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'confirm_booking'  ,'Confirm Booking',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'question_client_attended'  ,'Deseja confirmar a marcação?',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'question_client_attended'  ,'You want to confirm attendance?',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'client_missed'  ,'Marcação Perdida',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'client_missed'  ,'Missed Booking',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'question_sure_cancel'  ,'A sua marcação foi perdida?',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'question_sure_cancel'  ,'Your booking has been missed?',1);
+
+
+
+
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'menu_admin_sheddule'  ,'Gestão',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'menu_admin_sheddule'  ,'Management',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'today'  ,'Hoje',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'today'  ,'Today',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'booking', 'appointments', 'Histórico', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'booking', 'appointments', 'Appointments', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('pt', 'booking', 'booking', 'Marcações', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`, `active`) VALUES ('en', 'booking', 'booking', 'Booking', 1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'team-booking'  ,'Marcações',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'team-booking'  ,' Booking',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'team-appointments'  ,'Agenda',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'team-appointments'  ,'Appointments',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'client-profile'  ,'Perfil',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'client-profile'  ,'Profile',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'choose_another_teammember'  ,'Outro colaborador',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'choose_another_teammember'  ,'Other Professional',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'choose_another'  ,'Nova Marcação',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'choose_another'  ,'New Booking',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'morning'  ,'Manhã',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'morning'  ,'Morning',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'afternoon'  ,'Tarde',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'afternoon'  ,'Afternoon',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'night'  ,'Noite',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'night'  ,'Night',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'please_choose_a_time'  ,'Por favor escolha uma hora.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'please_choose_a_time'  ,'Please choose a time.',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'timespan_validation'  ,'A janela de tempo encontra-se fechada.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'timespan_validation'  ,'The time window has closed.',1);
+
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'occupied_error_message'  ,'{time} - A janela de tempo não está mais disponível.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'occupied_error_message'  ,'{time} - The time window is not longer available.',1);
+
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('pt','booking', 'occupied_error_message_datetime'  ,'A janela de tempo com a hora {time} e a data {date} já não encontra mais disponível.',1);
+INSERT INTO `translations` (`country_code`, `page`, `page_code`, `text`,`active`) VALUES ('en','booking', 'occupied_error_message_datetime'  ,'The time window with the time of {time} and date {date} is no longer available.',1);
+

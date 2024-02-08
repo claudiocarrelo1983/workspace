@@ -35,6 +35,7 @@ class m230719_193913_sheddule extends Migration
 
         $this->createTable('{{%sheddule}}', [
             'id' => $this->primaryKey(),   
+            'booking_code' => $this->string()->notNull(),
             'team_username' => $this->string()->notNull(),
             'client_username' => $this->string()->notNull(),      
             'company_code' => $this->string()->notNull(), 

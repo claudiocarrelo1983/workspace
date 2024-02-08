@@ -82,6 +82,8 @@ class m230620_133908_company extends Migration
             'color' => $this->string()->defaultValue('#0088CC'),          
             'template' => $this->string(),    
             'coin' => $this->string(),  
+            'cancelation_time' => $this->integer()->defaultValue(0), 
+            'timespan' => $this->integer()->defaultValue(0), 
             'opt_sms' => $this->boolean()->defaultValue(0), 
             'opt_email' => $this->boolean()->defaultValue(0),  
             'login_required' => $this->boolean()->defaultValue(0),  

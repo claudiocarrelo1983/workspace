@@ -234,6 +234,39 @@
         ]
      },
      {
+      "key":"t-vacations",
+      "title":"vacations",
+      "url":"null",
+      "icon":"icon dripicons-brightness-max",
+      "submenu":[
+      
+         {
+            "key":"t-sms",
+            "title":"sms",
+            "url":"sms/",
+            "submenu":[
+               
+            ]
+         },           
+         {
+            "key":"t-whatsapp",
+            "title":"whatsapp",
+            "url":"whatsapp/",
+            "submenu":[
+               
+            ]
+         },   
+         {
+            "key":"t-messages-template",
+            "title":"message_templates",
+            "url":"message-templates/",
+            "submenu":[
+               
+            ]
+         }             
+      ]
+   },
+     {
         "key":"t-configurations",
         "title":"configurations",
         "url":"null",

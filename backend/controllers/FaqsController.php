@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use common\models\Faqs;
 use common\models\FaqsSearch;
-use common\models\Translations;
+use common\models\GeneratorJson;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -81,7 +81,9 @@ class FaqsController extends Controller
             return $this->goHome();
         }
 
-        $model = new Faqs();
+        $model = new Faqs();               
+        $modelGeneratorjson = new GeneratorJson();
+
         $question = 'question_faqs_1';
         $answer = 'answer_faqs_1';
 
@@ -94,6 +96,7 @@ class FaqsController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                $modelGeneratorjson->generatejson();   
                 $model->saveFaqs('faqs_text',$model);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -122,7 +125,8 @@ class FaqsController extends Controller
         }
 
         $model = $this->findModel($id);
-    
+        $modelGeneratorjson = new GeneratorJson();
+
         $count = $model ::find('id')->orderBy("id desc")->where(['id' => $id])->limit(1)->one();
         $countValue = str_replace("question_faqs_", "", $count->page_code_question);
 
@@ -130,6 +134,7 @@ class FaqsController extends Controller
         $answer = 'answer_faqs_'.$countValue;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $modelGeneratorjson->generatejson(); 
             $model->updateFaqs('faqs_text',$model);
             return $this->redirect(['view', 'id' => $model->id]);
         }

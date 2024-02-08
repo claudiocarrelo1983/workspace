@@ -223,8 +223,7 @@ $bgImg = '/images/generic/header_bg-calendar.jpg';
                     </div>  
                     <div class="header-column justify-content-end ">
                         <div class="header-row ps-2 justify-content-end">
-                            <nav class="header-nav-top">	                         
-                            
+                            <nav class="header-nav-top">                         
                                 <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->company_code == $companyCode) { ?>                                
                                     <span class="white-text  text-center">                                               
                                         <span class="m-1">					
@@ -233,37 +232,58 @@ $bgImg = '/images/generic/header_bg-calendar.jpg';
                                     </span>  
                                    <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->level == 'team') { ?>   
                                         <span class="my-2 mx-1">|</span>                              
-                                        <span class="white-text  text-center">                                                     
-                                            <span class="m-1">	
+                                        <span class="white-text  text-center m-1">                                                     
                                                 <?=
                                                     Html::a(
-                                                        Yii::t('app', 'menu_admin_sheddule'),                                        
+                                                        Yii::t('app', 'account'),                                        
                                                         Url::toRoute(
                                                             [
-                                                                '/team-schedule',     
-                                                                'code' => Yii::$app->request->get('code'),
-                                                                'day' => ((empty(Yii::$app->request->get('day'))) ? '*' : Yii::$app->request->get('day')),  
-                                                                'time' => ((empty(Yii::$app->request->get('time'))) ? '*' : Yii::$app->request->get('time')),  
+                                                                '/booking',
+                                                                'code' => Yii::$app->request->get('code')
                                                             ]
-                                                        )                             
+                                                        ),
+                                                        [
+                                                            'class' => 'white-text'
+                                                        ]                              
                                                     )
-                                                ?>                                          	
-                                            </span>	
+                                                ?>                                         	
+                                        </span>                                   
+                                    <?php }else{ ?>   
+                                        <span class="my-2 mx-1">|</span>                              
+                                        <span class="white-text  text-center m-1">                                                     
+                                            <?=
+                                                Html::a(
+                                                    Yii::t('app', 'my_profile'),                                        
+                                                    Url::toRoute(
+                                                        [
+                                                            '/client-profile',
+                                                            'code' => Yii::$app->request->get('code')
+                                                        ]
+                                                    ),
+                                                    [
+                                                        'class' => 'white-text'
+                                                    ]                       
+                                                )
+                                            ?>                                         	
                                         </span> 
-                                  
-                                    <?php } ?>                            
+                                    <?php } ?>    
            
                                     <span class="my-2 mx-1">|</span>                               
                                     <?=
-                                            Html::beginForm(        
-                                                Url::toRoute(['page/logout', 'code' => $company]
+                                        Html::beginForm(        
+                                            Url::toRoute(
+                                                [
+                                                    'page/logout', 'code' => $company
+                                                ]
                                             ), 
-                                                'post', ['class' => 'form-inline'])
-                                                . Html::submitButton(
-                                                Yii::t('app', 'login_logout'),
-                                                ['class' => 'btn-link logout white-text']
-                                            )
-                                            . Html::endForm()
+                                        'post',
+                                        [
+                                            'class' => 'form-inline white-text'
+                                        ]). Html::submitButton(
+                                            Yii::t('app', 'login_logout'),
+                                            ['class' => 'logout white-text']
+                                        )
+                                        . Html::endForm()
                                     ?>  
 
                                     
@@ -336,29 +356,6 @@ $bgImg = '/images/generic/header_bg-calendar.jpg';
         </div>
     </div>
 </header>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

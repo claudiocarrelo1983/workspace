@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 
                 <?= $this->render('_form', [
                     'model' => $model, 
+                    'type' => 'edit', 
                     'dayHour' => $dayHour,  
                     'date' => $date,  
                     'inc' => $inc,    

@@ -55,18 +55,7 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
                 <?=  $form->field($model, 'page_code_question')->hiddenInput(['value'=> $question])->label(false); ?>
                 <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
              
-                <?= $form->field($model, 'answer')->widget(TinyMce::className(), [
-                    'options' => ['rows' => 6],
-                    'language' => 'es',
-                    'clientOptions' => [
-                        'plugins' => [
-                            "advlist autolink lists link charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table contextmenu paste"
-                        ],
-                        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                    ]
-                ]);?>
+                <?= $form->field($model, 'answer')->textarea(['rows' => '6']);?>
 
                 <?= $form->field($model, 'order')->textInput() ?>
 
@@ -91,18 +80,7 @@ $arrLanguages = ['en', 'pt', 'es', 'it', 'de', 'fr'];
 
                     <?= $form->field($model, 'question_'.$value['country_code'])->textInput(['maxlength' => true])->label('Question '.$value['full_title']) ?>
 
-                    <?= $form->field($model, 'answer_'.$value['country_code'])->widget(TinyMce::className(), [
-                        'options' => ['rows' => 6],
-                        'language' => 'es',
-                        'clientOptions' => [
-                            'plugins' => [
-                                "advlist autolink lists link charmap print preview anchor",
-                                "searchreplace visualblocks code fullscreen",
-                                "insertdatetime media table contextmenu paste"
-                            ],
-                            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                        ]
-                    ])->label('Answer '.$value['full_title']) ;?>
+                    <?= $form->field($model, 'answer_'.$value['country_code'])->textarea(['rows' => '6'])->label('Answer '.$value['full_title']);?>
                     
                 <?php 
                     }else{

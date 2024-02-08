@@ -13,6 +13,7 @@
 
                 <?= $this->render('_form', [
                     'model' => $model, 
+                    'type' => 'create',
                     'dayHour' => $dayHour,  
                     'date' => $date,  
                     'inc' => $inc,    

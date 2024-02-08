@@ -7,11 +7,11 @@ jQuery(function(){
       var csrfToken = jQuery(this).data('csrf');  
 
         jQuery.ajax({
-               url: url + "/index.php/site/language",
+               url: url + "/language",
                type: "post",            
                data: {lang: language, _csrf : csrfToken},
                success: function (response) {
-
+             
                 location.reload();	
        
                   // You will get response from your PHP page (what you echo or print)

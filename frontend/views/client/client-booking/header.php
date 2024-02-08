@@ -301,13 +301,13 @@ $bgImg = '../../images/generic/painting-mountain-lake-with-mountain-background.j
         <div class="header-container container " style="height: 40px;">
             <div class="header-row">
                 <a class="logo-url" href="/" data-hash="" data-hash-offset="0" data-hash-offset-lg="130"><div class="header-row">
-                        <div class="header-logo">							
+                        <div class="header-logo mt-5">							
                             <?= 
                                 Html::a(
                                     Html::img(
                                         $companyArr['path'].$companyArr['image_logo'], 
                                         //['class' => 'img-fluid border img-thumbnail mt-2 ', 'style' => 'top: 0px;  ']),  
-                                        ['class' => 'd-md-none img-fluid border img-thumbnail p-1 mt-3', 'style' => 'top: 5px;  height: 115px;']),                      
+                                        ['class' => 'd-md-none img-fluid border img-thumbnail p-1 mt-3', 'style' => 'top: 5px;  height: 150px;']),                      
                                     Url::toRoute(['/page', 'code' => $company])
                                 ) 
                             ?>   

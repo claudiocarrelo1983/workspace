@@ -11,12 +11,12 @@ $model = new GeneratorJson();
 $base_url = Helpers::getBaseUrl();
 
 switch($base_url){
-    case 'localhost:100':
+    case 'localhost':
     case 'specialcalendar.com':
         $structure = $model->getLastFileUploaded('other','calendar-menu');                   
         break;
   
-    case 'localhost':
+    case 'localhost:100':
     case 'myspecialgym.com':
         $structure = $model->getLastFileUploaded('other','public-menu');
         break;

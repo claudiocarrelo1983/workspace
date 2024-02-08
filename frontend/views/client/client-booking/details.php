@@ -20,9 +20,7 @@ $teamArr = Helpers::arrayTeam($filter);
 ?>
 
 
-<?= $this->render('@frontend/views/client/page/header', ['headerTransparent' => 1, 'model' => $model, 'companyArr' => $companyArr]); ?>
-
-<div class="py-5"></div>  
+<?= $this->render('@frontend/views/client/client-booking/header', ['headerTransparent' => 1, 'model' => $model, 'companyArr' => $companyArr]); ?>
 
 <div id="examples" class="container  pb-5">
 

@@ -398,6 +398,11 @@ class TeamController extends Controller
             $model->sheddule_array = json_encode($arrWeek);
 
             */
+
+            $this->changeCompanyLocation($model);
+            print"<pre>";
+            print_r($model->location_code);
+            die();
        
             if($model->save()){             
                 //$model->updateTeam('team', $model);
@@ -435,6 +440,31 @@ class TeamController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    protected function changeCompanyLocation($model)
+    {            
+        $query = new Query;      
+
+        $blogArr = $query->select('*')
+        ->from('services')    
+        ->all();
+
+        print"<pre>";
+        print_r($blogArr);
+        die();
+
+        
+    }
+
+    protected function findModelCompanyLocation($locationCode)
+    {
+        if (($model = User::findOne(['location_code' => $locationCode])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
 
     /**
      * Finds the Team model based on its primary key value.

@@ -25,7 +25,7 @@ $myData = '';
 
 <?= $this->render('/client/page/banner',['code' => $code, 'companyArr' => $companyArr2]); ?>
 
-<div role="main" class="main pb-4">
+<div role="main" class="main pb-5">
     <div class="container">  
         <div class="row justify-content-center">      
             <div class="col-md-10 col-lg-10">           
@@ -136,3 +136,4 @@ $myData = '';
         </div>
     </div>
 </div>
+<div class="my-5"></div>

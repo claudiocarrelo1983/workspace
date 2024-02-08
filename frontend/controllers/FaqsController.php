@@ -22,11 +22,15 @@ class FaqsController extends Controller
     public function actionIndex()
     {
 
+        $this->layout = 'public';
+       
+        $modelGeneratorjson = new GeneratorJson(); 
         $modelSubscriber = new Subscribers();  
-
+ 
         if ($this->request->isPost && $modelSubscriber->load($this->request->post()) ) {
     
-            if($modelSubscriber->validate() && $modelSubscriber->save()){             
+            if($modelSubscriber->validate() && $modelSubscriber->save()){         
+                
                 $this->refresh();
             } else{             
                 Yii::$app->getSession()->setFlash('display', 'display: block; padding-right: 17px;');
@@ -35,9 +39,7 @@ class FaqsController extends Controller
         }
 
 
-        $this->layout = 'public';
-       
-        $modelGeneratorjson = new GeneratorJson(); 
+   
         $configurations = $modelGeneratorjson->getLastFileUploaded('configurations');
 
         $maintenance = (isset($configurations['maintenance']) ? $configurations['maintenance'] : 0);

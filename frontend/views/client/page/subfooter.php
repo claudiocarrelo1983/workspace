@@ -13,8 +13,8 @@ use yii\helpers\Html;
             <?= (isset($companyArr['company_name']) ? $companyArr['company_name'] : '') ?>
         </h2>
         <div class="overflow-hidden mb-5">
-            <p class="lead mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200">
-                <?= ((empty($companyArr['page_code_subtitle'])) ? '' : Yii::t('app',$companyArr['page_code_subtitle'])) ?>                            
+            <p class="lead mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200">         
+                <?= ((empty($companyArr['subtitle_pt']) && empty($companyArr['subtitle_en'])) ? '' : Yii::t('app',$companyArr['page_code_subtitle'])) ?>                                 
             </p>
         </div>
         <?php

@@ -54,12 +54,12 @@ class GeneratorJson extends \yii\db\ActiveRecord
                      */    
                     case 'translations':        
                       
-                        if(method_exists(__CLASS__, $method)){                        
+                        if(method_exists(__CLASS__, $method)){                             
                             GeneratorJson::$method($table['TABLE_NAME'],  $columns);            
                         }else{
                             GeneratorJson::updateTablesGeneric($table['TABLE_NAME']);  
                         }   
-                        GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME']); 
+                        //GeneratorJson::updateTranslationsGeneric($table['TABLE_NAME']); 
                     break;                 
               
                 }             
@@ -248,8 +248,8 @@ class GeneratorJson extends \yii\db\ActiveRecord
         $blogArr = $blogQuery->select(['t.country_code', 't.page_code', 't.text'])
             ->from(['t' => 'translations'])
             ->innerJoin(['c' => 'countries'], 'c.country_code = t.country_code')
-            ->all();          
-
+            ->all();   
+  
         GeneratorJson::saveJson($blogArr, $table);
     }
 
@@ -709,8 +709,11 @@ class GeneratorJson extends \yii\db\ActiveRecord
 
     public static function getTranslations($language){
         
-        $model = new GeneratorJson(); 
+        $model = new GeneratorJson();    
+        
         $companyCode = Helpers::findCompanyCode();
+        //$companyCode = Helpers::findCompanyCodeByUrl();
+
         $translations = $model->getLastFileUploaded('translations'); 
 
         $resultTranslations = array(); 

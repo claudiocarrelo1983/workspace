@@ -66,10 +66,10 @@ class Services extends \yii\db\ActiveRecord
 
         return [
             [$arrRequired, 'required'],
-            [['text',  'text_pt', 'text_en'], 'string'],
+            [['location_code','username','text',  'text_pt', 'text_en'], 'string'],
             [['price', 'price_range'], 'number', 'numberPattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
             [['order', 'active'], 'integer'],
-            [['created_date','time'], 'safe'],
+            [['usernameArr','locationCodeArr','created_date','time'], 'safe'],
             [['username', 'company_code','category_code', 'page_code_title', 'page_code_text', 'title', 'title_pt', 'title_en'], 'string', 'max' => 255],
             [['service_code'], 'string', 'max' => 50],
             [['page_code_title'], 'unique'],

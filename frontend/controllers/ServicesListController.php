@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use Yii;
 use common\Helpers\Helpers;
 use common\models\GeneratorJson;
+use yii\db\Query;
 
 /**
  * ServicesController implements the CRUD actions for Services model.
@@ -111,33 +112,34 @@ class ServicesListController extends Controller
        
             if ($model->load($this->request->post())) {
 
-                $model->username = '';
-                $model->location_code = '';
+                $model->username = '';      
+                $model->location_code = '';           
               
                 if (!empty($_POST['Services']['usernameArr'])) {
         
                     $model->username = implode(',', $_POST['Services']['usernameArr']);
-                }    
+                }     
                 
-                if (!empty($_POST['Services']['locationCodeArr'])) {    
+                if (!empty($_POST['Services']['locationCodeArr'])) {
+        
                     $model->location_code = implode(',', $_POST['Services']['locationCodeArr']);
-                }  
-
-                $title = 'service_title_1';     
-                $text = 'service_text_1';      
+                }    
+            
+                $title = 'st_1';     
+                $text = 'st_1';      
             
                 $count = $model::find('id')->orderBy("id desc")->limit(1)->one();
         
                if(!empty($count->id)){
-                    $title = 'service_title_'.bcadd($count->id, 1);   
-                    $text = 'service_text_'.bcadd($count->id, 1);              
+                    $title = 'st_'.bcadd($count->id, 1);   
+                    $text = 'st_'.bcadd($count->id, 1);              
                 }
               
                 $model->company_code = Yii::$app->user->identity->company_code;
                 $model->service_code = 's'.Helpers::generateRandowHumber(); 
                 $model->page_code_title = $title;    
-                $model->page_code_text = $text;     
-
+                $model->page_code_text = $text;                   
+             
                 if($model->save()){
                     $model->updateServices('services', $model);
                     GeneratorJson::generatejson();                  
@@ -182,31 +184,87 @@ class ServicesListController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())){
 
-            $model->username = '';
-            $model->location_code = '';
+            $model->username = '';         
 
             if (!empty($_POST['Services']['usernameArr'])) {    
-                $model->username = implode(',', $_POST['Services']['usernameArr']);
-            }        
+                $model->username = '|'.implode('|', $_POST['Services']['usernameArr']).'|';
+            }     
+            
+            $model->location_code = '';         
 
             if (!empty($_POST['Services']['locationCodeArr'])) {    
-                $model->location_code = implode(',', $_POST['Services']['locationCodeArr']);
-            }   
-      
+                $model->location_code = '|'.implode('|', $_POST['Services']['locationCodeArr']).'|';
+            }       
+     
+
             if($model->save()) {
-                $model->updateServices('services', $model);
-                GeneratorJson::generatejson();   
+
+        
+                //$model->updateServices('services', $model);
+                //GeneratorJson::generatejson();   
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-        }
+        }       
        
-        $model->usernameArr = explode(',', $model->username);
-        $model->locationCodeArr = explode(',', $model->location_code);
-
-
+        $model->usernameArr = explode('|', $model->username);  
+        $model->locationCodeArr = explode('|', $model->location_code);  
+      
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    
+    public function actionGetProfessionals()
+    {     
+
+        $resultArr = ['active' => 1];
+        $myJSON = json_encode($resultArr);
+
+        echo $myJSON;
+        die();
+     
+
+        $query = new Query;
+
+        $resultArr = [];        
+         
+        $service = (isset($_POST['service'])? $_POST['service'] : '*');   
+
+        $serviceArr = $query->select([
+            'username',
+            'service_code', 
+            'page_code_title',     
+        ])
+        ->from('services')    
+        ->where(['service_code'  => $service])
+        ->one();  
+
+        $serviceArr = ((isset($serviceArr['username'])) ? explode('|',$serviceArr['username']) : []);
+        
+        $teamMembers = [];
+
+        foreach($serviceArr as $username){
+            if(!empty($username)){
+                $teamArr = $query->select('*')
+                ->from('user')    
+                ->where(['guid'  => $username])
+                ->one();
+    
+                $teamMembers[$teamArr['guid']] = $teamArr['first_name'].' '.$teamArr['last_name'];
+            }
+         
+        }   
+    
+        $teamMembers = array_merge(['*' => Yii::t('app', 'any_teammember')],  $teamMembers);
+        $resultArr = [
+            'team' => $teamMembers
+        ];
+
+        $myJSON = json_encode($resultArr);
+
+        echo $myJSON;
+
     }
 
     /**

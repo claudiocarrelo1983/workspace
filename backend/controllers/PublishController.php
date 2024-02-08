@@ -21,7 +21,7 @@ class PublishController extends \yii\web\Controller
             $modelGenerateJson = new GeneratorJson();  
 
             $modelGenerateJson->load($this->request->post());
-
+          
             switch ($model->type) {
                 case 'json':
                     $modelGenerateJson->generatejson();

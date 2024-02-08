@@ -26,6 +26,10 @@ class ClientProfileController extends Controller
        
     public function actionIndex()
     {        
+        if(Yii::$app->user->isGuest == true){     
+            return $this->goHome();
+        } 
+        
         $this->layout = 'registration';
 
         if (Yii::$app->user->isGuest) {

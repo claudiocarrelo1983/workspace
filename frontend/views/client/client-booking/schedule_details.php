@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 $query = new Query;
 
 $filter = [];
+$closed = 0;
 $arrSheddule = [];
 $days = array('sunday', 'monday', 'tuesday', 'wednesday','thursday','friday', 'saturday');
 
@@ -20,6 +21,13 @@ $date = (Yii::$app->request->get('day') == '*') ? strtotime(date('Y-m-d')) : Yii
 
 $arrTeam = Helpers::arrayTeam($filter);
 
+/*
+print"<pre>";
+print_r($filter);
+print_r($arrTeam);
+die();
+
+*/
 
 foreach($arrTeam as $member){
 
@@ -27,6 +35,7 @@ foreach($arrTeam as $member){
     $arrWeek = ((is_array(json_decode($member['sheddule_array'],true))) ? json_decode($member['sheddule_array'], true) : []);
 
     $resultWeekDays = $arrWeek[$days[date('w', $day)]];
+
     $closed = $resultWeekDays['closed'];
     $start = strtotime($resultWeekDays['start']); //9:00
     $end = strtotime($resultWeekDays['end']); //18:00
@@ -91,17 +100,20 @@ foreach($arrTeam as $member){
 
             $hour = date('H', $hourKey);
 
-            if($hour <= 12){  
-                $userShedduleArr['morning'][$hourKey] = $arrValues;
-            }
+            if(date('Y-m-d H:i',$hourKey) > date('Y-m-d H:i')){
 
-            if($hour > 12 && $hour <= 18 ){    
-                $userShedduleArr['afternoon'][$hourKey] = $arrValues;
-            }
+                if($hour <= 12){  
+                    $userShedduleArr['morning'][$hourKey] = $arrValues;
+                }
 
-            if($hour > 18 && $hour <= 24){  
-                $userShedduleArr['night'][] = $arrValues;
-            }  
+                if($hour > 12 && $hour <= 18 ){    
+                    $userShedduleArr['afternoon'][$hourKey] = $arrValues;
+                }
+
+                if($hour > 18 && $hour <= 24){  
+                    $userShedduleArr['night'][] = $arrValues;
+                }  
+            }
         }
     }     
 
@@ -121,6 +133,17 @@ foreach($arrTeam as $member){
         </h4> 
 
     <?php }else{ ?>   
+
+        <?php if(Yii::$app->session->hasFlash('error')):?>
+            <div class="col-lg-12" >
+                <div class="alert alert-danger alert-dismissible mt-5" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>
+                        <?= Yii::$app->session->getFlash('error')  ?>
+                    </strong> 
+                </div> 
+            </div> 
+        <?php endif; ?>
         
         <?php  foreach($userShedduleArr as $keyDay => $arrServices): ?> 
 
@@ -133,8 +156,8 @@ foreach($arrTeam as $member){
                 <?php  foreach($arrServices as $dayHour => $values): ?>
                     
                     <div class="col-lg-6" >
-                        <?php                     
-    
+                        <?php                    
+
                             echo $form->field($model, 'time', 
                                     ['template' => '{input}']
                                 )->radio(
@@ -152,68 +175,16 @@ foreach($arrTeam as $member){
                         <label type="button" id="choice-schedule-<?= $dayHour ?>" for="choice-schedule-<?= $dayHour ?>" class="btn w-100 btn-modern btn-lg btn-success rounded-0 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#client-create-09:00" onclick="checkScheduleTick(this)">
                             <?= date('H:i',$dayHour) ?>
                         </label>
-                    </div>
-                     
+                    </div>                     
             
-                    <?php  if(isset($value['canceled']) && $values['canceled'] == 0){ 
+                <?php 
 
-                          /*
+                    $inc++;        
+        
+                    $keyDay++;
 
-                        $this->render('@frontend/views/client/client-booking/modals/schedule_modal_create', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-
-                        ]); 
-                                        
-
-                      
-                        //view
-                        $this->render('@frontend/views/client/client-booking/schedule_modal_view', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-                        
-                        ]); 
-
-                        //edit                      
-                        $this->render('@frontend/views/client/client-booking/schedule_modal_edit', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-                        
-                        ]); 
-                        //cancel  
-                        $this->render('@frontend/views/client/client-booking/schedule_modal_cancel', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-                        
-                        ]); 
-
-                        $this->render('@frontend/views/client/client-booking/schedule_modal_confirm', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-
-                        ]); 
-            
-                        */
-
-                    
-
-                    }else{  
-                        /*
-                        $this->render('@frontend/views/client/client-booking/schedule_modal_info', 
-                        [
-                            'modelShedduleSearch' => $model,                          
-
-                        ]);   
-                        */    
-                    }  
-
-                $inc++;        
-     
-                $keyDay++;
-
-                
-                endforeach;       
-            ?>
+                    endforeach;       
+                ?>
              </div>
         </div>
     <?php

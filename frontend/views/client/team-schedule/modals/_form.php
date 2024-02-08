@@ -32,21 +32,35 @@ use kartik\date\DatePicker;
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-lg-4  text-left">
-                <?= $form->field($model, 'nif')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app','nif')) ?> 
+            <div class="form-group col-lg-6  text-left">
+                <?= $form->field($model, 'team_username')->dropDownList(
+                        Helpers::dropdownTeam(),
+                        [
+                            'id' => 'select-username-'.$model->team_username,
+                            'class' => 'form-select form-control h-auto py-2',
+                            'prompt'=> Yii::t('app', 'select_team'),
+                            'data-type' => $type,
+                            'data-inc' => $inc,
+                            'onChange' => 'teamBookingsGetUserServices(this)'  
+                        ]            
+                    )->label(Yii::t('app','team_username')) ; ; 
+                ?> 
             </div>
-            <div class="form-group col-lg-8  text-left">
-                <?= $form->field($model, 'service_code')->dropdownList(
-                    Helpers::dropdownServices(),
-                    ['class' => 'form-select form-control h-auto py-2','prompt'=>'Select Service'])->label(Yii::t('app','service_code')) ?>
-            </div>
+            <div class="form-group col-lg-6 text-left">
+                <?= $form->field($model, 'service_code')->dropDownList(
+                        Helpers::dropdownServices(),
+                        [
+                            'id' => 'select-service-'.$type.'-'.$inc,
+                            'class' => 'form-select form-control h-auto py-2',
+                            'prompt'=> Yii::t('app', 'select_services')
+                        ]                 
+                    )->label(Yii::t('app','service_code')) ; 
+                ?> 
+            </div>         
         </div>  
         <div class="row">
-            <div class="form-group col-lg-4 text-left">
-                <?= $form->field($model, 'team_username')->dropdownList(
-                    Helpers::dropdownTeam(),
-                    ['class' => 'form-select form-control h-auto py-2','prompt'=> Yii::t('app','select_time')]) 
-                ?>
+            <div class="form-group col-lg-4  text-left">
+                <?= $form->field($model, 'nif')->textInput(['class' => 'form-control text-3 h-auto py-2','maxlength' => true])->label(Yii::t('app','nif')) ?> 
             </div>
             <div class="form-group col-lg-8  text-left">
                 <label class="control-label" for="sheddule-service_cat">

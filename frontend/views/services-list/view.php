@@ -21,13 +21,25 @@ use common\Helpers\Helpers;
  
 
     <?= DetailView::widget([
-        'model' => $model,
+        'model' => $model,  
         'attributes' => [
-            'id',
-            'location_code',
-            'username',
+            'id', 
+            [
+                'attribute'=>'active',    
+                'label' => Yii::t('app','location_code'),    
+                'value' =>  Helpers::getCompanyLocationName($model->location_code)  
+            ],
+            [
+                'attribute'=>'active',    
+                'label' => 'username',    
+                'value' =>  Helpers::getUsersFullName($model->username)  
+            ], 
             'service_code',
-            'category_code',     
+            [
+                'attribute'=>'active',    
+                'label' => 'category_code',    
+                'value' =>  Helpers::getServiceCatName($model->category_code)  
+            ],
             'title',
             'text:ntext',
             'subtitle:ntext',
@@ -37,8 +49,8 @@ use common\Helpers\Helpers;
             'text_en:ntext',
             'price',
             'price_range',
-            'order',
-            'active',
+            'order',        
+            'active', 
             'created_date',
         ],
     ]) ?>

@@ -14,13 +14,14 @@ $model = new GeneratorJson();
 
 switch($base_url){
     case 'localhost:100':
-    case 'specialcalendar.com':
-        $structure = $model->getLastFileUploaded('other','admin-menu-calendar-'.$type);                   
+    case 'myspecialgym.com':
+        $structure = $model->getLastFileUploaded('other','admin-menu-'.$type);
          break;
   
     case 'localhost':
-    case 'myspecialgym.com':
-        $structure = $model->getLastFileUploaded('other','admin-menu-'.$type);
+    case 'specialcalendar.com':
+        $structure = $model->getLastFileUploaded('other','admin-menu-calendar-'.$type);  
+
         break;
     default:
         $structure = $model->getLastFileUploaded('other','admin-menu-calendar-admin');

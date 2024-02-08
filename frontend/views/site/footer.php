@@ -18,26 +18,27 @@ $linkedin = '';
 $instagram = '';
 
 switch($base_url){
-    case 'localhost:100':
-    case 'specialcalendar.com':
+    case 'localhost':
+	case 'specialcalendar.com':
         $menu = $model->getLastFileUploaded('other','calendar-menu');     
 		$facebook = 'https://www.facebook.com/specialcalendar2022';
 		$linkedin = 'https://www.linkedin.com/company/specialcalendar';
 		$instagram = 'https://www.instagram.com/specialcalendar/';                 
         break;
   
-    case 'localhost':
-    case 'myspecialgym.com':
+    case 'localhost:100':
+	case 'myspecialgym.com':
+
         $menu = $model->getLastFileUploaded('other','public-menu');
 		$facebook = 'https://www.facebook.com/myspecialgym2022';
 		$linkedin = 'https://www.linkedin.com/company/myspecialgym';
 		$instagram = 'https://www.instagram.com/myspecialgym/';  
         break;
     default:
-        $menu = $model->getLastFileUploaded('other','public-menu');
-		$facebook = '';
-		$linkedin = '';
-		$instagram = '';  
+		$menu = $model->getLastFileUploaded('other','calendar-menu');     
+		$facebook = 'https://www.facebook.com/specialcalendar2022';
+		$linkedin = 'https://www.linkedin.com/company/specialcalendar';
+		$instagram = 'https://www.instagram.com/specialcalendar/';   
     break;
 }   
 
@@ -63,6 +64,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 						<span class="d-block font-weight-normal line-height-1 text-color-light"><?= Yii::t('app', 'footer_subcategory_contact_info_working_days') ?></span>
 						<?= Yii::t('app', 'footer_subcategory_contact_info_schedule') ?> 
 					</li>
+					<!--
 					<li class="pb-1 mb-2">
 						<ul class="social-icons social-icons-big social-icons-dark-2">
 							<li class="social-icons-facebook"><a href="<?= $facebook  ?>" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
@@ -71,6 +73,7 @@ $structure = $model->getLastFileUploaded('other','footer');
 							
 						</ul>
 					</li>
+-->
 				</ul>			
 			</div>
 			<div class="col-md-6 col-lg-3 mb-5 mb-lg-0 align-items-center">

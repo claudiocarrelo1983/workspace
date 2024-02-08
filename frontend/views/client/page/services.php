@@ -8,8 +8,8 @@ $arrServices = Helpers::getServicesArr();
 if(count($arrServices) > 0){
 
 ?>
-  
-<section class="section section-height-4 section-with-shape-divider border-0 mt-5  lazyloaded" data-bg-src="img/parallax/parallax-2.jpg" style="background-image: url(&quot;img/parallax/parallax-2.jpg&quot;);">
+
+<section class="section section-height-4 section-with-shape-divider border-0 mt-5  lazyloaded" id="services" data-bg-src="img/parallax/parallax-2.jpg" style="background-image: url(&quot;img/parallax/parallax-2.jpg&quot;);">
     <div class="shape-divider" style="height: 385px;">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2000 385" preserveAspectRatio="none">
             <circle fill="#F7F7F7" opacity="0.2" cx="57" cy="181" r="161"></circle>

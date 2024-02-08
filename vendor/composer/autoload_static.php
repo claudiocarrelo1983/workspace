@@ -30,6 +30,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'd6b246ac924292702635bb2349f4a64b' => __DIR__ . '/..' . '/lcobucci/jwt/compat/lcobucci-clock-polyfill.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
         'f7c6080b46f9fe41a46a657439674576' => __DIR__ . '/..' . '/kreait/firebase-php/src/Firebase.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -63,6 +64,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         't' => 
         array (
+            'tpmanc\\imagick\\' => 15,
             'talma\\' => 6,
         ),
         's' => 
@@ -132,6 +134,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         ),
         'Z' => 
         array (
+            'Zxing\\' => 6,
             'ZipStream\\' => 10,
         ),
         'T' => 
@@ -165,6 +168,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'Superbalist\\Flysystem\\GoogleStorage\\' => 36,
             'StellaMaris\\Clock\\' => 18,
             'Spipu\\Html2Pdf\\' => 15,
+            'SimpleSoftwareIO\\QrCode\\' => 24,
         ),
         'R' => 
         array (
@@ -192,6 +196,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'Monolog\\' => 8,
             'Matrix\\' => 7,
             'MailchimpMarketing\\' => 19,
+            'MabeEnum\\' => 9,
         ),
         'L' => 
         array (
@@ -241,6 +246,8 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
             'DeepCopy\\' => 9,
+            'Da\\QrCode\\' => 10,
+            'DASPRiD\\Enum\\' => 13,
         ),
         'C' => 
         array (
@@ -252,6 +259,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BaconQrCode\\' => 12,
         ),
         'A' => 
         array (
@@ -327,6 +335,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'wbraganca\\dynamicform\\' => 
         array (
             0 => __DIR__ . '/..' . '/wbraganca/yii2-dynamicform/src',
+        ),
+        'tpmanc\\imagick\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tpmanc/yii2-imagick',
         ),
         'talma\\' => 
         array (
@@ -436,6 +448,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/bsadnu/yii2-googlecharts',
         ),
+        'Zxing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
+        ),
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
@@ -544,6 +560,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
         ),
+        'SimpleSoftwareIO\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src',
+        ),
         'Rize\\' => 
         array (
             0 => __DIR__ . '/..' . '/rize/uri-template/src/Rize',
@@ -616,6 +636,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'MailchimpMarketing\\' => 
         array (
             0 => __DIR__ . '/..' . '/mailchimp/marketing/lib',
+        ),
+        'MabeEnum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marc-mabe/php-enum/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -717,6 +741,14 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+        'Da\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/qrcode-library/src',
+        ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -738,6 +770,10 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
         'Adcuz\\FatSecret\\' => 
         array (
@@ -1386,7 +1422,7 @@ class ComposerStaticInit1a3140c3c5469ceec5569545e811eba7
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
-        'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
+        'Stringable' => __DIR__ . '/..' . '/marc-mabe/php-enum/stubs/Stringable.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
         'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
         'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',

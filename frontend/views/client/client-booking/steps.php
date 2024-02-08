@@ -128,28 +128,7 @@ foreach(array_keys($arrResultExist) as $key => $value){
                 <div class="<?= (($inc == $countSteps) ? 'process-step' : 'process-step') ?> col-2 mb-5 mb-lg-4 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
                     <div class="process-step-circle-<?= $textColor ?>">
                         <strong class="process-step-circle-content pt-1">
-                            <?php if($textColor == 'grey') {  ?>
-                                <i class="<?= $value['icon'] ?> text-5 text-<?= $textColor ?>"></i>
-                            <?php }else{  ?>
-                                <?=
-                                    Html::a(
-                                        '<i class="'.$value['icon'].'  text-5 text-'.$textColor.'"></i>',                                           
-                                        Url::toRoute(
-                                            array_merge(
-                                                    ['/choose-'.$start, 'code' => Yii::$app->request->get('code')],
-                                                    [                                   
-                                                        'service' => ((empty(Yii::$app->request->get('service'))) ? '*' : Yii::$app->request->get('service')),       
-                                                        'team' => ((empty(Yii::$app->request->get('team'))) ? '*' : Yii::$app->request->get('team')),       
-                                                        'location' => ((empty(Yii::$app->request->get('location'))) ? '*' : Yii::$app->request->get('location')), 
-                                                        'day' => ((empty(Yii::$app->request->get('day'))) ? '*' : Yii::$app->request->get('day')),   
-                                                        'time' => ((empty(Yii::$app->request->get('time'))) ? '*' : Yii::$app->request->get('time')),   
-                                                        'schedule' => ((empty(Yii::$app->request->get('schedule'))) ? '*' : Yii::$app->request->get('schedule')), 
-                                                    ]
-                                                )
-                                        )                             
-                                    )
-                                ?>
-                            <?php }  ?>
+                            <i class="<?= $value['icon'] ?> text-5 text-<?= $textColor ?>"></i>
                         </strong>
                     </div>
                     <div class="process-step-content">

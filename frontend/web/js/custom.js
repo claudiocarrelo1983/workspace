@@ -49,8 +49,10 @@ jQuery('input[id^="choice-service-"]').ready(function(key,val) { // Select the r
 
 jQuery('input[id^="choice-schedule-"]').ready(function(key,val) { // Select the radio input group
 
-    jQuery('input[id^="choice-schedule-"]').each(function(key,val){    
+    jQuery('input[id^="choice-schedule-"]').prop('checked', false);
     
+    jQuery('input[id^="choice-schedule-"]').each(function(key,val){       
+
         if (jQuery('#' + val.id).prop('checked')) {     
             
             jQuery('label[id^="choice-schedule-"]').removeClass('btn-success-dark');   
@@ -66,11 +68,13 @@ jQuery('input[id^="choice-schedule-"]').ready(function(key,val) { // Select the 
 
 function checkScheduleTick(attr) { 
 
- 
+    jQuery('input[id^="choice-schedule-"]').prop('checked', false);
+    jQuery('#alert-message').hide();
     jQuery('label[id^="choice-schedule-"]').removeClass('btn-success-dark');   
     jQuery('label[id^="choice-schedule-"]').addClass('btn-success');  
     jQuery('label#' + attr.id).removeClass("btn-success");  
     jQuery('label#' + attr.id).addClass("btn-success-dark");  
+    jQuery('#render-submit').show(); 
 
 }
 
@@ -86,6 +90,11 @@ function checkTeamTick(attr) {
     jQuery('div[id^="text-"]').removeClass('text-choice-service');
     jQuery('div[id^="text-"]').removeClass('text-color-hover-primary');
     jQuery('#text-' + attr.id).addClass("text-choice-service");
+
+    jQuery('#render-services').show(); 
+    jQuery('#render-schedule').hide(); 
+    jQuery('#render-profissional').hide();
+    jQuery('#render-submit').hide(); 
     
 }
 
@@ -228,9 +237,473 @@ function checkRadioButtonServices(attr){
 
     //<?= $locationT['location_code'] ?>-<?= $serviceT['service_code'] ?>-<?= $valueT['username_code'] ?>
     jQuery('table[id^="table-services"]').show();     
-    jQuery('td[id^="column-"]').hide();
+    jQuery('td[id^="column-"]').find('option').remove();
     jQuery('td[id^="column-'+ location + '-'+ service + '-'+ username + '"]').show();
 
 }
 
+function getServicesByViewMore(attr) { 
+
+    var username = jQuery(attr).data('username');
+    var service = jQuery(attr).data('service');
+
+    jQuery('select[id^="select-username-' + username +'"]').val(username);   
+    jQuery('select[id^="select-service-' + username +'"]').val(service);  
+
+   
+
+}
+
+
+
+
+function getScheduleByDateAjax(){
+  
+    //var date = jQuery(attr).val();
+    dataString = {
+        date: jQuery( "#date-calendar-search" ).val(),
+        username: jQuery( "#sheddule-team_username option:selected" ).val()
+    };     
+
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../client-appointments/get-date-schedule',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {      
+ 
+                var str = '';
+
+                jQuery.each(data, function(index, itemData) {
+                    str += '<option value="' + index + '">' + itemData + '</option>';
+                });
+
+                jQuery('#select-hour').find('option').remove().end().append(str)   
+                     
+            }       
+        }) 
+    });
+
+}
+
+/*
+
+Date buttons for Booking
+
+*/
+function getProfessionalByLocationAjax(attr){
+  
+    //var date = jQuery(attr).val();
+    dataString = {
+        service: jQuery(attr).val(),
+        location: jQuery("input:radio[name='Sheddule[location_code]']:checked").val(),    
+        date: jQuery("input[name='Sheddule[date]']").val(),      
+        company_code: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('company'),  
+        coin: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('coin'),
+    };
+
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({    
+
+            url: '../../booking/get-team-by-location',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {                
+ 
+                var strTeam = '';
+
+                jQuery.each(data.team, function(index, itemData) {        
+                    //strTeam += '<label><input type="radio" name="Sheddule[team_username]" value="' + index + '"> ' + itemData + '</input></label></br>';
+                    strTeam += '<option value="' + index + '">' + itemData + '</option>';
+                });
+
+                if(jQuery(attr).val() == '*'){
+                    jQuery('#render-profissional').hide();
+                }else{
+                    jQuery('#render-profissional').show(); 
+                }          
+                jQuery('#render-schedule').hide(); 
+
+                jQuery('#select-team').html(strTeam);
+                     
+            }       
+        }) 
+    });
+}
+
+
+
+function getServicesByUserAjax(){
+  
+    dataString = {
+        location: jQuery("input:radio[name='Sheddule[location_code]']:checked").val(),
+        company_code: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('company'),
+        coin: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('coin'),
+              
+    };
+
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/get-user-services',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {      
+                
+                console.log(data);
+
+                var str = '';
+
+                jQuery.each(data.services, function(index, itemData) {
+                    str += '<option value="' + index + '">' + itemData + '</option>';
+                });               
+
+                jQuery('#select-service').find('option').remove().end().append(str);
+             
+                //getScheduleByDateAjax();
+                     
+            }       
+        }) 
+    });
+
+}
+
+function getSchedduleByUserDefaulthAjax(attr){
+
+    dataString = {   
+        date: jQuery("input[name='Sheddule[date]']").val(),
+        username: jQuery( "#select-team option:selected" ).val(),
+        service: jQuery( "#select-service option:selected" ).val(),
+        location: jQuery("input:radio[name='Sheddule[location_code]']:checked").val()    
+    };
+
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/get-scheddule-user',
+            dataType: 'html',
+            data: dataString,
+            type: 'post',
+            success:function(data) {   
+
+                console.log(data);
+                
+                jQuery('#render-schedule').show();  
+                jQuery('#render-schedule').html(data);               
+          
+                     
+            }       
+        }) 
+    });
+
+}
+
+function getServicesByUserAjax(){
+  
+    dataString = {
+        location: jQuery("input:radio[name='Sheddule[location_code]']:checked").val(),
+        company_code: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('company'),
+        coin: jQuery("input:radio[name='Sheddule[location_code]']:checked").data('coin'),
+              
+    };
+
+    console.log(dataString);
+
+
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/get-user-services',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {      
+                
+                console.log(data);
+
+                var str = '';
+
+                jQuery.each(data.services, function(index, itemData) {
+                    str += '<option value="' + index + '">' + itemData + '</option>';
+                });               
+
+                jQuery('#select-service').find('option').remove().end().append(str);
+             
+                //getScheduleByDateAjax();
+                     
+            }       
+        }) 
+    });
+
+}
+
+function getAppointmentUserServices(attr){
+
+    dataString = {   
+        username: jQuery(attr).val(),   
+        company: jQuery(attr).data('company'), 
+    };
+
+    console.log(dataString);
+
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../appointments/get-user-services',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {   
+               
+                //jQuery('#render-schedule').show();  
+  
+                var str = '';
+
+                jQuery.each(data.services, function(index, itemData) {
+                    str += '<option value="' + index + '">' + itemData + '</option>';
+                });               
+            
+                jQuery('#select-service').find('option').remove().end().append(str);            
+          
+                     
+            }       
+        }) 
+    });
+}
+
+
+function teamBookingsGetUserServices(attr){
+    
+    var type = jQuery(attr).data('type');
+    var inc = jQuery(attr).data('inc'),  
+
+    dataString = {   
+        username: jQuery(attr).val(),    
+        day: jQuery(attr).data('day'),   
+        type: type, 
+        inc: inc, 
+    };
+ 
+    console.log(dataString);
+
+    jQuery('#select-service-create').hide();   
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../team-booking/get-user-services-and-hour',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {           
+               
+                //jQuery('#render-schedule').show();            
+                var str1 = '';
+
+                jQuery.each(data.services, function(index, itemData) {
+                    str1 += '<option value="' + index + '">' + itemData + '</option>';
+                });    
+
+                //jQuery("input[name='Sheddule[service_code]']").hide();                               
+                jQuery('#select-service-' + type + '-' + inc).find('option').remove().end().append(str1);        
+                
+                
+                var str2 = '';
+
+                jQuery.each(data.hour, function(index, itemData) {
+                    str2 += '<option value="' + index + '">' + itemData + '</option>';
+                });    
+
+                //jQuery("input[name='Sheddule[service_code]']").hide();                               
+                jQuery('#select-hour-' + type + '-' + inc).find('option').remove().end().append(str2);            
+         
+                jQuery('#submit-' + type + '-'+ inc).submit(function(e){
+                    jQuery('#client-' + type + '-'+ inc).modal('show');
+                    return false;
+                });
+            }       
+        }) 
+    });
+}
+
+
+
+
+
+
+function getSchedduleByUserAjax(attr){
+
+    dataString = {   
+        date: jQuery(attr).val(),
+        username: jQuery( "#select-service" ).data('team'),
+        service: jQuery( "#select-service option:selected" ).val(),
+        location: jQuery( "#select-service" ).data('location'),
+    };
+    
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/get-scheddule-user',
+            dataType: 'html',
+            data: dataString,
+            type: 'post',
+            success:function(data) {           
+               
+                jQuery('#render-schedule').html(data);               
+          
+                     
+            }       
+        }) 
+    });
+
+}
+
+
+
+function getSchedduleTeamAjax(attr){
+
+    dataString = {   
+        date: jQuery(attr).val(),
+        username: jQuery(attr).data('username'),  
+        url: jQuery(attr).data('url'), 
+    };
+    
+    console.log(dataString);
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../team-booking/get-team-scheddule',
+            dataType: 'html',
+            data: dataString,
+            type: 'post',
+            success:function(data) {           
+               
+                jQuery('#render-schedule').html(data);               
+          
+                     
+            }       
+        }) 
+    });
+
+}
+
+
+function submitBooking(attr){
+
+    dataString = {   
+        code:jQuery(attr).data('code'),
+        date: jQuery('#date-calendar-search1').val(),      
+        time: jQuery("input:radio[name='Sheddule[time]']:checked").val(),  
+        username: jQuery( "#select-team option:selected" ).val(),
+        service: jQuery( "#select-service option:selected" ).val(),
+        location: jQuery("input:radio[name='Sheddule[location_code]']:checked").val()    
+    };
+
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/booking-details-ajax',
+            dataType: 'json',
+            data: dataString,
+            type: 'post',
+            success:function(data) {          
+              
+              console.log(data);           
+          
+                     
+            }       
+        }) 
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getTeamScheddulleBookingAjax(){
+  
+    //var date = jQuery(attr).val();
+    dataString = {    
+        service: jQuery("#select-service").val(), 
+        location:  jQuery("#select-service").data('location'),    
+        date: jQuery("input[name='Sheddule[date]']").val(),
+        username:  jQuery("#select-service").data('team'),           
+    };
+
+    jQuery(document).ready(function () {   
+        jQuery.ajax({              
+            url: '../../booking/get-scheddule-user-individual',
+            dataType: 'html',
+            data: dataString,
+            type: 'post',
+            success:function(data) {     
+                jQuery('#render-schedule').html(data);                    
+       
+                /*
+                if( !jQuery(attr).val()) { 
+                    jQuery('#render-schedule').hide(); 
+                    jQuery('#render-submit').hide();                    
+                    
+                }else{
+                    jQuery('#render-schedule').show();  
+                    jQuery('#render-schedule').html(data);  
+                }
+                */
+                     
+            }       
+        }) 
+    });
+}
+
+
+function getSchedduleButtonUserAjax(attr){
+
+    dataString = {   
+        service: jQuery("#select-service").val(),
+        location: jQuery("#select-service").data('location'), 
+        username: jQuery("#select-service").data('team'),    
+        date: jQuery(attr).val(), 
+  
+    };
+    console.log(dataString);
+    jQuery(document).ready(function () {   
+        jQuery.ajax({     
+            url: '../../booking/get-scheddule-user-individual',
+            dataType: 'html',
+            data: dataString,
+            type: 'post',
+            success:function(data) {                         
+                jQuery('#render-schedule').html(data);                   
+            }       
+        }) 
+    });
+
+}
 

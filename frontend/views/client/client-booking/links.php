@@ -5,8 +5,8 @@ use yii\helpers\Url;
 
 
 ?>
-<!--
-<div class="row pb-3">
+
+<div class="row pt-5">
     <div class="col-4 mb-2 pr-3">
         <?= 
             Html::a(
@@ -32,10 +32,10 @@ use yii\helpers\Url;
     </div>
     <div class="col-4 mb-2 pl-3">
         <?= Html::a(
-            Yii::t('app', 'history'),                                           
+            Yii::t('app', 'scheduling_history'),                                           
             Url::toRoute(
                 [
-                    '/client-appointments',
+                    '/client-appointments/index',
                     'code' => Yii::$app->request->get('code')
                 ]
             ),
@@ -51,7 +51,7 @@ use yii\helpers\Url;
 
     <div class="col-4 mb-2 pl-3">
         <?= Html::a(
-            Yii::t('app', 'profiles'),                                           
+            Yii::t('app', 'profile'),                                           
             Url::toRoute([
                 '/client-profile',
                 'code' => Yii::$app->request->get('code')
@@ -68,6 +68,5 @@ use yii\helpers\Url;
 
     </div>
 </div> 
-            -->   
-
+      
 

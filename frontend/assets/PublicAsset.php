@@ -13,6 +13,10 @@ class PublicAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        '/assets/4fd2d2e9/css/bootstrap-datepicker4.css',
+        '/assets/4fd2d2e9/css/datepicker-kv.css',
+        '/assets/f37529d8/css/kv-widgets.css',
+        '/assets/4fd0c9ac/yii.activeForm.js',
         'vendor/bootstrap/css/bootstrap.min.css',
         'vendor/fontawesome-free/css/all.min.css',
         'vendor/animate/animate.compat.cs',
@@ -27,7 +31,7 @@ class PublicAsset extends AssetBundle
         'css/theme-shop.css',
         'css/demos/demo-finance.css',
         'css/skins/skin-finance.css',
-        'css/custom.css',
+        'css/custom.css',     
         'vendor/circle-flip-slideshow/css/component.css',
         'css/skins/default.css',
         'css/skins/custom.css',            
@@ -50,6 +54,10 @@ class PublicAsset extends AssetBundle
 
     public $js = [
         //'vendor/jquery/jquery.min.js',
+        '/assets/4fd2d2e9/js/bootstrap-datepicker.js',
+        '/assets/4fd2d2e9/js/datepicker-kv.js',
+        '/assets/f37529d8/js/kv-widgets.js',
+        '/assets/4fd0c9ac/yii.activeForm.js',
         'vendor/jquery.appear/jquery.appear.min.js',
         'vendor/jquery.easing/jquery.easing.min.js',
         'vendor/jquery.cookie/jquery.cookie.min.js',
@@ -68,6 +76,9 @@ class PublicAsset extends AssetBundle
         'js/views/view.home.js',
         'js/theme.js',
         'js/custom.js',
+        'js/booking.js',
+        'js/booking-individual.js',
+        'js/team-booking.js',
         'js/theme.init.js',
         //'assets/libs/metismenu/metisMenu.min.js',
         'assets/libs/simplebar/simplebar.min.js',

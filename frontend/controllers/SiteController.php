@@ -16,12 +16,10 @@ use common\models\LoginForm;
 use frontend\models\ResetPasswordForm;
 use common\models\User;
 use frontend\models\ContactForm;
-use yii\helpers\Url;
 use frontend\models\SignupForm;
 use yii\helpers\Json;
 use common\models\GeneratorJson;
 use common\models\Subscribers;
-use common\models\Comments;
 use common\Helpers\Helpers;
 use yii\db\Query;
 
@@ -798,7 +796,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
-     
             return $this->render('home/index', [
                 'modelSubscriber' => $modelSubscriber,
                 'model' => $model,
@@ -1215,23 +1212,27 @@ class SiteController extends Controller
     }
 
     public function actionLanguage()
-    {          
+    {         
 
-        Yii::$app->language = 'en';  
+        Yii::$app->language = 'pt';  
+        
         $cookies = new \yii\web\Cookie([
             'name' => 'lang',
-            'value' => 'en',
+            'value' => 'pt',
         ]);
+        
         Yii::$app->getResponse()->getCookies()->add($cookies);
 
        if(isset($_POST['lang'])){
-        Yii::$app->language = $_POST['lang'];   
-        $cookies = new \yii\web\Cookie([
-            'name' => 'lang',
-            'value' => $_POST['lang'],
-        ]);
 
-        Yii::$app->getResponse()->getCookies()->add($cookies);
+            Yii::$app->language = $_POST['lang'];  
+            
+            $cookies = new \yii\web\Cookie([
+                'name' => 'lang',
+                'value' => $_POST['lang'],
+            ]);
+
+            Yii::$app->getResponse()->getCookies()->add($cookies);
 
        }
     }

@@ -2497,8 +2497,12 @@ html .word-rotator.loading-bar-light .word-rotator-words::after {
 	background-color: #FFF;
 }
 
-.process .process-step-circle {
+.process .process-step-circle:hover {
 	border-color: #0088CC;
+}
+
+.process-step-circle{
+
 }
 
 .process .process-step:hover .process-step-circle {

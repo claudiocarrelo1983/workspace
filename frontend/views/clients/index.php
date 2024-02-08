@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Clients;
+use common\Helpers\Helpers;
 use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -16,7 +16,7 @@ $this->title = 'Clients List';
 $this->params['breadcrumbs'][] = $this->title;
 
 
-
+/*
 $query = new Query;
 $userArr = $query->select('*')
 ->from(['company'])
@@ -24,32 +24,15 @@ $userArr = $query->select('*')
    'company_code' => Yii::$app->user->identity->company_code
 ]) 
 ->one();
+*/
 
 
 ?>
 
 <!-- start page title -->
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18 pb-4 pt-4">
-                <?= Html::encode(Yii::t('app', 'menu_admin_clients_list')) ?>
-            </h4>  
-            <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item">
-                        <a href="javascript: void(0);">
-                            <?= Yii::t('app', 'menu_admin_clients') ?> 
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                    <?= Yii::t('app', 'menu_admin_clients_list') ?> 
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>  
+
+<?= Helpers::displayAminBreadcrumbs('clients','clients_list','clients') ?>
+
 
 <div class="row">
     <div class="col-12">

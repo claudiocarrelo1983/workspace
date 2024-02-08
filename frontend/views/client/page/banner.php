@@ -21,21 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h1 class="font-weight-bold text-10 text-xl-10 line-height-2">                     
                         <?= Yii::t('app', 'page_booking_text') ?>          
                     </h1>
-                </p>
-                
+                </p>      
                 <?php                   
                     echo Html::a(
                         '<i class="bx bx bx-calendar mr-1"></i> '.Yii::t('app', Yii::t('app', 'book_now_button')),                      
-                        Url::toRoute(['/choose-location', 
-                            'code' => Yii::$app->request->get('code'),
-                            'team' => '*',
-                            'location' =>  '*',
-                            'service' =>  '*',             
-                            'day' =>  '*',
-                            'time' =>  '*'                         
+                        Url::toRoute(['/booking', 
+                            'code' => Yii::$app->request->get('code')
                         ]),
                         [                     
-                            'class' => 'btn btn-gradient-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3',                                                  
+                            'class' => 'btn btn-primary btn-effect-4 font-weight-semi-bold px-4 btn-py-2 text-3',                                                  
                             'data-hash-offset' => 0,  
                             'data-hash-offset-lg' => 130,  
                         ] 

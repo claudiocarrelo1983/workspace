@@ -16,7 +16,9 @@ $this->title = 'Emails';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="email-index">
-    <?= Helpers::displayAminBreadcrumbs('message', 'sms') ?> 
+    <?= Helpers::displayAminBreadcrumbs('message', 'sms','message') ?> 
+
+
     <p>
         <?= Html::a(Yii::t('app', 'create_sms_button'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>

@@ -26,10 +26,22 @@ class Helpers{
             'color', 
             'path',     
             'coin',    
+            'company_code',
             'company_name',
             'image_logo',
             'image_banner',
             'page_code_text',
+            'cancelation_time',
+            'subtitle_pt',
+            'subtitle_en',
+            'pinterest',
+            'facebook',
+            'instagram',
+            'twitter',
+            'tiktok',
+            'linkedin',
+            'youtube',
+            'website',
             'page_code_team_title',
             'page_code_subtitle',
             'page_code_team_text',
@@ -49,7 +61,9 @@ class Helpers{
             'color' => (empty($companyArr['color']) ? '#0088CC' : $companyArr['color']),            
             'path' => (empty($companyArr['path']) ? '/images/company/' : $companyArr['path']),
             'coin' => (empty($companyArr['coin']) ? '' : $companyArr['coin']),
+            'company_code' => (empty($companyArr['company_code']) ? '' : $companyArr['company_code']),
             'company_name' => (empty($companyArr['company_name']) ? '' : $companyArr['company_name']),
+            'cancelation_time' => (empty($companyArr['cancelation_time']) ? '' : $companyArr['cancelation_time']),
             'page_code_text' => (empty($companyArr['page_code_text']) ? '' : $companyArr['page_code_text']),
             'page_code_team_title' => (empty($companyArr['page_code_team_title']) ? '' : $companyArr['page_code_team_title']),
             'page_code_team_text' => (empty($companyArr['page_code_team_text']) ? '' : $companyArr['page_code_team_text']),
@@ -58,19 +72,57 @@ class Helpers{
             'image_banner' => (empty($companyArr['image_banner']) ? 'generic-background.jpg' : $companyArr['image_banner']),
             'page_code_manteinance' => (empty($companyArr['page_code_manteinance']) ? 'menu_admin_campaign_manteinance_text' : $companyArr['page_code_manteinance']),
             'sheddule_array' =>  (empty($companyArr['sheddule_array']) ? Helpers::getJsonDefaulthShedule() : $companyArr['sheddule_array']),
-            'website' =>  (empty($companyArr['website']) ? '' : $companyArr['website']),
-            'facebook' =>  (empty($companyArr['facebook']) ? '' : $companyArr['facebook']),
+            'subtitle_pt' =>  (empty($companyArr['subtitle_pt']) ? '' : $companyArr['subtitle_pt']),
+            'subtitle_en' =>  (empty($companyArr['subtitle_en']) ? '' : $companyArr['subtitle_en']),
             'pinterest' =>  (empty($companyArr['pinterest']) ? '' : $companyArr['pinterest']),
             'instagram' =>  (empty($companyArr['instagram']) ? '' : $companyArr['instagram']),
             'twitter' =>  (empty($companyArr['twitter']) ? '' : $companyArr['twitter']),
             'tiktok' =>  (empty($companyArr['tiktok']) ? '' : $companyArr['tiktok']),
             'linkedin' =>  (empty($companyArr['linkedin']) ? '' : $companyArr['linkedin']),
-            'youtube' => (empty($companyArr['manyoutubeteinance']) ? '' : $companyArr['youtube']),
+            'website' =>  (empty($companyArr['website']) ? '' : $companyArr['website']),
+            'facebook' =>  (empty($companyArr['facebook']) ? '' : $companyArr['facebook']),
+            'youtube' => (empty($companyArr['youtube']) ? '' : $companyArr['youtube']),
             'manteinance' => (empty($companyArr['manteinance']) ? 0 : $companyArr['manteinance']),
         ];
+      
 
         return  $arrResult;
     }
+
+    public static function validationScheduleTimespan($hourKey, $companyCode){
+
+        $arrCompany = Helpers::arrayCompany(['company_code' => $companyCode], 'one');
+
+        $minusTime = (isset($arrCompany['timespan']) ? $arrCompany['timespan'] : 0);
+    
+        $timespanTime =  date('Y-m-d H:i', strtotime(date('Y-m-d H:i',$hourKey). '-'.$minusTime.' minutes'));
+
+        $str = false;
+
+        if(date('Y-m-d H:i') < $timespanTime){
+       
+            $str = true;
+        }
+       
+
+        return $str;
+    }
+
+    public static function sendSms($model, $type){
+
+        $str = true;
+
+        return $str;
+    }
+
+    public static function sendEmail($model, $type){
+
+        $str = true;
+
+        return $str;
+    }
+
+
 
     public static function getJsonDefaulthShedule(){
 
@@ -126,7 +178,7 @@ class Helpers{
             [
             'c.company_code_url' => Yii::$app->request->get('code')           
             ])
-        ->all(); 
+        ->all();   
 
         return  $companyArr;
     }
@@ -470,6 +522,20 @@ class Helpers{
         return $base_url;
     }
 
+    public static function getPathUrl(){
+
+        $url = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";     
+        //$url = parse_url($url, PHP_URL_SCHEME).'://'.parse_url($url, PHP_URL_HOST); 
+        $baseUrl = trim($url, '/');  
+        $baseUrl = explode('/', $baseUrl);
+        $baseUrl =  $baseUrl['0'];
+        $baseUrl = str_replace('http://','', $baseUrl);
+        $baseUrl = str_replace('https://','', $baseUrl);   
+        $baseUrl = str_replace($baseUrl, '', $url) ;
+
+        return $baseUrl;
+    }
+
     public static function languageTranslations(){
   
         $base_url = Helpers::getBaseUrl();
@@ -477,12 +543,12 @@ class Helpers{
         $tag = '';
         
         switch($base_url){
-            case 'localhost:100':
+            case 'localhost':
             case 'specialcalendar.com':
                 $tag =  '_calendar';                  
                 break;
           
-            case 'localhost':
+            case 'localhost:100':
             case 'myspecialgym.com':
                 $tag =  '';     
                 break;
@@ -501,7 +567,7 @@ class Helpers{
         $base_url = Helpers::getBaseUrl();
 
         switch($base_url){
-            case 'localhost:100':
+            case 'localhost':
             case 'specialcalendar.com':
                 $logo =  '<div class="header-row">
                                 <div class="header-logo">							
@@ -511,7 +577,7 @@ class Helpers{
                             </div>';                  
                 break;
           
-            case 'localhost':
+            case 'localhost:100':
             case 'myspecialgym.com':
                 $logo =  '<div class="header-row">
                     <div class="header-logo">							
@@ -522,7 +588,12 @@ class Helpers{
                 </div>';   
                 break;
             default:
-                $logo = ''; 
+            $logo =  '<div class="header-row">
+                        <div class="header-logo">							
+                            <span class="text-color-light font-weight-normal text-'.$size.' mb-2 mt-2">Special</span>
+                            <span class="font-weight-extra-bold blue-lettering text-'.$size.' mb-2 mt-2">Calendar</span>						
+                        </div>
+                      </div>'; 
             break;
         } 
 
@@ -534,12 +605,12 @@ class Helpers{
         $base_url = Helpers::getBaseUrl();
 
         switch($base_url){
-            case 'localhost:100':
+            case 'localhost':
             case 'specialcalendar.com':
                 \frontend\assets\CalendarAsset::register($val);                    
                  break;
           
-            case 'localhost':
+            case 'localhost:100':
             case 'myspecialgym.com':
                 \frontend\assets\PublicAsset::register($val);
                 break;
@@ -556,7 +627,7 @@ class Helpers{
         $currencyList = Helpers::currencyArr();
 
         foreach($currencyList as  $key => $value){
-            if(strtolower($currencyCode) == strtolower($key)){
+            if(strtolower($currencyCode) == strtolower($key)){          
                 return strtolower($key);
             }         
         }
@@ -632,6 +703,37 @@ class Helpers{
         }
 
         return $key;
+    }
+
+    public static function bookingRandowUsername($userArr, $time, $date, $company){
+
+        $query = new Query();
+
+        $explodTeamArr = explode('|', $userArr);
+
+        foreach($explodTeamArr as $username){
+
+            if(!empty($username)){
+
+                $resultArr = $query->select(['*'])
+                    ->from(['sheddule'])
+                    ->where(
+                    [            
+                        'date' => $date,
+                        'time' => $time,              
+                        'company_code' => $company, 
+                        'team_username' => $username                                             
+                    ])           
+                    ->one(); 
+
+                if(empty($resultArr)){                
+                    return $username;
+                }
+            }
+        }
+
+        return '';
+      
     }
 
     public static function cleanTynyMceText($text, $arrOptions = ['strong', 'p', 'span','table','h1','div', 'h2', 'h3', 'h4', 'h5'])
@@ -1484,17 +1586,46 @@ class Helpers{
         $search = [
             'company_code' => Helpers::findCompanyCode()            
         ];
+
         
         $search = array_merge($search, $filter);
+        
+        if(isset($filter['team_username'])){
+            $explod = explode('|', $filter['team_username']);
+
      
-        $locationArr = $query->select('*')
-        ->from(['sheddule'])
-        ->where($search)
-        ->orderBy(['time' => SORT_ASC])
-        ->$type();
+            $shedduleArr = $query->select('*')
+            ->from(['sheddule'])
+            ->where($search)
+            ->orWhere(['in', 'team_username', $explod])
+            ->orderBy(['time' => SORT_ASC])
+            ->$type();  
+    
+        }else{
+
+            $shedduleArr = $query->select('*')
+            ->from(['sheddule'])
+            ->where($search)        
+            ->orderBy(['time' => SORT_ASC])
+            ->$type();  
+    
+        }
+  
+
+        $resultArr = [];
+      
+        if($type == 'all'){
+            foreach($shedduleArr as $value){
+                //$str = date('Y-m-d H:i',strtotime(date('Y-m-d',$value['date']).' '.date('H:i',$value['time'])));      
+                $dayHour = $value['date'].' '.$value['time'];
+                $resultArr[strtotime($dayHour).'-'.$value['team_username']] = $value;        
+            }
+        }else{
+            $resultArr = $shedduleArr;
+        }
 
 
-        return $locationArr;
+        return $resultArr;
     }
 
     public static function arrayServiceCategory(){
@@ -1543,13 +1674,19 @@ class Helpers{
         return  $servicesArr;
     }
 
-    public static function arrayTeam($filter = []){
+    public static function arrayTeam($filter = [], $type = 'all'){
 
-        $query = new Query;
-
-        $companyCode = Helpers::findCompanyCode();
+        $query = new Query;      
         
-        $arrFilter = [];
+        $companyCode = Helpers::findCompanyCode();
+ 
+        $arrFilter = [
+            'level' => 'team',
+            'company_code' => $companyCode,
+            'active' => 1,           
+            'status' => '10',  
+        ];
+
 
         foreach($filter as $key => $value){
             if($value != '*'){
@@ -1557,19 +1694,39 @@ class Helpers{
             }
         }
 
-        $search = [       
-            'active' => 1,            
-            'level' => 'team',
-            'status' => '10',
-            'company_code' => $companyCode          
-        ];
+        if(isset($arrFilter['guid'])){
 
-        $search = array_merge($search, $arrFilter);
+            $explod = explode('|', $arrFilter['guid']);
 
-        $userArr = $query->select('*')
-        ->from('user')    
-        ->where($search)      
-        ->all();
+            $search = [       
+                'active' => 1,            
+                'level' => 'team',
+                'status' => '10',
+                       
+            ];
+    
+            $search = array_merge($search, $arrFilter);
+
+            $userArr = $query->select('*')
+            ->from('user')    
+            ->where($search)
+            ->orWhere(['in', 'guid', $explod])
+            //->orWhere('guid LIKE CONCAT("%'.$search['guid'].'%")')      
+            ->$type();
+   
+        
+
+        }else{       
+    
+            $search = $arrFilter;
+
+            $userArr = $query->select('*')
+            ->from('user')    
+            ->where($search)      
+            ->$type();
+        }
+
+     
 
         return $userArr;
     }
@@ -1664,6 +1821,22 @@ class Helpers{
     public static function findCompanyCode(){
 
         $query = new Query;    
+        
+        $explod = explode('/', Helpers::getPathUrl());
+        
+        $resultArr = $query->select('company_code')
+        ->from(['company'])
+        ->where(
+        [
+            'company_code_url' => $explod['1']                                              
+        ]
+        
+        )->one(); 
+        
+         $companyCode = ((isset($resultArr['company_code'])) ? $resultArr['company_code'] : '');
+
+         return  $companyCode;
+
      
         if(isset(Yii::$app->user->identity->company_code)){
         
@@ -1695,36 +1868,45 @@ class Helpers{
             $companyCode = ((isset($resultArr['company_code'])) ? $resultArr['company_code'] : '');
         }
 
-      
-   
         return  $companyCode;
     }
 
     
-    public static function findServiceName(){
+    public static function findCompanyCodeByUrl(){
+
+        $query = new Query;    
+
+        /*
+        print"<pre>";
+        print_r(Yii::$app->request->get());
+        die();
+     */
+        $resultArr = $query->select('company_code')
+            ->from(['company'])
+            ->where(
+            [
+                'company_code_url' => (isset(Yii::$app->request->get()['code']) ? Yii::$app->request->get()['code'] : ''),                                               
+            ])->one(); 
+
+        $companyCode = ((isset($resultArr['company_code'])) ? $resultArr['company_code'] : '');
+
+        return  $companyCode;
+    }
+
+    
+    public static function findServiceName($service_code){
 
         $query = new Query;     
      
-        if(isset(Yii::$app->user->identity->company_code)){
+        $resultArr = $query->select('page_code_title')
+        ->from(['services'])
+        ->where(
+        [
+            'service_code' => $service_code,                                               
+        ])->one();
 
-            $companyCode = Yii::$app->user->identity->company_code;
-
-        }else{
-
-            $resultArr = $query->select('company_code')
-                ->from(['company'])
-                ->where(
-                [
-                    'company_code_url' => Yii::$app->request->get('code'),                                               
-                ]
-                
-                )->one();
-
-            $companyCode = ((isset($resultArr['company_code'])) ? $resultArr['company_code'] : '');
-
-        }
-   
-        return  $companyCode;
+        return ((isset($resultArr['page_code_title'])) ? $resultArr['page_code_title'] : '');
+ 
     }
 
     public static function findCompanyLocationCode($companyCode){
@@ -1756,32 +1938,49 @@ class Helpers{
         return $arrLevel;
     }
 
-    public static function checkIfBookingExists($date, $time, $team, $company){
+    public static function checkIfBookingExists($bookingCode, $date, $time, $team, $company, $type = 0){
 
         $query = new Query;     
      
-        $resultArr = $query->select(['*'])
-        ->from(['sheddule'])
-        ->where(
-        [            
-            'date' => $date,
-            'time' => $time,
-            'team_username' => $team,
-            'company_code' => $company,                                               
-        ]        
-        )->one();
+        if($type){
+            $resultArr = $query->select(['*'])
+            ->from(['sheddule'])
+            ->where(
+            [            
+                'date' => $date,
+                'time' => $time,
+                'team_username' => $team,
+                'company_code' => $company,                                               
+            ])
+            ->andWhere(['!=', 'booking_code', $bookingCode])
+            ->one();  
+        }else{
 
- 
+            
+            $explod = Helpers::bookingRandowUsername($team, $time, $date, $company);
+
+
+            
+            print"<pre>";
+            print_r($explod);
+            die();
+        
+                 
+            
+        }     
+
         /*
-        print"<pre>";
-        print_r($date);
-        print"<pre>";
-        print_r($time);
-        print"<pre>";
-        print_r($resultArr);
-        die();
+           
+        if(empty($resultArr)){
+            print_r($resultArr);
+            die();
+    
+        }else{
+            die('0');
+        }
         */
-
+    
+    
         return  ((empty($resultArr)) ? 0 : 1);
     }
 
@@ -2040,8 +2239,22 @@ class Helpers{
     }
 
     
+    public static function dropdownSheddulleSortArrHours($userHourArr){
+    
+        $arrHour = [];
+        $arrHour = ['' => Yii::t('app', 'select_time')];
+        
 
-    public static function dropdownTeam($filter = []){       
+        foreach($userHourArr as $key => $value){
+            $arrHour[date('H:i:s', $key)] = date('H:i', $key);
+        } 
+
+        return $arrHour;
+
+    }
+    
+
+    public static function dropdownTeam($filter = [], $defaultValue = 'select_team'){      
 
         $teamArr = Helpers::arrayTeam($filter);
 
@@ -2050,6 +2263,14 @@ class Helpers{
         foreach($teamArr as $value){
             $arrTeam[$value['guid']] = $value['first_name'].' '.$value['last_name'];
         }
+        
+        $defaultKey = '|';
+
+        foreach($arrTeam as $key => $value){
+            $defaultKey .= $key.'|';
+        }
+
+        $arrTeam = array_merge([$defaultKey => Yii::t('app', $defaultValue)],  $arrTeam);
 
         return $arrTeam;
     }
@@ -2109,18 +2330,80 @@ class Helpers{
         return  $arrServices;
     }
     
+    public static function getJustServicesArr($filter = [], $type = 'all'){
+
+
+        $query = new Query;
+
+        $search = [
+            'company_code' => Helpers::findCompanyCode()
+        ];
+
+        $arrFilter = [];
+
+        foreach($filter as $key => $value){
+            if($value != '*'){
+                $arrFilter[$key] = $value;
+            }
+        }        
+        
+        $search = array_merge($search, $arrFilter);  
+
+        $searchTeam['location_code'] = $search['location_code'];
+        $arrTeam = Helpers::arrayTeam($searchTeam);
+
+        $serviceArr = $query->select([
+            'username',
+            'service_code', 
+            'page_code_title',           
+            'title_pt',  
+            'title_en',  
+        ])
+        ->from('services')    
+        ->where([
+            'company_code' => $search['company_code'],         
+            'service_code' => $search['service_code']
+        ]
+         
+        )
+        //->andWhere(['in', 'username', $resultTeam])
+        ->andWhere('location_code LIKE CONCAT("%|'.$search['location_code'].'|%")')
+  
+        ->$type();
+
+        $resultTeam = [];
+
+        //28148B26-280C-44A3-AAB9-4844BD21B6E3
+        //BF6A24AC-A22F-46A3-B881-5330F05FBBEA
+
+        foreach($arrTeam as $team){
+            if (str_contains($serviceArr['username'], $team['guid'])) { 
+                $resultTeam[] = $team['guid'];
+            }
+        }
+        
+    
+        $serviceArr['username'] = '|'.implode('|',$resultTeam).'|';       
+
+
+        return $serviceArr;
+
+    }
     public static function getServicesArr($filter = [], $filterCat = []){
 
-        $arrServices = [];       
+        $arrServices = [];     
+        $arrFilterCat = [];
+        $arrFilter = [];  
+
         $query = new Query;
 
         $companyCodeResult =  Helpers::findCompanyCode();
               
+
+        //filter for Service Cat
         $searchDefault = [
             'company_code' => $companyCodeResult
         ];
-
-        $arrFilterCat = [];
 
         foreach($filterCat as $key => $value){
             if($value != '*'){
@@ -2128,79 +2411,29 @@ class Helpers{
             }
         }
         
-        $searchCat = array_merge($searchDefault, $arrFilterCat);       
-      
+        $searchCat = array_merge($searchDefault, $arrFilterCat);  
+
+
+        //filter for Services
+        foreach($filter as $key => $value){
+            if($value != '*'){
+                $arrFilter[$key] = $value;
+            }
+        }
+
+        $search = array_merge($searchDefault, $arrFilter);       
+
         $servicesCatArr = Helpers::getServicesCatArr($searchCat);
-
-
-               /*
-
-        $arrUsers = [];
-
-        if(isset($filter['username_array'])){
-
-            $arrUsers = explode(',',$filter['username_array']);
-            unset($filter['username_array']);           
-        }      
-     
-     
-
-      
-        $locationsArr = Helpers::arrayCompanyLocations();
-
-        $arrLocation = [];
-        $arrUsername = [];
-
-        foreach($locationsArr as $location){
-
-            foreach(explode(',',$location['location_code']) as $local){
-                $arrLocation[] = $local;
-            }
-
-            foreach(explode(',',$location['username_array']) as $user){
-                $arrUsername[] = $user;
-            }
-        }       
-
-           print"<pre>";
-        print_r($servicesCatArr);
-        die();
-
-
-        
-
-
-
-        $arrLocationResult = (empty($arrLocation)) ? '1=1' : ['in', 'location_code', $arrLocation];
-
-        $arrUsernameResult =  (empty($arrUsers) ? '1=1' : ['in', 'username', $arrUsers]);
-
-        $arrUsernameResult = (empty($arrUsername)) ? $arrUsernameResult   :['in', 'username', $arrUsername];
-
-          print"<pre ";
-            print_r($serviceCat['category_code']);
-            die();
-       */
-
-       $arrFilter = [];
-
-       foreach($filter as $key => $value){
-           if($value != '*'){
-               $arrFilter[$key] = $value;
-           }
-       }
-
-        $search = array_merge($searchDefault, $arrFilter);  
- 
 
 
         foreach($servicesCatArr as $serviceCat){    
 
-            $serviceCat2['category_code'] = $serviceCat['category_code'];
 
-            $search = array_merge($serviceCat2, $searchCat);  
+            $search = array_merge($search, ['category_code' => $serviceCat['category_code']]);  
 
-            $servicesArr = $query->from(['services'])
+            if(isset($search['username'])){
+
+                $servicesArr = $query->from(['services'])
                 ->select([     
                     'service_code', 
                     'location_code',               
@@ -2214,15 +2447,47 @@ class Helpers{
                     'services_title'  => 'page_code_title',        
                     'services_text'  => 'page_code_text',
                     ])
-                ->where($search)  
+                ->where($search) 
+                ->orWhere('username LIKE CONCAT("%'.$search['username'].'%")')
+                //->where($arrLocationResult)  
+                //->where($arrUsernameResult)               
+                //->where('or', $arrLocation, $arrUsername)           
+                //->where($arrUsername)
+                ->orderBy(['order'=>SORT_ASC])->all();  
+
+            }else{
+
+                $servicesArr = $query->from(['services'])
+                ->select([     
+                    'service_code', 
+                    'location_code',               
+                    'category_code',
+                    'username',
+                    'price',    
+                    'text_pt', 
+                    'time',
+                    'text_en', 
+                    'price_range',       
+                    'services_title'  => 'page_code_title',        
+                    'services_text'  => 'page_code_text',
+                    ])
+                ->where($search) 
+                //->orWhere('username LIKE CONCAT("%'.$search['username'].'%")')
                 //->where($arrLocationResult)  
                 //->where($arrUsernameResult)               
                 //->where('or', $arrLocation, $arrUsername)           
                 //->where($arrUsername)
                 ->orderBy(['order'=>SORT_ASC])->all();   
 
-            $arrServices[$serviceCat['page_code_sc_title']] = $servicesArr;
-        }
+            }
+          
+
+         
+            if(!empty($servicesArr)){
+                $arrServices[$serviceCat['page_code_sc_title']] = $servicesArr;
+            }
+    
+        }  
 
         return $arrServices;
 
@@ -2266,7 +2531,7 @@ class Helpers{
             ->where($search)
             ->orderBy(['order'=>SORT_ASC])
             ->all();
- 
+
         return $servicesCatArr;
     }
 
@@ -2299,7 +2564,9 @@ class Helpers{
     
         $serviceArr = $query->select([
             'category_code', 
-            'page_code_title',     
+            'page_code_title',   
+            'title_pt',
+            'title_en'  
         ])
         ->from('services_category')    
         ->where(['company_code' => Yii::$app->user->identity->company_code])
@@ -2308,12 +2575,243 @@ class Helpers{
         $arrServiceCat =  [];
         
         foreach($serviceArr as $value){
-            $arrServiceCat[$value['category_code']] = Yii::t('app',$value['page_code_title'], [], $language);
+            $arrServiceCat[$value['category_code']] = $value['title_'.Yii::$app->language];
         }
 
         return $arrServiceCat;
     }
+    
 
+    public static function dropdownServices($filter = [], $coin = '€'){
+
+        $query = new Query;
+
+        $serviceArr =[];  
+
+        $arrFilter = Helpers::filterHelper($filter, ['username','location_code']);   
+
+
+        $usernameWhere = ((isset($filter['username']) && !empty($filter['username'])) ? 'username LIKE CONCAT("%'.$filter['username'].'%")' : '1=1');
+
+        if(isset($filter['location_code']) && empty($filter['location_code'])){
+
+            $arrLocationCode = explode('|', $filter['location_code']); 
+
+            foreach($arrLocationCode as $key => $value){
+ 
+                $serviceResult = $query->select([
+                    'service_code', 
+                    'page_code_title',    
+                    'title_pt',
+                    'title_en',
+                    'text_pt',
+                    'text_en',
+                    'title',   
+                    'price'
+                ])
+                ->from('services')    
+                ->where($arrFilter)           
+                ->andWhere($usernameWhere)
+                ->andWhere('location_code LIKE CONCAT("%|'.$value.'|%")')  
+                ->one();
+
+                $serviceArr[] = $serviceResult;
+            }
+
+        }else{
+
+            $serviceArr = $query->select([
+                'service_code', 
+                'page_code_title',    
+                'title_pt',
+                'title_en',
+                'text_pt',
+                'text_en',
+                'title',   
+                'price'
+            ])
+            ->from('services')    
+            ->where($arrFilter)            
+            ->andWhere($usernameWhere)           
+            ->all();
+
+        }
+        
+        $arrServices = [];
+        
+        foreach($serviceArr as $value){
+            $arrServices[$value['service_code']] = $value['title_'.Yii::$app->language].' ('.$coin.$value['price'].')';
+        }
+
+        $arrServices = array_merge(['' => Yii::t('app', 'select_services')],  $arrServices);
+
+        return $arrServices;
+
+
+
+        /*
+
+
+
+
+
+        
+       
+  
+        $arrLocationCode = [];
+
+        if(empty($filter['location_code'])){
+            $arrLocationCode = explode('|', $filter['location_code']); 
+
+
+            foreach($arrLocationCode as $key => $value){
+
+                if(isset($search['username'])){
+                   
+                    $serviceResult = $query->select([
+                        'service_code', 
+                        'page_code_title',    
+                        'title_pt',
+                        'title_en',
+                        'text_pt',
+                        'text_en',
+                        'title',   
+                        'price'
+                    ])
+                    ->from('services')    
+                    ->where($search)           
+                    ->andWhere('username LIKE CONCAT("%'.$search['username'].'%")')
+                    ->andWhere('location_code LIKE CONCAT("%|'.$value.'|%")')
+                    ->one();
+        
+                }else{
+        
+             
+                    if(empty($search['location_code'])){
+                            
+                        $serviceResult = $query->select([
+                            'service_code', 
+                            'page_code_title',    
+                            'page_code_text',
+                            'title_pt',
+                            'title_en',
+                            'text_pt',
+                            'text_en',
+                            'title', 
+                            'price'
+                        ])
+                        ->from('services')      
+                        ->where($search)
+                        //->andWhere('location_code LIKE CONCAT("%|'.$value.'|%")')   
+                        ->one(); 
+                        
+                    }else{
+
+                        $serviceResult = $query->select([
+                            'service_code', 
+                            'page_code_title',    
+                            'page_code_text',
+                            'title_pt',
+                            'title_en',
+                            'text_pt',
+                            'text_en',
+                            'title', 
+                            'price'
+                        ])
+                        ->from('services')      
+                        ->where($search)
+                        ->andWhere('location_code LIKE CONCAT("%|'.$value.'|%")')   
+                        ->one(); 
+                    }
+                 
+                }
+
+                $serviceArr[] = $serviceResult;
+
+            }
+
+        }else{
+         
+            if(isset($search['username'])){
+
+                $serviceArr = $query->select([
+                    'service_code', 
+                    'page_code_title',    
+                    'title_pt',
+                    'title_en',
+                    'text_pt',
+                    'text_en',
+                    'title',   
+                    'price'
+                ])
+                ->from('services')    
+                ->where($search)           
+                ->orWhere('username LIKE CONCAT("%'.$search['username'].'%")')
+                ->all();
+    
+            }else{
+           
+                $serviceArr = $query->select([
+                    'service_code', 
+                    'page_code_title',    
+                    'page_code_text',
+                    'title_pt',
+                    'title_en',
+                    'text_pt',
+                    'text_en',
+                    'title', 
+                    'price'
+                ])
+                ->from('services')      
+                ->where($search)                          
+                ->andWhere('location_code LIKE CONCAT("%|'.$value.'|%")')  
+                ->all();  
+    
+            }
+        }
+   
+        $arrServices = [];
+        
+        foreach($serviceArr as $value){
+            $arrServices[$value['service_code']] = $value['title_'.Yii::$app->language].' ('.$coin.$value['price'].')';
+        }
+
+        $arrServices = array_merge(['' => Yii::t('app', 'select_services')],  $arrServices);
+
+        return $arrServices;
+
+        */
+    }
+
+    public static function filterHelper($filter, $ignoreArr = [], $search = []){
+
+        $filter = array_merge($search, $filter);
+
+        $arrFilter = [];   
+      
+     
+        foreach($filter as $key => $value){
+
+            $generate = true;
+
+            foreach($ignoreArr as $value2){
+                if($value2 == $key){                  
+                    $generate = false;
+                    break;
+                }
+            }
+
+      
+            if($generate == true){
+                if($value != '*'){
+                    $arrFilter[$key] = $value;
+                }  
+            }                
+        }   
+
+        return $arrFilter;
+    }
+ /*
     public static function dropdownServices(){
 
         $query = new Query;
@@ -2352,7 +2850,7 @@ class Helpers{
         return $arrServices;
     }
 
-    /*
+   
     public static function dropdownClientContactsUsSubject($type, $company){
 
         $query = new Query;
@@ -2529,6 +3027,7 @@ class Helpers{
 
 
     public static function displayAminBreadcrumbs($labelFrom, $labelTo, $sourcePath, $type = '', $value = ''){        
+     
 
         $path = str_replace('-','_',$sourcePath);  
         $from = str_replace('-','_',$labelFrom);    
@@ -2577,6 +3076,219 @@ class Helpers{
         }
     }
 
+
+    public static function getUsersFullName($usernameStr){
+
+
+        $query = new Query();
+
+        $explod = explode('|', $usernameStr);
+        
+        $userArr = $query->from(['user'])
+            ->select('full_name')
+            ->where(['in', 'guid', $explod])
+            ->all();
+
+        $user = [];
+
+        foreach($userArr as $value){
+            $user[] = $value['full_name'];            
+        }
+
+    
+        
+        return implode(', ',$user);
+    }
+
+    public static function getServiceCatName($serviceCatCode){
+
+        //$test = ServicesCategory::find('page_code_title')->orderBy("id desc")->where(['category_code' => $model->category_code])->limit(1)->one();
+
+        $query = new Query();
+
+        $explod = explode(',', $serviceCatCode);
+        
+        $userArr = $query->from(['services_category'])
+            ->select('page_code_title')
+            ->where(['in', 'category_code', $explod])
+            ->all();
+
+        $user = [];
+
+        foreach($userArr as $value){
+            $user[] = Yii::t('app', $value['page_code_title']);
+        }
+
+        return implode(', ',$user);
+    }
+
+    public static function getServicesName($serviceCode){
+
+        $query = new Query();
+
+        $explod = explode(',', $serviceCode);
+        
+        $userArr = $query->from(['services'])
+            ->select('page_code_title')
+            ->where(['in', 'category_code', $explod])
+            ->all();
+
+        $user = [];
+
+        foreach($userArr as $value){
+            $user[] = Yii::t('app', $value['page_code_title']);
+        }
+
+        return implode(', ',$user);
+    }
+
+    public static function getCompanyLocationName($companyLocationCode){
+
+        $query = new Query();
+
+        $explod = explode('|', $companyLocationCode);
+     
+        $userArr = $query->from(['company_locations'])
+            ->select(['location', 'address_line_1', 'address_line_2'])
+            ->where(['in', 'location_code', $explod])
+            ->all();            
+    
+        $user = [];
+
+        foreach($userArr as $value){
+            $user[] = $value['location'];
+            //$user[] = $value['address_line_1'].'<br>'.$value['address_line_2'].'<br>'.$value['location'];
+        }
+
+        return implode(', ',$user);
+    }
+
+    
+    public static function dropdownUserTimeWindow($day = '',$userGuid = ''){
+
+
+        $days = array('sunday', 'monday', 'tuesday', 'wednesday','thursday','friday', 'saturday');
+
+        $member = Helpers::arrayTeam(['guid' => $userGuid],'one');        
+
+        $arrWeek = ((is_array(json_decode($member['sheddule_array'],true))) ? json_decode($member['sheddule_array'], true) : []);
+
+        $resultWeekDays = $arrWeek[$days[date('w', strtotime($day))]];
+
+        $start = strtotime($resultWeekDays['start']); //9:00
+        $end = strtotime($resultWeekDays['end']); //18:00
+        $lunchFrom = $resultWeekDays['break_start']; //13:00
+        $lunchTo = $resultWeekDays['break_end']; //14:00
+
+        $serviceTimeMin = (empty($member['time_window']) ? '60' : $member['time_window']);
+
+        $i = 0;
+        $arrSheddule = [];
+
+        while ($start < $end) {
+         
+            $hour = $start;
+    
+            if($hour >= strtotime($lunchTo)){
+                if($i == 0){
+                    $start = strtotime($lunchTo);
+                    $hour = $start;
+                    $i++;
+                }        
+            }        
+    
+            $sum = (60*$serviceTimeMin);
+        
+            if ($hour < strtotime($lunchFrom) || $hour >= strtotime($lunchTo)){  
+               
+                $dayHour = date('Y-m-d H:i',strtotime(date('Y-m-d',strtotime($day)).' '.date('H:i',$hour)));
+
+                $arrSheddule[date('H:i:s', strtotime($dayHour))] = date('H:i', strtotime($dayHour));
+        
+            }     
+        
+            $start += $sum;
+            //$start += date('H:i', strtotime($sum));
+        
+        }
+
+      return $arrSheddule;
+    }
+
+
+    public static function dropdownUserTimeWindowAvailable($day = '',$userGuid = ''){
+
+        $days = array('sunday', 'monday', 'tuesday', 'wednesday','thursday','friday', 'saturday');
+
+        $member = Helpers::arrayTeam(['guid' => $userGuid],'one');        
+
+        $arrWeek = ((is_array(json_decode($member['sheddule_array'],true))) ? json_decode($member['sheddule_array'], true) : []);
+
+        $resultWeekDays = $arrWeek[$days[date('w', strtotime($day))]];
+
+        $start = strtotime($resultWeekDays['start']); //9:00
+        $end = strtotime($resultWeekDays['end']); //18:00
+        $lunchFrom = $resultWeekDays['break_start']; //13:00
+        $lunchTo = $resultWeekDays['break_end']; //14:00
+
+        $serviceTimeMin = (empty($member['time_window']) ? '60' : $member['time_window']);
+
+        $i = 0;
+        $arrSheddule = [];
+
+        while ($start < $end) {
+         
+            $hour = $start;
+    
+            if($hour >= strtotime($lunchTo)){
+                if($i == 0){
+                    $start = strtotime($lunchTo);
+                    $hour = $start;
+                    $i++;
+                }        
+            }        
+    
+            $sum = (60*$serviceTimeMin);
+        
+            if ($hour < strtotime($lunchFrom) || $hour >= strtotime($lunchTo)){  
+               
+                $dayHour = date('Y-m-d H:i',strtotime(date('Y-m-d',strtotime($day)).' '.date('H:i',$hour)));
+
+                if(Helpers::checkIfBookingExists(date('Y-m-d',strtotime($day)), date('H:i',$hour),$member['guid'], $member['company_code']) ==  0){
+                    $arrSheddule[date('H:i:s', strtotime($dayHour))] = date('H:i', strtotime($dayHour));
+                }               
+
+            }     
+        
+            $start += $sum;
+            //$start += date('H:i', strtotime($sum));
+        
+        }
+
+      return $arrSheddule;
+
+    }
+
+    public static function validationTimeFrameCancelation($companyArr, $model){
+
+        $timeFrame = $companyArr['cancelation_time'];
+      
+        $paymentDate = date('Y-m-d H:i:s');
+        $contractDateBegin = date('Y-m-d H:i:s', strtotime($model->date.' '.$model->time.' -'. $timeFrame.' minutes'));
+        $contractDateEnd = $model->date.' '.$model->time; 
+
+            
+        if (($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)){
+            $resultStatusFrame = 2;
+        }elseif($paymentDate >= $contractDateEnd){
+            $resultStatusFrame = 3;
+        }else{
+            $resultStatusFrame = 1;
+        }
+
+        return $resultStatusFrame;
+
+    }
     
 
 }

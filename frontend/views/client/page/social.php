@@ -1,24 +1,33 @@
 
 <?php 
     $active = 0;
-
-    if(isset($companyArr[0]) ){ 
-        foreach($companyArr[0] as $keyt => $value){  
+ 
+    if(isset($companyArr) ){ 
+        foreach($companyArr as $keyt => $value){  
             if(!empty($value)){
                 $active = 1;
                 break;
             }
         }
-    } 
+    }
+
+    /*
+    
+    print"<pre>";
+    print_r($companyArr);
+    die();
+
+    */
+
  ?>
 
 
 <?php  if($active){  ?>
-
+<div class="container"> 
     <div class="row  my-5">           
         <div class="col-lg-12">
             <div class="heading text-primary heading-border">
-                <h1>
+                <h1 class="font-weight-normal">
                     <?= Yii::t('app', 'follow_us') ?> 
                 </h1>
                 <hr class="solid mb-5"> 
@@ -32,8 +41,8 @@
 
                                 $str = '';
 
-                                if(isset($companyArr[0]) ){
-                                    foreach($companyArr[0] as $keyt => $value){  
+                                if(isset($companyArr) ){
+                                    foreach($companyArr as $keyt => $value){  
                                         if(!empty($value)){
                                             switch ($keyt) {
                                                 case 'instagram':
@@ -41,6 +50,7 @@
                                                 case 'twitter':
                                                 case 'pinterest': 
                                                 case 'linkedin':
+                                                case 'tiktok':
                                                 case 'youtube':
                                                     $str .= '<li class=" mx-2  social-icons-'.$keyt.'" >';
                                                     $str .= '<a  target="_blank" href="'.$value.'"><i class="text-6 fab fa-'.$keyt.'"  
@@ -48,8 +58,8 @@
                                                     $str .= '</li>';                                    
                                                     break;                                        
                                                 case 'website':
-                                                    $str .= '<li class="social-icons-'.$keyt.'">';
-                                                    $str .= '<a  href="'.$value.'"><i class="icon-globe icons"></i></a>';
+                                                    $str .= '<li class=" social-icons-'.$keyt.'">';
+                                                    $str .= '<a  href="'.$value.'" style="padding:5px;"><i class="icon-globe icons text-6"></i></a>';
                                                     $str .= '</li>';
                                                     
                                                     break;
@@ -66,4 +76,5 @@
             </div>
         </div>
     </div>
+</div>
 <?php } ?>

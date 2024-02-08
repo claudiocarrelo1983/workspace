@@ -14,7 +14,6 @@ $arrServices = [];
 $filter['location_code'] = Yii::$app->request->get('location');
 $teamArr = Helpers::arrayTeam($filter);
 
-
 ?>
 
 

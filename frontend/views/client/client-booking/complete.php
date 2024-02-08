@@ -37,9 +37,8 @@ Array
 ?>
 
 
-<?= $this->render('@frontend/views/client/page/header', ['headerTransparent' => 1, 'model' => $model, 'companyArr' => $companyArr]); ?>
+<?= $this->render('@frontend/views/client/client-booking/header', ['headerTransparent' => 1, 'model' => $model, 'companyArr' => $companyArr]); ?>
 
-<div class="py-5"></div>  
 
 <div id="examples" class="container  pb-5">
 
@@ -98,7 +97,7 @@ Array
 										<div class="row border-bottom ">
 											<div class="col-lg-4 py-3">
 												<strong class="d-block text-color-dark font-weight-semibold">
-													Full Name:
+													<?= Yii::t('app','full_name') ?>:
 												</strong>		
 												<span class="text-color-dark">
 													<?= $sheddule['full_name'] ?>	
@@ -106,7 +105,7 @@ Array
 											</div>
 											<div class="col-lg-4 py-3">
 												<strong class="d-block text-color-dark font-weight-semibold">
-													Contact Number:
+													<?= Yii::t('app','contact_number') ?>:
 												</strong>		
 												<span class="text-color-dark">
 													<?= $sheddule['contact_number'] ?>	
@@ -114,25 +113,25 @@ Array
 											</div>
 											<div class="col-lg-4 py-3">
 												<strong class="d-block text-color-dark font-weight-semibold">
-													Email:
+													<?= Yii::t('app','email') ?>:
 												</strong>		
 												<span class="text-color-dark">
 													<?= $sheddule['email'] ?>	
 												</span>	
 											</div>									
-										</div>
+										</div>							
 										<div class="row my-3 py-3">
-											<div class="col-lg-6">
+											<div class="col-6">
 												<strong class="text-color-dark text-5">
 													<?= Yii::t('app',$sheddule['service_name']) ?>
 												</strong>	
 											</div>
-											<div class="col-lg-6 text-right">	
+											<div class="col-6 text-right">	
 												<span class="text-color-dark text-5">
 													<?= $sheddule['price'] ?> 
 												</span>
 											</div>									
-										</div>																		
+										</div>														
 									</div>
 								</div>						
 							</div>

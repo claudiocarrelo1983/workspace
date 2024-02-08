@@ -479,35 +479,28 @@ class PageController extends Controller
         }          
         */
 
+     
 
         if ($model->load(Yii::$app->request->post())) {
 
             $userModel = new User();   
             $userResult = $userModel::find('id')->orderBy("id desc")->where(['username' => $model->username, 'active' => 1])->limit(1)->one();
 
+
+            
             //$model->login() && 
             if($model->login() && $userResult->level == 'client'){                                
 
                 $companyCode = Yii::$app->request->get('code');
                      
-                return $this->redirect(['/'.$companyCode.'/choose-location/%2A/%2A/%2A/%2A/%2A']);   
+                return $this->redirect(['/'.$companyCode.'/booking']);   
             }
 
             if($model->login() && $userResult->level == 'team'){
 
-                $this->refresh();
-
-                /*
-                               
-                $dateGet = Yii::$app->request->get('day');
-                $date = ((empty($dateGet)) ? strtotime(date('Y-m-d')) : $dateGet);
-
-                return $this->redirect(['/sheddule-organizer', 
-                    'code' => Yii::$app->request->get('code'),
-                    'day' => $date
-                ]
-                );
-                */
+                $companyCode = Yii::$app->request->get('code');
+                     
+                return $this->redirect(['/'.$companyCode.'/team-booking']);   
             }
             
         }
@@ -790,13 +783,14 @@ class PageController extends Controller
 
         $company = Helpers::findCompanyCode();   
 
-        $companyArr = Helpers::myCompanyDetailsArr($company);    
+
+       // $companyArr = Helpers::myCompanyDetailsArr($company);    
        
         if (empty($company)) {    
             return $this->goHome();
         }       
 
-
+      
         return $this->render('@frontend/views/client/page/index', [
             'modelEvents' => $modelEvents,
             'companyArr' =>  $companyArr,

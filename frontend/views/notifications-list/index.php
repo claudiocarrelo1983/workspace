@@ -8,7 +8,6 @@ use common\Helpers\Helpers;
 ?>
 
 <!-- start page title -->
-<?= Helpers::displayAminBreadcrumbs('notifications','notifications-list') ?>
 
 <div class="row">
     <div class="col-12">

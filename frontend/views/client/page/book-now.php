@@ -25,14 +25,9 @@ use yii\helpers\Url;
                         <?= 
                         Html::a(
                             '<i class="bx bx bx-calendar mr-1"></i> '.Yii::t('app', 'book_now_button'),                      
-                            Url::to(['/choose-location', 
-                            'code' => Yii::$app->request->get('code'),
-                            'team' => '*',
-                            'location' =>  '*',             
-                            'service' =>  '*',
-                            'day' =>  '*',
-                            'time' =>  '*'                 
-                        ]),
+                            Url::toRoute(['/booking', 
+                                'code' => Yii::$app->request->get('code')
+                            ]),
                             [
                                 'class' => 'btn btn-primary btn-xl mb-2 text-5 py-3 px-5',                                                  
                                 'data-hash-offset' => 0,  

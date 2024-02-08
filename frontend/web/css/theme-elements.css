@@ -8529,7 +8529,7 @@ h1 {
 h2 {
 	font-size: 2.2em;
 	font-weight: 300;
-	line-height: 42px;
+	
 	margin: 0 0 32px 0;
 }
 
@@ -20450,9 +20450,24 @@ ul.team-list .team-item .thumb-info-social-icons {
     }
 }
 
-.input-group-text {
+
+
+.input-group-text-2 {
+	font-size: 1.25rem;
+    border-radius: 0.3rem;
 	justify-content: center;
-  
+	display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
 }
 
 /* If the screen size is 1200px wide or more, set the font-size to 80px */

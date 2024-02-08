@@ -53,26 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function (Services $model) {
                     
-                    //$test = User::find('username')->orderBy("id desc")->where(['in', 'guid', ['1769881E-F0F8-4E3B-9218-3F4D40F8BB3E','347D78A1-0C26-45BD-8DE3-26E8752B39BD']])->asArray();
-
-                    $query = new Query();
-
-                    $explod = explode(',', $model->username);
-                    
-                    $userArr = $query->from(['user'])
-                        ->select('full_name')
-                        ->where(['in', 'guid', $explod])
-                        ->all();
-
-                    $user = [];
-
-                    foreach($userArr as $value){
-                        $user[] = $value['full_name'];
-                    }
-
-             
-                  
-                    return implode(', ',$user);
+                    return Helpers::getUsersFullName($model->username);
                 },
             ],  
         
@@ -88,9 +69,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [     
                 'label' => Yii::t('app', 'company_code_location'),                         
                 'format' => 'raw',
-                'value' => function (Services $model) {
+                'value' => function (Services $model) {                   
+                    return Helpers::getCompanyLocationName($model->location_code);
+                    /*
                     $test = CompanyLocations::find('city')->orderBy("id desc")->where(['location_code' => $model->location_code])->limit(1)->one();
                     return (isset($test->city) ?  Yii::t('app', $test->city) : '');
+                    */
                 },
             ],  
           

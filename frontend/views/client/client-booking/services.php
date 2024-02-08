@@ -5,12 +5,11 @@ use common\Helpers\Helpers;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$filter['username'] =  Yii::$app->request->get('team');
+$filter['location_code'] = Yii::$app->request->get('location');
 
-$filter[] =  Yii::$app->request->get('team');
-$filter[] = Yii::$app->request->get('location');
-$filterCat[] = Yii::$app->request->get('location');
+$arrServices = Helpers::getServicesArr($filter);
 
-$arrServices = Helpers::getServicesArr($filter, $filterCat);
 $companyArr = Helpers::myCompanyArr();
 
 
@@ -113,57 +112,55 @@ $companyArr = Helpers::myCompanyArr();
                                                         <div class="col-lg-12"> 
                                                             <div class="row ">  
                                                                                                          
-                                                                <div class="col-7">                                                    
+                                                                <div class="col-8">                                                    
                                                                     <div class="price-menu-item-title">
                                                                         <p class="custom-secondary-font text-transform-none font-weight-semibold text-3 mb-0">                             
                                                                             <?=  Yii::t('app', $service['services_title']) ?> <?php  //Yii::t('app', $service['time']) ?> 
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4"> 
-                                                                    <div class="price-menu-item-price text-right  ">                                                          
-                                                                        <strong class="custom-font-secondary text-3 positive-ls-3">
-                                                                            <?php  
-                                                                    
-                                                                                if(isset($companyArr['coin'])){
-                                                                                    $coin = Yii::t('app',Helpers::getCurrencyName($companyArr['coin']));
-                                                                                } 
-                                                                            ?>
+                                                                <div class="col-4 text-right ">                                                                   
+                                                                    <div class="row">
+                                                                        <div class="col-9 text-right"> 
+                                                                            <span class="price-menu-item-price  ">                                                          
+                                                                                <strong class="custom-font-secondary text-3 positive-ls-3 my-2">
+                                                                                    <?php  
+                                                                            
+                                                                                        if(isset($companyArr['coin'])){
+                                                                                            $coin = Yii::t('app',Helpers::getCurrencyName($companyArr['coin']));
+                                                                                        } 
+                                                                                    ?>
 
-                                                                            <?php if(empty($service['price_range'])){ ?>
-                                                                                <?=  $coin.$service['price'] ?>
-                                                                            <?php  }else{ ?>
-                                                                                <?= $coin.$service['price'] ?>/<?= $coin.$service['price_range'] ?>
-                                                                            <?php  } ?>  
-                                                                                                    
-                                                                        </strong> 
-                                                                        <!--
-
-                                                                        <span id="tick-choice-service-<?= $service['service_code'] ?>" class="tick_container-service" style="display:none">
-                                                                            <span class="tick-service"><i class="fa fa-check"></i></span>
-                                                                        </span> 
-                                                                            -->
-                                                                    </div> 
-                                                                </div>
-                                                
-                                                                <div class="col-1 text-right ">                                                             
-                                                                    <?= $form->field($model, 'service_code', 
-                                                                        ['template' => '{input}'],
-                                                                        
-                                                                        )->radio(
-                                                                        [
-                                                                            //'class' => 'd-none imgbgchk input-display-services p-0 m-0',
-                                                                            'uncheck' => null,
-                                                                            'label' => '',
-                                                                            'options' => ['tag' => false],
-                                                                            'template' => '{input}', 
-                                                                            'value' => $service['service_code'],
-                                                                            'id' => 'choice-service-'.$service['service_code'],
-                                                                            'onclick' => 'this.form.submit()',
-                                                                            //'separator'=>''
-                                                                        ],
-                                                                        )->label(false)
-                                                                    ?>  
+                                                                                    <?php if(empty($service['price_range'])){ ?>
+                                                                                        <?= $coin.$service['price'] ?>
+                                                                                    <?php  }else{ ?>
+                                                                                        <?= $coin.$service['price'] ?>/<?= $coin.$service['price_range'] ?>
+                                                                                    <?php  } ?>  
+                                                                                                            
+                                                                                </strong>                                                                  
+                                                                            </span> 
+                                                                        </div>
+                                                                        <div class="col-3 text-right"> 
+                                                                            <?= $form->field($model, 'service_code', 
+                                                                                ['template' => '{input}'],
+                                                                                
+                                                                                )->radio(
+                                                                                [
+                                                                                    //'class' => 'd-none imgbgchk input-display-services p-0 m-0',
+                                                                                    'uncheck' => null,
+                                                                                    'label' => '',
+                                                                                    'options' => ['tag' => false],
+                                                                                    'template' => '{input}',
+                                                                                    'value' => $service['service_code'],
+                                                                                    'id' => 'choice-service-'.$service['service_code'],
+                                                                                    'class' => 'mt-2',
+                                                                                    'onclick' => 'this.form.submit()',
+                                                                                    //'separator'=>''
+                                                                                ],
+                                                                                )->label(false)
+                                                                            ?>  
+                                                                        </div>
+                                                                    </div>                                                                  
                                                                 </div>
                                                             </div>
                                                         </label>

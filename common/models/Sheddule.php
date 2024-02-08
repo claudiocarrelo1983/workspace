@@ -33,6 +33,8 @@ class Sheddule extends \yii\db\ActiveRecord
 
      public $type;
      public $datetime;
+    
+   
 
     public static function tableName()
     {
@@ -44,25 +46,27 @@ class Sheddule extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
-            [['service_code',  'full_name', 'contact_number'], 'required'],
-            [['canceled','confirm', 'price_advanced','type'], 'integer'],
+            [['service_code', 'team_username', 'full_name', 'contact_number'], 'required'],
+            [['id','type','canceled','confirm', 'missed','price_advanced'], 'integer'],
             [['time', 'created_date','team_username'], 'safe'],
             [['datetime'], 'validateIfShedduleExist'],
-            [['id','date','location_code', 'client_username', 'company_code', 'service_code', 'service_name', 'full_name', 'contact_number', 'email', 'nif'], 'string', 'max' => 255],
+            [['booking_code','service_code','date','location_code', 'client_username', 'company_code', 'service_code', 'service_name', 'full_name', 'contact_number', 'email', 'nif'], 'string', 'max' => 255],
         ];
     }
 
     public function validateIfShedduleExist($attribute, $params){
 
         $error = Helpers::checkIfBookingExists(
+            $this->booking_code, 
             $this->date, 
             $this->time, 
             $this->team_username,
             $this->company_code
-        );            
-        
-        if ($error) {                  
+        );          
+     
+        if ($error == 0) {                       
             $this->addError('datetime');
         }
         //Helpers::checkIfBookingExists($modelSheddule);
@@ -75,19 +79,19 @@ class Sheddule extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'team_username' => 'Team Username',
-            'client_username' => 'Client Username',
-            'company_code' => 'Company Code',
-            'service_code' => 'Service Cat',
-            'service_name' => 'Service Name',
-            'canceled' => 'Available',
-            'name' => 'Name',
-            'contact_number' => 'Contact Number',
-            'email' => 'Email',
-            'nif' => 'Nif',
-            'date' => 'Date',
-            'time' => 'Time',
-            'created_date' => 'Created Date',
+            'team_username' => Yii::t('app','team_username'),
+            'client_username' => Yii::t('app','client_username'),
+            'company_code' => Yii::t('app','company_code'),
+            'service_code' => Yii::t('app','service_code'),
+            'service_name' => Yii::t('app','service_name'),
+            'canceled' => Yii::t('app','canceled'),
+            'name' => Yii::t('app','name'),
+            'contact_number' => Yii::t('app','contact_number'),
+            'email' => Yii::t('app','email'),
+            'nif' => Yii::t('app','nif'),
+            'date' => Yii::t('app','date'),
+            'time' => Yii::t('app','time'),
+            'created_date' => Yii::t('app','created_date'),
         ];
     }
 

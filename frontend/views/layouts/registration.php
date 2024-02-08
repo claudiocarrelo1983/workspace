@@ -28,6 +28,7 @@ PublicAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script>window.kvDatepicker_d6088889 = {"autoclose":true,"format":"dd-mm-yyyy","todayHighlight":true};</script>
 </head>
 
 <?php $this->beginBody() ?>
@@ -40,36 +41,34 @@ PublicAsset::register($this);
         </div>
     </div>
 </div>
-<div class="body"> 
+
+<div class="body" > 
 
 <!--Top Menu -->    
     <?= $content ?>
-    <!--
-    <section class=" call-to-action call-to-action-default with-button-arrow content-align-center call-to-action-in-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="call-to-action-content">
-                        <h2 class="font-weight-normal text-5 mb-0">
-                            My Calendar                   
-                        </h2>
-                        <p class="mb-0">
-                            Secure Your Spot Now: Book Instantly and Hassle-Free with Our Quick and Easy Online Booking Button!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
--->
-    
-    <?= $this->render('/site/footer_simple'); ?>			
 
+    <?= $this->render('/site/footer_simple'); ?>
 </div>
 
 
 
 <?php $this->endBody() ?>
+
+<script>jQuery(function ($) {
+jQuery.fn.kvDatepicker.dates={};
+jQuery&&jQuery.pjax&&(jQuery.pjax.defaults.maxCacheLength=0);
+if (jQuery('#date-calendar-search1').data('kvDatepicker')) { jQuery('#date-calendar-search1').kvDatepicker('destroy'); }
+jQuery('#date-calendar-search1-kvdate').kvDatepicker(kvDatepicker_d6088889);
+
+initDPRemove('date-calendar-search1');
+initDPAddon('date-calendar-search1');
+if (jQuery('#date-calendar-search2').data('kvDatepicker')) { jQuery('#date-calendar-search2').kvDatepicker('destroy'); }
+jQuery('#date-calendar-search2-kvdate').kvDatepicker(kvDatepicker_d6088889);
+
+initDPRemove('date-calendar-search2');
+initDPAddon('date-calendar-search2');
+jQuery('#submit-location').yiiActiveForm([{"id":"choice-location-cl20231124194308451","name":"location_code","container":".field-choice-location-cl20231124194308451","input":"#choice-location-cl20231124194308451","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Location Code must be a string.","max":255,"tooLong":"Location Code should contain at most 255 characters.","skipOnEmpty":1});}},{"id":"choice-location-cl202311241943084512","name":"location_code","container":".field-choice-location-cl202311241943084512","input":"#choice-location-cl202311241943084512","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Location Code must be a string.","max":255,"tooLong":"Location Code should contain at most 255 characters.","skipOnEmpty":1});}},{"id":"select-service","name":"service_code","container":".field-select-service","input":"#select-service","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Service Cat cannot be blank."});yii.validation.string(value, messages, {"message":"Service Cat must be a string.","max":255,"tooLong":"Service Cat should contain at most 255 characters.","skipOnEmpty":1});}}], []);
+});</script>
 </body>
 </html>
 <?php $this->endPage();

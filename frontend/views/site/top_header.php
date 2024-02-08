@@ -9,7 +9,7 @@ use yii\helpers\Url;
 	<?php
  
  	//&& Yii::$app->user->identity->first_name == 'admin'
-	    if (!Yii::$app->user->isGuest ) { ?>                                
+	    if (!Yii::$app->user->isGuest && Yii::$app->user->identity->first_name == 'admin') { ?>                                
 		<span class="white-text  text-center">
 			<div class="d-block d-lg-none">
 				<i class="fas fa-user ms-1"> </i>

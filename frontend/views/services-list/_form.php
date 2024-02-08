@@ -59,27 +59,116 @@ if(empty(Helpers::dropdownServiceCategory())){
 ?>
 <div class="services-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-        <div class="row">      
-            <div class="col">             
-                <?= $form->field($model, 'locationCodeArr')->checkBoxList(Helpers::dropdownCompanyLocations(),
-                    ['prompt'=> Yii::t('app', 'select_company_location')], 
-                    ['separator' => '<br>'])->label(Yii::t('app', 'company_code_location')); 
-                ?>   
-                <a href="<?= Url::toRoute('company-locations/index') ?>" target="_blank"  class="pb-5">
-                    <?= Yii::t('app', 'create_company_location') ?>	                    
-                </a>         
-            </div>
-            <div class="col">               
-                <?= 
-                    $form->field($model, 'usernameArr')->checkBoxList(
-                    Helpers::dropdownTeam(),
-                    ['prompt'=> Yii::t('app', 'select_username'),'separator' => '<br>'])->label(Yii::t('app', 'team_members')); 
-                ?>
-                <a href="<?= Url::toRoute('team/index') ?>" target="_blank"  class="pb-5">
-                    <?= Yii::t('app', 'create_team') ?>	 
-                </a>    
-            </div>
+    <?php $form = ActiveForm::begin([
+            'id' => 'submit-location',
+            //'validateOnSubmit' => true,
+            //'type' => ActiveForm::TYPE_VERTICAL,
+        ]);                        
+    ?>  
+    <div class="row pb-5"> 
+        <div class="col">   
+            <div class="form-group field-services-locationcodearr">
+                <label class="control-label">
+                    <?=
+
+                        $form->field($model, 'locationCodeArr')->checkboxList( 
+
+                        Helpers::dropdownCompanyLocations(),
+                            [
+
+                                'item'=>function ($index, $label, $name, $checked, $value){
+
+                                    return '<label>
+                                                <input type="checkbox" name="'.$name.'"  onchange= "getTeam(this)" value="'.$value.'" '.(($checked == 1) ? 'checked' : '').'> 
+                                                    '.$label.'
+                                                </label><br>';
+
+                                }
+
+                            ]
+                            )->label(Yii::t('app', 'company_code_location'));
+                    ?>
+                </div>
+        
+            <a href="<?= Url::toRoute('company-locations/index') ?>" target="_blank"  class="pb-5">
+                <?= Yii::t('app', 'create_company_location') ?>	                    
+            </a>         
+        </div>
+
+
+    <?php
+    
+        $i = 0;
+        $companyLocationArr =   Helpers::dropdownCompanyLocations();
+
+        foreach($companyLocationArr as $locationCode => $locationName){
+
+    ?>
+               
+        
+            <?php
+                $teamMembers = Helpers::dropdownTeam(
+                    [                        
+                        'company_code' => Yii::$app->user->identity->company_code, 
+                        'level' => 'team', 
+                        'location_code'=> $locationCode
+                    ]);
+            ?>
+
+            <?php
+                $display = 'style="display:none"';
+                foreach($model->locationCodeArr as $location){                    
+                    if($location == $locationCode){
+                        $display = '';
+                        break;                   
+                    }
+                }
+            ?>
+
+         
+        <div class="col"  id="team-<?= $locationCode ?>" <?= $display  ?> >         
+            <div class="form-group field-services-usernamearr" >   
+                <label class="control-label">
+                    <?= Yii::t('app', 'team_members').' : '.$locationName; ?>
+                </label>          
+                <div id="services-usernamearr">
+                    <label>
+                        <input id="checkbox-all-<?= $locationCode ?>" type="checkbox"  data-location="<?= $locationCode ?>" onclick="checkboxAll(this)"> 
+                        <?= Yii::t('app', 'choose_all') ?>
+                    </label><br>
+                    <?php foreach($teamMembers as $guid => $name){ ?>
+                        <?php           
+                            $checked = '';
+
+                            if(in_array($guid, $model->usernameArr)) {
+                                $checked = 'checked';
+                            }else{
+                                $checked = '';
+                            }
+                        ?>
+                        <label>
+                            <input id="team-<?= $locationCode ?>-<?= $guid ?>" type="checkbox" name="Services[usernameArr][]" value="<?= $guid ?>" <?= $checked ?>>
+                            <?= $name ?>
+                        </label><br>
+                    <?php } ?>
+                </div>
+                <div class="help-block"></div>
+            </div>  
+            <a href="<?= Url::toRoute('team/index') ?>" target="_blank"  class="pb-5">
+                <?= Yii::t('app', 'create_team') ?>	 
+            </a>  
+        </div>
+      
+        <?php
+            $i++;
+            }
+
+        ?>         
+
+        
+   
+    </div>
+    <div class="row"> 
             <div class="col">
                 <?= $form->field($model, 'category_code')->dropdownList(
                         Helpers::dropdownServiceCategory(),

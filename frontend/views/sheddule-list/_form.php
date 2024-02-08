@@ -20,12 +20,15 @@ use common\Helpers\Helpers;
                 ?>  
             </div>
             <div class="col-lg-3">  
-                <?= $form->field($model, 'client_username')->textInput(['maxlength' => true])->label(Yii::t('app', 'client_usernames')) ?>
+                <?= $form->field($model, 'client_username')->textInput(['maxlength' => true])->label(Yii::t('app', 'client_username')) ?>
             </div>
             <div class="col-lg-3"> 
                 <?= $form->field($model, 'service_code')->radioList(
                     Helpers::dropdownTeam(),
-                    ['prompt'=> Yii::t('app', 'select_service')],   
+                    [
+                        'prompt'=> Yii::t('app', 'select_service'),
+                        'separator'=> '<pre>'
+                    ],   
                     ['maxlength' => true])->label(Yii::t('app', 'service_code'))
                 ?>
             </div>

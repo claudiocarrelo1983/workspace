@@ -6,10 +6,6 @@ use common\Helpers\Helpers;
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 
-$companyArr = Helpers::myCompanyArr();
-
-
-
 
 ?>
 
@@ -42,19 +38,14 @@ $companyArr = Helpers::myCompanyArr();
     <?= $this->render('/client/page/services', ['companyArr' => $companyArr]); ?>
 
   
-    <?= $this->render('/client/page/book-now', ['companyArr' => $companyArr]); ?>
-  
+    <?= $this->render('/client/page/book-now', ['companyArr' => $companyArr]); ?> 
 
-    <div class="container"> 
-        <section class="section section-height-1 bg-light position-relative border-0 m-0" id="location">
-            <?= $this->render('/client/page/location'); ?>
-        </section>
-    </div>
-    <div class="container"> 
-        <section class="section section-height-1 bg-light position-relative border-0 m-0" id="social">
-            <?= $this->render('/client/page/social', [ 'companyArr' => $companyArr]); ?>
-        </section>
-    </div>
+    <?= $this->render('/client/page/contact', ['model' => $model]); ?>
+
+    <?= $this->render('/client/page/location'); ?>
+
+    <?= $this->render('/client/page/social', [ 'companyArr' => $companyArr]); ?>
+ 
     <?= $this->render('/client/page/subfooter', [ 'companyArr' => $companyArr]); ?>
 </div>
 
